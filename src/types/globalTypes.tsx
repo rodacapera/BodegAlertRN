@@ -33,3 +33,7 @@ export type LoginSplashProps = NativeStackScreenProps<
   RootStackParamList,
   'LoginSplash'
 >;
+export type RegisterProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Register'
+>;

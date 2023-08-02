@@ -14,6 +14,7 @@ const InputForm = ({
   setButtonAction: (data: LoginFormAction) => void;
 }) => {
   const [phone, setPhone] = useState('');
+  const [focusPhone, setFocusPhone] = useState(false);
 
   const handlePhoneNumber = (text: string) => {
     let myPhone = phoneRef.current.getCountryCode();
@@ -23,7 +24,11 @@ const InputForm = ({
   };
 
   return (
-    <View style={loginFormStyles.phoneInputContainer}>
+    <View
+      style={[
+        loginFormStyles.phoneInputContainer,
+        {borderBottomWidth: focusPhone ? 1.9 : 0.7},
+      ]}>
       <View style={loginFormStyles.phoneFlagContent}>
         <PhoneInput
           ref={ref => {
@@ -41,6 +46,8 @@ const InputForm = ({
         underlineStyle={{
           backgroundColor: 'transparent',
         }}
+        onFocus={() => setFocusPhone(true)}
+        onBlur={() => setFocusPhone(false)}
         dense={true}
         // right={
         //   <TextInput.Icon

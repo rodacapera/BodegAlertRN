@@ -13,6 +13,7 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
+        titleCreateAccount: 'Create an account',
         resendOtp: 'Resend',
         errorOtp: 'The code is not valid, please try again.',
         titleOtp: 'OTP code verify',
@@ -48,6 +49,7 @@ i18n.use(initReactI18next).init({
     },
     es: {
       translation: {
+        titleCreateAccount: 'Crear una cuenta',
         resendOtp: 'Reenviar',
         errorOtp:
           'El código ingresado no es válido, por favor intenta nuevamente.',
