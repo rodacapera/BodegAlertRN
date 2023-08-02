@@ -72,23 +72,17 @@ export const timerCount = (
 ) => {
   let timer: any = null;
   let count: any = null;
+  let newCount = counter;
   if (sendCode) {
-    timer = setTimeout(() => {
-      setCounter(60);
-      sendOtpCode(false);
-      clearTimeout(timer);
-    }, 60000);
     if (!count) {
       count = setInterval(() => {
-        let newCount = counter--;
-        setCounter(newCount);
-        console.log('newCount', newCount);
-        if (newCount <= 0) {
-          console.log('cleaning');
-          clearTimeout(timer);
-          clearInterval(count);
+        if (newCount <= 1) {
           setCounter(60);
           sendOtpCode(false);
+          clearInterval(count);
+        } else {
+          newCount = counter--;
+          setCounter(newCount);
         }
       }, 1000);
     }
