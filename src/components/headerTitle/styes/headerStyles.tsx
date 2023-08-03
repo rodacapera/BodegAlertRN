@@ -17,8 +17,10 @@ export const headerStyles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
+    width: 280,
     fontWeight: 'bold',
     textTransform: 'capitalize',
+    textAlign: 'center',
     color: isDarkMode
       ? darkTheme.colors.primaryContainer
       : lightTheme.colors.onPrimaryContainer,

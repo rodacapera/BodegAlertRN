@@ -61,7 +61,7 @@ const Buttons = ({
             : lightTheme.colors.onPrimaryContainer
         }
         mode="text"
-        onPress={() => navigate('Register', {administrator: false})}>
+        onPress={() => navigate('Register', {administrator: true})}>
         {t('signUp')}
       </Button>
     </View>

@@ -15,7 +15,13 @@ const Register = ({navigation, route}: RegisterProps) => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <View style={registerStyles.container}>
-        <HeaderTitle title={t('titleCreateAccount')} />
+        <HeaderTitle
+          title={
+            administrator
+              ? t('titleCreateAccountAdmin')
+              : t('titleCreateAccountUser')
+          }
+        />
         {administrator ? <AdminForm /> : <UserForm route={route} />}
       </View>
     </SafeAreaView>

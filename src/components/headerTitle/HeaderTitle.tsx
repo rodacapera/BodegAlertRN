@@ -27,7 +27,9 @@ const HeaderTitle = ({title}: {title: string}) => {
           onPress={() => goBack()}
         />
       </View>
-      <Text style={headerStyles.title}>{title}</Text>
+      <Text style={headerStyles.title} numberOfLines={1}>
+        {title}
+      </Text>
     </View>
   );
 };
