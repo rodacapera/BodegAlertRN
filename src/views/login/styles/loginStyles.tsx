@@ -1,9 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {darkTheme} from '@src/hooks/darkMode';
 import {lightTheme} from '@src/hooks/lightMode';
-import {isDarkMode} from '@src/globals/styles/screenMode';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {DefaultTheme} from 'react-native-paper';
+import {StyleSheet} from 'react-native';
 
 export const loginStyles = StyleSheet.create({
   content: {flex: 1, paddingTop: 50, paddingLeft: 30, paddingRight: 30},

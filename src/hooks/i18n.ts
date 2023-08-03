@@ -13,6 +13,13 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
+        names: 'Names',
+        lastNames: 'Last Names',
+        email: 'Email',
+        address: 'Address',
+        city: 'City',
+        state: 'State',
+        aliasName: 'Alias Name',
         titleCreateAccount: 'Create an account',
         resendOtp: 'Resend',
         errorOtp: 'The code is not valid, please try again.',
@@ -49,6 +56,13 @@ i18n.use(initReactI18next).init({
     },
     es: {
       translation: {
+        name: 'Nombre',
+        lastNames: 'Apellidos',
+        email: 'Correo',
+        address: 'Dirección',
+        city: 'Ciudad',
+        state: 'Estado/Departamento',
+        aliasName: 'Alias',
         titleCreateAccount: 'Crear una cuenta',
         resendOtp: 'Reenviar',
         errorOtp:

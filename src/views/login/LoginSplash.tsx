@@ -37,7 +37,7 @@ const LoginSplash = ({route, navigation}: LoginSplashProps) => {
                 style={loginStyles.button}
                 textColor="white"
                 buttonColor={lightTheme.colors.onPrimaryContainer}
-                // icon={() => <CustomIcon name={'camera'} color="white" />}
+                icon="check"
                 mode="contained"
                 onPress={() => navigation.navigate('Login')}>
                 {t('continue')}

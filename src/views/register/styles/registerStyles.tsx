@@ -24,4 +24,9 @@ export const registerStyles = StyleSheet.create({
 
     // borderBottomColor: lightTheme.colors.error,
   },
+  body: {
+    flex: 1,
+    marginTop: 20,
+    justifyContent: 'space-evenly',
+  },
 });

@@ -31,6 +31,7 @@ export const loginFormStyles = StyleSheet.create({
   phoneFlagContent: {
     width: 80,
     paddingTop: 18,
+    paddingLeft: 15,
   },
   phoneInputContainer: {
     height: 50,
