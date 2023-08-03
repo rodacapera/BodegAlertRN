@@ -29,7 +29,7 @@ export const loginFormStyles = StyleSheet.create({
     marginTop: -19,
   },
   phoneFlagContent: {
-    width: 80,
+    width: 90,
     paddingTop: 18,
     paddingLeft: 15,
   },

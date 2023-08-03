@@ -1,18 +1,12 @@
-import {View} from 'react-native';
-import React, {useState} from 'react';
-import {loginFormStyles} from '../styles/loginFormStyles';
-import PhoneInput from 'react-native-phone-input';
-import {TextInput} from 'react-native-paper';
 import {lightTheme} from '@src/hooks/lightMode';
-import {LoginFormAction} from '@src/types/loginTypes';
+import {InputFormProps} from '@src/types/loginTypes';
+import React, {useState} from 'react';
+import {View} from 'react-native';
+import {TextInput} from 'react-native-paper';
+import PhoneInput from 'react-native-phone-input';
+import {loginFormStyles} from '../styles/loginFormStyles';
 
-const InputForm = ({
-  phoneRef,
-  setButtonAction,
-}: {
-  phoneRef: any;
-  setButtonAction: (data: LoginFormAction) => void;
-}) => {
+const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
   const [phone, setPhone] = useState('');
   const [focusPhone, setFocusPhone] = useState(false);
 
@@ -30,12 +24,16 @@ const InputForm = ({
         {borderBottomWidth: focusPhone ? 1.9 : 0.7},
       ]}>
       <View style={loginFormStyles.phoneFlagContent}>
-        <PhoneInput
-          ref={ref => {
-            phoneRef.current = ref;
-          }}
-          textStyle={loginFormStyles.flagText}
-          initialCountry={'co'}></PhoneInput>
+        {type === 'phone' ? (
+          <PhoneInput
+            ref={ref => {
+              phoneRef.current = ref;
+            }}
+            textStyle={loginFormStyles.flagText}
+            initialCountry={'co'}></PhoneInput>
+        ) : (
+          <></>
+        )}
       </View>
       <TextInput
         style={loginFormStyles.email}

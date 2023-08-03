@@ -1,21 +1,17 @@
+import {buttonActionInitialState} from '@src/globals/constants/login';
+import {LoginFormAction, LoginFormProps} from '@src/types/loginTypes';
+import {t} from 'i18next';
 import React, {Fragment, useRef, useState} from 'react';
 import {Text} from 'react-native-paper';
-import {LoginFormAction} from '@src/types/loginTypes';
-import ErrorInputForm from './ErrorInputForm';
 import Buttons from './Buttons';
+import ErrorInputForm from './ErrorInputForm';
 import InputForm from './InputForm';
-import {buttonActionInitialState} from '@src/globals/constants/login';
-import {t} from 'i18next';
 
 const LoginForm = ({
   setButtonAction,
   errorPhone,
   setIsLogin,
-}: {
-  setButtonAction: (e: LoginFormAction) => void;
-  errorPhone: boolean;
-  setIsLogin: (e: boolean) => void;
-}) => {
+}: LoginFormProps) => {
   const phoneRef = useRef<any>();
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);
@@ -23,7 +19,11 @@ const LoginForm = ({
   return (
     <Fragment>
       <Text variant="titleLarge">{t('loginTitle')}</Text>
-      <InputForm phoneRef={phoneRef} setButtonAction={setCurrentButtonAction} />
+      <InputForm
+        phoneRef={phoneRef}
+        setButtonAction={setCurrentButtonAction}
+        type="phone"
+      />
       {errorPhone && <ErrorInputForm />}
       <Buttons
         setButtonAction={setButtonAction}

@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
-import {Text} from 'react-native-paper';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Image, View} from 'react-native';
-import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {logo} from '@src/assets';
-import {splashStyles} from './styles/splashStyles';
-import {useTranslation} from 'react-i18next';
 import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
+import {backgroundStyle} from '@src/globals/styles/screenMode';
 import splashHook from '@src/hooks/splash/splashHook';
 import {SplashProps} from '@src/types/globalTypes';
+import React, {useEffect} from 'react';
+import {useTranslation} from 'react-i18next';
+import {Image, View} from 'react-native';
+import {Text} from 'react-native-paper';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {splashStyles} from './styles/splashStyles';
 const Splash = ({route, navigation}: SplashProps) => {
   const {i18n, t} = useTranslation();
 

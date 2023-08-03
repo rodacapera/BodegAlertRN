@@ -1,25 +1,20 @@
-import React from 'react';
-import {View} from 'react-native';
-import {LoginFormAction} from '@src/types/loginTypes';
-import {loginFormStyles} from '../styles/loginFormStyles';
-import {Button} from 'react-native-paper';
-import {lightTheme} from '@src/hooks/lightMode';
-import CustomIcon from '@src/components/customIcon/CustomIcon';
 import {useNavigation} from '@react-navigation/native';
-import {type StackNavigation} from '@src/types/globalTypes';
-import {t} from 'i18next';
 import {isDarkMode} from '@src/globals/styles/screenMode';
 import {darkTheme} from '@src/hooks/darkMode';
+import {lightTheme} from '@src/hooks/lightMode';
+import {type StackNavigation} from '@src/types/globalTypes';
+import {LoginButtonsProps} from '@src/types/loginTypes';
+import {t} from 'i18next';
+import React from 'react';
+import {View} from 'react-native';
+import {Button} from 'react-native-paper';
+import {loginFormStyles} from '../styles/loginFormStyles';
 
 const Buttons = ({
   setButtonAction,
   currentButtonAction,
   setIsLogin,
-}: {
-  setButtonAction: (e: LoginFormAction) => void;
-  currentButtonAction: LoginFormAction;
-  setIsLogin: (e: boolean) => void;
-}) => {
+}: LoginButtonsProps) => {
   const {navigate} = useNavigation<StackNavigation>();
 
   const handleLogin = () => {
@@ -38,7 +33,7 @@ const Buttons = ({
               ? darkTheme.colors.primaryContainer
               : lightTheme.colors.onPrimaryContainer
           }
-          // icon={() => <CustomIcon name={'camera'} color="white" />}
+          icon="login"
           mode="contained"
           onPress={handleLogin}>
           {t('signIn')}
@@ -53,9 +48,7 @@ const Buttons = ({
               ? darkTheme.colors.primaryContainer
               : lightTheme.colors.onPrimaryContainer
           }
-          icon={() => (
-            <CustomIcon font="awesome" name={'qrcode'} color="white" />
-          )}
+          icon="qrcode"
           mode="contained"
           onPress={() => console.log('Register')}>
           {t('scanButton')}
@@ -63,10 +56,12 @@ const Buttons = ({
       </View>
       <Button
         textColor={
-          isDarkMode ? darkTheme.colors.primary : lightTheme.colors.primary
+          isDarkMode
+            ? darkTheme.colors.primaryContainer
+            : lightTheme.colors.onPrimaryContainer
         }
         mode="text"
-        onPress={() => navigate('Register')}>
+        onPress={() => navigate('Register', {administrator: false})}>
         {t('signUp')}
       </Button>
     </View>

@@ -23,8 +23,13 @@ export type RootStackParamList = {
   LoginSplash: undefined;
   Login: undefined;
   LoginForm: undefined;
-  Register: undefined;
+  Register: {
+    administrator: boolean;
+    shop?: {address: string; city: string; state: string; alias: string};
+  };
 };
+
+export type SelectedTypes = 'phone' | 'city';
 
 export type StackNavigation = NavigationProp<RootStackParamList>;
 export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
