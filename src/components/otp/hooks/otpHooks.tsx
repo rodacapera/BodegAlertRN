@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
@@ -28,8 +29,12 @@ export const handleValidateOtp = (
   {navigate}: StackNavigation,
   setErrorOtp: (e: boolean) => void,
 ) => {
+  const setUser = async () => {
+    await AsyncStorage.setItem('@user', JSON.stringify({logged: true}));
+  };
   console.log('send', code); //validate code with firebase
   const validateOtp = () => {
+    setUser();
     return false;
   };
   if (code.length === 6) {

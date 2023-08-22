@@ -1,7 +1,10 @@
 import {isDarkMode} from '@src/globals/styles/screenMode';
+import {ThemeContext} from '@src/hooks/context/themeContext/ThemeContext';
 import {lightTheme} from '@src/hooks/lightMode';
+import {useContext} from 'react';
 import {StyleSheet} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+const {theme} = useContext(ThemeContext);
 
 export const loginFormStyles = StyleSheet.create({
   logo: {
@@ -12,7 +15,7 @@ export const loginFormStyles = StyleSheet.create({
   },
   loginContent: {
     flex: 1,
-    backgroundColor: isDarkMode ? Colors.black : Colors.white,
+    // backgroundColor: isDarkMode ? Colors.black : Colors.white,
   },
   email: {
     width: 200,
@@ -25,7 +28,7 @@ export const loginFormStyles = StyleSheet.create({
     alignItems: 'center',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    backgroundColor: isDarkMode ? Colors.black : Colors.white,
+    // backgroundColor: isDarkMode ? Colors.black : Colors.white,
     marginTop: -19,
   },
   phoneFlagContent: {
@@ -84,6 +87,6 @@ export const loginFormStyles = StyleSheet.create({
   },
   error: {fontSize: 12, color: 'red'},
   flagText: {
-    color: isDarkMode ? Colors.white : Colors.black,
+    color: theme.dark ? Colors.white : Colors.black,
   },
 });

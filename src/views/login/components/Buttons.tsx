@@ -5,10 +5,11 @@ import {lightTheme} from '@src/hooks/lightMode';
 import {type StackNavigation} from '@src/types/globalTypes';
 import {LoginButtonsProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import React from 'react';
+import React, {useContext} from 'react';
 import {View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {loginFormStyles} from '../styles/loginFormStyles';
+import {ThemeContext} from '@src/hooks/context/themeContext/ThemeContext';
 
 const Buttons = ({
   setButtonAction,
@@ -16,6 +17,7 @@ const Buttons = ({
   setIsLogin,
 }: LoginButtonsProps) => {
   const {navigate} = useNavigation<StackNavigation>();
+  const {theme} = useContext(ThemeContext);
 
   const handleLogin = () => {
     setButtonAction(currentButtonAction);
@@ -55,11 +57,7 @@ const Buttons = ({
         </Button>
       </View>
       <Button
-        textColor={
-          isDarkMode
-            ? darkTheme.colors.primaryContainer
-            : lightTheme.colors.onPrimaryContainer
-        }
+        textColor={theme.colors.onPrimaryContainer}
         mode="text"
         onPress={() => navigate('Register', {administrator: true})}>
         {t('signUp')}

@@ -7,14 +7,14 @@ import {MD3DarkTheme, MD3LightTheme, useTheme} from 'react-native-paper';
 
 const colorScheme = useColorScheme();
 
-export const paperTheme =
-  colorScheme === 'dark'
-    ? {...MD3DarkTheme, colors: darkTheme.colors}
-    : {...MD3LightTheme, colors: lightTheme.colors};
+// export const paperTheme =
+//   colorScheme === 'dark'
+//     ? {...MD3DarkTheme, colors: darkTheme.colors}
+//     : {...MD3LightTheme, colors: lightTheme.colors};
 
-export type AppTheme = typeof paperTheme;
+// export type AppTheme = typeof paperTheme;
 
-export const useAppTheme = () => useTheme<AppTheme>();
+// export const useAppTheme = () => useTheme<AppTheme>();
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -42,3 +42,4 @@ export type RegisterProps = NativeStackScreenProps<
   RootStackParamList,
   'Register'
 >;
+export type HomeProps = NativeStackScreenProps<RootStackParamList, 'Home'>;

@@ -58,7 +58,7 @@ const Default = () => {
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+        backgroundColor={'red'}
       />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
