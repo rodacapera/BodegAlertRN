@@ -1,49 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import {createContext} from 'react';
-
-import {MD3DarkTheme, MD3LightTheme, MD3Theme} from 'react-native-paper';
-import {darkTheme} from '@src/hooks/darkMode';
-import {lightTheme} from '@src/hooks/lightMode';
-import {useColorScheme} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-export type ThemeContextMode = MD3Theme & {
-  dark: boolean;
-  colors: {
-    primary: string;
-    background: string;
-    card: string;
-    text: string;
-    border: string;
-    notification: string;
-  };
-};
-
-interface TeamContextProps {
-  theme: ThemeContextMode;
-  setDarkTheme: () => void;
-  setLightTheme: () => void;
-}
-
-export const ThemeContext = createContext({} as TeamContextProps);
-
-const setCurrentTheme = async (theme: string) => {
-  await AsyncStorage.setItem('@theme', theme);
-};
+import {ThemeContext, ThemeContextMode} from '@src/types/contextTypes';
+import {useEffect, useState} from 'react';
+import {
+  customDarkTheme,
+  customDefaultTheme,
+  customLightTheme,
+} from '@src/globals/constants/theme';
 
 export const ThemeProvider = ({children}: any) => {
-  const colorScheme = useColorScheme();
   const [theme, setTheme] = useState<ThemeContextMode>();
+  const setCurrentTheme = async (theme: string) => {
+    await AsyncStorage.setItem('@theme', theme);
+  };
 
   const setDarkTheme = () => {
-    console.log('setDarkTheme');
     setCurrentTheme('dark');
-    setTheme({...MD3DarkTheme, colors: darkTheme.colors} as ThemeContextMode);
+    setTheme(customDarkTheme);
   };
+
   const setLightTheme = () => {
-    console.log('setLightTheme');
     setCurrentTheme('light');
-    setTheme({...MD3LightTheme, colors: lightTheme.colors} as ThemeContextMode);
+    setTheme(customLightTheme);
   };
 
   const getCurrentTheme = async () => {
@@ -51,13 +28,10 @@ export const ThemeProvider = ({children}: any) => {
     if (myCurrentTheme) {
       myCurrentTheme === 'dark' ? setDarkTheme() : setLightTheme();
     } else {
-      const currentTheme =
-        colorScheme === 'dark'
-          ? {...MD3DarkTheme, colors: darkTheme.colors}
-          : {...MD3LightTheme, colors: lightTheme.colors};
-      setTheme(currentTheme as ThemeContextMode);
+      setTheme(customDefaultTheme);
     }
   };
+
   useEffect(() => {
     getCurrentTheme();
   }, []);

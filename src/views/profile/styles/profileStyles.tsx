@@ -1,0 +1,19 @@
+import {StyleSheet} from 'react-native';
+
+export const profileStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 30,
+    alignItems: 'center',
+    // backgroundColor: 'red',
+  },
+  profileTitle: {
+    textAlign: 'center',
+    fontSize: 17,
+    fontWeight: 'bold',
+  },
+  contentProfileTitle: {
+    paddingHorizontal: 30,
+    marginBottom: 10,
+  },
+});

@@ -1,9 +1,6 @@
 import {NavigationProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {darkTheme} from '@src/hooks/darkMode';
-import {lightTheme} from '@src/hooks/lightMode';
 import {useColorScheme} from 'react-native';
-import {MD3DarkTheme, MD3LightTheme, useTheme} from 'react-native-paper';
 
 const colorScheme = useColorScheme();
 
@@ -15,7 +12,16 @@ const colorScheme = useColorScheme();
 // export type AppTheme = typeof paperTheme;
 
 // export const useAppTheme = () => useTheme<AppTheme>();
-
+export type ShopProps = {
+  address: string;
+  city: string;
+  state: string;
+  alias: string;
+};
+export type RegisterParams = {
+  administrator: boolean;
+  shop?: ShopProps;
+};
 export type RootStackParamList = {
   Splash: undefined;
   MyOnboarding: undefined;
@@ -23,10 +29,10 @@ export type RootStackParamList = {
   LoginSplash: undefined;
   Login: undefined;
   LoginForm: undefined;
-  Register: {
-    administrator: boolean;
-    shop?: {address: string; city: string; state: string; alias: string};
-  };
+  Register: RegisterParams;
+  Profile: RegisterParams;
+  Buttons: undefined;
+  Employees: undefined;
 };
 
 export type SelectedTypes = 'phone' | 'city';
@@ -43,3 +49,15 @@ export type RegisterProps = NativeStackScreenProps<
   'Register'
 >;
 export type HomeProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+export type ProfileProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Profile'
+>;
+export type ButtonsProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Buttons'
+>;
+export type EmployeesProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Employees'
+>;

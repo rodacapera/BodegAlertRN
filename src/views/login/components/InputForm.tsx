@@ -1,14 +1,19 @@
 import {lightTheme} from '@src/hooks/lightMode';
 import {InputFormProps} from '@src/types/loginTypes';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {View} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import PhoneInput from 'react-native-phone-input';
 import {loginFormStyles} from '../styles/loginFormStyles';
+import {ThemeContext} from '@src/types/contextTypes';
 
 const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
   const [phone, setPhone] = useState('');
   const [focusPhone, setFocusPhone] = useState(false);
+  const {
+    theme: {colors},
+    theme,
+  } = useContext(ThemeContext);
 
   const handlePhoneNumber = (text: string) => {
     let myPhone = phoneRef.current.getCountryCode();
@@ -29,7 +34,10 @@ const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
             ref={ref => {
               phoneRef.current = ref;
             }}
-            textStyle={loginFormStyles.flagText}
+            textStyle={[
+              loginFormStyles.flagText,
+              {color: colors.onPrimaryContainer},
+            ]}
             initialCountry={'co'}></PhoneInput>
         ) : (
           <></>
@@ -44,6 +52,7 @@ const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
         underlineStyle={{
           backgroundColor: 'transparent',
         }}
+        theme={theme}
         onFocus={() => setFocusPhone(true)}
         onBlur={() => setFocusPhone(false)}
         dense={true}

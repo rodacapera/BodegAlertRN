@@ -2,18 +2,15 @@ import React, {useContext, useEffect, useState} from 'react';
 import {PaperProvider} from 'react-native-paper';
 import NavigationProvider from './src/hooks/navigator/NavigationProvider';
 import '@src/hooks/i18n';
-import {AppTheme, paperTheme} from '@src/types/globalTypes';
 import {DarkTheme, NavigationContainer} from '@react-navigation/native';
 import {LateralDrawer} from '@src/hooks/navigator/LateralDrawer';
-import {
-  ThemeContext,
-  ThemeProvider,
-} from '@src/hooks/context/themeContext/ThemeContext';
+import {ThemeProvider} from '@src/hooks/context/themeContext/ThemeContext';
+import {customDefaultTheme} from '@src/globals/constants/theme';
 
 function App(): JSX.Element {
   return (
     <AppState>
-      <PaperProvider theme={paperTheme}>
+      <PaperProvider theme={customDefaultTheme}>
         <LateralDrawer />
       </PaperProvider>
     </AppState>

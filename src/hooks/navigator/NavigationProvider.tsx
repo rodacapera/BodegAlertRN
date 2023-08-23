@@ -1,18 +1,13 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-import {useColorScheme} from 'react-native';
 import {RootStackParamList} from '@src/types/globalTypes';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
 import MyOnboarding from '@src/components/onboarding/MyOnboarding';
-import Splash from '../../views/splash/Splash';
 import LoginSplash from '../../views/login/LoginSplash';
-import Default from '../../views/default/Default';
-
+import Splash from '../../views/splash/Splash';
+import Buttons from '@src/views/buttons/Buttons';
+import Employees from '@src/views/employees/Employees';
 import Home from '@src/views/home/Home';
 import Login from '@src/views/login/Login';
+import Profile from '@src/views/profile/Profile';
 import Register from '@src/views/register/Register';
 
 const NavigationProvider = () => {
@@ -34,17 +29,6 @@ const NavigationProvider = () => {
         }}
       />
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          // title: 'BodegAlert',
-          // headerStyle: {
-          //   backgroundColor: backgroundStyle.backgroundColor,
-          // },
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
         name="LoginSplash"
         component={LoginSplash}
         options={{
@@ -61,6 +45,38 @@ const NavigationProvider = () => {
       <Stack.Screen
         name="Register"
         component={Register}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          // title: 'BodegAlert',
+          // headerStyle: {
+          //   backgroundColor: backgroundStyle.backgroundColor,
+          // },
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Employees"
+        component={Employees}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Buttons"
+        component={Buttons}
         options={{
           headerShown: false,
         }}

@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+
 export const drawerComponentStyles = StyleSheet.create({
   drawerContent: {
     flex: 1,

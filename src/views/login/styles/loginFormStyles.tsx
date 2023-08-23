@@ -1,6 +1,6 @@
 import {isDarkMode} from '@src/globals/styles/screenMode';
-import {ThemeContext} from '@src/hooks/context/themeContext/ThemeContext';
 import {lightTheme} from '@src/hooks/lightMode';
+import {ThemeContext} from '@src/types/contextTypes';
 import {useContext} from 'react';
 import {StyleSheet} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';

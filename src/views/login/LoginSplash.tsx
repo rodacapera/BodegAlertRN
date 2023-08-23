@@ -8,8 +8,15 @@ import {login_background} from '@src/assets';
 import {lightTheme} from '@src/hooks/lightMode';
 import {LoginSplashProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
+import {getLocationPermissions} from '@src/hooks/locations/permissions';
 
 const LoginSplash = ({route, navigation}: LoginSplashProps) => {
+  const handleLoginButton = async () => {
+    const granted = await getLocationPermissions();
+    console.log('is granted', granted);
+
+    // navigation.navigate('Login')
+  };
   return (
     <SafeAreaView style={backgroundStyle}>
       <ImageBackground
@@ -39,7 +46,7 @@ const LoginSplash = ({route, navigation}: LoginSplashProps) => {
                 buttonColor={lightTheme.colors.onPrimaryContainer}
                 icon="check"
                 mode="contained"
-                onPress={() => navigation.navigate('Login')}>
+                onPress={handleLoginButton}>
                 {t('continue')}
               </Button>
             </View>

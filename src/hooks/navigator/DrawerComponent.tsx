@@ -8,7 +8,7 @@ import {
 } from '@react-navigation/drawer';
 import {t} from 'i18next';
 import React, {useContext, useEffect, useState} from 'react';
-import {Image, View} from 'react-native';
+import {Image, StatusBar, View} from 'react-native';
 import {
   Avatar,
   Caption,
@@ -20,30 +20,35 @@ import {
 } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {drawerComponentStyles} from './styles/drawerComppnentStyles';
-import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {ThemeContext} from '@src/types/contextTypes';
+import {shop} from '@src/globals/constants/fakeData';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
+  const {
+    setDarkTheme,
+    setLightTheme,
+    theme: {colors},
+    theme,
+  } = useContext(ThemeContext);
   const {getItem, setItem} = useAsyncStorage('@theme');
   const [isDark, setIsDark] = useState(false);
-  const {setDarkTheme, setLightTheme} = useContext(ThemeContext);
 
   const onToggleSwitch = () => {
     setIsDark(!isDark);
     !isDark ? setDarkTheme() : setLightTheme();
   };
 
-  const handleClickButtonMenuDrawer = (path: string) => {
-    navigation.navigate(path);
-  };
+  const handleClickButtonMenuDrawer = (path: string, params?: object) =>
+    navigation.navigate(path, params);
 
   const validateSwitch = async () => {
     const item = await getItem();
-    if (item) {
-      setIsDark(item === 'dark' ? true : false);
-    } else {
-      setItem('light');
-    }
+    item ? setIsDark(item === 'dark' ? true : false) : setItem('light');
+  };
+  const handleLogout = () => {
+    AsyncStorage.clear();
+    navigation.navigate('Login');
   };
 
   useEffect(() => {
@@ -51,7 +56,10 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
   }, []);
 
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView
+      {...props}
+      style={drawerComponentStyles.drawerContent}>
+      <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} />
       <View style={drawerComponentStyles.userInfoSection}>
         <Avatar.Image
           source={{
@@ -59,18 +67,28 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           }}
           size={50}
         />
-        <Title style={drawerComponentStyles.title}>Dawid Urbaniak</Title>
-        <Caption style={drawerComponentStyles.caption}>Shop name</Caption>
+        <Title style={[drawerComponentStyles.title, {color: colors.onSurface}]}>
+          Dawid Urbaniak
+        </Title>
+        <Caption
+          style={[drawerComponentStyles.caption, {color: colors.onSurface}]}>
+          Shop name
+        </Caption>
         <View style={drawerComponentStyles.row}>
           <View style={drawerComponentStyles.section}>
             <Paragraph
               style={[
                 drawerComponentStyles.paragraph,
                 drawerComponentStyles.caption,
+                {color: colors.onSurface},
               ]}>
               3
             </Paragraph>
-            <Caption style={drawerComponentStyles.caption}>
+            <Caption
+              style={[
+                drawerComponentStyles.caption,
+                {color: colors.onSurfaceDisabled},
+              ]}>
               {t('employees')}
             </Caption>
           </View>
@@ -79,10 +97,15 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
               style={[
                 drawerComponentStyles.paragraph,
                 drawerComponentStyles.caption,
+                {color: colors.onSurface},
               ]}>
               2
             </Paragraph>
-            <Caption style={drawerComponentStyles.caption}>
+            <Caption
+              style={[
+                drawerComponentStyles.caption,
+                {color: colors.onSurfaceDisabled},
+              ]}>
               {t('buttons')}
             </Caption>
           </View>
@@ -92,39 +115,48 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
       {/* <DrawerItemList {...props} /> */}
       <Drawer.Section style={drawerComponentStyles.drawerSection}>
         <DrawerItem
-          icon={({color, size}) => (
+          icon={({size}) => (
             <MaterialCommunityIcons
               name="account-outline"
-              color={color}
+              color={colors.onSurface}
               size={size}
             />
           )}
+          labelStyle={{color: colors.onSurface}}
           label="Profile"
-          onPress={() => handleClickButtonMenuDrawer('Profile')}
+          onPress={() =>
+            handleClickButtonMenuDrawer('Profile', {administrator: false, shop})
+          }
         />
         <DrawerItem
-          icon={({color, size}) => (
+          icon={({size}) => (
             <MaterialCommunityIcons
               name="account-group"
-              color={color}
+              color={colors.onSurface}
               size={size}
             />
           )}
+          labelStyle={{color: colors.onSurface}}
           label="Users"
-          onPress={() => handleClickButtonMenuDrawer('Users')}
+          onPress={() => handleClickButtonMenuDrawer('Employees')}
         />
         <DrawerItem
-          icon={({color, size}) => (
-            <MaterialCommunityIcons name="tune" color={color} size={size} />
+          icon={({size}) => (
+            <MaterialCommunityIcons
+              name="tune"
+              color={colors.onSurface}
+              size={size}
+            />
           )}
+          labelStyle={{color: colors.onSurface}}
           label="Buttons"
           onPress={() => handleClickButtonMenuDrawer('Buttons')}
         />
       </Drawer.Section>
-      <Drawer.Section title="Preferences">
+      <Drawer.Section theme={theme} title="Preferences">
         {/* <TouchableRipple onPress={() => setIsDark(!isDark)}> */}
         <View style={drawerComponentStyles.preference}>
-          <Text>Dark Theme</Text>
+          <Text style={{color: colors.onSurface}}>Dark Theme</Text>
           <View>
             <Switch value={isDark} onValueChange={onToggleSwitch} />
           </View>
@@ -140,7 +172,8 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
         </TouchableRipple> */}
       </Drawer.Section>
       <Drawer.Section style={drawerComponentStyles.drawerSection}>
-        <Title style={drawerComponentStyles.titleLogos}>
+        <Title
+          style={[drawerComponentStyles.titleLogos, {color: colors.onSurface}]}>
           {t('guarantorEntities')}
         </Title>
         <View style={drawerComponentStyles.logos}>
@@ -164,15 +197,19 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           />
         </View>
         <DrawerItem
-          icon={({color, size}) => (
-            <MaterialCommunityIcons name="logout" color={color} size={size} />
+          icon={({size}) => (
+            <MaterialCommunityIcons
+              name="logout"
+              color={colors.onSurface}
+              size={size}
+            />
           )}
+          labelStyle={{color: colors.onSurface}}
           label={t('logOut')}
-          onPress={() => console.log('logout')}
+          onPress={handleLogout}
         />
       </Drawer.Section>
     </DrawerContentScrollView>
   );
 };
-
 export default DrawerComponent;

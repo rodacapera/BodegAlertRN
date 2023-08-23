@@ -13,6 +13,8 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
+        profileTitle:
+          'Below you will find your profile data registered in our system, if you wish you can update them right here!',
         names: 'Names',
         lastNames: 'Last Names',
         email: 'Email',
@@ -57,6 +59,8 @@ i18n.use(initReactI18next).init({
     },
     es: {
       translation: {
+        profileTitle:
+          'A continuación encuentras los datos de tu perfil registrados en nuestro sistema, si deseas puedes actualizarlos aquí mismo.',
         name: 'Nombre',
         lastNames: 'Apellidos',
         email: 'Correo',

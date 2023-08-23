@@ -17,7 +17,7 @@ const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
   const {t} = useTranslation();
   const handleFinishOnboarding = async () => {
     await AsyncStorage.setItem('@appInit', 'true');
-    navigation.navigate('Login');
+    navigation.navigate('LoginSplash');
   };
   return (
     <Onboarding

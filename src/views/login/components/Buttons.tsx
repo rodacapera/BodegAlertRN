@@ -2,14 +2,14 @@ import {useNavigation} from '@react-navigation/native';
 import {isDarkMode} from '@src/globals/styles/screenMode';
 import {darkTheme} from '@src/hooks/darkMode';
 import {lightTheme} from '@src/hooks/lightMode';
+import {ThemeContext} from '@src/types/contextTypes';
 import {type StackNavigation} from '@src/types/globalTypes';
 import {LoginButtonsProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 import {View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {loginFormStyles} from '../styles/loginFormStyles';
-import {ThemeContext} from '@src/hooks/context/themeContext/ThemeContext';
 
 const Buttons = ({
   setButtonAction,

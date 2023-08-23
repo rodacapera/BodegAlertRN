@@ -26,14 +26,20 @@ export const registerStyles = StyleSheet.create({
     // borderBottomColor: lightTheme.colors.error,
   },
   body: {
-    flex: 1,
+    // flex: 1,
     marginTop: 10,
   },
   footer: {
-    marginTop: 40,
+    marginVertical: 40,
+  },
+  contentFooterText: {
+    display: 'flex',
+    flexDirection: 'row',
+    // alignContent: 'space-between',
+    justifyContent: 'space-between',
   },
   footerText: {
-    marginVertical: 15,
+    alignItems: 'center',
   },
   contentBackButtonRegister: {
     position: 'absolute',

@@ -22,7 +22,7 @@ const Register = ({navigation, route}: RegisterProps) => {
               : t('titleCreateAccountUser')
           }
         />
-        {administrator ? <AdminForm /> : <UserForm route={route} />}
+        {administrator ? <AdminForm /> : <UserForm />}
       </View>
     </SafeAreaView>
   );

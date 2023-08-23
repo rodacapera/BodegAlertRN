@@ -1,31 +1,30 @@
-import {RouteProp, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import CustomIcon from '@src/components/customIcon/CustomIcon';
+import {shop} from '@src/globals/constants/fakeData';
 import {buttonActionInitialState} from '@src/globals/constants/login';
-import {lightTheme} from '@src/hooks/lightMode';
-import {RootStackParamList, StackNavigation} from '@src/types/globalTypes';
-import {LoginFormAction} from '@src/types/loginTypes';
-import InputForm from '@src/views/login/components/InputForm';
-import React, {useRef, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {ScrollView, Text, View} from 'react-native';
-import {Button, TextInput} from 'react-native-paper';
-import {registerStyles} from '../styles/registerStyles';
 import {isDarkMode} from '@src/globals/styles/screenMode';
 import {darkTheme} from '@src/hooks/darkMode';
+import {lightTheme} from '@src/hooks/lightMode';
+import {StackNavigation} from '@src/types/globalTypes';
+import {LoginFormAction} from '@src/types/loginTypes';
+import InputForm from '@src/views/login/components/InputForm';
+import {useContext, useRef, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {ScrollView, Text, View} from 'react-native';
+import {Button, Caption, TextInput} from 'react-native-paper';
+import {registerStyles} from '../styles/registerStyles';
+import {ThemeContext} from '@src/types/contextTypes';
 
-const UserForm = ({
-  route,
-}: {
-  route: RouteProp<RootStackParamList, 'Register'>;
-}) => {
+const UserForm = () => {
   const {t} = useTranslation();
-  const {shop} = route.params;
   const phoneRef = useRef<any>();
+  const {
+    theme: {colors},
+    theme,
+  } = useContext(ThemeContext);
   const {navigate} = useNavigation<StackNavigation>();
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);
-
-  console.log('currentButtonAction', currentButtonAction);
 
   return (
     <ScrollView
@@ -40,55 +39,68 @@ const UserForm = ({
       <TextInput
         label={t('name')}
         style={registerStyles.input}
-        secureTextEntry
-        theme={{
-          colors: {onSurface: lightTheme.colors.error},
-        }}
+        theme={theme}
         left={
           <TextInput.Icon
-            icon={() => <CustomIcon name={'pencil'} font={'awesome'} />}
+            icon={() => (
+              <CustomIcon
+                name={'pencil'}
+                font={'awesome'}
+                color={colors.onSurface}
+              />
+            )}
           />
         }
       />
       <TextInput
         label={t('lastName')}
         style={registerStyles.input}
-        secureTextEntry
-        theme={{
-          colors: {onSurface: lightTheme.colors.error},
-        }}
+        theme={theme}
         left={
           <TextInput.Icon
-            icon={() => <CustomIcon name={'pencil'} font={'awesome'} />}
+            icon={() => (
+              <CustomIcon
+                name={'pencil'}
+                font={'awesome'}
+                color={colors.onSurface}
+              />
+            )}
           />
         }
       />
       <TextInput
         label={t('email')}
         style={registerStyles.input}
-        secureTextEntry
-        theme={{
-          colors: {onSurface: lightTheme.colors.error},
-        }}
+        theme={theme}
         left={
           <TextInput.Icon
-            icon={() => <CustomIcon name={'envelope'} font={'awesome'} />}
+            icon={() => (
+              <CustomIcon
+                name={'envelope'}
+                font={'awesome'}
+                color={colors.onSurface}
+              />
+            )}
           />
         }
       />
       <View style={[registerStyles.footer]}>
-        <Text style={registerStyles.footerText}>
-          {t('address')} {shop?.address}
-        </Text>
-        <Text style={registerStyles.footerText}>
-          {t('city')} {shop?.city}
-        </Text>
-        <Text style={registerStyles.footerText}>
-          {t('state')} {shop?.state}
-        </Text>
-        <Text style={registerStyles.footerText}>
-          {t('aliasName')} {shop?.alias}
-        </Text>
+        <View style={registerStyles.contentFooterText}>
+          <Text style={registerStyles.footerText}>{t('address')}</Text>
+          <Caption>{shop.address}</Caption>
+        </View>
+        <View style={registerStyles.contentFooterText}>
+          <Text style={registerStyles.footerText}>{t('city')}</Text>
+          <Caption>{shop.city}</Caption>
+        </View>
+        <View style={registerStyles.contentFooterText}>
+          <Text style={registerStyles.footerText}>{t('state')}</Text>
+          <Caption>{shop.state}</Caption>
+        </View>
+        <View style={registerStyles.contentFooterText}>
+          <Text style={registerStyles.footerText}>{t('aliasName')}</Text>
+          <Caption>{shop.alias}</Caption>
+        </View>
       </View>
       <View>
         <Button

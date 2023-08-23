@@ -5,7 +5,7 @@ import {APP_NAME} from '@src/globals/constants/config';
 import DrawerComponent from './DrawerComponent';
 import NavigationProvider from './NavigationProvider';
 import {NavigationContainer} from '@react-navigation/native';
-import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {ThemeContext} from '@src/types/contextTypes';
 
 const MyDrawer = createDrawerNavigator();
 
@@ -37,7 +37,7 @@ export const LateralDrawer = () => {
           drawerStyle: {backgroundColor: colors.background},
           headerShown: false, // this remove header
           drawerHideStatusBarOnOpen: true,
-          overlayColor: 'transparent',
+          //   overlayColor: 'transparent',
         }}
         drawerContent={props => <DrawerComponent {...props} />}>
         <MyDrawer.Screen
