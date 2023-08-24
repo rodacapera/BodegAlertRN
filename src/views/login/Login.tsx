@@ -3,7 +3,7 @@ import {ImageBackground, SafeAreaView, View} from 'react-native';
 import {Text, Avatar} from 'react-native-paper';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {loginFormStyles} from './styles/loginFormStyles';
-import {login_background, logo} from '@src/assets';
+import {login_background, logo} from '@src/assets/images';
 import {APP_NAME} from '@src/globals/constants/config';
 import LoginForm from './components/LoginForm';
 import {buttonActionInitialState} from '@src/globals/constants/login';

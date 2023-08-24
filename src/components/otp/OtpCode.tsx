@@ -1,9 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {isDarkMode} from '@src/globals/styles/screenMode';
-import {lightTheme} from '@src/hooks/lightMode';
-import {StackNavigation} from '@src/types/globalTypes';
-import {LoginFormAction} from '@src/types/loginTypes';
 import {
   handleChange,
   handleClear,
@@ -11,7 +6,11 @@ import {
   handleValidateOtp,
   timerCount,
 } from '@src/components/otp/hooks/otpHooks';
+import {ThemeContext} from '@src/types/contextTypes';
+import {StackNavigation} from '@src/types/globalTypes';
+import {LoginFormAction} from '@src/types/loginTypes';
 import {t} from 'i18next';
+import {useContext, useEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {OtpInput, OtpInputRef} from 'react-native-otp-entry';
 import {Button, Text} from 'react-native-paper';
@@ -33,6 +32,10 @@ const OtpCode = ({
   const [errorOtp, setErrorOtp] = useState(false);
   const [sendOtpCode, setSendOtpCode] = useState(false);
   const [counter, setCounter] = useState(60);
+  const {
+    theme: {colors},
+    theme,
+  } = useContext(ThemeContext);
 
   useEffect(() => {
     handleSendOtp(buttonAction, setSendOtpCode);
@@ -57,37 +60,53 @@ const OtpCode = ({
           numberOfDigits={6}
           theme={{
             pinCodeTextStyle: {
-              color: isDarkMode
-                ? lightTheme.colors.onPrimary
-                : lightTheme.colors.onErrorContainer,
+              color: theme.dark ? colors.onSurface : colors.onPrimaryContainer,
             },
           }}
-          focusColor={
-            isDarkMode
-              ? lightTheme.colors.onPrimary
-              : lightTheme.colors.onErrorContainer
-          }
+          focusColor={theme.dark ? colors.onSurface : colors.onPrimaryContainer}
           onTextChange={text => handleChange(text, inputRef, setCode)}
           focusStickBlinkingDuration={500}
         />
-        {errorOtp && <Text style={otpStyles.errorOtp}>{t('errorOtp')}</Text>}
+        {errorOtp && (
+          <Text
+            style={[
+              otpStyles.errorOtp,
+              {
+                color: colors.error,
+              },
+            ]}>
+            {t('errorOtp')}
+          </Text>
+        )}
       </View>
       <View style={otpStyles.contentOtpButtons}>
         <Button
           mode="elevated"
           icon={() =>
-            sendOtpCode && <Text style={otpStyles.counterOtp}>{counter}</Text>
+            sendOtpCode && (
+              <Text
+                style={{
+                  color: theme.dark
+                    ? colors.onSurface
+                    : colors.onPrimaryContainer,
+                }}>
+                {counter}
+              </Text>
+            )
           }
+          theme={theme}
           onPress={() => handleSendOtp(buttonAction, setSendOtpCode)}
           disabled={sendOtpCode}>
           {t('resendOtp')}
         </Button>
         <Button
+          theme={theme}
           mode="elevated"
           onPress={() => handleClear(setCode, setErrorOtp, inputRef.current!)}>
           {t('clear')}
         </Button>
         <Button
+          theme={theme}
           mode="elevated"
           onPress={() => handleValidateOtp(code, navigate, setErrorOtp)}>
           {t('verify')}

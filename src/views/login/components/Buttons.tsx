@@ -1,7 +1,4 @@
 import {useNavigation} from '@react-navigation/native';
-import {isDarkMode} from '@src/globals/styles/screenMode';
-import {darkTheme} from '@src/hooks/darkMode';
-import {lightTheme} from '@src/hooks/lightMode';
 import {ThemeContext} from '@src/types/contextTypes';
 import {type StackNavigation} from '@src/types/globalTypes';
 import {LoginButtonsProps} from '@src/types/loginTypes';
@@ -17,7 +14,10 @@ const Buttons = ({
   setIsLogin,
 }: LoginButtonsProps) => {
   const {navigate} = useNavigation<StackNavigation>();
-  const {theme} = useContext(ThemeContext);
+  const {
+    theme,
+    theme: {colors},
+  } = useContext(ThemeContext);
 
   const handleLogin = () => {
     setButtonAction(currentButtonAction);
@@ -31,9 +31,7 @@ const Buttons = ({
           style={loginFormStyles.button}
           textColor="white"
           buttonColor={
-            isDarkMode
-              ? darkTheme.colors.primaryContainer
-              : lightTheme.colors.onPrimaryContainer
+            theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
           }
           icon="login"
           mode="contained"
@@ -46,9 +44,7 @@ const Buttons = ({
           style={loginFormStyles.button}
           textColor="white"
           buttonColor={
-            isDarkMode
-              ? darkTheme.colors.primaryContainer
-              : lightTheme.colors.onPrimaryContainer
+            theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
           }
           icon="qrcode"
           mode="contained"
@@ -57,7 +53,9 @@ const Buttons = ({
         </Button>
       </View>
       <Button
-        textColor={theme.colors.onPrimaryContainer}
+        textColor={
+          theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
+        }
         mode="text"
         onPress={() => navigate('Register', {administrator: true})}>
         {t('signUp')}

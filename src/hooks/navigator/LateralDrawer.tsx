@@ -1,18 +1,18 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import React, {useContext} from 'react';
-import {useWindowDimensions} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {APP_NAME} from '@src/globals/constants/config';
+import {ThemeContext} from '@src/types/contextTypes';
+import {useContext} from 'react';
+import {useWindowDimensions} from 'react-native';
 import DrawerComponent from './DrawerComponent';
 import NavigationProvider from './NavigationProvider';
-import {NavigationContainer} from '@react-navigation/native';
-import {ThemeContext} from '@src/types/contextTypes';
-
-const MyDrawer = createDrawerNavigator();
 
 export const LateralDrawer = () => {
   const {width} = useWindowDimensions();
+  const MyDrawer = createDrawerNavigator();
   const {
     theme: {colors},
+    theme: {dark},
     theme,
   } = useContext(ThemeContext);
   return (
@@ -21,7 +21,7 @@ export const LateralDrawer = () => {
         screenOptions={{
           drawerType: width >= 768 ? 'permanent' : 'front',
           drawerActiveTintColor: colors.background,
-          headerTintColor: colors.primary,
+          headerTintColor: dark ? colors.onSurface : colors.primary,
           headerTitleStyle: {
             fontSize: 26,
             fontWeight: 'bold',

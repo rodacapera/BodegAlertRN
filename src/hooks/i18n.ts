@@ -13,6 +13,14 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
+        employeeNotFound:
+          'We have not found any employees registered to your store, we invite you to watch the following video to learn how to register one.',
+        cancel: 'Cancel',
+        ok: 'OK',
+        errorLocationPermissionsAlert: 'Permission denied',
+        descriptionErrorLocationPermissionsAlert:
+          'You have denied the use of geolocation, to validate it again you will have to uninstall the application and install it again.',
+
         profileTitle:
           'Below you will find your profile data registered in our system, if you wish you can update them right here!',
         names: 'Names',
@@ -21,7 +29,7 @@ i18n.use(initReactI18next).init({
         address: 'Address',
         city: 'City',
         state: 'State',
-        aliasName: 'Alias Name',
+        aliasName: 'Alias Shop',
         titleCreateAccountAdmin: 'Create an account',
         titleCreateAccountUser: 'Join a registered account',
         resendOtp: 'Resend',
@@ -49,16 +57,26 @@ i18n.use(initReactI18next).init({
         onboardingTitleOne: 'Do you have any emergency?',
         onboardingTitleTwo: 'Wit our messaging service',
         onboardingTitleThree: 'We are your best option',
+        onboardingTitleFour: 'We need access to your location!',
         onboardingDescriptionOne:
           'Forget about calling the traditional emergency system.',
         onboardingDescriptionTwo:
           'You will be able to inform your entire community about what is happening',
         onboardingDescriptionThree:
           'For those moments when you need to warn about any event that is happening.',
+        onboardingDescriptionFour:
+          'To ensure that our application works correctly, we require access to your location so that we can additionally autocomplete your profile data.',
       },
     },
     es: {
       translation: {
+        employeeNotFound:
+          'No hemos encontrado empleados registrados a tu tienda, te invitamos a ver el siguiente video para que aprendas como debes registrar uno',
+        cancel: 'Cancelar',
+        ok: 'OK',
+        errorLocationPermissionsAlert: 'Permiso denegado',
+        descriptionErrorLocationPermissionsAlert:
+          'Has negado el uso de la geolocalización, para volver a validarlo deberás desinstalar la aplicación e instalarla de nuevo.',
         profileTitle:
           'A continuación encuentras los datos de tu perfil registrados en nuestro sistema, si deseas puedes actualizarlos aquí mismo.',
         name: 'Nombre',
@@ -67,7 +85,7 @@ i18n.use(initReactI18next).init({
         address: 'Dirección',
         city: 'Ciudad',
         state: 'Estado/Departamento',
-        aliasName: 'Alias',
+        aliasName: 'Alias de la tienda',
         titleCreateAccountAdmin: 'Crear una cuenta',
         titleCreateAccountUser: 'Asociate a una cuententa registrada',
         resendOtp: 'Reenviar',
@@ -96,12 +114,15 @@ i18n.use(initReactI18next).init({
         onboardingTitleOne: '¿Tienes alguna emergencia?',
         onboardingTitleTwo: 'Con nuestro servicio de envio de mensajes',
         onboardingTitleThree: 'Somos tu mejor opcion',
+        onboardingTitleFour: 'Necesitamos acceder a tu ubicación!',
         onboardingDescriptionOne:
           'Olvidate de llamar al sistema de emergencias tradicional',
         onboardingDescriptionTwo:
           'Podrás informar a toda tu comunidad lo que esta sucediendo',
         onboardingDescriptionThree:
           'Para esos momentos en que necesitas avisar sobre cualquíer evento que este sucediendo',
+        onboardingDescriptionFour:
+          'Para garantizar que nuestra aplicación funcione correctamente, requerimos acceder a tu ubicación adicionalemente podremos autocompletar los datos de tu perfil.',
       },
     },
     it: {

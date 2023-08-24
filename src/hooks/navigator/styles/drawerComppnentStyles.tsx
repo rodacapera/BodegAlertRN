@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 
 export const drawerComponentStyles = StyleSheet.create({
   drawerContent: {
     flex: 1,
   },
   userInfoSection: {
+    marginTop: Platform.OS === 'android' ? 30 : 0,
     paddingLeft: 20,
   },
   title: {

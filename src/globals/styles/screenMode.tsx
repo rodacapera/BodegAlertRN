@@ -1,12 +1,7 @@
-import {useColorScheme} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {StyleProp, ViewStyle, useColorScheme} from 'react-native';
 
-const colorScheme = useColorScheme();
-
-const isDarkMode = colorScheme === 'dark';
 const backgroundStyle = {
   flex: 1,
-  // backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-};
+} as StyleProp<ViewStyle>;
 
-export {backgroundStyle, isDarkMode};
+export {backgroundStyle};

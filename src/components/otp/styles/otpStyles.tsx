@@ -1,7 +1,4 @@
-import {lightTheme} from '@src/hooks/lightMode';
 import {StyleSheet} from 'react-native';
-import {darkTheme} from '@src/hooks/darkMode';
-import {isDarkMode} from '@src/globals/styles/screenMode';
 export const otpStyles = StyleSheet.create({
   containerOtp: {
     width: '100%',
@@ -17,7 +14,7 @@ export const otpStyles = StyleSheet.create({
   contentBackButtonOtp: {
     position: 'absolute',
     left: -10,
-    top: -30,
+    top: -20,
     alignItems: 'flex-start',
     zIndex: 99999,
   },
@@ -39,21 +36,13 @@ export const otpStyles = StyleSheet.create({
   titleOtp: {
     fontSize: 20,
     fontWeight: '600',
-    color: isDarkMode ? lightTheme.colors.onPrimary : lightTheme.colors.outline,
   },
   subTitleOtp: {
     fontSize: 18,
     textAlign: 'center',
     fontWeight: '400',
-    color: isDarkMode ? lightTheme.colors.onPrimary : lightTheme.colors.outline,
   },
   errorOtp: {
     marginTop: 8,
-    color: isDarkMode
-      ? lightTheme.colors.errorContainer
-      : lightTheme.colors.error,
-  },
-  counterOtp: {
-    color: isDarkMode ? lightTheme.colors.onPrimary : lightTheme.colors.outline,
   },
 });

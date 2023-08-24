@@ -4,18 +4,20 @@ import {Button, Text} from 'react-native-paper';
 import {backgroundStyle} from '../../globals/styles/screenMode';
 import {loginStyles} from './styles/loginStyles';
 import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
-import {login_background} from '@src/assets';
+import {login_background} from '@src/assets/images';
 import {lightTheme} from '@src/hooks/lightMode';
 import {LoginSplashProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
-import {getLocationPermissions} from '@src/hooks/locations/permissions';
+import {
+  getLocationPermissions,
+  requestLocationPermission,
+} from '@src/hooks/locations/permissionsHook';
 
 const LoginSplash = ({route, navigation}: LoginSplashProps) => {
   const handleLoginButton = async () => {
-    const granted = await getLocationPermissions();
-    console.log('is granted', granted);
+    console.log('aaa');
 
-    // navigation.navigate('Login')
+    navigation.navigate('Login');
   };
   return (
     <SafeAreaView style={backgroundStyle}>

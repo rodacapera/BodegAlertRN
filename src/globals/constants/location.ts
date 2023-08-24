@@ -1,0 +1,1 @@
+export const GOOGLE_API_ANDROID = 'AIzaSyBf-L9VmCcYHpQ13Rllrdl0k54Ma5QSiQU';

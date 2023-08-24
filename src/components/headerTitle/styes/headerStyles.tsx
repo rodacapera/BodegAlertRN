@@ -1,7 +1,4 @@
-import {lightTheme} from '@src/hooks/lightMode';
 import {StyleSheet} from 'react-native';
-import {darkTheme} from '@src/hooks/darkMode';
-import {isDarkMode} from '@src/globals/styles/screenMode';
 export const headerStyles = StyleSheet.create({
   header: {
     flexDirection: 'row',
@@ -21,8 +18,5 @@ export const headerStyles = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'capitalize',
     textAlign: 'center',
-    color: isDarkMode
-      ? darkTheme.colors.primaryContainer
-      : lightTheme.colors.onPrimaryContainer,
   },
 });

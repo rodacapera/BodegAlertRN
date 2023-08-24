@@ -26,7 +26,10 @@ const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
     <View
       style={[
         loginFormStyles.phoneInputContainer,
-        {borderBottomWidth: focusPhone ? 1.9 : 0.7},
+        {
+          borderBottomWidth: focusPhone ? 1.9 : 0.7,
+          borderBottomColor: focusPhone ? colors.error : colors.onSurface,
+        },
       ]}>
       <View style={loginFormStyles.phoneFlagContent}>
         {type === 'phone' ? (
@@ -34,10 +37,7 @@ const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
             ref={ref => {
               phoneRef.current = ref;
             }}
-            textStyle={[
-              loginFormStyles.flagText,
-              {color: colors.onPrimaryContainer},
-            ]}
+            textStyle={{color: colors.onPrimaryContainer}}
             initialCountry={'co'}></PhoneInput>
         ) : (
           <></>

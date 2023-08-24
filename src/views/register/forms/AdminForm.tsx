@@ -1,17 +1,17 @@
-import {View, Text, ScrollView} from 'react-native';
-import React, {useRef, useState} from 'react';
-import InputForm from '@src/views/login/components/InputForm';
-import {registerStyles} from '../styles/registerStyles';
-import {useTranslation} from 'react-i18next';
-import {buttonActionInitialState} from '@src/globals/constants/login';
-import {LoginFormAction} from '@src/types/loginTypes';
-import {Button, TextInput} from 'react-native-paper';
-import {lightTheme} from '@src/hooks/lightMode';
-import CustomIcon from '@src/components/customIcon/CustomIcon';
-import {isDarkMode} from '@src/globals/styles/screenMode';
-import {darkTheme} from '@src/hooks/darkMode';
 import {useNavigation} from '@react-navigation/native';
+import CustomIcon from '@src/components/customIcon/CustomIcon';
+import {buttonActionInitialState} from '@src/globals/constants/login';
+import {getLocation} from '@src/hooks/locations/geocoderHook';
+import {ThemeContext} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
+import {GeocoderResponse, ResultLocations} from '@src/types/locationTypes';
+import {LoginFormAction} from '@src/types/loginTypes';
+import InputForm from '@src/views/login/components/InputForm';
+import {useContext, useEffect, useRef, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {ScrollView, View} from 'react-native';
+import {Button, TextInput} from 'react-native-paper';
+import {registerStyles} from '../styles/registerStyles';
 
 const AdminForm = () => {
   const {t} = useTranslation();
@@ -19,8 +19,16 @@ const AdminForm = () => {
   const {navigate} = useNavigation<StackNavigation>();
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);
+  const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
+  const {
+    theme: {colors},
+    theme,
+  } = useContext(ThemeContext);
 
-  console.log('currentButtonAction', currentButtonAction);
+  useEffect(() => {
+    getLocation(setMyCurrentLocation);
+  }, []);
+
   return (
     <ScrollView
       style={registerStyles.body}
@@ -35,12 +43,16 @@ const AdminForm = () => {
         label={t('name')}
         style={registerStyles.input}
         secureTextEntry
-        theme={{
-          colors: {onSurface: lightTheme.colors.error},
-        }}
+        theme={theme}
         left={
           <TextInput.Icon
-            icon={() => <CustomIcon name={'pencil'} font={'awesome'} />}
+            icon={() => (
+              <CustomIcon
+                name={'pencil'}
+                color={colors.onSurface}
+                font={'awesome'}
+              />
+            )}
           />
         }
       />
@@ -48,12 +60,16 @@ const AdminForm = () => {
         label={t('lastName')}
         style={registerStyles.input}
         secureTextEntry
-        theme={{
-          colors: {onSurface: lightTheme.colors.error},
-        }}
+        theme={theme}
         left={
           <TextInput.Icon
-            icon={() => <CustomIcon name={'pencil'} font={'awesome'} />}
+            icon={() => (
+              <CustomIcon
+                name={'pencil'}
+                color={colors.onSurface}
+                font={'awesome'}
+              />
+            )}
           />
         }
       />
@@ -61,39 +77,88 @@ const AdminForm = () => {
         label={t('email')}
         style={registerStyles.input}
         secureTextEntry
-        theme={{
-          colors: {onSurface: lightTheme.colors.error},
-        }}
+        theme={theme}
         left={
           <TextInput.Icon
-            icon={() => <CustomIcon name={'envelope'} font={'awesome'} />}
+            icon={() => (
+              <CustomIcon
+                name={'envelope'}
+                color={colors.onSurface}
+                font={'awesome'}
+              />
+            )}
+          />
+        }
+      />
+      <TextInput
+        label={t('aliasName')}
+        style={registerStyles.input}
+        theme={theme}
+        left={
+          <TextInput.Icon
+            icon={() => (
+              <CustomIcon
+                name={'home'}
+                color={colors.onSurface}
+                font={'awesome'}
+                size={28}
+              />
+            )}
+          />
+        }
+      />
+      <TextInput
+        label={t('country')}
+        style={registerStyles.input}
+        theme={theme}
+        disabled
+        value={myCurrentLocation?.country.long_name}
+        left={
+          <TextInput.Icon
+            icon={() => (
+              <CustomIcon
+                name={'map'}
+                color={colors.onSurface}
+                font={'awesome'}
+              />
+            )}
           />
         }
       />
       <TextInput
         label={t('address')}
         style={registerStyles.input}
-        secureTextEntry
-        theme={{
-          colors: {onSurface: lightTheme.colors.error},
-        }}
+        theme={theme}
+        disabled
+        value={myCurrentLocation?.address}
         left={
           <TextInput.Icon
-            icon={() => <CustomIcon name={'map'} font={'awesome'} />}
+            icon={() => (
+              <CustomIcon
+                name={'map-marker'}
+                color={colors.onSurface}
+                font={'awesome'}
+                size={29}
+              />
+            )}
           />
         }
       />
       <TextInput
         label={t('city')}
         style={registerStyles.input}
-        secureTextEntry
-        theme={{
-          colors: {onSurface: lightTheme.colors.error},
-        }}
+        theme={theme}
+        disabled
+        value={myCurrentLocation?.city.long_name}
         left={
           <TextInput.Icon
             icon={() => (
-              <CustomIcon name={'city'} font={'materialMc'} size={29} />
+              <CustomIcon
+                name={'city'}
+                color={colors.onSurface}
+                font={'materialMc'}
+                size={29}
+              />
             )}
           />
         }
@@ -101,26 +166,18 @@ const AdminForm = () => {
       <TextInput
         label={t('state')}
         style={registerStyles.input}
-        secureTextEntry
-        theme={{
-          colors: {onSurface: lightTheme.colors.error},
-        }}
+        theme={theme}
+        disabled
+        value={myCurrentLocation?.state.long_name}
         left={
           <TextInput.Icon
-            icon={() => <CustomIcon name={'flag'} font={'awesome'} />}
-          />
-        }
-      />
-      <TextInput
-        label={t('aliasName')}
-        style={registerStyles.input}
-        secureTextEntry
-        theme={{
-          colors: {onSurface: lightTheme.colors.error},
-        }}
-        left={
-          <TextInput.Icon
-            icon={() => <CustomIcon name={'home'} font={'awesome'} />}
+            icon={() => (
+              <CustomIcon
+                name={'flag'}
+                color={colors.onSurface}
+                font={'awesome'}
+              />
+            )}
           />
         }
       />
@@ -129,11 +186,7 @@ const AdminForm = () => {
           textColor="white"
           mode="contained"
           icon="check"
-          buttonColor={
-            isDarkMode
-              ? darkTheme.colors.primaryContainer
-              : lightTheme.colors.onPrimaryContainer
-          }
+          buttonColor={colors.primaryContainer}
           onPress={() => navigate('Register', {administrator: false})}>
           {t('continue')}
         </Button>
@@ -143,3 +196,6 @@ const AdminForm = () => {
 };
 
 export default AdminForm;
+function findDataLocation(myCurrentLocation: GeocoderResponse) {
+  throw new Error('Function not implemented.');
+}

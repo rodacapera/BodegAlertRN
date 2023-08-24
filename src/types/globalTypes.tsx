@@ -61,3 +61,7 @@ export type EmployeesProps = NativeStackScreenProps<
   RootStackParamList,
   'Employees'
 >;
+export type MyOnboardingProps = NativeStackScreenProps<
+  RootStackParamList,
+  'MyOnboarding'
+>;

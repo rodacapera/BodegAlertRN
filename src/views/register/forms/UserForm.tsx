@@ -2,9 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import CustomIcon from '@src/components/customIcon/CustomIcon';
 import {shop} from '@src/globals/constants/fakeData';
 import {buttonActionInitialState} from '@src/globals/constants/login';
-import {isDarkMode} from '@src/globals/styles/screenMode';
-import {darkTheme} from '@src/hooks/darkMode';
-import {lightTheme} from '@src/hooks/lightMode';
+import {ThemeContext} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import InputForm from '@src/views/login/components/InputForm';
@@ -13,7 +11,6 @@ import {useTranslation} from 'react-i18next';
 import {ScrollView, Text, View} from 'react-native';
 import {Button, Caption, TextInput} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
-import {ThemeContext} from '@src/types/contextTypes';
 
 const UserForm = () => {
   const {t} = useTranslation();
@@ -86,20 +83,36 @@ const UserForm = () => {
       />
       <View style={[registerStyles.footer]}>
         <View style={registerStyles.contentFooterText}>
-          <Text style={registerStyles.footerText}>{t('address')}</Text>
-          <Caption>{shop.address}</Caption>
+          <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
+            {t('address')}
+          </Text>
+          <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
+            {shop.address}
+          </Caption>
         </View>
         <View style={registerStyles.contentFooterText}>
-          <Text style={registerStyles.footerText}>{t('city')}</Text>
-          <Caption>{shop.city}</Caption>
+          <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
+            {t('city')}
+          </Text>
+          <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
+            {shop.city}
+          </Caption>
         </View>
         <View style={registerStyles.contentFooterText}>
-          <Text style={registerStyles.footerText}>{t('state')}</Text>
-          <Caption>{shop.state}</Caption>
+          <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
+            {t('state')}
+          </Text>
+          <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
+            {shop.state}
+          </Caption>
         </View>
         <View style={registerStyles.contentFooterText}>
-          <Text style={registerStyles.footerText}>{t('aliasName')}</Text>
-          <Caption>{shop.alias}</Caption>
+          <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
+            {t('aliasName')}
+          </Text>
+          <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
+            {shop.alias}
+          </Caption>
         </View>
       </View>
       <View>
@@ -107,11 +120,7 @@ const UserForm = () => {
           textColor="white"
           mode="contained"
           icon="check"
-          buttonColor={
-            isDarkMode
-              ? darkTheme.colors.primaryContainer
-              : lightTheme.colors.onPrimaryContainer
-          }
+          buttonColor={colors.primaryContainer}
           onPress={() => navigate('Register', {administrator: false})}>
           {t('continue')}
         </Button>
