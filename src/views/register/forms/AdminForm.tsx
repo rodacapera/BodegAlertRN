@@ -186,7 +186,8 @@ const AdminForm = () => {
           textColor="white"
           mode="contained"
           icon="check"
-          buttonColor={colors.primaryContainer}
+          theme={theme}
+          // buttonColor={colors.primaryContainer}
           onPress={() => navigate('Register', {administrator: false})}>
           {t('continue')}
         </Button>

@@ -1,19 +1,19 @@
-import React from 'react';
+import {login_background} from '@src/assets/images';
+import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
+import {ThemeContext} from '@src/types/contextTypes';
+import {LoginSplashProps} from '@src/types/globalTypes';
+import {t} from 'i18next';
+import {useContext} from 'react';
 import {ImageBackground, SafeAreaView, View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {backgroundStyle} from '../../globals/styles/screenMode';
 import {loginStyles} from './styles/loginStyles';
-import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
-import {login_background} from '@src/assets/images';
-import {lightTheme} from '@src/hooks/lightMode';
-import {LoginSplashProps} from '@src/types/globalTypes';
-import {t} from 'i18next';
-import {
-  getLocationPermissions,
-  requestLocationPermission,
-} from '@src/hooks/locations/permissionsHook';
 
 const LoginSplash = ({route, navigation}: LoginSplashProps) => {
+  const {
+    theme: {colors},
+    theme,
+  } = useContext(ThemeContext);
   const handleLoginButton = async () => {
     console.log('aaa');
 
@@ -45,7 +45,8 @@ const LoginSplash = ({route, navigation}: LoginSplashProps) => {
               <Button
                 style={loginStyles.button}
                 textColor="white"
-                buttonColor={lightTheme.colors.onPrimaryContainer}
+                theme={theme}
+                // buttonColor={lightTheme.colors.onPrimaryContainer}
                 icon="check"
                 mode="contained"
                 onPress={handleLoginButton}>

@@ -30,9 +30,10 @@ const Buttons = ({
         <Button
           style={loginFormStyles.button}
           textColor="white"
-          buttonColor={
-            theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
-          }
+          theme={theme}
+          // buttonColor={
+          //   theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
+          // }
           icon="login"
           mode="contained"
           onPress={handleLogin}>
@@ -43,9 +44,10 @@ const Buttons = ({
         <Button
           style={loginFormStyles.button}
           textColor="white"
-          buttonColor={
-            theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
-          }
+          theme={theme}
+          // buttonColor={
+          //   theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
+          // }
           icon="qrcode"
           mode="contained"
           onPress={() => console.log('Register')}>
@@ -53,9 +55,10 @@ const Buttons = ({
         </Button>
       </View>
       <Button
-        textColor={
-          theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
-        }
+        theme={theme}
+        // textColor={
+        //   theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
+        // }
         mode="text"
         onPress={() => navigate('Register', {administrator: true})}>
         {t('signUp')}
