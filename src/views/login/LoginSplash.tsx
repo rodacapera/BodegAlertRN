@@ -14,11 +14,6 @@ const LoginSplash = ({route, navigation}: LoginSplashProps) => {
     theme: {colors},
     theme,
   } = useContext(ThemeContext);
-  const handleLoginButton = async () => {
-    console.log('aaa');
-
-    navigation.navigate('Login');
-  };
   return (
     <SafeAreaView style={backgroundStyle}>
       <ImageBackground
@@ -28,7 +23,7 @@ const LoginSplash = ({route, navigation}: LoginSplashProps) => {
         <View style={[loginStyles.content]}>
           <View style={loginStyles.header}>
             <Text style={loginStyles.title}>
-              {t('welcome')} {'! \n'}
+              {t('loginSplashView.welcome')} {'! \n'}
               <Text style={loginStyles.appNameInit}>
                 {APP_NAME_FIRST}
                 <Text style={loginStyles.appNameEnd}>{APP_NAME_END}</Text>
@@ -37,7 +32,7 @@ const LoginSplash = ({route, navigation}: LoginSplashProps) => {
           </View>
           <View style={loginStyles.descriptionContainer}>
             <Text style={loginStyles.loginDescription}>
-              {t('loginDescription')}
+              {t('loginSplashView.description')}
             </Text>
           </View>
           <View style={loginStyles.footer}>
@@ -45,12 +40,13 @@ const LoginSplash = ({route, navigation}: LoginSplashProps) => {
               <Button
                 style={loginStyles.button}
                 textColor="white"
-                theme={theme}
-                // buttonColor={lightTheme.colors.onPrimaryContainer}
+                buttonColor={
+                  theme.dark ? colors.onPrimary : colors.onPrimaryContainer
+                }
                 icon="check"
                 mode="contained"
-                onPress={handleLoginButton}>
-                {t('continue')}
+                onPress={() => navigation.navigate('Login')}>
+                {t('loginSplashView.continue')}
               </Button>
             </View>
           </View>

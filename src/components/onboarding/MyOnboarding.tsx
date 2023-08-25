@@ -8,50 +8,54 @@ import {
 import {handleFinishOnboarding} from '@src/hooks/onboarding/onboardingHook';
 import {MyOnboardingProps, StackNavigation} from '@src/types/globalTypes';
 import {splashStyles} from '@src/views/splash/styles/splashStyles';
-import React, {Fragment} from 'react';
+import React, {Fragment, useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import CustomDialogAlert from '../dialogAlert/CustomDialogAlert';
+import {ThemeContext} from '@src/types/contextTypes';
 
 const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
   const [visible, setVisible] = React.useState(false);
   const {t} = useTranslation();
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
   const {navigate} = useNavigation<StackNavigation>();
 
   return (
     <Fragment>
       <CustomDialogAlert visible={visible} setVisible={setVisible} />
       <Onboarding
-        nextLabel={t('next')}
-        skipLabel={t('skip')}
+        nextLabel={t('onboarding.next')}
+        skipLabel={t('onboarding.skip')}
         bottomBarColor="transparent"
         onSkip={() => handleFinishOnboarding(setVisible, navigate)}
         onDone={() => handleFinishOnboarding(setVisible, navigate)}
         pages={[
           {
-            backgroundColor: '#fff',
+            backgroundColor: colors.background,
             image: <Image source={emergency} style={splashStyles.logo} />,
-            title: t('onboardingTitleOne'),
-            subtitle: t('onboardingDescriptionOne'),
+            title: t('onboarding.titleOne'),
+            subtitle: t('onboarding.descriptionOne'),
           },
           {
-            backgroundColor: '#fff',
+            backgroundColor: colors.background,
             image: <Image source={alert_push} style={splashStyles.logo} />,
-            title: t('onboardingTitleTwo'),
-            subtitle: t('onboardingDescriptionTwo'),
+            title: t('onboarding.titleTwo'),
+            subtitle: t('onboarding.descriptionTwo'),
           },
           {
-            backgroundColor: '#fff',
+            backgroundColor: colors.background,
             image: <Image source={notification} style={splashStyles.logo} />,
-            title: t('onboardingTitleThree'),
-            subtitle: t('onboardingDescriptionThree'),
+            title: t('onboarding.titleThree'),
+            subtitle: t('onboarding.descriptionThree'),
           },
           {
-            backgroundColor: '#fff',
+            backgroundColor: colors.background,
             image: <Image source={location} style={splashStyles.logo} />,
-            title: t('onboardingTitleFour'),
-            subtitle: t('onboardingDescriptionFour'),
+            title: t('onboarding.titleFour'),
+            subtitle: t('onboarding.descriptionFour'),
           },
         ]}
       />

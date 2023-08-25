@@ -34,7 +34,7 @@ const CustomDialogAlert = ({
           {cancelButton && (
             <Button onPress={() => setVisible(false)}>{t('cancel')}</Button>
           )}
-          <Button onPress={handleSuccess}>{t('ok')}</Button>
+          <Button onPress={handleSuccess}>{t('general.ok')}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>

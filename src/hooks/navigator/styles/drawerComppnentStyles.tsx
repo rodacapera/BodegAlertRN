@@ -15,6 +15,7 @@ export const drawerComponentStyles = StyleSheet.create({
   caption: {
     fontSize: 14,
     lineHeight: 14,
+    textTransform: 'capitalize',
   },
   row: {
     marginTop: 20,

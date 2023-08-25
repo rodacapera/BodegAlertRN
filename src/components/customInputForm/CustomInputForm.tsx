@@ -4,10 +4,11 @@ import React, {useContext, useState} from 'react';
 import {View} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import PhoneInput from 'react-native-phone-input';
-import {loginFormStyles} from '../styles/loginFormStyles';
+import {loginFormStyles} from '../../views/login/styles/loginFormStyles';
 import {ThemeContext} from '@src/types/contextTypes';
+import {t} from 'i18next';
 
-const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
+const CustomInputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
   const [phone, setPhone] = useState('');
   const [focusPhone, setFocusPhone] = useState(false);
   const {
@@ -37,8 +38,12 @@ const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
             ref={ref => {
               phoneRef.current = ref;
             }}
-            textStyle={{color: colors.onPrimaryContainer}}
-            initialCountry={'co'}></PhoneInput>
+            textStyle={{color: colors.onSurface}}
+            pickerBackgroundColor={colors.background}
+            cancelTextStyle={{color: colors.onSecondaryContainer}}
+            confirmTextStyle={{color: colors.onSecondaryContainer}}
+            initialCountry={'co'}
+          />
         ) : (
           <></>
         )}
@@ -52,7 +57,11 @@ const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
         underlineStyle={{
           backgroundColor: 'transparent',
         }}
-        theme={theme}
+        // theme={{
+        //   colors: {
+        //     primary: 'blue',
+        //   },
+        // }}
         onFocus={() => setFocusPhone(true)}
         onBlur={() => setFocusPhone(false)}
         dense={true}
@@ -61,7 +70,7 @@ const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
         //     icon={() => <CustomIcon name={'camera'} size={20} />}
         //   />
         // }
-        label="Phone"
+        label={t('general.phone')}
         value={phone}
         onChangeText={text => handlePhoneNumber(text)}
       />
@@ -69,4 +78,4 @@ const InputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
   );
 };
 
-export default InputForm;
+export default CustomInputForm;

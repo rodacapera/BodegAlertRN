@@ -75,7 +75,7 @@ const OtpCode = ({
                 color: colors.error,
               },
             ]}>
-            {t('errorOtp')}
+            {t('otp.error')}
           </Text>
         )}
       </View>
@@ -97,19 +97,19 @@ const OtpCode = ({
           theme={theme}
           onPress={() => handleSendOtp(buttonAction, setSendOtpCode)}
           disabled={sendOtpCode}>
-          {t('resendOtp')}
+          {t('otp.resend')}
         </Button>
         <Button
           theme={theme}
           mode="elevated"
           onPress={() => handleClear(setCode, setErrorOtp, inputRef.current!)}>
-          {t('clear')}
+          {t('general.clear')}
         </Button>
         <Button
           theme={theme}
           mode="elevated"
           onPress={() => handleValidateOtp(code, navigate, setErrorOtp)}>
-          {t('verify')}
+          {t('general.verify')}
         </Button>
       </View>
     </View>

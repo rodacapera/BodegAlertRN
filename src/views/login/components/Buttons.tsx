@@ -15,8 +15,8 @@ const Buttons = ({
 }: LoginButtonsProps) => {
   const {navigate} = useNavigation<StackNavigation>();
   const {
-    theme,
     theme: {colors},
+    theme,
   } = useContext(ThemeContext);
 
   const handleLogin = () => {
@@ -30,38 +30,33 @@ const Buttons = ({
         <Button
           style={loginFormStyles.button}
           textColor="white"
-          theme={theme}
-          // buttonColor={
-          //   theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
-          // }
+          buttonColor={
+            theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
+          }
           icon="login"
           mode="contained"
           onPress={handleLogin}>
-          {t('signIn')}
+          {t('loginView.signIn')}
         </Button>
       </View>
       <View style={loginFormStyles.buttonQr}>
         <Button
           style={loginFormStyles.button}
           textColor="white"
-          theme={theme}
-          // buttonColor={
-          //   theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
-          // }
+          buttonColor={
+            theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
+          }
           icon="qrcode"
           mode="contained"
           onPress={() => console.log('Register')}>
-          {t('scanButton')}
+          {t('loginView.scanButton')}
         </Button>
       </View>
       <Button
-        theme={theme}
-        // textColor={
-        //   theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
-        // }
         mode="text"
+        textColor={colors.onSurface}
         onPress={() => navigate('Register', {administrator: true})}>
-        {t('signUp')}
+        {t('loginView.signUp')}
       </Button>
     </View>
   );

@@ -77,5 +77,5 @@ export const loginFormStyles = StyleSheet.create({
     marginTop: -29,
     width: 278,
   },
-  error: {fontSize: 12, color: 'red'},
+  error: {fontSize: 12},
 });

@@ -5,7 +5,7 @@ import {buttonActionInitialState} from '@src/globals/constants/login';
 import {ThemeContext} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
-import InputForm from '@src/views/login/components/InputForm';
+import CustomInputForm from '@src/components/customInputForm/CustomInputForm';
 import {useContext, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, Text, View} from 'react-native';
@@ -27,7 +27,7 @@ const UserForm = () => {
     <ScrollView
       style={registerStyles.body}
       showsVerticalScrollIndicator={false}>
-      <InputForm
+      <CustomInputForm
         phoneRef={phoneRef}
         setButtonAction={setCurrentButtonAction}
         type="phone"

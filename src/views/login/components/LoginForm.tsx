@@ -4,8 +4,8 @@ import {t} from 'i18next';
 import {Fragment, useContext, useRef, useState} from 'react';
 import {Text} from 'react-native-paper';
 import Buttons from './Buttons';
-import ErrorInputForm from './ErrorInputForm';
-import InputForm from './InputForm';
+import ErrorInputForm from '../../../components/customErrorInputForm/CustomErrorInputForm';
+import CustomInputForm from '../../../components/customInputForm/CustomInputForm';
 import {ThemeContext} from '@src/types/contextTypes';
 
 const LoginForm = ({
@@ -26,18 +26,16 @@ const LoginForm = ({
       <Text
         variant="titleLarge"
         style={{
-          color: theme.dark
-            ? colors.primaryContainer
-            : colors.onPrimaryContainer,
+          color: theme.dark ? colors.onSurface : colors.onPrimaryContainer,
         }}>
-        {t('loginTitle')}
+        {t('loginView.title')}
       </Text>
-      <InputForm
+      <CustomInputForm
         phoneRef={phoneRef}
         setButtonAction={setCurrentButtonAction}
         type="phone"
       />
-      {errorPhone && <ErrorInputForm />}
+      {errorPhone && <ErrorInputForm error={t('loginView.errorPhone')} />}
       <Buttons
         setButtonAction={setButtonAction}
         currentButtonAction={currentButtonAction}

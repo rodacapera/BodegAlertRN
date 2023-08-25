@@ -6,7 +6,7 @@ import {ThemeContext} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {GeocoderResponse, ResultLocations} from '@src/types/locationTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
-import InputForm from '@src/views/login/components/InputForm';
+import CustomInputForm from '@src/components/customInputForm/CustomInputForm';
 import {useContext, useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, View} from 'react-native';
@@ -33,7 +33,7 @@ const AdminForm = () => {
     <ScrollView
       style={registerStyles.body}
       showsVerticalScrollIndicator={false}>
-      <InputForm
+      <CustomInputForm
         phoneRef={phoneRef}
         setButtonAction={setCurrentButtonAction}
         type="phone"

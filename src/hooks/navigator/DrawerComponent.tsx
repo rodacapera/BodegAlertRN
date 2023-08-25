@@ -22,6 +22,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {drawerComponentStyles} from './styles/drawerComppnentStyles';
 import {ThemeContext} from '@src/types/contextTypes';
 import {shop} from '@src/globals/constants/fakeData';
+import {colorScheme} from '@src/globals/constants/theme';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
@@ -31,7 +32,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     theme: {colors},
     theme,
   } = useContext(ThemeContext);
-  const {getItem, setItem} = useAsyncStorage('@theme');
+  const {getItem} = useAsyncStorage('@theme');
   const [isDark, setIsDark] = useState(false);
 
   const onToggleSwitch = () => {
@@ -44,7 +45,11 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
 
   const validateSwitch = async () => {
     const item = await getItem();
-    item ? setIsDark(item === 'dark' ? true : false) : setItem('light');
+    console.log('iiiiiteeeemmm', item);
+
+    item
+      ? setIsDark(item === 'dark' ? true : false)
+      : setIsDark(colorScheme === 'dark' ? true : false);
   };
   const handleLogout = () => {
     AsyncStorage.clear();
@@ -123,7 +128,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
             />
           )}
           labelStyle={{color: colors.onSurface}}
-          label="Profile"
+          label={t('drawer.profile')}
           onPress={() =>
             handleClickButtonMenuDrawer('Profile', {administrator: false, shop})
           }
@@ -137,7 +142,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
             />
           )}
           labelStyle={{color: colors.onSurface}}
-          label="Users"
+          label={t('drawer.employees')}
           onPress={() => handleClickButtonMenuDrawer('Employees')}
         />
         <DrawerItem
@@ -149,14 +154,14 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
             />
           )}
           labelStyle={{color: colors.onSurface}}
-          label="Buttons"
+          label={t('drawer.buttons')}
           onPress={() => handleClickButtonMenuDrawer('Buttons')}
         />
       </Drawer.Section>
       <Drawer.Section theme={theme} title="Preferences">
         {/* <TouchableRipple onPress={() => setIsDark(!isDark)}> */}
         <View style={drawerComponentStyles.preference}>
-          <Text style={{color: colors.onSurface}}>Dark Theme</Text>
+          <Text style={{color: colors.onSurface}}>{t('drawer.darkTheme')}</Text>
           <View>
             <Switch value={isDark} onValueChange={onToggleSwitch} />
           </View>
@@ -174,7 +179,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
       <Drawer.Section style={drawerComponentStyles.drawerSection}>
         <Title
           style={[drawerComponentStyles.titleLogos, {color: colors.onSurface}]}>
-          {t('guarantorEntities')}
+          {t('drawer.supportingEntities')}
         </Title>
         <View style={drawerComponentStyles.logos}>
           <Image
@@ -191,7 +196,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           />
           <Image
             source={{
-              uri: 'https://site.ccflorencia.org.co/wp-content/uploads/2022/01/icono-camara.png',
+              uri: 'http://site.ccflorencia.org.co/wp-content/uploads/2022/01/icono-camara.png',
             }}
             style={drawerComponentStyles.imagesLogos}
           />
