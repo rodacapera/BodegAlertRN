@@ -40,7 +40,7 @@ const AdminForm = () => {
       />
 
       <TextInput
-        label={t('name')}
+        label={t('adminFormView.name')}
         style={registerStyles.input}
         secureTextEntry
         theme={theme}
@@ -57,7 +57,7 @@ const AdminForm = () => {
         }
       />
       <TextInput
-        label={t('lastName')}
+        label={t('adminFormView.lastName')}
         style={registerStyles.input}
         secureTextEntry
         theme={theme}
@@ -74,7 +74,7 @@ const AdminForm = () => {
         }
       />
       <TextInput
-        label={t('email')}
+        label={t('adminFormView.email')}
         style={registerStyles.input}
         secureTextEntry
         theme={theme}
@@ -91,7 +91,7 @@ const AdminForm = () => {
         }
       />
       <TextInput
-        label={t('aliasName')}
+        label={t('adminFormView.aliasName')}
         style={registerStyles.input}
         theme={theme}
         left={
@@ -108,7 +108,7 @@ const AdminForm = () => {
         }
       />
       <TextInput
-        label={t('country')}
+        label={t('adminFormView.country')}
         style={registerStyles.input}
         theme={theme}
         disabled
@@ -126,7 +126,7 @@ const AdminForm = () => {
         }
       />
       <TextInput
-        label={t('address')}
+        label={t('adminFormView.address')}
         style={registerStyles.input}
         theme={theme}
         disabled
@@ -145,7 +145,7 @@ const AdminForm = () => {
         }
       />
       <TextInput
-        label={t('city')}
+        label={t('adminFormView.city')}
         style={registerStyles.input}
         theme={theme}
         disabled
@@ -164,7 +164,7 @@ const AdminForm = () => {
         }
       />
       <TextInput
-        label={t('state')}
+        label={t('adminFormView.state')}
         style={registerStyles.input}
         theme={theme}
         disabled
@@ -186,10 +186,9 @@ const AdminForm = () => {
           textColor="white"
           mode="contained"
           icon="check"
-          theme={theme}
-          // buttonColor={colors.primaryContainer}
+          buttonColor={colors.primaryContainer}
           onPress={() => navigate('Register', {administrator: false})}>
-          {t('continue')}
+          {t('general.continue')}
         </Button>
       </View>
     </ScrollView>

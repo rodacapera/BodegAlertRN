@@ -34,7 +34,7 @@ const UserForm = () => {
       />
 
       <TextInput
-        label={t('name')}
+        label={t('adminFormView.names')}
         style={registerStyles.input}
         theme={theme}
         left={
@@ -50,7 +50,7 @@ const UserForm = () => {
         }
       />
       <TextInput
-        label={t('lastName')}
+        label={t('adminFormView.lastNames')}
         style={registerStyles.input}
         theme={theme}
         left={
@@ -66,7 +66,7 @@ const UserForm = () => {
         }
       />
       <TextInput
-        label={t('email')}
+        label={t('adminFormView.email')}
         style={registerStyles.input}
         theme={theme}
         left={
@@ -84,7 +84,7 @@ const UserForm = () => {
       <View style={[registerStyles.footer]}>
         <View style={registerStyles.contentFooterText}>
           <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
-            {t('address')}
+            {t('adminFormView.address')}
           </Text>
           <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
             {shop.address}
@@ -92,7 +92,7 @@ const UserForm = () => {
         </View>
         <View style={registerStyles.contentFooterText}>
           <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
-            {t('city')}
+            {t('adminFormView.city')}
           </Text>
           <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
             {shop.city}
@@ -100,7 +100,7 @@ const UserForm = () => {
         </View>
         <View style={registerStyles.contentFooterText}>
           <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
-            {t('state')}
+            {t('adminFormView.state')}
           </Text>
           <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
             {shop.state}
@@ -108,7 +108,7 @@ const UserForm = () => {
         </View>
         <View style={registerStyles.contentFooterText}>
           <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
-            {t('aliasName')}
+            {t('adminFormView.aliasName')}
           </Text>
           <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
             {shop.alias}
@@ -120,9 +120,9 @@ const UserForm = () => {
           textColor="white"
           mode="contained"
           icon="check"
-          theme={theme}
+          buttonColor={colors.primaryContainer}
           onPress={() => navigate('Register', {administrator: false})}>
-          {t('continue')}
+          {t('general.continue')}
         </Button>
       </View>
     </ScrollView>

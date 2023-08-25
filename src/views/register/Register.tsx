@@ -18,8 +18,8 @@ const Register = ({navigation, route}: RegisterProps) => {
         <HeaderTitle
           title={
             administrator
-              ? t('titleCreateAccountAdmin')
-              : t('titleCreateAccountUser')
+              ? t('registerView.titleCreateAccountAdmin')
+              : t('registerView.titleCreateAccountUser')
           }
         />
         {administrator ? <AdminForm /> : <UserForm />}

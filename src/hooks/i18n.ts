@@ -21,28 +21,31 @@ i18n.use(initReactI18next).init({
           darkTheme: 'Dark theme',
           supportingEntities: 'Supporting entities',
         },
-        employeeNotFound:
-          'We have not found any employees registered to your store, we invite you to watch the following video to learn how to register one.',
-        cancel: 'Cancel',
-
-        errorLocationPermissionsAlert: 'Permission denied',
-        descriptionErrorLocationPermissionsAlert:
-          'You have denied the use of geolocation, to validate it again you will have to uninstall the application and install it again.',
-
+        employeesView: {
+          banner:
+            'Below you will find a list of the employees registered in your store, which you can delete or add using the floating button!',
+          employeeNotFound:
+            'We have not found any employees registered to your store, we invite you to watch the following video to learn how to register one.',
+        },
+        geolocationAlert: {
+          errorLocationPermissionsAlert: 'Permission denied',
+          descriptionErrorLocationPermissionsAlert:
+            'You have denied the use of geolocation, to validate it again you will have to uninstall the application and install it again.',
+        },
         profileTitle:
           'Below you will find your profile data registered in our system, if you wish you can update them right here!',
-        names: 'Names',
-        lastNames: 'Last Names',
-        email: 'Email',
-        address: 'Address',
-        city: 'City',
-        state: 'State',
-        aliasName: 'Alias Shop',
+        adminFormView: {
+          names: 'Names',
+          lastNames: 'Last Names',
+          email: 'Email',
+          address: 'Address',
+          city: 'City',
+          country: 'Country',
+          state: 'State',
+          aliasName: 'Alias Shop',
+        },
         titleCreateAccountAdmin: 'Create an account',
         titleCreateAccountUser: 'Join a registered account',
-
-        send: 'Send',
-
         loginView: {
           title: 'Login with your cell phone number!',
           signIn: 'Sign in',
@@ -54,10 +57,7 @@ i18n.use(initReactI18next).init({
           welcome: 'Welcome to',
           description:
             'Remember that in BodegAlert you will find an ally that will help you notify your entire community of the events in which you need attention from each one of them, making it easier for you to be more visible in those moments when you need it most.',
-          continue: 'Continue',
         },
-        about: 'About',
-        home: 'Home',
         onboarding: {
           titleOne: 'Do you have any emergency?',
           titleTwo: 'Wit our messaging service',
@@ -87,6 +87,9 @@ i18n.use(initReactI18next).init({
           clear: 'Clear',
           verify: 'Verify',
           ok: 'OK',
+          cancel: 'Cancel',
+          send: 'Send',
+          continue: 'Continue',
         },
       },
     },
@@ -100,27 +103,33 @@ i18n.use(initReactI18next).init({
           darkTheme: 'Modo oscuro',
           supportingEntities: 'Entidades que apoyan',
         },
-
-        employeeNotFound:
-          'No hemos encontrado empleados registrados a tu tienda, te invitamos a ver el siguiente video para que aprendas como debes registrar uno',
-        cancel: 'Cancelar',
-        errorLocationPermissionsAlert: 'Permiso denegado',
-        descriptionErrorLocationPermissionsAlert:
-          'Has negado el uso de la geolocalización, para volver a validarlo deberás desinstalar la aplicación e instalarla de nuevo.',
+        employeesView: {
+          banner:
+            'A continuación encontraras una lista de los empleados registrados en tu tienda, los cuales podrás eliminar o en su defecto agregar utilizando el botón flotante!',
+          employeeNotFound:
+            'No hemos encontrado empleados registrados a tu tienda, te invitamos a ver el siguiente video para que aprendas como debes registrar uno',
+        },
+        geolocationAlert: {
+          errorLocationPermissionsAlert: 'Permiso denegado',
+          descriptionErrorLocationPermissionsAlert:
+            'Has negado el uso de la geolocalización, para volver a validarlo deberás desinstalar la aplicación e instalarla de nuevo.',
+        },
         profileTitle:
           'A continuación encuentras los datos de tu perfil registrados en nuestro sistema, si deseas puedes actualizarlos aquí mismo.',
-        name: 'Nombre',
-        lastNames: 'Apellidos',
-        email: 'Correo',
-        address: 'Dirección',
-        city: 'Ciudad',
-        state: 'Estado/Departamento',
-        aliasName: 'Alias de la tienda',
-        titleCreateAccountAdmin: 'Crear una cuenta',
-        titleCreateAccountUser: 'Asociate a una cuententa registrada',
-
-        send: 'Enviar',
-
+        adminFormView: {
+          name: 'Nombre',
+          lastName: 'Apellidos',
+          email: 'Correo',
+          address: 'Dirección',
+          city: 'Ciudad',
+          country: 'Country',
+          state: 'Estado/Departamento',
+          aliasName: 'Alias de la tienda',
+        },
+        registerView: {
+          titleCreateAccountAdmin: 'Crear una cuenta',
+          titleCreateAccountUser: 'Asociate a una cuententa registrada',
+        },
         loginView: {
           title: 'Ingresa con tu número celular!',
           signIn: 'Ingresar',
@@ -132,10 +141,7 @@ i18n.use(initReactI18next).init({
           welcome: 'Bienvenido a ',
           description:
             'Recuerda que en BodegAlert encontrarás un aliado que te ayudará a notificar a toda tu comunidad los eventos en los que necesites la atención de cada uno de ellos, facilitándote ser más visible en los momentos en los que más lo necesites.',
-          continue: 'Continuar',
         },
-        about: 'Sobre mí',
-        home: 'Inicio',
         onboarding: {
           titleOne: '¿Tienes alguna emergencia?',
           titleTwo: 'Con nuestro servicio de envio de mensajes',
@@ -166,6 +172,9 @@ i18n.use(initReactI18next).init({
           clear: 'Limpiar',
           verify: 'Verificar',
           ok: 'OK',
+          cancel: 'Cancelar',
+          send: 'Enviar',
+          continue: 'Continuar',
         },
       },
     },

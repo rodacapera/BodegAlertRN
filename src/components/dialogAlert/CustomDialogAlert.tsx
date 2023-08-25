@@ -23,16 +23,18 @@ const CustomDialogAlert = ({
       <Dialog visible={visible} onDismiss={() => setVisible(false)}>
         <Dialog.Icon icon="alert" />
         <Dialog.Title style={styles.title}>
-          {t('errorLocationPermissionsAlert')}
+          {t('geolocationAlert.errorLocationPermissionsAlert')}
         </Dialog.Title>
         <Dialog.Content>
           <Text variant="bodyMedium">
-            {t('descriptionErrorLocationPermissionsAlert')}
+            {t('geolocationAlert.descriptionErrorLocationPermissionsAlert')}
           </Text>
         </Dialog.Content>
         <Dialog.Actions>
           {cancelButton && (
-            <Button onPress={() => setVisible(false)}>{t('cancel')}</Button>
+            <Button onPress={() => setVisible(false)}>
+              {t('general.cancel')}
+            </Button>
           )}
           <Button onPress={handleSuccess}>{t('general.ok')}</Button>
         </Dialog.Actions>
