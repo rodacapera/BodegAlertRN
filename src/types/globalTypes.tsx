@@ -65,3 +65,15 @@ export type MyOnboardingProps = NativeStackScreenProps<
   RootStackParamList,
   'MyOnboarding'
 >;
+
+export type CustomLinkProps = {
+  text: string;
+  link: string;
+  underline?: boolean;
+  color?: string;
+};
+
+export type QrModalProps = {
+  visible: boolean;
+  setVisible: (e: boolean) => void;
+};

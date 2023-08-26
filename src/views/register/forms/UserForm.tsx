@@ -120,7 +120,9 @@ const UserForm = () => {
           textColor="white"
           mode="contained"
           icon="check"
-          buttonColor={colors.primaryContainer}
+          buttonColor={
+            theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
+          }
           onPress={() => navigate('Register', {administrator: false})}>
           {t('general.continue')}
         </Button>

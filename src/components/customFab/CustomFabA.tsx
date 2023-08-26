@@ -8,10 +8,6 @@ const CustomFab = ({
   icon: string;
   onPress: (e: boolean) => void;
 }) => (
-  <FAB
-    icon={icon}
-    style={customFabStyles.fab}
-    onPress={() => console.log('Pressed')}
-  />
+  <FAB icon={icon} style={customFabStyles.fab} onPress={() => onPress(true)} />
 );
 export default CustomFab;

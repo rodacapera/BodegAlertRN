@@ -1,4 +1,4 @@
-import {logo} from '@src/assets/images';
+import {logo_app} from '@src/assets/images';
 import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
 import splashHook from '@src/hooks/splash/splashHook';
@@ -27,7 +27,7 @@ const Splash = ({route, navigation}: SplashProps) => {
     <SafeAreaView style={backgroundStyle}>
       <View style={splashStyles.container}>
         <View style={splashStyles.imgContent}>
-          <Image source={logo} style={splashStyles.logo} />
+          <Image source={logo_app} style={splashStyles.logo} />
           <Text
             style={[
               splashStyles.textLogoInit,

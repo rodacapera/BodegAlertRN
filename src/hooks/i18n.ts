@@ -91,6 +91,12 @@ i18n.use(initReactI18next).init({
           send: 'Send',
           continue: 'Continue',
         },
+        qrModal: {
+          helperTitleQr:
+            'Ask your collaborator to scan this code from their app in order to be able to to be able to register to your store!',
+          helperFooterQrFirst: `Learn how it's done, click`,
+          helperFooterQrSecond: 'here.',
+        },
       },
     },
     es: {
@@ -175,6 +181,12 @@ i18n.use(initReactI18next).init({
           cancel: 'Cancelar',
           send: 'Enviar',
           continue: 'Continuar',
+        },
+        qrModal: {
+          helperTitleQr:
+            'Pidele a tu colaborador que escannee este código desde su app para poder registrarse a tu tienda!',
+          helperFooterQrFirst: 'Conocer como se hace, click',
+          helperFooterQrSecond: 'aquí.',
         },
       },
     },
