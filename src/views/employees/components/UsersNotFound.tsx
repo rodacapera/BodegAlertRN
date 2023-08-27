@@ -1,27 +1,25 @@
-import {View, Text} from 'react-native';
-import React, {useContext} from 'react';
-import CustomImage from '@src/components/customImage/CustomImage';
-import {Caption} from 'react-native-paper';
-import {t} from 'i18next';
 import {user_not_found} from '@src/assets/images';
-import {employeeStyles} from '../styles/employeesStyles';
+import CustomImage from '@src/components/customImage/CustomImage';
+import TextWithCustomLink from '@src/components/textWithCustomLink/TextWithCustomLink';
 import {ThemeContext} from '@src/types/contextTypes';
+import {t} from 'i18next';
+import {useContext} from 'react';
+import {View} from 'react-native';
+import {employeeStyles} from '../styles/employeesStyles';
+import {userNotFoundVideoUrl} from '@src/globals/constants/fakeData';
 
 const UsersNotFound = () => {
   const {
     theme: {colors},
+    theme,
   } = useContext(ThemeContext);
   return (
     <View>
       <CustomImage source={user_not_found} style={employeeStyles} />
-      <Caption
-        style={{
-          marginTop: 10,
-          textAlign: 'center',
-          color: colors.onSurface,
-        }}>
-        {t('employeesView.employeeNotFound')}
-      </Caption>
+      <TextWithCustomLink
+        text={t('employeesView.employeeNotFound')}
+        link={userNotFoundVideoUrl}
+      />
     </View>
   );
 };

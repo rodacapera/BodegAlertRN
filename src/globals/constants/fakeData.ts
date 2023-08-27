@@ -20,3 +20,7 @@ export const bannerActions = [
     onPress: () => console.log('learn more'),
   },
 ];
+
+export const qrLink = 'http://awesome.link.qr'; //get url to user data from firebase
+export const userNotFoundVideoUrl = 'https://www.google.com'; //get video from youtube
+export const addUserVideo = 'https://www.google.clo'; //get video from youtube

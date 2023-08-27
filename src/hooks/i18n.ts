@@ -25,7 +25,10 @@ i18n.use(initReactI18next).init({
           banner:
             'Below you will find a list of the employees registered in your store, which you can delete or add using the floating button!',
           employeeNotFound:
-            'We have not found any employees registered to your store, we invite you to watch the following video to learn how to register one.',
+            'We have not found any employees registered to your store, we invite you to watch the following video to learn how to register one',
+          alertTitleErrorDeleteUser: 'Remove user',
+          alertDescriptionErrorDeleteUser:
+            'Are you sure you want to delete this user, if so press Ok button.',
         },
         geolocationAlert: {
           errorLocationPermissionsAlert: 'Permission denied',
@@ -90,12 +93,12 @@ i18n.use(initReactI18next).init({
           cancel: 'Cancel',
           send: 'Send',
           continue: 'Continue',
+          here: 'here.',
         },
         qrModal: {
           helperTitleQr:
             'Ask your collaborator to scan this code from their app in order to be able to to be able to register to your store!',
           helperFooterQrFirst: `Learn how it's done, click`,
-          helperFooterQrSecond: 'here.',
         },
       },
     },
@@ -114,6 +117,9 @@ i18n.use(initReactI18next).init({
             'A continuación encontraras una lista de los empleados registrados en tu tienda, los cuales podrás eliminar o en su defecto agregar utilizando el botón flotante!',
           employeeNotFound:
             'No hemos encontrado empleados registrados a tu tienda, te invitamos a ver el siguiente video para que aprendas como debes registrar uno',
+          alertTitleErrorDeleteUser: 'Eliminar usuario',
+          alertDescriptionErrorDeleteUser:
+            'Está seguro de eliminar este usuario?, si es así presione el boton OK.',
         },
         geolocationAlert: {
           errorLocationPermissionsAlert: 'Permiso denegado',
@@ -181,12 +187,12 @@ i18n.use(initReactI18next).init({
           cancel: 'Cancelar',
           send: 'Enviar',
           continue: 'Continuar',
+          here: 'aquí.',
         },
         qrModal: {
           helperTitleQr:
             'Pidele a tu colaborador que escannee este código desde su app para poder registrarse a tu tienda!',
           helperFooterQrFirst: 'Conocer como se hace, click',
-          helperFooterQrSecond: 'aquí.',
         },
       },
     },

@@ -2,7 +2,6 @@ import {ThemeContext} from '@src/types/contextTypes';
 import {useContext} from 'react';
 import {Avatar, Card, IconButton} from 'react-native-paper';
 import {simpleRemoveItemCardsStyles} from './styles/simpleRemoveItemCards';
-import {View} from 'react-native';
 
 const SimpleRemoveItemCards = ({
   title,
@@ -30,14 +29,16 @@ const SimpleRemoveItemCards = ({
       ]}
       theme={theme}
       titleVariant="headlineSmall"
-      titleStyle={{textTransform: 'capitalize'}}
+      titleStyle={{textTransform: 'capitalize', color: colors.onSurface}}
       title={title}
       subtitle={subtitle}
+      subtitleStyle={{textTransform: 'capitalize', color: colors.onSurface}}
       left={props => <Avatar.Icon {...props} icon="account-star" />}
       right={props => (
         <IconButton
           {...props}
           icon={'delete'}
+          iconColor={colors.onSurface}
           onPress={() => removeItem(index)}
         />
       )}

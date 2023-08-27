@@ -12,8 +12,8 @@ import React, {Fragment, useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
-import CustomDialogAlert from '../dialogAlert/CustomDialogAlert';
 import {ThemeContext} from '@src/types/contextTypes';
+import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
 
 const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
   const [visible, setVisible] = React.useState(false);
@@ -25,7 +25,14 @@ const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
 
   return (
     <Fragment>
-      <CustomDialogAlert visible={visible} setVisible={setVisible} />
+      <CustomDialogAlert
+        visible={visible}
+        setVisible={setVisible}
+        title={t('geolocationAlert.errorLocationPermissionsAlert')}
+        description={t(
+          'geolocationAlert.descriptionErrorLocationPermissionsAlert',
+        )}
+      />
       <Onboarding
         nextLabel={t('onboarding.next')}
         skipLabel={t('onboarding.skip')}

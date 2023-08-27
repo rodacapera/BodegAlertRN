@@ -1,6 +1,7 @@
 import {NavigationProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useColorScheme} from 'react-native';
+import {Button, useColorScheme} from 'react-native';
+import {$RemoveChildren} from 'react-native-paper/lib/typescript/src/types';
 
 const colorScheme = useColorScheme();
 
@@ -73,7 +74,24 @@ export type CustomLinkProps = {
   color?: string;
 };
 
+export type TextWithCustomLinkProps = {text: string; link: string};
+
 export type QrModalProps = {
   visible: boolean;
   setVisible: (e: boolean) => void;
+};
+
+export type CustomDialogAlertProps = {
+  visible: boolean;
+  setVisible: (e: boolean) => void;
+  cancelButton?: boolean;
+  actionSuccess?: (e: boolean) => void;
+  title: string;
+  description: string;
+};
+
+type Actions = {label: string & $RemoveChildren<typeof Button>}[];
+export type CustomBannerProps = {
+  actions?: Actions;
+  visible: boolean;
 };
