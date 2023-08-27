@@ -25,13 +25,6 @@ const Employees = ({navigation, route}: EmployeesProps) => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <CustomDialogAlert
-        visible={alertVisible}
-        setVisible={setAlertVisible}
-        cancelButton
-        title={t('employeesView.alertTitleErrorDeleteUser')}
-        description={t('employeesView.alertDescriptionErrorDeleteUser')}
-      />
       <CustomBanner visible={myEmployees.length > 0 ? true : false} />
       <View style={employeeStyles.container}>
         {myEmployees.length == 0 && <UsersNotFound />}
@@ -44,11 +37,16 @@ const Employees = ({navigation, route}: EmployeesProps) => {
             key={index}
           />
         ))}
-        <CustomFab
-          icon="account-plus-outline"
-          onPress={() => setVisible(true)}
-        />
       </View>
+      <CustomFab icon="account-plus-outline" onPress={() => setVisible(true)} />
+
+      <CustomDialogAlert
+        visible={alertVisible}
+        setVisible={setAlertVisible}
+        cancelButton
+        title={t('employeesView.alertTitleErrorDeleteUser')}
+        description={t('employeesView.alertDescriptionErrorDeleteUser')}
+      />
       <QrModal visible={visible} setVisible={setVisible} />
     </SafeAreaView>
   );

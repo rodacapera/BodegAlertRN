@@ -47,8 +47,10 @@ i18n.use(initReactI18next).init({
           state: 'State',
           aliasName: 'Alias Shop',
         },
-        titleCreateAccountAdmin: 'Create an account',
-        titleCreateAccountUser: 'Join a registered account',
+        registerView: {
+          titleCreateAccountAdmin: 'Create an account',
+          titleCreateAccountUser: 'Join a registered account',
+        },
         loginView: {
           title: 'Login with your cell phone number!',
           signIn: 'Sign in',

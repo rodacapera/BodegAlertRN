@@ -18,9 +18,7 @@ const HeaderTitle = ({title}: {title: string}) => {
         <IconButton
           icon="arrow-left"
           mode="contained-tonal"
-          iconColor={
-            theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
-          }
+          iconColor={theme.dark ? colors.onSurface : colors.onPrimaryContainer}
           style={{
             backgroundColor: 'transparent',
           }}
@@ -31,9 +29,7 @@ const HeaderTitle = ({title}: {title: string}) => {
         style={[
           headerStyles.title,
           {
-            color: theme.dark
-              ? colors.primaryContainer
-              : colors.onPrimaryContainer,
+            color: theme.dark ? colors.onSurface : colors.onPrimaryContainer,
           },
         ]}
         numberOfLines={1}>

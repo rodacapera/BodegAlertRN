@@ -40,7 +40,7 @@ const AdminForm = () => {
       />
 
       <TextInput
-        label={t('adminFormView.name')}
+        label={t('adminFormView.names')}
         style={registerStyles.input}
         secureTextEntry
         theme={theme}
@@ -57,7 +57,7 @@ const AdminForm = () => {
         }
       />
       <TextInput
-        label={t('adminFormView.lastName')}
+        label={t('adminFormView.lastNames')}
         style={registerStyles.input}
         secureTextEntry
         theme={theme}
