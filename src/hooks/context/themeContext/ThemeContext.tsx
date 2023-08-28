@@ -9,7 +9,6 @@ import {
 
 export const ThemeProvider = ({children}: any) => {
   const [theme, setTheme] = useState<ThemeContextMode>();
-
   const setCurrentTheme = async (theme: string) => {
     await AsyncStorage.setItem('@theme', theme);
   };
@@ -21,6 +20,8 @@ export const ThemeProvider = ({children}: any) => {
 
   const setLightTheme = () => {
     setCurrentTheme('light');
+    // console.log('settttt');
+
     setTheme(customLightTheme);
   };
 

@@ -25,7 +25,11 @@ const Employees = ({navigation, route}: EmployeesProps) => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <CustomBanner visible={myEmployees.length > 0 ? true : false} />
+      <CustomBanner
+        visible={myEmployees.length > 0 ? true : false}
+        text={t('employeesView.banner')}
+        icon="account-group-outline"
+      />
       <View style={employeeStyles.container}>
         {myEmployees.length == 0 && <UsersNotFound />}
         {myEmployees.map((value, index) => (

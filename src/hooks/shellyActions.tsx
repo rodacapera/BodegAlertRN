@@ -13,7 +13,7 @@ type UniqueData = {
   ssid: string;
 };
 
-type Networks = {
+export type Networks = {
   name: string;
 };
 const unique: Networks[] = [];
@@ -39,7 +39,9 @@ const showNetworks = async () => {
     });
   }
   console.log(unique); //list ssid available
+  return unique;
 };
+
 const mqttConfig = async (value: string) => {
   return await fetch(MQTT + value, {method: 'GET'})
     .then(response => response.json())

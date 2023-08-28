@@ -6,9 +6,11 @@ import {
   DrawerContentScrollView,
   DrawerItem,
 } from '@react-navigation/drawer';
+import {shop} from '@src/globals/constants/fakeData';
+import {ThemeContext} from '@src/types/contextTypes';
 import {t} from 'i18next';
-import React, {useContext, useEffect, useState} from 'react';
-import {Image, StatusBar, View} from 'react-native';
+import {useContext, useEffect, useState} from 'react';
+import {Appearance, Image, StatusBar, View} from 'react-native';
 import {
   Avatar,
   Caption,
@@ -20,9 +22,6 @@ import {
 } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {drawerComponentStyles} from './styles/drawerComppnentStyles';
-import {ThemeContext} from '@src/types/contextTypes';
-import {shop} from '@src/globals/constants/fakeData';
-import {colorScheme} from '@src/globals/constants/theme';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
@@ -34,7 +33,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
   } = useContext(ThemeContext);
   const {getItem} = useAsyncStorage('@theme');
   const [isDark, setIsDark] = useState(false);
-
+  const colorScheme = Appearance.getColorScheme();
   const onToggleSwitch = () => {
     setIsDark(!isDark);
     !isDark ? setDarkTheme() : setLightTheme();
@@ -45,8 +44,12 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
 
   const validateSwitch = async () => {
     const item = await getItem();
-    console.log('iiiiiteeeemmm', item);
-
+    if (colorScheme && colorScheme == 'dark') {
+      setIsDark(true);
+      Appearance.addChangeListener(() => console.log('remove')).remove();
+    } else {
+      item ? setIsDark(item === 'dark' ? true : false) : setIsDark(true);
+    }
     item
       ? setIsDark(item === 'dark' ? true : false)
       : setIsDark(colorScheme === 'dark' ? true : false);
@@ -58,6 +61,15 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
 
   useEffect(() => {
     validateSwitch();
+  }, []);
+
+  useEffect(() => {
+    Appearance.addChangeListener(({colorScheme}) => {
+      validateSwitch();
+    });
+    return () => {
+      Appearance.addChangeListener(() => console.log('remove')).remove();
+    };
   }, []);
 
   return (
@@ -160,12 +172,16 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
       </Drawer.Section>
       <Drawer.Section theme={theme} title="Preferences">
         {/* <TouchableRipple onPress={() => setIsDark(!isDark)}> */}
-        <View style={drawerComponentStyles.preference}>
-          <Text style={{color: colors.onSurface}}>{t('drawer.darkTheme')}</Text>
-          <View>
-            <Switch value={isDark} onValueChange={onToggleSwitch} />
+        {colorScheme == 'light' && (
+          <View style={drawerComponentStyles.preference}>
+            <Text style={{color: colors.onSurface}}>
+              {t('drawer.darkTheme')}
+            </Text>
+            <View>
+              <Switch value={isDark} onValueChange={onToggleSwitch} />
+            </View>
           </View>
-        </View>
+        )}
         {/* </TouchableRipple> */}
         {/* <TouchableRipple onPress={() => {}}>
           <View style={drawerComponentStyles.preference}>

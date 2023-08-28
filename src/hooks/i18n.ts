@@ -30,6 +30,15 @@ i18n.use(initReactI18next).init({
           alertDescriptionErrorDeleteUser:
             'Are you sure you want to delete this user, if so press Ok button.',
         },
+        buttonsView: {
+          banner:
+            'Below you will find a list of the buttons registered in your store, which you can remove or add using the floating button!',
+          employeeNotFound:
+            'We have not found any buttons registered to your store, we invite you to watch the following video to learn how to create one',
+          alertTitleErrorDeleteUser: 'Remove button',
+          alertDescriptionErrorDeleteUser:
+            'Are you sure you want to delete this button, if so press Ok button.',
+        },
         geolocationAlert: {
           errorLocationPermissionsAlert: 'Permission denied',
           descriptionErrorLocationPermissionsAlert:
@@ -102,6 +111,12 @@ i18n.use(initReactI18next).init({
             'Ask your collaborator to scan this code from their app in order to be able to to be able to register to your store!',
           helperFooterQrFirst: `Learn how it's done, click`,
         },
+        buttonsModal: {
+          title: 'Select your network!',
+          helperTitleQr:
+            'Turn on your button and connect to the wifi network that starts with shellybuton1, go back to this screen, select your wifi network from the list below and follow the steps!',
+          helperFooterQrFirst: `Learn how it's done, click`,
+        },
       },
     },
     es: {
@@ -122,6 +137,15 @@ i18n.use(initReactI18next).init({
           alertTitleErrorDeleteUser: 'Eliminar usuario',
           alertDescriptionErrorDeleteUser:
             'Está seguro de eliminar este usuario?, si es así presione el boton OK.',
+        },
+        buttonsView: {
+          banner:
+            'A continuación encontrará una lista de los botones registrados en su tienda, que puede eliminar o añadir utilizando el botón flotante!',
+          employeeNotFound:
+            'No hemos encontrado ningún botón registrado en su tienda, le invitamos a ver el siguiente vídeo para aprender a crear uno',
+          alertTitleErrorDeleteUser: 'Remove button',
+          alertDescriptionErrorDeleteUser:
+            '¿Está seguro de que desea eliminar este botón, si es así pulse el botón Ok.',
         },
         geolocationAlert: {
           errorLocationPermissionsAlert: 'Permiso denegado',
@@ -194,6 +218,12 @@ i18n.use(initReactI18next).init({
         qrModal: {
           helperTitleQr:
             'Pidele a tu colaborador que escannee este código desde su app para poder registrarse a tu tienda!',
+          helperFooterQrFirst: 'Conocer como se hace, click',
+        },
+        buttonsModal: {
+          title: 'Selecciona tu red!',
+          helperTitleQr:
+            'Enciende tu botón y conectate a la red wifi que inicia con shellybuton1, volve a esta pantalla, selecciona tu red wifi del listado de abajo y segue los pasos!',
           helperFooterQrFirst: 'Conocer como se hace, click',
         },
       },

@@ -10,6 +10,17 @@ export const employees = [
   {title: 'employee two', subtitle: 'Tienda parcero'},
 ];
 
+export const buttons = [
+  {title: 'button one', subtitle: 'Tienda la vaca'},
+  {title: 'button two', subtitle: 'Tienda parcero'},
+];
+
+export const networks = [
+  {title: 'casa one'},
+  {title: 'casa two'},
+  {title: 'casa thre'},
+];
+
 export const bannerActions = [
   {
     label: 'Fix it',
@@ -23,4 +34,5 @@ export const bannerActions = [
 
 export const qrLink = 'http://awesome.link.qr'; //get url to user data from firebase
 export const userNotFoundVideoUrl = 'https://www.google.com'; //get video from youtube
-export const addUserVideo = 'https://www.google.clo'; //get video from youtube
+export const addUserVideo = 'https://www.google.com'; //get video from youtube
+export const addButton = 'https://www.google.com'; //get video from youtube

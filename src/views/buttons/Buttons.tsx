@@ -1,10 +1,56 @@
+import ButtonsModal from '@src/components/buttonsModal/ButtonsModal';
+import CustomBanner from '@src/components/customBanner/CustomBanner';
+import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
+import CustomFab from '@src/components/customFab/CustomFabA';
+import SimpleRemoveItemCards from '@src/components/simpleRemoveItemCards/SimpleRemoveItemCards';
+import {buttons} from '@src/globals/constants/fakeData';
+import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {ButtonsProps} from '@src/types/globalTypes';
-import {SafeAreaView, Text} from 'react-native';
+import {t} from 'i18next';
+import {useState} from 'react';
+import {SafeAreaView, View} from 'react-native';
+import UsersNotFound from '../employees/components/UsersNotFound';
+import {employeeStyles} from '../employees/styles/employeesStyles';
 
 const Buttons = ({navigation, route}: ButtonsProps) => {
+  const [visible, setVisible] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [myButtons, setMyButtons] =
+    useState<{title: string; subtitle: string}[]>(buttons); // buttons
+
+  const removeItem = (index: number) => {
+    console.log('remove item', index);
+    setAlertVisible(true);
+  };
   return (
-    <SafeAreaView>
-      <Text>Buttons</Text>
+    <SafeAreaView style={backgroundStyle}>
+      <CustomBanner
+        visible={myButtons.length > 0 ? true : false}
+        text={t('buttonsView.banner')}
+        icon="security"
+      />
+      <View style={employeeStyles.container}>
+        {myButtons.length == 0 && <UsersNotFound />}
+        {myButtons.map((value, index) => (
+          <SimpleRemoveItemCards
+            title={value.title}
+            index={index}
+            subtitle={value.subtitle}
+            removeItem={removeItem}
+            key={index}
+          />
+        ))}
+      </View>
+      <CustomFab icon="shield-plus" onPress={() => setVisible(true)} />
+
+      <CustomDialogAlert
+        visible={alertVisible}
+        setVisible={setAlertVisible}
+        cancelButton
+        title={t('buttonsView.alertTitleErrorDeleteUser')}
+        description={t('buttonsView.alertDescriptionErrorDeleteUser')}
+      />
+      <ButtonsModal visible={visible} setVisible={setVisible} />
     </SafeAreaView>
   );
 };

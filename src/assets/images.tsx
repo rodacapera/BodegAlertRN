@@ -10,3 +10,4 @@ export const female_avatar = require('./graphics/female_avatar.jpg');
 export const male_avatar = require('./graphics/male_avatar.jpg');
 export const notifications_not_found = require('./graphics/notifications_not_found.jpg');
 export const user_not_found = require('./graphics/user_not_found.jpg');
+export const shelly_button = require('./images/button.jpg');

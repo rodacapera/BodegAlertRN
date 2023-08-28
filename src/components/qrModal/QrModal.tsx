@@ -22,7 +22,11 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
       onDismiss={hideModal}
       contentContainerStyle={[
         qrModalStyles.modalContainer,
-        {backgroundColor: colors.background},
+        {
+          backgroundColor: theme.dark
+            ? colors.surfaceVariant
+            : colors.background,
+        },
       ]}>
       <View style={qrModalStyles.modalContent}>
         <Caption

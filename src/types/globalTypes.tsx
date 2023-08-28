@@ -81,6 +81,11 @@ export type QrModalProps = {
   setVisible: (e: boolean) => void;
 };
 
+export type ButtonsModalProps = {
+  visible: boolean;
+  setVisible: (e: boolean) => void;
+};
+
 export type CustomDialogAlertProps = {
   visible: boolean;
   setVisible: (e: boolean) => void;
@@ -94,4 +99,6 @@ type Actions = {label: string & $RemoveChildren<typeof Button>}[];
 export type CustomBannerProps = {
   actions?: Actions;
   visible: boolean;
+  text: string;
+  icon: string;
 };
