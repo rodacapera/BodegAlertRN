@@ -102,3 +102,8 @@ export type CustomBannerProps = {
   text: string;
   icon: string;
 };
+
+type ParamListBase = {
+  //example to index
+  [x: string]: object | undefined;
+};

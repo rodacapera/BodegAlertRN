@@ -76,7 +76,11 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     <DrawerContentScrollView
       {...props}
       style={drawerComponentStyles.drawerContent}>
-      <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} />
+      <StatusBar
+        backgroundColor={colors.onPrimary}
+        animated={true}
+        barStyle={isDark ? 'light-content' : 'dark-content'}
+      />
       <View style={drawerComponentStyles.userInfoSection}>
         <Avatar.Image
           source={{

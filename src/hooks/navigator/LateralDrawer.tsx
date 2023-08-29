@@ -20,7 +20,7 @@ export const LateralDrawer = () => {
       <MyDrawer.Navigator
         screenOptions={{
           drawerType: width >= 768 ? 'permanent' : 'front',
-          drawerActiveTintColor: colors.background,
+          drawerActiveTintColor: dark ? colors.onSurface : colors.background,
           headerTintColor: dark ? colors.onSurface : colors.primary,
           headerTitleStyle: {
             fontSize: 26,
@@ -29,6 +29,7 @@ export const LateralDrawer = () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
+
           // headerStyle: {
           //   borderWidth: 0,
           //   elevation: 0,
@@ -36,7 +37,7 @@ export const LateralDrawer = () => {
           // },
           drawerStyle: {backgroundColor: colors.background},
           headerShown: false, // this remove header
-          drawerHideStatusBarOnOpen: true,
+          // drawerHideStatusBarOnOpen: true,
           //   overlayColor: 'transparent',
         }}
         drawerContent={props => <DrawerComponent {...props} />}>
