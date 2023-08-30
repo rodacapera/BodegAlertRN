@@ -6,12 +6,12 @@ import {CustomLoaderProps} from '@src/types/globalTypes';
 
 const CustomLoader = ({label, visible}: CustomLoaderProps) => {
   const {
-    theme: {colors},
+    theme: {colors}
   } = useContext(ThemeContext);
   return visible ? (
     <View>
       <ActivityIndicator animating={true} color={colors.secondary} />
-      <Caption>{label}...</Caption>
+      <Caption style={{color: colors.onSurface}}>{label}...</Caption>
     </View>
   ) : (
     <></>
