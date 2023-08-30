@@ -4,35 +4,36 @@ export const buttonsModalStyles = StyleSheet.create({
   imageContainer: {
     width: 80,
     height: 80,
-    borderRadius: 8,
+    borderRadius: 8
   },
   linkText: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 10,
+    marginVertical: 10
   },
   modalContainer: {padding: 20, flexDirection: 'row'},
   modalContent: {
     alignItems: 'center',
-    paddingBottom: 20,
+    paddingBottom: 20
   },
   helperCaption: {
     borderColor: '#ccc',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 10,
+    paddingTop: 10
   },
   title: {
     fontSize: 18,
     paddingTop: 20,
     paddingBottom: 30,
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   button: {
     borderColor: '#ccc',
     borderWidth: 1,
     margin: 3,
-    borderRadius: 6,
+    borderRadius: 6
   },
+  input: {width: 280, backgroundColor: 'transparent', marginVertical: 15}
 });

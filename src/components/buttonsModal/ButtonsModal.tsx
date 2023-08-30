@@ -11,10 +11,11 @@ import CustomLoader from '../customLoader/CustomLoader';
 import TextWithCustomLink from '../textWithCustomLink/TextWithCustomLink';
 import Header from './components/header/Header';
 import {buttonsModalStyles} from './styles/buttonsModalStyles';
+import AddButtonForm from './components/addButtonForm/AddButtonForm';
 
 const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
   const [networks, setNetworks] = useState<Networks[]>();
-  const [firsStep, setFirsStep] = useState(false);
+  const [firsStep, setFirsStep] = useState<string>('');
   const hideModal = () => (setVisible(false), setNetworks(undefined));
   const networksStatus = !networks ? true : false;
   const {
@@ -43,6 +44,8 @@ const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
     return () => appMode.remove();
   }, []);
 
+  console.log('firsStep', firsStep);
+
   return (
     <Modal
       visible={visible}
@@ -60,13 +63,14 @@ const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
         <CustomLoader visible={networksStatus} label={t('general.scanning')} />
         {networks && networks[0].name && (
           <Fragment>
-            {!firsStep ? (
+            {firsStep == '' ? (
               <ButtonsList height={400} width={320}>
                 {networks.map((value, index) => {
                   return (
                     <TouchableOpacity
                       style={buttonsModalStyles.button}
-                      key={index}>
+                      key={index}
+                      onPress={() => setFirsStep(value.name!)}>
                       <List.Item
                         theme={theme}
                         title={value.name}
@@ -78,7 +82,7 @@ const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
                 })}
               </ButtonsList>
             ) : (
-              <></>
+              <AddButtonForm backButton={setFirsStep} iss={firsStep} />
             )}
           </Fragment>
         )}

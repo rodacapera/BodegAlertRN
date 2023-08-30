@@ -10,7 +10,7 @@ import {otpStyles} from '../styles/otpStyles';
 const HeaderOtp = ({setButtonAction, setIsLogin, setCode}: HeaderOtpParams) => {
   const {
     theme: {colors},
-    theme,
+    theme
   } = useContext(ThemeContext);
   return (
     <View style={otpStyles.headerOtp}>
@@ -29,14 +29,14 @@ const HeaderOtp = ({setButtonAction, setIsLogin, setCode}: HeaderOtpParams) => {
         <Text
           style={[
             otpStyles.titleOtp,
-            {color: theme.dark ? colors.onSurface : colors.outline},
+            {color: theme.dark ? colors.onSurface : colors.outline}
           ]}>
           {t('otp.title')} {'\n'}
         </Text>
         <Text
           style={[
             otpStyles.subTitleOtp,
-            {color: theme.dark ? colors.onSurface : colors.outline},
+            {color: theme.dark ? colors.onSurface : colors.outline}
           ]}>
           {t('otp.subTitle')}
         </Text>

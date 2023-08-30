@@ -4,7 +4,7 @@ import {
   handleClear,
   handleSendOtp,
   handleValidateOtp,
-  timerCount,
+  timerCount
 } from '@src/components/otp/hooks/otpHooks';
 import {ThemeContext} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
@@ -20,7 +20,7 @@ import {otpStyles} from './styles/otpStyles';
 const OtpCode = ({
   buttonAction,
   setButtonAction,
-  setIsLogin,
+  setIsLogin
 }: {
   buttonAction: LoginFormAction;
   setButtonAction: (e: LoginFormAction) => void;
@@ -34,7 +34,7 @@ const OtpCode = ({
   const [counter, setCounter] = useState(60);
   const {
     theme: {colors},
-    theme,
+    theme
   } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -60,8 +60,8 @@ const OtpCode = ({
           numberOfDigits={6}
           theme={{
             pinCodeTextStyle: {
-              color: theme.dark ? colors.onSurface : colors.onPrimaryContainer,
-            },
+              color: theme.dark ? colors.onSurface : colors.onPrimaryContainer
+            }
           }}
           focusColor={theme.dark ? colors.onSurface : colors.onPrimaryContainer}
           onTextChange={text => handleChange(text, inputRef, setCode)}
@@ -72,8 +72,8 @@ const OtpCode = ({
             style={[
               otpStyles.errorOtp,
               {
-                color: colors.error,
-              },
+                color: colors.error
+              }
             ]}>
             {t('otp.error')}
           </Text>
@@ -88,7 +88,7 @@ const OtpCode = ({
                 style={{
                   color: theme.dark
                     ? colors.onSurface
-                    : colors.onPrimaryContainer,
+                    : colors.onPrimaryContainer
                 }}>
                 {counter}
               </Text>
