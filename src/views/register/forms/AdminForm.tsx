@@ -22,7 +22,7 @@ const AdminForm = () => {
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
   const {
     theme: {colors},
-    theme,
+    theme
   } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -42,7 +42,6 @@ const AdminForm = () => {
       <TextInput
         label={t('adminFormView.names')}
         style={registerStyles.input}
-        secureTextEntry
         theme={theme}
         left={
           <TextInput.Icon
@@ -59,7 +58,6 @@ const AdminForm = () => {
       <TextInput
         label={t('adminFormView.lastNames')}
         style={registerStyles.input}
-        secureTextEntry
         theme={theme}
         left={
           <TextInput.Icon
@@ -76,7 +74,6 @@ const AdminForm = () => {
       <TextInput
         label={t('adminFormView.email')}
         style={registerStyles.input}
-        secureTextEntry
         theme={theme}
         left={
           <TextInput.Icon
@@ -111,7 +108,7 @@ const AdminForm = () => {
         label={t('adminFormView.country')}
         style={registerStyles.input}
         theme={theme}
-        disabled
+        editable={false}
         value={myCurrentLocation?.country.long_name}
         left={
           <TextInput.Icon
@@ -129,7 +126,7 @@ const AdminForm = () => {
         label={t('adminFormView.address')}
         style={registerStyles.input}
         theme={theme}
-        disabled
+        editable={false}
         value={myCurrentLocation?.address}
         left={
           <TextInput.Icon
@@ -148,7 +145,7 @@ const AdminForm = () => {
         label={t('adminFormView.city')}
         style={registerStyles.input}
         theme={theme}
-        disabled
+        editable={false}
         value={myCurrentLocation?.city.long_name}
         left={
           <TextInput.Icon
@@ -167,7 +164,7 @@ const AdminForm = () => {
         label={t('adminFormView.state')}
         style={registerStyles.input}
         theme={theme}
-        disabled
+        editable={false}
         value={myCurrentLocation?.state.long_name}
         left={
           <TextInput.Icon
