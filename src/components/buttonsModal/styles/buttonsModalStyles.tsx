@@ -14,12 +14,13 @@ export const buttonsModalStyles = StyleSheet.create({
   modalContainer: {padding: 20, flexDirection: 'row'},
   modalContent: {
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingBottom: 20,
   },
   helperCaption: {
     borderColor: '#ccc',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: 10,
   },
   title: {
     fontSize: 18,
@@ -27,5 +28,11 @@ export const buttonsModalStyles = StyleSheet.create({
     paddingBottom: 30,
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  button: {
+    borderColor: '#ccc',
+    borderWidth: 1,
+    margin: 3,
+    borderRadius: 6,
   },
 });

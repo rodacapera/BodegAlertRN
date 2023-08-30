@@ -3,7 +3,7 @@ import {
   API,
   BUTTON_ACTION,
   GET_NETWORKS,
-  MQTT,
+  MQTT
 } from '../globals/constants/shelly';
 type UniqueData = {
   auth: number;
@@ -14,15 +14,19 @@ type UniqueData = {
 };
 
 export type Networks = {
-  name: string;
+  name?: string;
+  error?: string;
 };
-const unique: Networks[] = [];
+let unique: Networks[] = [];
 
 const networks = async () => {
   return await fetch(GET_NETWORKS, {method: 'GET'})
     .then(response => response.json())
     .then(async data => {
       return data;
+    })
+    .catch(error => {
+      return error.message;
     });
 };
 const showNetworks = async () => {
@@ -30,15 +34,18 @@ const showNetworks = async () => {
   if (result.wifiscan === 'started' || result.wifiscan === 'inprogress') {
     await showNetworks();
   } else {
-    result.results.map((val: UniqueData) => {
-      const find = unique.findIndex((e: Networks) => e.name === val.ssid);
-
-      if (find === -1) {
-        unique.push({name: val.ssid});
-      }
-    });
+    if (result.results) {
+      unique.length > 0 && (unique = []);
+      result.results.map((val: UniqueData) => {
+        const find = unique.findIndex((e: Networks) => e.name === val.ssid);
+        if (find === -1) {
+          unique.push({name: val.ssid});
+        }
+      });
+    } else {
+      unique = [{error: result}];
+    }
   }
-  console.log(unique); //list ssid available
   return unique;
 };
 
@@ -87,7 +94,7 @@ const networkSettings = async (wifi_name: string, wifi_pass: string) => {
     date: Date.now(),
     name: myConfig.device.hostname,
     reference: btnAction,
-    shop: '/shops/', //obtener la tienda del usuario e insertarla como una referencia
+    shop: '/shops/' //obtener la tienda del usuario e insertarla como una referencia
   };
 
   console.log(dataBtnBd);

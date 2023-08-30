@@ -16,9 +16,9 @@ export const buttons = [
 ];
 
 export const networks = [
-  {title: 'casa one'},
-  {title: 'casa two'},
-  {title: 'casa thre'},
+  {name: 'casa one'},
+  {name: 'casa two'},
+  {name: 'casa thre'},
 ];
 
 export const bannerActions = [

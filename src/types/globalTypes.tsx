@@ -1,5 +1,6 @@
 import {NavigationProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {ReactNode} from 'react';
 import {Button, useColorScheme} from 'react-native';
 import {$RemoveChildren} from 'react-native-paper/lib/typescript/src/types';
 
@@ -74,7 +75,11 @@ export type CustomLinkProps = {
   color?: string;
 };
 
-export type TextWithCustomLinkProps = {text: string; link: string};
+export type TextWithCustomLinkProps = {
+  text: string;
+  link: string;
+  visible: boolean;
+};
 
 export type QrModalProps = {
   visible: boolean;
@@ -84,6 +89,12 @@ export type QrModalProps = {
 export type ButtonsModalProps = {
   visible: boolean;
   setVisible: (e: boolean) => void;
+};
+
+export type ButtonsListProps = {
+  height?: number;
+  width?: number;
+  children: ReactNode;
 };
 
 export type CustomDialogAlertProps = {
@@ -102,6 +113,8 @@ export type CustomBannerProps = {
   text: string;
   icon: string;
 };
+
+export type CustomLoaderProps = {label: string; visible: boolean};
 
 type ParamListBase = {
   //example to index

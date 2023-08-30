@@ -1,31 +1,46 @@
 import {addButton} from '@src/globals/constants/fakeData';
+import {Networks, showNetworks} from '@src/hooks/shellyActions';
 import {ThemeContext} from '@src/types/contextTypes';
 import {ButtonsModalProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
-import {useContext, useEffect, useState} from 'react';
-import {View, TouchableOpacity, ScrollView} from 'react-native';
-import {Caption, List, Modal, Text, Title} from 'react-native-paper';
+import {Fragment, useContext, useEffect, useState} from 'react';
+import {AppState, TouchableOpacity, View} from 'react-native';
+import {List, Modal} from 'react-native-paper';
+import ButtonsList from '../buttonsList/ButtonsList';
+import CustomLoader from '../customLoader/CustomLoader';
 import TextWithCustomLink from '../textWithCustomLink/TextWithCustomLink';
-import {Networks, showNetworks} from '@src/hooks/shellyActions';
-import CustomImage from '../customImage/CustomImage';
-import {shelly_button} from '@src/assets/images';
+import Header from './components/header/Header';
 import {buttonsModalStyles} from './styles/buttonsModalStyles';
 
 const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
   const [networks, setNetworks] = useState<Networks[]>();
-  const hideModal = () => setVisible(false);
+  const [firsStep, setFirsStep] = useState(false);
+  const hideModal = () => (setVisible(false), setNetworks(undefined));
+  const networksStatus = !networks ? true : false;
   const {
     theme: {colors},
-    theme,
+    theme
   } = useContext(ThemeContext);
 
   const getMyNetworks = async () => {
-    const networksResult = await showNetworks();
-    console.log('myNetworks', networksResult);
-    networksResult && setNetworks(networksResult);
+    if (!networks || networks == undefined) {
+      const networksResult = await showNetworks();
+      networksResult[0].error
+        ? setNetworks(undefined)
+        : setNetworks(networksResult);
+    }
   };
+
   useEffect(() => {
     getMyNetworks();
+  }, [networks]);
+
+  useEffect(() => {
+    const appMode = AppState.addEventListener(
+      'change',
+      value => value === 'active' && getMyNetworks()
+    );
+    return () => appMode.remove();
   }, []);
 
   return (
@@ -37,68 +52,40 @@ const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
         {
           backgroundColor: theme.dark
             ? colors.surfaceVariant
-            : colors.background,
-        },
+            : colors.background
+        }
       ]}>
       <View style={buttonsModalStyles.modalContent}>
-        {!networks && (
-          <View style={buttonsModalStyles.helperCaption}>
-            <CustomImage source={shelly_button} style={buttonsModalStyles} />
-            <Caption
-              style={[
-                buttonsModalStyles.title,
-                {
-                  color: colors.onSurface,
-                },
-              ]}>
-              {t('buttonsModal.helperTitleQr')}
-            </Caption>
-          </View>
+        <Header visible={networksStatus} />
+        <CustomLoader visible={networksStatus} label={t('general.scanning')} />
+        {networks && networks[0].name && (
+          <Fragment>
+            {!firsStep ? (
+              <ButtonsList height={400} width={320}>
+                {networks.map((value, index) => {
+                  return (
+                    <TouchableOpacity
+                      style={buttonsModalStyles.button}
+                      key={index}>
+                      <List.Item
+                        theme={theme}
+                        title={value.name}
+                        description={'Some description'}
+                        left={props => <List.Icon {...props} icon="wifi" />}
+                      />
+                    </TouchableOpacity>
+                  );
+                })}
+              </ButtonsList>
+            ) : (
+              <></>
+            )}
+          </Fragment>
         )}
-
-        {networks && (
-          <Title
-            style={{
-              color: colors.onSurface,
-              marginVertical: 10,
-              fontWeight: 'bold',
-            }}>
-            {t('buttonsModal.title')}
-          </Title>
-        )}
-
-        {networks && (
-          <ScrollView
-            style={{
-              height: 360,
-              width: 320,
-            }}>
-            {networks.map((value, index) => {
-              return (
-                <TouchableOpacity
-                  style={{
-                    borderColor: '#ccc',
-                    borderWidth: 1,
-                    margin: 3,
-                    borderRadius: 6,
-                  }}
-                  key={index}>
-                  <List.Item
-                    theme={theme}
-                    title={value.name}
-                    description="Item description"
-                    left={props => <List.Icon {...props} icon="wifi" />}
-                  />
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-        )}
-        {/* </View> */}
-
         <TextWithCustomLink
           text={t('buttonsModal.helperFooterQrFirst')}
           link={addButton}
+          visible={networksStatus}
         />
       </View>
     </Modal>

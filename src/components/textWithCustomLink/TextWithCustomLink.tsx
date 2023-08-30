@@ -7,16 +7,16 @@ import {Paragraph} from 'react-native-paper';
 import CustomLink from '../customLink/CustomLink';
 import {qrModalStyles} from '../qrModal/styles/qrModalStyles';
 
-const TextWithCustomLink = ({text, link}: TextWithCustomLinkProps) => {
+const TextWithCustomLink = ({text, link, visible}: TextWithCustomLinkProps) => {
   const {
     theme: {colors},
-    theme,
+    theme
   } = useContext(ThemeContext);
-  return (
+  return visible ? (
     <View style={qrModalStyles.linkText}>
       <Paragraph
         style={{
-          color: colors.onSurface,
+          color: colors.onSurface
         }}>
         {text}{' '}
         <CustomLink
@@ -27,6 +27,8 @@ const TextWithCustomLink = ({text, link}: TextWithCustomLinkProps) => {
         />
       </Paragraph>
     </View>
+  ) : (
+    <></>
   );
 };
 
