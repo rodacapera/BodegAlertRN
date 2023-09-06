@@ -14,6 +14,7 @@ i18n.use(initReactI18next).init({
     en: {
       translation: {
         drawer: {
+          home: 'Home',
           profile: 'Profile',
           employees: 'Employees',
           buttons: 'Buttons',
@@ -127,6 +128,7 @@ i18n.use(initReactI18next).init({
     es: {
       translation: {
         drawer: {
+          home: 'Inicio',
           profile: 'Perfil',
           employees: 'Empleados',
           buttons: 'Botones',

@@ -1,13 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import CustomIcon from '@src/components/customIcon/CustomIcon';
+import CustomInputForm from '@src/components/customInputForm/CustomInputForm';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {getLocation} from '@src/hooks/locations/geocoderHook';
-import {ThemeContext} from '@src/types/contextTypes';
+import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {GeocoderResponse, ResultLocations} from '@src/types/locationTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
-import CustomInputForm from '@src/components/customInputForm/CustomInputForm';
-import {useContext, useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, View} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
@@ -20,10 +20,7 @@ const AdminForm = () => {
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
-  const {
-    theme: {colors},
-    theme
-  } = useContext(ThemeContext);
+  const {colors, theme} = actualTheme();
 
   useEffect(() => {
     getLocation(setMyCurrentLocation);

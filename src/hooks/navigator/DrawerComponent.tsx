@@ -1,15 +1,15 @@
 import AsyncStorage, {
-  useAsyncStorage,
+  useAsyncStorage
 } from '@react-native-async-storage/async-storage';
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
-  DrawerItem,
+  DrawerItem
 } from '@react-navigation/drawer';
 import {shop} from '@src/globals/constants/fakeData';
-import {ThemeContext} from '@src/types/contextTypes';
+import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
-import {useContext, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Appearance, Image, StatusBar, View} from 'react-native';
 import {
   Avatar,
@@ -18,19 +18,14 @@ import {
   Paragraph,
   Switch,
   Text,
-  Title,
+  Title
 } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {drawerComponentStyles} from './styles/drawerComppnentStyles';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
-  const {
-    setDarkTheme,
-    setLightTheme,
-    theme: {colors},
-    theme,
-  } = useContext(ThemeContext);
+  const {colors, theme, setDarkTheme, setLightTheme} = actualTheme();
   const {getItem} = useAsyncStorage('@theme');
   const [isDark, setIsDark] = useState(false);
   const colorScheme = Appearance.getColorScheme();
@@ -84,7 +79,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
       <View style={drawerComponentStyles.userInfoSection}>
         <Avatar.Image
           source={{
-            uri: 'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg',
+            uri: 'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg'
           }}
           size={50}
         />
@@ -101,14 +96,14 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
               style={[
                 drawerComponentStyles.paragraph,
                 drawerComponentStyles.caption,
-                {color: colors.onSurface},
+                {color: colors.onSurface}
               ]}>
               3
             </Paragraph>
             <Caption
               style={[
                 drawerComponentStyles.caption,
-                {color: colors.onSurfaceDisabled},
+                {color: colors.onSurfaceDisabled}
               ]}>
               {t('employees')}
             </Caption>
@@ -118,14 +113,14 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
               style={[
                 drawerComponentStyles.paragraph,
                 drawerComponentStyles.caption,
-                {color: colors.onSurface},
+                {color: colors.onSurface}
               ]}>
               2
             </Paragraph>
             <Caption
               style={[
                 drawerComponentStyles.caption,
-                {color: colors.onSurfaceDisabled},
+                {color: colors.onSurfaceDisabled}
               ]}>
               {t('buttons')}
             </Caption>
@@ -135,6 +130,20 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
 
       {/* <DrawerItemList {...props} /> */}
       <Drawer.Section style={drawerComponentStyles.drawerSection}>
+        <DrawerItem
+          icon={({size}) => (
+            <MaterialCommunityIcons
+              name="home"
+              color={colors.onSurface}
+              size={size}
+            />
+          )}
+          labelStyle={{color: colors.onSurface}}
+          label={t('drawer.home')}
+          onPress={() =>
+            handleClickButtonMenuDrawer('Home', {administrator: false, shop})
+          }
+        />
         <DrawerItem
           icon={({size}) => (
             <MaterialCommunityIcons
@@ -204,19 +213,19 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
         <View style={drawerComponentStyles.logos}>
           <Image
             source={{
-              uri: 'https://www.florencia-caqueta.gov.co/sites/florenciacaqueta/content/files/000861/43037_pag-wb-escudo_200x200.png',
+              uri: 'https://www.florencia-caqueta.gov.co/sites/florenciacaqueta/content/files/000861/43037_pag-wb-escudo_200x200.png'
             }}
             style={drawerComponentStyles.imagesLogos}
           />
           <Image
             source={{
-              uri: 'https://scontent.fbog2-5.fna.fbcdn.net/v/t39.30808-1/360098370_588153136823100_6601367482560876322_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=c6021c&_nc_ohc=SBUR5C-j4zMAX-foIrh&_nc_ht=scontent.fbog2-5.fna&oh=00_AfDl3uT-tK7FGd_twV7CAf_Rkpfsaswq-hWCOz4koUu7vA&oe=64E8410C',
+              uri: 'https://scontent.fbog2-5.fna.fbcdn.net/v/t39.30808-1/360098370_588153136823100_6601367482560876322_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=c6021c&_nc_ohc=SBUR5C-j4zMAX-foIrh&_nc_ht=scontent.fbog2-5.fna&oh=00_AfDl3uT-tK7FGd_twV7CAf_Rkpfsaswq-hWCOz4koUu7vA&oe=64E8410C'
             }}
             style={drawerComponentStyles.imagesLogos}
           />
           <Image
             source={{
-              uri: 'http://site.ccflorencia.org.co/wp-content/uploads/2022/01/icono-camara.png',
+              uri: 'http://site.ccflorencia.org.co/wp-content/uploads/2022/01/icono-camara.png'
             }}
             style={drawerComponentStyles.imagesLogos}
           />

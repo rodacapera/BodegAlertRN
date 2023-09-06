@@ -19,7 +19,6 @@ const Employees = ({navigation, route}: EmployeesProps) => {
     useState<{title: string; subtitle: string}[]>(employees); // employees
 
   const removeItem = (index: number) => {
-    console.log('remove item', index);
     setAlertVisible(true);
   };
 

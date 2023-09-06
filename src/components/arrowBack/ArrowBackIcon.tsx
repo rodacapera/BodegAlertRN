@@ -1,11 +1,8 @@
-import {ThemeContext} from '@src/types/contextTypes';
-import {useContext} from 'react';
+import {actualTheme} from '@src/types/contextTypes';
 import CustomIcon from '../customIcon/CustomIcon';
 
 const ArrowBackIcon = () => {
-  const {
-    theme: {colors},
-  } = useContext(ThemeContext);
+  const {colors} = actualTheme();
   return (
     <CustomIcon font="material" name="arrow-back" color={colors.onPrimary} />
   );

@@ -2,20 +2,17 @@ import {logo_app} from '@src/assets/images';
 import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
 import splashHook from '@src/hooks/splash/splashHook';
+import {actualTheme} from '@src/types/contextTypes';
 import {SplashProps} from '@src/types/globalTypes';
-import React, {useContext, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {splashStyles} from './styles/splashStyles';
-import {ThemeContext} from '@src/types/contextTypes';
 const Splash = ({route, navigation}: SplashProps) => {
   const {i18n, t} = useTranslation();
-  const {
-    theme: {colors},
-    theme,
-  } = useContext(ThemeContext);
+  const {colors, theme} = actualTheme();
 
   useEffect(() => {
     setTimeout(() => {
@@ -31,15 +28,15 @@ const Splash = ({route, navigation}: SplashProps) => {
           <Text
             style={[
               splashStyles.textLogoInit,
-              {color: theme.dark ? colors.onPrimaryContainer : colors.primary},
+              {color: theme.dark ? colors.onPrimaryContainer : colors.primary}
             ]}>
             {APP_NAME_FIRST}
             <Text
               style={[
                 splashStyles.textLogoFin,
                 {
-                  color: theme.dark ? colors.inversePrimary : colors.primary,
-                },
+                  color: theme.dark ? colors.inversePrimary : colors.primary
+                }
               ]}>
               {APP_NAME_END}
             </Text>

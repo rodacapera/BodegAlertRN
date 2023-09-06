@@ -1,8 +1,7 @@
 import {qrLink, addUserVideo} from '@src/globals/constants/fakeData';
-import {ThemeContext} from '@src/types/contextTypes';
+import {actualTheme} from '@src/types/contextTypes';
 import {QrModalProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
-import {useContext} from 'react';
 import {View} from 'react-native';
 import {Caption, Modal} from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
@@ -12,10 +11,7 @@ import {qrModalStyles} from './styles/qrModalStyles';
 
 const QrModal = ({visible, setVisible}: QrModalProps) => {
   const hideModal = () => setVisible(false);
-  const {
-    theme: {colors},
-    theme,
-  } = useContext(ThemeContext);
+  const {colors, theme} = actualTheme();
   return (
     <Modal
       visible={visible}
@@ -25,16 +21,16 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
         {
           backgroundColor: theme.dark
             ? colors.surfaceVariant
-            : colors.background,
-        },
+            : colors.background
+        }
       ]}>
       <View style={qrModalStyles.modalContent}>
         <Caption
           style={[
             qrModalStyles.title,
             {
-              color: colors.onSurface,
-            },
+              color: colors.onSurface
+            }
           ]}>
           {t('qrModal.helperTitleQr')}
         </Caption>
@@ -50,6 +46,7 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
         <TextWithCustomLink
           text={t('qrModal.helperFooterQrFirst')}
           link={addUserVideo}
+          visible
         />
       </View>
     </Modal>

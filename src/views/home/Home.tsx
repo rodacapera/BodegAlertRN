@@ -1,22 +1,19 @@
 import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {backAction} from '@src/hooks/home/homeHook';
-import {ThemeContext} from '@src/types/contextTypes';
-import {HomeProps, StackNavigation} from '@src/types/globalTypes';
-import {useContext, useEffect} from 'react';
+import {actualTheme} from '@src/types/contextTypes';
+import {HomeProps} from '@src/types/globalTypes';
+import {useEffect} from 'react';
 import {BackHandler, SafeAreaView} from 'react-native';
 import {Text} from 'react-native-paper';
 const Home = ({navigation, route}: HomeProps) => {
-  const {
-    theme: {dark},
-  } = useContext(ThemeContext);
+  const {colors, theme, dark} = actualTheme();
 
-  navigation.getState();
   useEffect(() => {
     navigation.getParent()?.setOptions({
-      headerShown: true,
+      headerShown: true
     });
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () =>
-      backAction(navigation),
+      backAction(navigation)
     );
 
     return () => backHandler.remove();

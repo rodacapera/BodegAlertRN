@@ -3,24 +3,22 @@ import {
   alert_push,
   emergency,
   location,
-  notification,
+  notification
 } from '@src/assets/images';
 import {handleFinishOnboarding} from '@src/hooks/onboarding/onboardingHook';
+import {actualTheme} from '@src/types/contextTypes';
 import {MyOnboardingProps, StackNavigation} from '@src/types/globalTypes';
 import {splashStyles} from '@src/views/splash/styles/splashStyles';
-import React, {Fragment, useContext} from 'react';
+import React, {Fragment} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
-import {ThemeContext} from '@src/types/contextTypes';
 import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
 
 const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
   const [visible, setVisible] = React.useState(false);
   const {t} = useTranslation();
-  const {
-    theme: {colors},
-  } = useContext(ThemeContext);
+  const {colors, theme} = actualTheme();
   const {navigate} = useNavigation<StackNavigation>();
 
   return (
@@ -30,7 +28,7 @@ const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
         setVisible={setVisible}
         title={t('geolocationAlert.errorLocationPermissionsAlert')}
         description={t(
-          'geolocationAlert.descriptionErrorLocationPermissionsAlert',
+          'geolocationAlert.descriptionErrorLocationPermissionsAlert'
         )}
       />
       <Onboarding
@@ -44,26 +42,26 @@ const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
             backgroundColor: colors.background,
             image: <Image source={emergency} style={splashStyles.logo} />,
             title: t('onboarding.titleOne'),
-            subtitle: t('onboarding.descriptionOne'),
+            subtitle: t('onboarding.descriptionOne')
           },
           {
             backgroundColor: colors.background,
             image: <Image source={alert_push} style={splashStyles.logo} />,
             title: t('onboarding.titleTwo'),
-            subtitle: t('onboarding.descriptionTwo'),
+            subtitle: t('onboarding.descriptionTwo')
           },
           {
             backgroundColor: colors.background,
             image: <Image source={notification} style={splashStyles.logo} />,
             title: t('onboarding.titleThree'),
-            subtitle: t('onboarding.descriptionThree'),
+            subtitle: t('onboarding.descriptionThree')
           },
           {
             backgroundColor: colors.background,
             image: <Image source={location} style={splashStyles.logo} />,
             title: t('onboarding.titleFour'),
-            subtitle: t('onboarding.descriptionFour'),
-          },
+            subtitle: t('onboarding.descriptionFour')
+          }
         ]}
       />
     </Fragment>

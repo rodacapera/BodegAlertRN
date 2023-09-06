@@ -1,9 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
-import {ThemeContext} from '@src/types/contextTypes';
+import {actualTheme} from '@src/types/contextTypes';
 import {type StackNavigation} from '@src/types/globalTypes';
 import {LoginButtonsProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import {useContext} from 'react';
 import {View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {loginFormStyles} from '../styles/loginFormStyles';
@@ -11,13 +10,10 @@ import {loginFormStyles} from '../styles/loginFormStyles';
 const Buttons = ({
   setButtonAction,
   currentButtonAction,
-  setIsLogin,
+  setIsLogin
 }: LoginButtonsProps) => {
   const {navigate} = useNavigation<StackNavigation>();
-  const {
-    theme: {colors},
-    theme,
-  } = useContext(ThemeContext);
+  const {colors, theme} = actualTheme();
 
   const handleLogin = () => {
     setButtonAction(currentButtonAction);

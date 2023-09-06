@@ -6,17 +6,17 @@ export const headerStyles = StyleSheet.create({
     marginHorizontal: 20,
     position: 'relative',
     paddingVertical: 10,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   arrowBackIcon: {
     position: 'absolute',
-    left: 5,
+    left: 5
   },
   title: {
     fontSize: 26,
     width: 280,
     fontWeight: 'bold',
     textTransform: 'capitalize',
-    textAlign: 'center',
-  },
+    textAlign: 'center'
+  }
 });

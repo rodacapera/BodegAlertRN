@@ -1,5 +1,4 @@
-import {ThemeContext} from '@src/types/contextTypes';
-import {useContext} from 'react';
+import {actualTheme} from '@src/types/contextTypes';
 import {Avatar, Card, IconButton} from 'react-native-paper';
 import {simpleRemoveItemCardsStyles} from './styles/simpleRemoveItemCards';
 
@@ -7,25 +6,22 @@ const SimpleRemoveItemCards = ({
   title,
   subtitle,
   index,
-  removeItem,
+  removeItem
 }: {
   title: string;
   subtitle?: string;
   index: number;
   removeItem: (e: number) => void;
 }) => {
-  const {
-    theme,
-    theme: {colors},
-  } = useContext(ThemeContext);
+  const {colors, theme, dark} = actualTheme();
   const handleRemove = () => {};
   return (
     <Card.Title
       style={[
         simpleRemoveItemCardsStyles.container,
         {
-          borderColor: theme.dark ? colors.onSurface : colors.onSurfaceDisabled,
-        },
+          borderColor: dark ? colors.onSurface : colors.onSurfaceDisabled
+        }
       ]}
       theme={theme}
       titleVariant="headlineSmall"

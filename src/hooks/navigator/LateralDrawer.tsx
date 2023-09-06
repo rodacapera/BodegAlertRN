@@ -1,8 +1,7 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {APP_NAME} from '@src/globals/constants/config';
-import {ThemeContext} from '@src/types/contextTypes';
-import {useContext} from 'react';
+import {actualTheme} from '@src/types/contextTypes';
 import {useWindowDimensions} from 'react-native';
 import DrawerComponent from './DrawerComponent';
 import NavigationProvider from './NavigationProvider';
@@ -10,11 +9,7 @@ import NavigationProvider from './NavigationProvider';
 export const LateralDrawer = () => {
   const {width} = useWindowDimensions();
   const MyDrawer = createDrawerNavigator();
-  const {
-    theme: {colors},
-    theme: {dark},
-    theme,
-  } = useContext(ThemeContext);
+  const {colors, theme, dark} = actualTheme();
   return (
     <NavigationContainer theme={theme}>
       <MyDrawer.Navigator
@@ -24,10 +19,10 @@ export const LateralDrawer = () => {
           headerTintColor: dark ? colors.onSurface : colors.primary,
           headerTitleStyle: {
             fontSize: 26,
-            fontWeight: 'bold',
+            fontWeight: 'bold'
           },
           headerStyle: {
-            backgroundColor: colors.background,
+            backgroundColor: colors.background
           },
 
           // headerStyle: {
@@ -36,7 +31,7 @@ export const LateralDrawer = () => {
           //   shadowOpacity: 0,
           // },
           drawerStyle: {backgroundColor: colors.background},
-          headerShown: false, // this remove header
+          headerShown: false // this remove header
           // drawerHideStatusBarOnOpen: true,
           //   overlayColor: 'transparent',
         }}
@@ -44,7 +39,7 @@ export const LateralDrawer = () => {
         <MyDrawer.Screen
           name="StackNavigator"
           options={{
-            title: APP_NAME,
+            title: APP_NAME
           }}
           component={NavigationProvider}
         />

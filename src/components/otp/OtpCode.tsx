@@ -6,11 +6,11 @@ import {
   handleValidateOtp,
   timerCount
 } from '@src/components/otp/hooks/otpHooks';
-import {ThemeContext} from '@src/types/contextTypes';
+import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import {useContext, useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {OtpInput, OtpInputRef} from 'react-native-otp-entry';
 import {Button, Text} from 'react-native-paper';
@@ -32,10 +32,7 @@ const OtpCode = ({
   const [errorOtp, setErrorOtp] = useState(false);
   const [sendOtpCode, setSendOtpCode] = useState(false);
   const [counter, setCounter] = useState(60);
-  const {
-    theme: {colors},
-    theme
-  } = useContext(ThemeContext);
+  const {colors, dark, theme} = actualTheme();
 
   useEffect(() => {
     handleSendOtp(buttonAction, setSendOtpCode);
@@ -60,24 +57,14 @@ const OtpCode = ({
           numberOfDigits={6}
           theme={{
             pinCodeTextStyle: {
-              color: theme.dark ? colors.onSurface : colors.onPrimaryContainer
+              color: dark ? colors.onSurface : colors.onPrimaryContainer
             }
           }}
-          focusColor={theme.dark ? colors.onSurface : colors.onPrimaryContainer}
+          focusColor={dark ? colors.onSurface : colors.onPrimaryContainer}
           onTextChange={text => handleChange(text, inputRef, setCode)}
           focusStickBlinkingDuration={500}
         />
-        {errorOtp && (
-          <Text
-            style={[
-              otpStyles.errorOtp,
-              {
-                color: colors.error
-              }
-            ]}>
-            {t('otp.error')}
-          </Text>
-        )}
+        {errorOtp && <Text style={otpStyles.errorOtp}>{t('otp.error')}</Text>}
       </View>
       <View style={otpStyles.contentOtpButtons}>
         <Button

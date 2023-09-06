@@ -1,7 +1,6 @@
-import {ThemeContext} from '@src/types/contextTypes';
+import {actualTheme} from '@src/types/contextTypes';
 import {CustomDialogAlertProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
-import {useContext} from 'react';
 import {Button, Dialog, Portal, Text} from 'react-native-paper';
 import {customDialogAlertStyles} from './styles/customDialogAlertStyles';
 
@@ -11,11 +10,9 @@ const CustomDialogAlert = ({
   cancelButton,
   actionSuccess,
   title,
-  description,
+  description
 }: CustomDialogAlertProps) => {
-  const {
-    theme: {colors},
-  } = useContext(ThemeContext);
+  const {colors} = actualTheme();
   const handleSuccess = () => {
     actionSuccess && actionSuccess(true);
     setVisible(false);

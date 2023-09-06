@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {ThemeContext} from '@src/types/contextTypes';
+import {ThemeContext, actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {useContext} from 'react';
 import {Text, View} from 'react-native';
@@ -8,19 +8,16 @@ import {headerStyles} from './styes/headerStyles';
 
 const HeaderTitle = ({title}: {title: string}) => {
   const {goBack} = useNavigation<StackNavigation>();
-  const {
-    theme: {colors},
-    theme,
-  } = useContext(ThemeContext);
+  const {colors, theme, dark} = actualTheme();
   return (
     <View style={headerStyles.header}>
       <View style={headerStyles.arrowBackIcon}>
         <IconButton
           icon="arrow-left"
           mode="contained-tonal"
-          iconColor={theme.dark ? colors.onSurface : colors.onPrimaryContainer}
+          iconColor={dark ? colors.onSurface : colors.onPrimaryContainer}
           style={{
-            backgroundColor: 'transparent',
+            backgroundColor: 'transparent'
           }}
           onPress={() => goBack()}
         />
@@ -29,8 +26,8 @@ const HeaderTitle = ({title}: {title: string}) => {
         style={[
           headerStyles.title,
           {
-            color: theme.dark ? colors.onSurface : colors.onPrimaryContainer,
-          },
+            color: dark ? colors.onSurface : colors.onPrimaryContainer
+          }
         ]}
         numberOfLines={1}>
         {title}

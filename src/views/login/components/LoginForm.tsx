@@ -6,27 +6,24 @@ import {Text} from 'react-native-paper';
 import Buttons from './Buttons';
 import ErrorInputForm from '../../../components/customErrorInputForm/CustomErrorInputForm';
 import CustomInputForm from '../../../components/customInputForm/CustomInputForm';
-import {ThemeContext} from '@src/types/contextTypes';
+import {ThemeContext, actualTheme} from '@src/types/contextTypes';
 
 const LoginForm = ({
   setButtonAction,
   errorPhone,
-  setIsLogin,
+  setIsLogin
 }: LoginFormProps) => {
   const phoneRef = useRef<any>();
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);
-  const {
-    theme: {colors},
-    theme,
-  } = useContext(ThemeContext);
+  const {colors, theme} = actualTheme();
 
   return (
     <Fragment>
       <Text
         variant="titleLarge"
         style={{
-          color: theme.dark ? colors.onSurface : colors.onPrimaryContainer,
+          color: theme.dark ? colors.onSurface : colors.onPrimaryContainer
         }}>
         {t('loginView.title')}
       </Text>

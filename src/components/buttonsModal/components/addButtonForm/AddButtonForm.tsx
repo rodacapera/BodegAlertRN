@@ -1,9 +1,9 @@
-import {View, Text} from 'react-native';
-import React, {useContext, useState} from 'react';
-import {Button, Caption, TextInput, Title} from 'react-native-paper';
-import {t} from 'i18next';
-import {ThemeContext} from '@src/types/contextTypes';
 import CustomIcon from '@src/components/customIcon/CustomIcon';
+import {actualTheme} from '@src/types/contextTypes';
+import {t} from 'i18next';
+import {useState} from 'react';
+import {View} from 'react-native';
+import {Button, Caption, TextInput, Title} from 'react-native-paper';
 import {buttonsModalStyles} from '../../styles/buttonsModalStyles';
 
 const AddButtonForm = ({
@@ -14,10 +14,7 @@ const AddButtonForm = ({
   backButton: (e: string) => void;
 }) => {
   const [eye, setEye] = useState(false);
-  const {
-    theme: {colors},
-    theme
-  } = useContext(ThemeContext);
+  const {colors, theme} = actualTheme();
   return (
     <View>
       <Title style={{fontWeight: 'bold', color: colors.onSurface}}>

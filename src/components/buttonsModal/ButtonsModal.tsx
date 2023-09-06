@@ -1,6 +1,6 @@
 import {addButton} from '@src/globals/constants/fakeData';
 import {Networks, showNetworks} from '@src/hooks/shellyActions';
-import {ThemeContext} from '@src/types/contextTypes';
+import {ThemeContext, actualTheme} from '@src/types/contextTypes';
 import {ButtonsModalProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {Fragment, useContext, useEffect, useState} from 'react';
@@ -18,10 +18,7 @@ const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
   const [firsStep, setFirsStep] = useState<string>('');
   const hideModal = () => (setVisible(false), setNetworks(undefined));
   const networksStatus = !networks ? true : false;
-  const {
-    theme: {colors},
-    theme
-  } = useContext(ThemeContext);
+  const {colors, theme} = actualTheme();
 
   const getMyNetworks = async () => {
     if (!networks || networks == undefined) {

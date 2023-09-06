@@ -1,12 +1,12 @@
 import {useNavigation} from '@react-navigation/native';
 import CustomIcon from '@src/components/customIcon/CustomIcon';
+import CustomInputForm from '@src/components/customInputForm/CustomInputForm';
 import {shop} from '@src/globals/constants/fakeData';
 import {buttonActionInitialState} from '@src/globals/constants/login';
-import {ThemeContext} from '@src/types/contextTypes';
+import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
-import CustomInputForm from '@src/components/customInputForm/CustomInputForm';
-import {useContext, useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, Text, View} from 'react-native';
 import {Button, Caption, TextInput} from 'react-native-paper';
@@ -15,10 +15,7 @@ import {registerStyles} from '../styles/registerStyles';
 const UserForm = () => {
   const {t} = useTranslation();
   const phoneRef = useRef<any>();
-  const {
-    theme: {colors},
-    theme,
-  } = useContext(ThemeContext);
+  const {colors, theme} = actualTheme();
   const {navigate} = useNavigation<StackNavigation>();
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);

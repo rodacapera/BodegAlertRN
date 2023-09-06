@@ -1,13 +1,10 @@
-import {View, Text} from 'react-native';
-import React, {useContext} from 'react';
-import {ActivityIndicator, Caption} from 'react-native-paper';
-import {ThemeContext} from '@src/types/contextTypes';
+import {actualTheme} from '@src/types/contextTypes';
 import {CustomLoaderProps} from '@src/types/globalTypes';
+import {View} from 'react-native';
+import {ActivityIndicator, Caption} from 'react-native-paper';
 
 const CustomLoader = ({label, visible}: CustomLoaderProps) => {
-  const {
-    theme: {colors}
-  } = useContext(ThemeContext);
+  const {colors} = actualTheme();
   return visible ? (
     <View>
       <ActivityIndicator animating={true} color={colors.secondary} />

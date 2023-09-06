@@ -19,7 +19,6 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
     useState<{title: string; subtitle: string}[]>(buttons); // buttons
 
   const removeItem = (index: number) => {
-    console.log('remove item', index);
     setAlertVisible(true);
   };
   return (
@@ -30,16 +29,19 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
         icon="security"
       />
       <View style={employeeStyles.container}>
-        {myButtons.length == 0 && <UsersNotFound />}
-        {myButtons.map((value, index) => (
-          <SimpleRemoveItemCards
-            title={value.title}
-            index={index}
-            subtitle={value.subtitle}
-            removeItem={removeItem}
-            key={index}
-          />
-        ))}
+        {myButtons.length > 0 ? (
+          myButtons.map((value, index) => (
+            <SimpleRemoveItemCards
+              title={value.title}
+              index={index}
+              subtitle={value.subtitle}
+              removeItem={removeItem}
+              key={index}
+            />
+          ))
+        ) : (
+          <UsersNotFound />
+        )}
       </View>
       <CustomFab icon="shield-plus" onPress={() => setVisible(true)} />
 
