@@ -35,8 +35,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MaterialCommunityIcons.ttf</string>
@@ -60,7 +58,7 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app needs location access when it is in the background, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Can I have location always?</string>
+	<string>This app needs access to location when open, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs access to location when open, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
 </dict>
