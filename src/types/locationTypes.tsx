@@ -1,6 +1,8 @@
-export type LatLngProp = {
-  latitude: string;
-  longitude: string;
+export type Region = {
+  latitude: Number;
+  longitude: Number;
+  latitudeDelta: Number;
+  longitudeDelta: Number;
 };
 
 export interface LatLng {
@@ -9,14 +11,25 @@ export interface LatLng {
 }
 
 export type GetLocationParams = {
-  accuracy: number;
+  accuracy?: number;
   altitude: number;
-  bearing: number;
+  bearing?: number;
   latitude: number;
   longitude: number;
-  provider: string;
+  provider?: string;
   speed: number;
   time: number;
+};
+
+export type GetLocationProps = {
+  accuracy: number;
+  altitude: number;
+  course: number;
+  latitude: number;
+  longitude: number;
+  speed: number;
+  time: number;
+  verticalAccuracy: number;
 };
 
 export interface PlusCode {

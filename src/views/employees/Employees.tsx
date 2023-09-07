@@ -1,5 +1,5 @@
 import CustomBanner from '@src/components/customBanner/CustomBanner';
-import CustomFab from '@src/components/customFab/CustomFabA';
+import CustomFab from '@src/components/customFab/CustomFab';
 import QrModal from '@src/components/qrModal/QrModal';
 import SimpleRemoveItemCards from '@src/components/simpleRemoveItemCards/SimpleRemoveItemCards';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
@@ -41,7 +41,11 @@ const Employees = ({navigation, route}: EmployeesProps) => {
           />
         ))}
       </View>
-      <CustomFab icon="account-plus-outline" onPress={() => setVisible(true)} />
+      <CustomFab
+        styles="bottomRight"
+        icon="account-plus-outline"
+        onPress={() => setVisible(true)}
+      />
 
       <CustomDialogAlert
         visible={alertVisible}

@@ -116,6 +116,20 @@ export type CustomBannerProps = {
 
 export type CustomLoaderProps = {label: string; visible: boolean};
 
+export type CustomFabStyles =
+  | 'bottomRight'
+  | 'bottomLeft'
+  | 'topRight'
+  | 'topLeft'
+  | 'topCenter'
+  | 'bottomCenter';
+
+export type CustomFabProps = {
+  icon: string;
+  styles: CustomFabStyles;
+  onPress: (e: any) => void;
+};
+
 type ParamListBase = {
   //example to index
   [x: string]: object | undefined;

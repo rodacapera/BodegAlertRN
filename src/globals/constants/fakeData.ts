@@ -41,19 +41,12 @@ export const fakePosition = {
 
 export const fakeMarkers = [
   {
-    latlng: {latitude: 4.441886, longitude: -75.197092},
-    title: 'home',
-    description: 'home description',
-    myPosition: true
-  },
-  {
     latlng: {
       latitude: 4.443289,
       longitude: -75.198824
     },
     title: 'casa 1',
-    description: 'description 1',
-    myPosition: false
+    description: 'description 1'
   },
   {
     latlng: {
@@ -61,8 +54,7 @@ export const fakeMarkers = [
       longitude: -75.198556
     },
     title: 'casa 2',
-    description: 'description 2',
-    myPosition: false
+    description: 'description 2'
   }
 ];
 

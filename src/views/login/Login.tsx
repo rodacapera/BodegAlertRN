@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ImageBackground, SafeAreaView, View} from 'react-native';
+import {ImageBackground, SafeAreaView, ScrollView, View} from 'react-native';
 import {Text, Avatar} from 'react-native-paper';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {loginFormStyles} from './styles/loginFormStyles';
@@ -28,38 +28,40 @@ const Login = ({route, navigation}: LoginProps) => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <View style={[loginFormStyles.loginContent]}>
-        <View style={loginFormStyles.loginHeader}>
-          <ImageBackground
-            source={login_background}
-            resizeMode="cover"
-            style={loginFormStyles.image}>
-            <Avatar.Image
-              style={loginFormStyles.logo}
-              size={150}
-              source={logo_app}
-            />
-            <Text style={loginFormStyles.appName}>{APP_NAME}</Text>
-          </ImageBackground>
+      <ScrollView keyboardShouldPersistTaps="handled">
+        <View style={[loginFormStyles.loginContent]}>
+          <View style={loginFormStyles.loginHeader}>
+            <ImageBackground
+              source={login_background}
+              resizeMode="cover"
+              style={loginFormStyles.image}>
+              <Avatar.Image
+                style={loginFormStyles.logo}
+                size={150}
+                source={logo_app}
+              />
+              <Text style={loginFormStyles.appName}>{APP_NAME}</Text>
+            </ImageBackground>
+          </View>
+          <View style={loginFormStyles.loginBody}>
+            {!isLogin ||
+            buttonAction.phone.length == 2 ||
+            buttonAction.phone.length < 10 ? (
+              <LoginForm
+                setButtonAction={setButtonAction}
+                errorPhone={errorPhone}
+                setIsLogin={setIsLogin}
+              />
+            ) : (
+              <OtpCode
+                buttonAction={buttonAction}
+                setButtonAction={setButtonAction}
+                setIsLogin={setIsLogin}
+              />
+            )}
+          </View>
         </View>
-        <View style={loginFormStyles.loginBody}>
-          {!isLogin ||
-          buttonAction.phone.length == 2 ||
-          buttonAction.phone.length < 10 ? (
-            <LoginForm
-              setButtonAction={setButtonAction}
-              errorPhone={errorPhone}
-              setIsLogin={setIsLogin}
-            />
-          ) : (
-            <OtpCode
-              buttonAction={buttonAction}
-              setButtonAction={setButtonAction}
-              setIsLogin={setIsLogin}
-            />
-          )}
-        </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

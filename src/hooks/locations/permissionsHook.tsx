@@ -1,3 +1,4 @@
+import {GetLocationProps} from '@src/types/locationTypes';
 import {PermissionsAndroid} from 'react-native';
 import GetLocation from 'react-native-get-location';
 export const requestLocationPermission = async () => {
@@ -9,8 +10,8 @@ export const requestLocationPermission = async () => {
         message: 'Can we access your location?',
         buttonNeutral: 'Ask Me Later',
         buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
-      },
+        buttonPositive: 'OK'
+      }
     );
     console.log('granted', granted);
     if (granted === 'granted') {
@@ -28,7 +29,7 @@ export const requestLocationPermission = async () => {
 export const getLocationPermissions = () =>
   GetLocation.getCurrentPosition({
     enableHighAccuracy: true,
-    timeout: 60000,
+    timeout: 60000
   })
     .then(location => {
       console.log(location);
@@ -39,3 +40,22 @@ export const getLocationPermissions = () =>
       console.warn(code, message);
       return {code, message};
     });
+
+export const getMyCurrentPosition = new Promise<GetLocationProps>(
+  (resolve, reject) => {
+    GetLocation.getCurrentPosition({
+      enableHighAccuracy: true,
+      timeout: 60000
+    })
+      .then(location => {
+        console.log(location);
+        resolve(location as GetLocationProps);
+      })
+      .catch(error => {
+        const {code, message} = error;
+        console.warn(code, message);
+        // return {code, message};
+        reject(error);
+      });
+  }
+);

@@ -1,7 +1,7 @@
 import ButtonsModal from '@src/components/buttonsModal/ButtonsModal';
 import CustomBanner from '@src/components/customBanner/CustomBanner';
 import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
-import CustomFab from '@src/components/customFab/CustomFabA';
+import CustomFab from '@src/components/customFab/CustomFab';
 import SimpleRemoveItemCards from '@src/components/simpleRemoveItemCards/SimpleRemoveItemCards';
 import {buttons} from '@src/globals/constants/fakeData';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
@@ -43,7 +43,11 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
           <UsersNotFound />
         )}
       </View>
-      <CustomFab icon="shield-plus" onPress={() => setVisible(true)} />
+      <CustomFab
+        styles="bottomRight"
+        icon="shield-plus"
+        onPress={() => setVisible(true)}
+      />
 
       <CustomDialogAlert
         visible={alertVisible}

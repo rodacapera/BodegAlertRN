@@ -3,7 +3,7 @@ import {actualTheme} from '@src/types/contextTypes';
 import {InputFormProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
 import {useState} from 'react';
-import {View} from 'react-native';
+import {Keyboard, View} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import PhoneInput from 'react-native-phone-input';
 import {loginFormStyles} from '../../views/login/styles/loginFormStyles';
@@ -45,6 +45,7 @@ const CustomInputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
           <></>
         )}
       </View>
+
       <TextInput
         style={loginFormStyles.email}
         mode="flat"
@@ -67,6 +68,8 @@ const CustomInputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
         //     icon={() => <CustomIcon name={'camera'} size={20} />}
         //   />
         // }
+        onSubmitEditing={Keyboard.dismiss}
+        inputMode="numeric"
         label={t('general.phone')}
         value={phone}
         onChangeText={text => handlePhoneNumber(text)}
