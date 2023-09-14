@@ -3,7 +3,7 @@ import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
 
 const PanicButton = () => {
-  const {colors} = actualTheme();
+  const {colors, dark} = actualTheme();
 
   return (
     <CustomFab
@@ -12,7 +12,7 @@ const PanicButton = () => {
       position={'bottomCenter'}
       onPress={() => console.log('click')}
       style={{
-        backgroundColor: colors.onErrorContainer,
+        backgroundColor: dark ? colors.onPrimary : colors.onErrorContainer,
         borderRadius: 50
       }}
       iconColor="white"
