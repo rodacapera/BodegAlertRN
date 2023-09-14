@@ -16,11 +16,12 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
   const [visible, setVisible] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
   const [myButtons, setMyButtons] =
-    useState<{title: string; subtitle: string}[]>(buttons); // buttons
+    useState<{title: string; subtitle: string}[]>(buttons); // get buttons list from bd
 
   const removeItem = (index: number) => {
     setAlertVisible(true);
   };
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <CustomBanner
