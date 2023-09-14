@@ -43,8 +43,12 @@ const CustomMap = () => {
       </MapView>
       <CustomFab
         icon={'target'}
-        styles={'bottomRight'}
+        position={'bottomRight'}
         onPress={() => animateCamera(mapRef, region, 1000)}
+        style={{
+          borderRadius: 80,
+          backgroundColor: 'rgba(255, 255, 255, 0.5)'
+        }}
       />
     </Fragment>
   );

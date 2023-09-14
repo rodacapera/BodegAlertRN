@@ -122,6 +122,9 @@ i18n.use(initReactI18next).init({
           helperTitleQr:
             'Turn on your button and connect to the wifi network that starts with shellybuton1, go back to this screen, select your wifi network from the list below and follow the steps!',
           helperFooterQrFirst: `Learn how it's done, click`
+        },
+        home: {
+          panicButton: 'Send Notify'
         }
       }
     },
@@ -238,6 +241,9 @@ i18n.use(initReactI18next).init({
           helperTitleQr:
             'Enciende tu botón y conectate a la red wifi que inicia con shellybuton1, volve a esta pantalla, selecciona tu red wifi del listado de abajo y segue los pasos!',
           helperFooterQrFirst: 'Conocer como se hace, click'
+        },
+        home: {
+          panicButton: 'Enviar Noticia'
         }
       }
     },

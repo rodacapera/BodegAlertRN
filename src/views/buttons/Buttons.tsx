@@ -45,7 +45,7 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
         )}
       </View>
       <CustomFab
-        styles="bottomRight"
+        position="bottomRight"
         icon="shield-plus"
         onPress={() => setVisible(true)}
       />

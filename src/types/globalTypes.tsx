@@ -1,7 +1,7 @@
 import {NavigationProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ReactNode} from 'react';
-import {Button, useColorScheme} from 'react-native';
+import {Button, ViewStyle, useColorScheme} from 'react-native';
 import {$RemoveChildren} from 'react-native-paper/lib/typescript/src/types';
 
 const colorScheme = useColorScheme();
@@ -126,8 +126,11 @@ export type CustomFabStyles =
 
 export type CustomFabProps = {
   icon: string;
-  styles: CustomFabStyles;
+  position: CustomFabStyles;
   onPress: (e: any) => void;
+  style?: ViewStyle;
+  label?: string;
+  iconColor?: string;
 };
 
 type ParamListBase = {

@@ -42,7 +42,7 @@ const Employees = ({navigation, route}: EmployeesProps) => {
         ))}
       </View>
       <CustomFab
-        styles="bottomRight"
+        position="bottomRight"
         icon="account-plus-outline"
         onPress={() => setVisible(true)}
       />

@@ -2,8 +2,9 @@ import {backAction} from '@src/hooks/home/homeHook';
 import {HomeProps} from '@src/types/globalTypes';
 import {useEffect} from 'react';
 import {BackHandler, View} from 'react-native';
-import CustomMap from './components/map/CustomMap';
+import CustomMap from './components/customMap/CustomMap';
 import {homeStyles} from './styles/homeStyles';
+import PanicButton from './components/panicButton/PannicButton';
 
 const Home = ({navigation, route}: HomeProps) => {
   useEffect(() => {
@@ -19,6 +20,7 @@ const Home = ({navigation, route}: HomeProps) => {
   return (
     <View style={homeStyles.container}>
       <CustomMap />
+      <PanicButton />
     </View>
   );
 };
