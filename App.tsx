@@ -1,16 +1,21 @@
-import {customDefaultTheme} from '@src/globals/constants/theme';
+import customTheme from '@src/globals/constants/customTheme';
 import {ThemeProvider} from '@src/hooks/context/themeContext/ThemeContext';
 import '@src/hooks/i18n';
 import {LateralDrawer} from '@src/hooks/navigator/LateralDrawer';
-import {PaperProvider} from 'react-native-paper';
-import {enableLatestRenderer} from 'react-native-maps';
+import {pushConfigure} from '@src/hooks/notifications/notificationsHook';
+import {useEffect} from 'react';
 import {Platform} from 'react-native';
+import {enableLatestRenderer} from 'react-native-maps';
+import {PaperProvider} from 'react-native-paper';
 
 function App(): JSX.Element {
-  if (Platform.OS === 'android') {
-    const res = enableLatestRenderer();
-    console.log('res', res);
-  }
+  const {customDefaultTheme} = customTheme();
+
+  useEffect(() => {
+    if (Platform.OS === 'android') enableLatestRenderer();
+    pushConfigure();
+  }, []);
+
   return (
     <ThemeProvider>
       <PaperProvider theme={customDefaultTheme}>

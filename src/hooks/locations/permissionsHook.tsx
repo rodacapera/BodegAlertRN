@@ -13,7 +13,6 @@ export const requestLocationPermission = async () => {
         buttonPositive: 'OK'
       }
     );
-    console.log('granted', granted);
     if (granted === 'granted') {
       console.log('You can use Geolocation');
       return true;
@@ -32,7 +31,7 @@ export const getLocationPermissions = () =>
     timeout: 60000
   })
     .then(location => {
-      console.log(location);
+      // console.log(location);
       return location;
     })
     .catch(error => {
@@ -48,7 +47,7 @@ export const getMyCurrentPosition = new Promise<GetLocationProps>(
       timeout: 60000
     })
       .then(location => {
-        console.log(location);
+        // console.log(location);
         resolve(location as GetLocationProps);
       })
       .catch(error => {

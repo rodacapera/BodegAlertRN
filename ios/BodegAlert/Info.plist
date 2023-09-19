@@ -35,11 +35,23 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app needs location access when it is in the background, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>This app needs access to location when open, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs access to location when open, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MaterialCommunityIcons.ttf</string>
 		<string>MaterialIcons.ttf</string>
 		<string>FontAwesome.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -55,11 +67,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app needs location access when it is in the background, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
-	<key>NSLocationUsageDescription</key>
-	<string>This app needs access to location when open, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location when open, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
 </dict>
 </plist>

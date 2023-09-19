@@ -41,8 +41,6 @@ const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
     return () => appMode.remove();
   }, []);
 
-  console.log('firsStep', firsStep);
-
   return (
     <Modal
       visible={visible}

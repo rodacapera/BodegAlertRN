@@ -1,19 +1,9 @@
 import {NavigationProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ReactNode} from 'react';
-import {Button, ViewStyle, useColorScheme} from 'react-native';
+import {Button, ViewStyle} from 'react-native';
 import {$RemoveChildren} from 'react-native-paper/lib/typescript/src/types';
 
-const colorScheme = useColorScheme();
-
-// export const paperTheme =
-//   colorScheme === 'dark'
-//     ? {...MD3DarkTheme, colors: darkTheme.colors}
-//     : {...MD3LightTheme, colors: lightTheme.colors};
-
-// export type AppTheme = typeof paperTheme;
-
-// export const useAppTheme = () => useTheme<AppTheme>();
 export type ShopProps = {
   address: string;
   city: string;

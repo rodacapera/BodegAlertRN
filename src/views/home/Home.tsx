@@ -4,7 +4,7 @@ import {useEffect} from 'react';
 import {BackHandler, View} from 'react-native';
 import CustomMap from './components/customMap/CustomMap';
 import {homeStyles} from './styles/homeStyles';
-import PanicButton from './components/panicButton/PannicButton';
+import PanicButton from './components/panicButton/PanicButton';
 
 const Home = ({navigation, route}: HomeProps) => {
   useEffect(() => {

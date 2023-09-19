@@ -1,4 +1,4 @@
-import {StyleProp, ViewStyle, useColorScheme} from 'react-native';
+import {StyleProp, ViewStyle} from 'react-native';
 
 const backgroundStyle = {
   flex: 1

@@ -59,7 +59,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
   }, []);
 
   useEffect(() => {
-    Appearance.addChangeListener(({colorScheme}) => {
+    Appearance.addChangeListener(() => {
       validateSwitch();
     });
     return () => {
@@ -185,16 +185,14 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
       </Drawer.Section>
       <Drawer.Section theme={theme} title="Preferences">
         {/* <TouchableRipple onPress={() => setIsDark(!isDark)}> */}
-        {colorScheme == 'light' && (
-          <View style={drawerComponentStyles.preference}>
-            <Text style={{color: colors.onSurface}}>
-              {t('drawer.darkTheme')}
-            </Text>
-            <View>
-              <Switch value={isDark} onValueChange={onToggleSwitch} />
-            </View>
+        {/* {colorScheme == 'light' && ( */}
+        <View style={drawerComponentStyles.preference}>
+          <Text style={{color: colors.onSurface}}>{t('drawer.darkTheme')}</Text>
+          <View>
+            <Switch value={isDark} onValueChange={onToggleSwitch} />
           </View>
-        )}
+        </View>
+        {/* )} */}
         {/* </TouchableRipple> */}
         {/* <TouchableRipple onPress={() => {}}>
           <View style={drawerComponentStyles.preference}>

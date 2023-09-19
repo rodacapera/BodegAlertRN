@@ -1,34 +1,34 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {customDarkTheme, customLightTheme} from '@src/globals/constants/theme';
 import {ThemeContext, ThemeContextMode} from '@src/types/contextTypes';
-import {useContext, useEffect, useState} from 'react';
-import {
-  customDarkTheme,
-  customDefaultTheme,
-  customLightTheme
-} from '@src/globals/constants/theme';
+import {useEffect, useState} from 'react';
+import customTheme from '@src/globals/constants/customTheme';
 
 export const ThemeProvider = ({children}: any) => {
-  const [customTheme, setCustomTheme] = useState<ThemeContextMode>();
+  const [currentCustomTheme, setCurrentCustomTheme] =
+    useState<ThemeContextMode>();
   const setCurrentTheme = async (myTheme: string) => {
     await AsyncStorage.setItem('@theme', myTheme);
   };
+  const {customDefaultTheme} = customTheme();
 
   const setDarkTheme = () => {
     setCurrentTheme('dark');
-    setCustomTheme(customDarkTheme);
+    setCurrentCustomTheme(customDarkTheme);
   };
 
   const setLightTheme = () => {
     setCurrentTheme('light');
-    setCustomTheme(customLightTheme);
+    setCurrentCustomTheme(customLightTheme);
   };
 
   const getCurrentTheme = async () => {
     const myCurrentTheme = await AsyncStorage.getItem('@theme');
+
     if (myCurrentTheme) {
       myCurrentTheme === 'dark' ? setDarkTheme() : setLightTheme();
     } else {
-      setCustomTheme(customDefaultTheme);
+      setCurrentCustomTheme(customDefaultTheme);
     }
   };
 
@@ -37,8 +37,9 @@ export const ThemeProvider = ({children}: any) => {
   }, []);
 
   return (
-    customTheme && (
-      <ThemeContext.Provider value={{customTheme, setDarkTheme, setLightTheme}}>
+    currentCustomTheme && (
+      <ThemeContext.Provider
+        value={{customTheme: currentCustomTheme, setDarkTheme, setLightTheme}}>
         {children}
       </ThemeContext.Provider>
     )
