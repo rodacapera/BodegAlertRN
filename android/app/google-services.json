@@ -1,0 +1,80 @@
+{
+  "project_info": {
+    "project_number": "923215387352",
+    "firebase_url": "https://bodegalert.firebaseio.com",
+    "project_id": "bodegalert",
+    "storage_bucket": "bodegalert.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923215387352:android:d313b5585a877f408155ad",
+        "android_client_info": {
+          "package_name": "io.cordova.alarmu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923215387352-1ln8h8bommdh7ua69lenmd0ph69q6v2f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.cordova.alarmu",
+            "certificate_hash": "7190fad9f911164e7ad89fd4d298004aeaedb91f"
+          }
+        },
+        {
+          "client_id": "923215387352-42re9ud06lt28flp1o8l4jgspf11vvi7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.cordova.alarmu",
+            "certificate_hash": "1c6d9930907954c776b7c6e3519e4f43a926bec1"
+          }
+        },
+        {
+          "client_id": "923215387352-dbibl23ccqhbqp5a3sev8cpankauj3gl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.cordova.alarmu",
+            "certificate_hash": "99fadec2cc3f46f2df8154f352187e11267890de"
+          }
+        },
+        {
+          "client_id": "923215387352-qos0dlig39ibtvrmp8nacqab4cpsjrfe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.cordova.alarmu",
+            "certificate_hash": "f633abbad4cb43f6f84412a1fd2ad99532118b5d"
+          }
+        },
+        {
+          "client_id": "923215387352-iarbqrnk8dem2t7negusgp4lv3jg8jsv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf-L9VmCcYHpQ13Rllrdl0k54Ma5QSiQU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923215387352-iarbqrnk8dem2t7negusgp4lv3jg8jsv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "923215387352-9l5u8e7soosrm5t6m4klfkddgprch1ku.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.cordova.alarmu",
+                "app_store_id": "1428944146"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

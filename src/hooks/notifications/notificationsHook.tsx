@@ -57,6 +57,10 @@ export const pushConfigure = () => {
   });
 };
 
+export const remoteMessageAction = (remoteMessage: any) => {
+  console.log('remoteMessage', remoteMessage);
+};
+
 const updateTokenFcm = async (newToken: string) => {
   const token = await AsyncStorage.getItem('@fcmToken');
   token != null

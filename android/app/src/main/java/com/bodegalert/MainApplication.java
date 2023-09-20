@@ -1,4 +1,4 @@
-package com.bodegalert;
+package io.cordova.alarmu;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
