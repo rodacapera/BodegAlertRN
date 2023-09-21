@@ -106,7 +106,8 @@ i18n.use(initReactI18next).init({
           send: 'Send',
           continue: 'Continue',
           here: 'here.',
-          scanning: 'Scanning'
+          scanning: 'Scanning',
+          loading: 'Loading'
         },
         qrModal: {
           helperTitleQr:
@@ -224,7 +225,8 @@ i18n.use(initReactI18next).init({
           send: 'Enviar',
           continue: 'Continuar',
           here: 'aquí.',
-          scanning: 'Escaneando'
+          scanning: 'Escaneando',
+          loading: 'Cargando'
         },
         qrModal: {
           helperTitleQr:

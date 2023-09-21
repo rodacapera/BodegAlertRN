@@ -1,11 +1,11 @@
-import {getMyCurrentPosition} from '@src/hooks/locations/permissionsHook';
+import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
 import {Region} from 'react-native-maps';
 
 export const getMyLocation = async () => {
-  const location = await getMyCurrentPosition;
+  const location = await getCurrentPosition();
   return {
-    latitude: location.latitude,
-    longitude: location.longitude,
+    latitude: location.coords.latitude,
+    longitude: location.coords.longitude,
     latitudeDelta: 0.015,
     longitudeDelta: 0.0121
   };

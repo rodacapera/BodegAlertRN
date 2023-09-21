@@ -1,10 +1,9 @@
-import {FAB} from 'react-native-paper';
-import {customFabStyles} from './styles/customFabStyles';
-import {ViewStyle} from 'react-native';
+import {CustomFabProps} from '@src/types/globalTypes';
 import {useEffect, useState} from 'react';
-import {CustomFabProps, CustomFabStyles} from '@src/types/globalTypes';
+import {ViewStyle} from 'react-native';
+import {FAB} from 'react-native-paper';
 import {validatePosition} from './hooks/customFabHook';
-import {backgroundStyle} from '@src/globals/styles/screenMode';
+import {customFabStyles} from './styles/customFabStyles';
 
 const CustomFab = ({
   onPress,

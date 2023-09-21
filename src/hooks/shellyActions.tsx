@@ -64,7 +64,6 @@ const buttonConfig = async (value: string) => {
     .then(async data => {
       return data;
     });
-
   console.log('result', result);
 };
 

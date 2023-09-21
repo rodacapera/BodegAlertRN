@@ -1,6 +1,6 @@
-import {GetLocationProps} from '@src/types/locationTypes';
 import {PermissionsAndroid} from 'react-native';
-import GetLocation from 'react-native-get-location';
+import Geolocation, {GeoPosition} from 'react-native-geolocation-service';
+
 export const requestLocationPermission = async () => {
   try {
     const granted = await PermissionsAndroid.request(
@@ -25,36 +25,16 @@ export const requestLocationPermission = async () => {
   }
 };
 
-export const getLocationPermissions = () =>
-  GetLocation.getCurrentPosition({
-    enableHighAccuracy: true,
-    timeout: 60000
-  })
-    .then(location => {
-      // console.log(location);
-      return location;
-    })
-    .catch(error => {
-      const {code, message} = error;
-      console.warn(code, message);
-      return {code, message};
-    });
-
-export const getMyCurrentPosition = new Promise<GetLocationProps>(
-  (resolve, reject) => {
-    GetLocation.getCurrentPosition({
-      enableHighAccuracy: true,
-      timeout: 60000
-    })
-      .then(location => {
-        // console.log(location);
-        resolve(location as GetLocationProps);
-      })
-      .catch(error => {
-        const {code, message} = error;
-        console.warn(code, message);
-        // return {code, message};
+export const getCurrentPosition = async (): Promise<GeoPosition> =>
+  new Promise((resolve, reject) => {
+    Geolocation.getCurrentPosition(
+      position => {
+        resolve(position);
+      },
+      error => {
+        console.log('error', error.code, 'message', error.message);
         reject(error);
-      });
-  }
-);
+      },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000}
+    );
+  });

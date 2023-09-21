@@ -104,7 +104,11 @@ export type CustomBannerProps = {
   icon: string;
 };
 
-export type CustomLoaderProps = {label: string; visible: boolean};
+export type CustomLoaderProps = {
+  label: string;
+  visible: boolean;
+  size?: 'small' | 'large';
+};
 
 export type CustomFabStyles =
   | 'bottomRight'

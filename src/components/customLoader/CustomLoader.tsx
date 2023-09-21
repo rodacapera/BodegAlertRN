@@ -1,15 +1,21 @@
 import {actualTheme} from '@src/types/contextTypes';
 import {CustomLoaderProps} from '@src/types/globalTypes';
-import {View} from 'react-native';
+import {Fragment} from 'react';
 import {ActivityIndicator, Caption} from 'react-native-paper';
 
-const CustomLoader = ({label, visible}: CustomLoaderProps) => {
+const CustomLoader = ({label, visible, size}: CustomLoaderProps) => {
   const {colors} = actualTheme();
   return visible ? (
-    <View>
-      <ActivityIndicator animating={true} color={colors.secondary} />
-      <Caption style={{color: colors.onSurface}}>{label}...</Caption>
-    </View>
+    <Fragment>
+      <ActivityIndicator
+        animating={true}
+        color={colors.secondary}
+        size={size ?? 'small'}
+      />
+      <Caption style={{color: colors.onSurface, fontWeight: 'bold'}}>
+        {label}...
+      </Caption>
+    </Fragment>
   ) : (
     <></>
   );
