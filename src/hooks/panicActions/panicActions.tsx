@@ -7,6 +7,7 @@ import {getAxios} from '../axios';
 import * as geolib from 'geolib';
 import {GeolibInputCoordinates} from 'geolib/es/types';
 import {getCurrentPosition} from '../locations/permissionsHook';
+import {t} from 'i18next';
 
 const url = `${SERVER_PANIC_URL_PATH}${SERVER_PANIC_API_PUSH}`;
 
@@ -20,7 +21,7 @@ const sendNotification = async ({data, setLoading}: SendNotificationProps) => {
   return false;
 };
 
-const validDistance = (
+const getDistanceBetween = (
   registerPosition: GeolibInputCoordinates,
   currentPosition: GeolibInputCoordinates
 ) => {
@@ -33,23 +34,36 @@ const validDistance = (
   return calculate;
 };
 
-export const panicNotification = async (setLoading: (e: boolean) => void) => {
+export const panicNotification = async (
+  setLoading: (e: boolean) => void,
+  setErrorDistance: (e: boolean) => void
+) => {
   const currentPosition = await getCurrentPosition();
   console.log('currentPosition', currentPosition);
-
+  const validDistance = 50;
+  const user = 'user';
+  const latLng = {
+    lat: currentPosition.coords.latitude,
+    lng: currentPosition.coords.longitude
+  };
   const data = {
-    title: 'hola prueba',
-    body: 'mensage prueba',
-    my_location: {lat: 4.650263, lng: -74.146984},
-    name: 'rhonald',
+    title: `${user} ${t('notifications.title')}`,
+    body: t('notifications.body'),
+    my_location: latLng,
+    name: user,
     phone: '3102712547',
     alias: 'FerreConsumo',
     zip_code: '110800',
     countryCode: 'CO'
   };
-  const registerPosition = {latitude: 51.5103, longitude: 7.49347};
-  // const currentPosition = {latitude: "51° 31' N", longitude: "7° 28' E"};
+  const registerPosition = {latitude: 4.441517, longitude: -75.191001};
 
-  // const isValid = validDistance(registerPosition, currentPosition.);
-  sendNotification({data, setLoading});
+  const distance = getDistanceBetween(registerPosition, latLng);
+  console.log('isValid', distance);
+  if (distance < validDistance) {
+    sendNotification({data, setLoading});
+    setErrorDistance(false);
+  } else {
+    setErrorDistance(true);
+  }
 };

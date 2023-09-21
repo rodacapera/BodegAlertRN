@@ -126,6 +126,13 @@ i18n.use(initReactI18next).init({
         },
         home: {
           panicButton: 'Send Notify'
+        },
+        notifications: {
+          title: 'says: I need an assistance!',
+          body: 'I have an event in progress and would like to have your assistance.',
+          errorDistanceTitle: 'Shipping error!',
+          errorDistanceDescription:
+            'Apparently you are out of coverage to send the notification.'
         }
       }
     },
@@ -246,6 +253,13 @@ i18n.use(initReactI18next).init({
         },
         home: {
           panicButton: 'Enviar Noticia'
+        },
+        notifications: {
+          title: 'dice: Necesito una asistencia!',
+          body: 'tengo un evento en curso y me gustaría contar con tu asistencia.',
+          errorDistanceTitle: 'Error de envío!',
+          errorDistanceDescription:
+            'Al parecer estás fuera de cobertura para enviar la notificación.'
         }
       }
     },
