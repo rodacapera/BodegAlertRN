@@ -3,19 +3,28 @@ import {HomeProps} from '@src/types/globalTypes';
 import {useEffect} from 'react';
 import {BackHandler, View} from 'react-native';
 import CustomMap from './components/customMap/CustomMap';
-import {homeStyles} from './styles/homeStyles';
 import PanicButton from './components/panicButton/PanicButton';
+import {homeStyles} from './styles/homeStyles';
+import {headerShown} from '@src/hooks/navigator/headerShown';
+import {actualTheme} from '@src/types/contextTypes';
 
 const Home = ({navigation, route}: HomeProps) => {
+  const {colors, theme, dark} = actualTheme();
+
   useEffect(() => {
-    navigation.getParent()?.setOptions({
-      headerShown: true
-    });
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () =>
       backAction(navigation)
     );
     return () => backHandler.remove();
   }, []);
+  useEffect(() => {
+    headerShown({
+      navigation,
+      visible: true,
+      transparent: true,
+      titleColor: colors.onPrimaryContainer
+    });
+  });
 
   return (
     <View style={homeStyles.container}>

@@ -31,8 +31,8 @@ const config: Config = {
     mass: 3,
     overshootClamping: true,
     restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
-  },
+    restSpeedThreshold: 0.01
+  }
 };
 
 const NavigationProvider = () => {
@@ -43,35 +43,35 @@ const NavigationProvider = () => {
         name="Splash"
         component={Splash}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
       <Stack.Screen
         name="MyOnboarding"
         component={MyOnboarding}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
       <Stack.Screen
         name="LoginSplash"
         component={LoginSplash}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
       <Stack.Screen
         name="Login"
         component={Login}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
       <Stack.Screen
         name="Register"
         component={Register}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
       <Stack.Screen
@@ -83,7 +83,7 @@ const NavigationProvider = () => {
           //   backgroundColor: backgroundStyle.backgroundColor,
           // },
           headerShown: false,
-          animation: 'slide_from_right',
+          animation: 'slide_from_right'
         }}
       />
       <Stack.Screen
@@ -91,7 +91,7 @@ const NavigationProvider = () => {
         component={Profile}
         options={{
           headerShown: false,
-          animation: 'slide_from_right',
+          animation: 'slide_from_right'
         }}
       />
       <Stack.Screen
@@ -99,7 +99,7 @@ const NavigationProvider = () => {
         component={Employees}
         options={{
           headerShown: false,
-          animation: 'slide_from_right',
+          animation: 'slide_from_right'
         }}
       />
       <Stack.Screen
@@ -107,7 +107,7 @@ const NavigationProvider = () => {
         component={Buttons}
         options={{
           headerShown: false,
-          animation: 'slide_from_right',
+          animation: 'slide_from_right'
         }}
       />
     </Stack.Navigator>

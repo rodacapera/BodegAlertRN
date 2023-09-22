@@ -10,8 +10,8 @@ const CustomFab = ({
   icon,
   position,
   style,
-  label = '',
-  iconColor = 'black'
+  label,
+  iconColor
 }: CustomFabProps) => {
   const [currentPosition, setCurrentPosition] = useState<ViewStyle>(
     customFabStyles.bottomRight
@@ -25,7 +25,7 @@ const CustomFab = ({
     <FAB
       icon={icon}
       label={label}
-      color={iconColor ?? undefined}
+      color={iconColor}
       style={[currentPosition, style]}
       onPress={() => onPress(true)}
     />

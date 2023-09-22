@@ -16,7 +16,7 @@ export const LateralDrawer = () => {
         screenOptions={{
           drawerType: width >= 768 ? 'permanent' : 'front',
           drawerActiveTintColor: dark ? colors.onSurface : colors.background,
-          headerTintColor: dark ? colors.onSurface : colors.primary,
+          headerTintColor: dark ? colors.onSurface : colors.onPrimaryContainer,
           headerTitleStyle: {
             fontSize: 26,
             fontWeight: 'bold'
@@ -31,7 +31,8 @@ export const LateralDrawer = () => {
           //   shadowOpacity: 0,
           // },
           drawerStyle: {backgroundColor: colors.background},
-          headerShown: false // this remove header
+          headerShown: false, // this remove header
+          headerTransparent: true
           // drawerHideStatusBarOnOpen: true,
           //   overlayColor: 'transparent',
         }}

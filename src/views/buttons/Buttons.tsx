@@ -7,12 +7,15 @@ import {buttons} from '@src/globals/constants/fakeData';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {ButtonsProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import UsersNotFound from '../employees/components/UsersNotFound';
 import {employeeStyles} from '../employees/styles/employeesStyles';
+import {headerShown} from '@src/hooks/navigator/headerShown';
+import {actualTheme} from '@src/types/contextTypes';
 
 const Buttons = ({navigation, route}: ButtonsProps) => {
+  const {colors, dark} = actualTheme();
   const [visible, setVisible] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
   const [myButtons, setMyButtons] =
@@ -21,6 +24,15 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
   const removeItem = (index: number) => {
     setAlertVisible(true);
   };
+
+  useEffect(() => {
+    headerShown({
+      navigation,
+      visible: true,
+      transparent: false,
+      titleColor: dark ? colors.onSurface : colors.onPrimaryContainer
+    });
+  });
 
   return (
     <SafeAreaView style={backgroundStyle}>

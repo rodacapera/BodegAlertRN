@@ -6,6 +6,7 @@ import {
   DrawerContentScrollView,
   DrawerItem
 } from '@react-navigation/drawer';
+import {useNavigation} from '@react-navigation/native';
 import {shop} from '@src/globals/constants/fakeData';
 import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
@@ -25,6 +26,7 @@ import {drawerComponentStyles} from './styles/drawerComppnentStyles';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
+  const navigate = useNavigation();
   const {colors, theme, setDarkTheme, setLightTheme} = actualTheme();
   const {getItem} = useAsyncStorage('@theme');
   const [isDark, setIsDark] = useState(false);

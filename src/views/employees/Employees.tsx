@@ -4,15 +4,18 @@ import QrModal from '@src/components/qrModal/QrModal';
 import SimpleRemoveItemCards from '@src/components/simpleRemoveItemCards/SimpleRemoveItemCards';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {EmployeesProps} from '@src/types/globalTypes';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import UsersNotFound from './components/UsersNotFound';
 import {employeeStyles} from './styles/employeesStyles';
 import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 import {t} from 'i18next';
 import {employees} from '../../globals/constants/fakeData';
+import {headerShown} from '@src/hooks/navigator/headerShown';
+import {actualTheme} from '@src/types/contextTypes';
 
 const Employees = ({navigation, route}: EmployeesProps) => {
+  const {colors, dark} = actualTheme();
   const [visible, setVisible] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
   const [myEmployees, setMyEmployees] =
@@ -21,6 +24,14 @@ const Employees = ({navigation, route}: EmployeesProps) => {
   const removeItem = (index: number) => {
     setAlertVisible(true);
   };
+  useEffect(() => {
+    headerShown({
+      navigation,
+      visible: true,
+      transparent: false,
+      titleColor: dark ? colors.onSurface : colors.onPrimaryContainer
+    });
+  });
 
   return (
     <SafeAreaView style={backgroundStyle}>
