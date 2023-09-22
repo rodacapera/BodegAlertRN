@@ -17,6 +17,7 @@ const Home = ({navigation, route}: HomeProps) => {
     );
     return () => backHandler.remove();
   }, []);
+
   useEffect(() => {
     headerShown({
       navigation,

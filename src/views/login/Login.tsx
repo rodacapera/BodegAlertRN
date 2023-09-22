@@ -9,6 +9,7 @@ import LoginForm from './components/LoginForm';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {LoginProps} from '@src/types/globalTypes';
 import OtpCode from '@src/components/otp/OtpCode';
+import {headerShown} from '@src/hooks/navigator/headerShown';
 
 const Login = ({route, navigation}: LoginProps) => {
   const [errorPhone, setErrorPhone] = useState(false);
@@ -25,6 +26,14 @@ const Login = ({route, navigation}: LoginProps) => {
   useEffect(() => {
     validatePhoneNumber();
   }, [buttonAction]);
+
+  useEffect(() => {
+    headerShown({
+      navigation,
+      visible: false,
+      transparent: false
+    });
+  });
 
   return (
     <SafeAreaView style={backgroundStyle}>
