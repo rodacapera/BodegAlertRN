@@ -6,7 +6,6 @@ import {
   DrawerContentScrollView,
   DrawerItem
 } from '@react-navigation/drawer';
-import {useNavigation} from '@react-navigation/native';
 import {shop} from '@src/globals/constants/fakeData';
 import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
@@ -23,10 +22,13 @@ import {
 } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {drawerComponentStyles} from './styles/drawerComppnentStyles';
+import {useGetUser} from '../user/useGetUser';
+import {drawerComponentHook} from './hook/drawerComponentHook';
+import {StackNavigation} from '@src/types/globalTypes';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
-  const navigate = useNavigation();
+  const {name, phone} = useGetUser();
   const {colors, theme, setDarkTheme, setLightTheme} = actualTheme();
   const {getItem} = useAsyncStorage('@theme');
   const [isDark, setIsDark] = useState(false);
@@ -35,6 +37,9 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     setIsDark(!isDark);
     !isDark ? setDarkTheme() : setLightTheme();
   };
+  const {handleLogout} = drawerComponentHook(
+    navigation as unknown as StackNavigation
+  );
 
   const handleClickButtonMenuDrawer = (path: string, params?: object) =>
     navigation.navigate(path, params);
@@ -50,10 +55,6 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     item
       ? setIsDark(item === 'dark' ? true : false)
       : setIsDark(colorScheme === 'dark' ? true : false);
-  };
-  const handleLogout = () => {
-    AsyncStorage.clear();
-    navigation.navigate('Login');
   };
 
   useEffect(() => {

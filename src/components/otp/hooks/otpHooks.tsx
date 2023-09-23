@@ -1,23 +1,23 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {buttonActionInitialState} from '@src/globals/constants/login';
+import {useLogin} from '@src/hooks/firebase/login/loginWithPhoneNumber';
+import {headerShown} from '@src/hooks/navigator/headerShown';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {OtpInputRef} from 'react-native-otp-entry';
 
 export const handleBack = (
   setButtonAction: (e: LoginFormAction) => void,
-  setIsLogin: (e: boolean) => void,
-  setCode: (e: string) => void,
+  setCode: (e: string) => void
 ) => {
   setButtonAction(buttonActionInitialState);
-  setIsLogin(false);
   setCode('');
 };
 
 export const handleClear = (
   setCode: (e: string) => void,
   setErrorOtp: (e: boolean) => void,
-  inputRef: OtpInputRef,
+  inputRef: OtpInputRef
 ) => {
   setCode('');
   setErrorOtp(false);
@@ -28,37 +28,55 @@ export const handleValidateOtp = (
   code: string,
   {navigate}: StackNavigation,
   setErrorOtp: (e: boolean) => void,
+  currentButtonAction: LoginFormAction,
+  setButtonAction: (e: LoginFormAction) => void,
+  setCode: (e: string) => void
 ) => {
-  const setUser = async () => {
-    await AsyncStorage.setItem('@user', JSON.stringify({logged: true}));
+  const setUser = async (user: any) => {
+    await AsyncStorage.setItem('@userAuth', JSON.stringify(user));
   };
-  console.log('send', code); //validate code with firebase
-  const validateOtp = () => {
-    setUser();
-    return false;
-  };
-  if (code.length === 6) {
-    if (validateOtp()) {
-      setErrorOtp(false);
-      navigate('Home');
+
+  const validateOtp = (result: any) => {
+    if (result) {
+      setUser(result);
+      return true;
     } else {
-      setErrorOtp(true);
+      setUser(false);
+      return false;
     }
+  };
+
+  if (code.length === 6) {
+    currentButtonAction.confirmation?.confirm(code).then(result => {
+      if (validateOtp(result?.user)) {
+        handleBack(setButtonAction, setCode);
+        setErrorOtp(false);
+        navigate('Home');
+      } else {
+        setErrorOtp(true);
+      }
+    });
   }
 };
 
-export const handleSendOtp = (
+export const handleSendOtp = async (
   buttonAction: LoginFormAction,
-  setSendOtpCode: (e: boolean) => void,
+  setSendOtpCode: (e: boolean) => void
 ) => {
-  console.log('send OTP to phone', buttonAction);
+  const confirmation = await useLogin(buttonAction.phone);
+  buttonAction.confirmation = confirmation;
+  AsyncStorage.setItem('@otp', JSON.stringify(true));
   setSendOtpCode(true);
+};
+
+const removeOtpCode = async () => {
+  AsyncStorage.removeItem('@otp');
 };
 
 export const handleChange = (
   text: any,
   inputRef: any,
-  setCode: (e: string) => void,
+  setCode: (e: string) => void
 ) => {
   if (!isNaN(text)) {
     inputRef?.current?.setValue(text)!;
@@ -73,9 +91,8 @@ export const timerCount = (
   setCounter: (e: number) => void,
   sendOtpCode: (e: boolean) => void,
   sendCode: boolean,
-  counter: number,
+  counter: number
 ) => {
-  let timer: any = null;
   let count: any = null;
   let newCount = counter;
   if (sendCode) {
@@ -85,11 +102,24 @@ export const timerCount = (
           setCounter(60);
           sendOtpCode(false);
           clearInterval(count);
+          removeOtpCode();
         } else {
           newCount = counter--;
           setCounter(newCount);
         }
       }, 1000);
     }
+  }
+};
+
+export const getOtp = async (
+  buttonAction: LoginFormAction,
+  setSendOtpCode: (e: boolean) => void
+) => {
+  const otp = await AsyncStorage.getItem('@otp');
+  if (!otp) {
+    handleSendOtp(buttonAction, setSendOtpCode);
+  } else {
+    console.debug('the code has been sent', JSON.parse(otp));
   }
 };

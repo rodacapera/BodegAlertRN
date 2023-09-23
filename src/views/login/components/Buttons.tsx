@@ -6,18 +6,13 @@ import {t} from 'i18next';
 import {View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {loginFormStyles} from '../styles/loginFormStyles';
-
-const Buttons = ({
-  setButtonAction,
-  currentButtonAction,
-  setIsLogin
-}: LoginButtonsProps) => {
+import {useLogin} from '@src/hooks/firebase/login/loginWithPhoneNumber';
+const Buttons = ({setButtonAction, currentButtonAction}: LoginButtonsProps) => {
   const {navigate} = useNavigation<StackNavigation>();
   const {colors, theme} = actualTheme();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setButtonAction(currentButtonAction);
-    setIsLogin(true);
   };
 
   return (

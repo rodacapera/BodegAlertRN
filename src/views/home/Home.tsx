@@ -1,15 +1,16 @@
 import {backAction} from '@src/hooks/home/homeHook';
+import {headerShown} from '@src/hooks/navigator/headerShown';
+import {actualTheme} from '@src/types/contextTypes';
 import {HomeProps} from '@src/types/globalTypes';
 import {useEffect} from 'react';
 import {BackHandler, View} from 'react-native';
 import CustomMap from './components/customMap/CustomMap';
 import PanicButton from './components/panicButton/PanicButton';
 import {homeStyles} from './styles/homeStyles';
-import {headerShown} from '@src/hooks/navigator/headerShown';
-import {actualTheme} from '@src/types/contextTypes';
 
 const Home = ({navigation, route}: HomeProps) => {
   const {colors, theme, dark} = actualTheme();
+  const focus = navigation.isFocused();
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () =>
@@ -19,6 +20,8 @@ const Home = ({navigation, route}: HomeProps) => {
   }, []);
 
   useEffect(() => {
+    console.log('aaaaaa');
+
     headerShown({
       navigation,
       visible: true,
@@ -26,6 +29,7 @@ const Home = ({navigation, route}: HomeProps) => {
       titleColor: colors.onPrimaryContainer
     });
   });
+  console.log('bbbbbb');
 
   return (
     <View style={homeStyles.container}>

@@ -1,5 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {
+  getOtp,
   handleChange,
   handleClear,
   handleSendOtp,
@@ -19,12 +20,10 @@ import {otpStyles} from './styles/otpStyles';
 
 const OtpCode = ({
   buttonAction,
-  setButtonAction,
-  setIsLogin
+  setButtonAction
 }: {
   buttonAction: LoginFormAction;
   setButtonAction: (e: LoginFormAction) => void;
-  setIsLogin: (e: boolean) => void;
 }) => {
   const navigate = useNavigation<StackNavigation>();
   const inputRef = useRef<OtpInputRef>();
@@ -35,7 +34,7 @@ const OtpCode = ({
   const {colors, dark, theme} = actualTheme();
 
   useEffect(() => {
-    handleSendOtp(buttonAction, setSendOtpCode);
+    getOtp(buttonAction, setSendOtpCode);
   }, []);
 
   useEffect(() => {
@@ -48,9 +47,10 @@ const OtpCode = ({
     <View style={otpStyles.containerOtp}>
       <HeaderOtp
         setButtonAction={setButtonAction}
-        setIsLogin={setIsLogin}
         setCode={setCode}
+        counter={counter}
       />
+
       <View style={otpStyles.contentOtpInput}>
         <OtpInput
           ref={(e: OtpInputRef) => (inputRef.current = e)}
@@ -95,7 +95,16 @@ const OtpCode = ({
         <Button
           theme={theme}
           mode="elevated"
-          onPress={() => handleValidateOtp(code, navigate, setErrorOtp)}>
+          onPress={() =>
+            handleValidateOtp(
+              code,
+              navigate,
+              setErrorOtp,
+              buttonAction,
+              setButtonAction,
+              setCode
+            )
+          }>
           {t('general.verify')}
         </Button>
       </View>

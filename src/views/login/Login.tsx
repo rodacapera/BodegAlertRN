@@ -10,11 +10,14 @@ import {buttonActionInitialState} from '@src/globals/constants/login';
 import {LoginProps} from '@src/types/globalTypes';
 import OtpCode from '@src/components/otp/OtpCode';
 import {headerShown} from '@src/hooks/navigator/headerShown';
+import {LoginFormAction} from '@src/types/loginTypes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({route, navigation}: LoginProps) => {
   const [errorPhone, setErrorPhone] = useState(false);
   const [buttonAction, setButtonAction] = useState(buttonActionInitialState);
-  const [isLogin, setIsLogin] = useState(false);
+  const [currentButtonAction, setCurrentButtonAction] =
+    useState<LoginFormAction>(buttonActionInitialState);
 
   const validatePhoneNumber = () => {
     buttonAction.logged &&
@@ -28,11 +31,12 @@ const Login = ({route, navigation}: LoginProps) => {
   }, [buttonAction]);
 
   useEffect(() => {
-    headerShown({
-      navigation,
-      visible: false,
-      transparent: false
-    });
+    !currentButtonAction.logged &&
+      headerShown({
+        navigation,
+        visible: false,
+        transparent: false
+      });
   });
 
   return (
@@ -53,19 +57,18 @@ const Login = ({route, navigation}: LoginProps) => {
             </ImageBackground>
           </View>
           <View style={loginFormStyles.loginBody}>
-            {!isLogin ||
-            buttonAction.phone.length == 2 ||
+            {buttonAction.phone.length == 2 ||
             buttonAction.phone.length < 10 ? (
               <LoginForm
                 setButtonAction={setButtonAction}
                 errorPhone={errorPhone}
-                setIsLogin={setIsLogin}
+                currentButtonAction={currentButtonAction}
+                setCurrentButtonAction={setCurrentButtonAction}
               />
             ) : (
               <OtpCode
                 buttonAction={buttonAction}
                 setButtonAction={setButtonAction}
-                setIsLogin={setIsLogin}
               />
             )}
           </View>

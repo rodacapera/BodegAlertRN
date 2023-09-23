@@ -16,7 +16,13 @@ const CustomInputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
   const handlePhoneNumber = (text: string) => {
     let myPhone = phoneRef.current.getCountryCode();
     myPhone = `+${myPhone} ${text}`;
-    setButtonAction({name: 'login', show: false, phone: myPhone, logged: true});
+    setButtonAction({
+      name: 'login',
+      show: false,
+      phone: myPhone,
+      logged: true,
+      confirmation: null
+    });
     setPhone(text);
   };
 

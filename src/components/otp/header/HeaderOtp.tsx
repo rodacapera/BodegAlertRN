@@ -6,20 +6,22 @@ import {Text, View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {otpStyles} from '../styles/otpStyles';
 
-const HeaderOtp = ({setButtonAction, setIsLogin, setCode}: HeaderOtpParams) => {
+const HeaderOtp = ({setButtonAction, setCode, counter}: HeaderOtpParams) => {
   const {colors, theme, dark} = actualTheme();
   return (
     <View style={otpStyles.headerOtp}>
       <View style={otpStyles.contentBackButtonOtp}>
-        <Button
-          icon="arrow-left"
-          textColor={dark ? colors.onSurface : colors.onPrimaryContainer}
-          style={{backgroundColor: 'transparent'}}
-          theme={theme}
-          mode="text"
-          onPress={() => handleBack(setButtonAction, setIsLogin, setCode)}>
-          {t('general.back')}
-        </Button>
+        {counter === 60 && (
+          <Button
+            icon="arrow-left"
+            textColor={dark ? colors.onSurface : colors.onPrimaryContainer}
+            style={{backgroundColor: 'transparent'}}
+            theme={theme}
+            mode="text"
+            onPress={() => handleBack(setButtonAction, setCode)}>
+            {t('general.back')}
+          </Button>
+        )}
       </View>
       <View style={otpStyles.contentTitleOtp}>
         <Text

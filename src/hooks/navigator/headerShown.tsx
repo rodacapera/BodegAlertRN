@@ -12,6 +12,8 @@ export const headerShown = ({
   transparent: boolean;
   titleColor?: string;
 }) => {
+  console.log('setting header');
+
   navigation.getParent()?.setOptions({
     headerShown: visible,
     headerTransparent: transparent,

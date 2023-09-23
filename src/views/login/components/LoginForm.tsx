@@ -1,21 +1,20 @@
 import {buttonActionInitialState} from '@src/globals/constants/login';
+import {actualTheme} from '@src/types/contextTypes';
 import {LoginFormAction, LoginFormProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import {Fragment, useContext, useRef, useState} from 'react';
+import {Fragment, useRef, useState} from 'react';
 import {Text} from 'react-native-paper';
-import Buttons from './Buttons';
 import ErrorInputForm from '../../../components/customErrorInputForm/CustomErrorInputForm';
 import CustomInputForm from '../../../components/customInputForm/CustomInputForm';
-import {ThemeContext, actualTheme} from '@src/types/contextTypes';
+import Buttons from './Buttons';
 
 const LoginForm = ({
   setButtonAction,
   errorPhone,
-  setIsLogin
+  currentButtonAction,
+  setCurrentButtonAction
 }: LoginFormProps) => {
   const phoneRef = useRef<any>();
-  const [currentButtonAction, setCurrentButtonAction] =
-    useState<LoginFormAction>(buttonActionInitialState);
   const {colors, theme} = actualTheme();
 
   return (
@@ -36,7 +35,6 @@ const LoginForm = ({
       <Buttons
         setButtonAction={setButtonAction}
         currentButtonAction={currentButtonAction}
-        setIsLogin={setIsLogin}
       />
     </Fragment>
   );
