@@ -22,7 +22,7 @@ import {drawerComponentStyles} from './styles/drawerComponentStyles';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
-  const {handleLogout, onToggleSwitch, isDark, colors, theme} =
+  const {handleLogout, onToggleSwitch, isDark, colors, theme, user} =
     drawerComponentHook(navigation as unknown as StackNavigation);
 
   return (
@@ -42,11 +42,11 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           size={50}
         />
         <Title style={[drawerComponentStyles.title, {color: colors.onSurface}]}>
-          Dawid Urbaniak
+          {user?.name} {user?.lastname}
         </Title>
         <Caption
           style={[drawerComponentStyles.caption, {color: colors.onSurface}]}>
-          Shop name
+          {t('drawer.shopName')} : {user?.alias}
         </Caption>
         <View style={drawerComponentStyles.row}>
           <View style={drawerComponentStyles.section}>
@@ -63,7 +63,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
                 drawerComponentStyles.caption,
                 {color: colors.onSurfaceDisabled}
               ]}>
-              {t('employees')}
+              {t('drawer.employees')}
             </Caption>
           </View>
           <View style={drawerComponentStyles.section}>
@@ -80,7 +80,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
                 drawerComponentStyles.caption,
                 {color: colors.onSurfaceDisabled}
               ]}>
-              {t('buttons')}
+              {t('drawer.buttons')}
             </Caption>
           </View>
         </View>
@@ -142,16 +142,12 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
         />
       </Drawer.Section>
       <Drawer.Section theme={theme} title="Preferences">
-        {/* <TouchableRipple onPress={() => setIsDark(!isDark)}> */}
-        {/* {colorScheme == 'light' && ( */}
         <View style={drawerComponentStyles.preference}>
           <Text style={{color: colors.onSurface}}>{t('drawer.darkTheme')}</Text>
           <View>
             <Switch value={isDark} onValueChange={onToggleSwitch} />
           </View>
         </View>
-        {/* )} */}
-        {/* </TouchableRipple> */}
         {/* <TouchableRipple onPress={() => {}}>
           <View style={drawerComponentStyles.preference}>
             <Text>RTL</Text>

@@ -3,6 +3,7 @@ import AsyncStorage, {
 } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import {DrawerActions, StackActions} from '@react-navigation/native';
+import {useAuth} from '@src/hooks/auth/useAuth';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
@@ -11,14 +12,17 @@ import {Appearance} from 'react-native';
 
 const drawerComponentHook = (navigation: StackNavigation) => {
   const {colors, theme} = actualTheme();
-  const {name, phone} = useGetUser();
+
+  const {user} = useGetUser();
   const {getItem} = useAsyncStorage('@theme');
   const {setDarkTheme, setLightTheme, dark} = actualTheme();
   const [isDark, setIsDark] = useState(false);
+
   const onToggleSwitch = () => {
     setIsDark(!isDark);
     !isDark ? setDarkTheme() : setLightTheme();
   };
+
   const handleLogout = () => {
     auth()
       .signOut()
@@ -62,7 +66,15 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     };
   }, []);
 
-  return {handleLogout, onToggleSwitch, setIsDark, isDark, colors, theme};
+  return {
+    handleLogout,
+    onToggleSwitch,
+    setIsDark,
+    isDark,
+    colors,
+    theme,
+    user
+  };
 };
 
 export {drawerComponentHook};

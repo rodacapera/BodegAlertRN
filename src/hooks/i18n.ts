@@ -20,7 +20,8 @@ i18n.use(initReactI18next).init({
           buttons: 'Buttons',
           preferences: 'Preferences',
           darkTheme: 'Dark theme',
-          supportingEntities: 'Supporting entities'
+          supportingEntities: 'Supporting entities',
+          shopName: 'Shop Name'
         },
         employeesView: {
           banner:
@@ -145,7 +146,8 @@ i18n.use(initReactI18next).init({
           buttons: 'Botones',
           preferences: 'Preferencias',
           darkTheme: 'Modo oscuro',
-          supportingEntities: 'Entidades que apoyan'
+          supportingEntities: 'Entidades que apoyan',
+          shopName: 'Nombre de la tienda'
         },
         employeesView: {
           banner:

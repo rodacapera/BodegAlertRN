@@ -10,7 +10,8 @@ export const drawerComponentStyles = StyleSheet.create({
   },
   title: {
     marginTop: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textTransform: 'capitalize'
   },
   caption: {
     fontSize: 14,

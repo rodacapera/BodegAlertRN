@@ -20,8 +20,6 @@ const Home = ({navigation, route}: HomeProps) => {
   }, []);
 
   useEffect(() => {
-    console.log('aaaaaa');
-
     headerShown({
       navigation,
       visible: true,
@@ -29,7 +27,6 @@ const Home = ({navigation, route}: HomeProps) => {
       titleColor: colors.onPrimaryContainer
     });
   });
-  console.log('bbbbbb');
 
   return (
     <View style={homeStyles.container}>
