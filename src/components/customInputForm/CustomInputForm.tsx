@@ -21,7 +21,7 @@ const CustomInputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
       show: false,
       phone: myPhone,
       logged: true,
-      confirmation: null
+      confirmation: undefined
     });
     setPhone(text);
   };

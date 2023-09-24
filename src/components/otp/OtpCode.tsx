@@ -1,21 +1,19 @@
 import {useNavigation} from '@react-navigation/native';
 import {
-  getOtp,
   handleChange,
   handleClear,
   handleSendOtp,
-  handleValidateOtp,
-  timerCount
-} from '@src/components/otp/hooks/otpHooks';
+  handleValidateOtp
+} from '@src/components/otp/hooks/otpFunctions';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import {useEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {OtpInput, OtpInputRef} from 'react-native-otp-entry';
 import {Button, Text} from 'react-native-paper';
 import HeaderOtp from './header/HeaderOtp';
+import {otpHook} from './hooks/otpHook';
 import {otpStyles} from './styles/otpStyles';
 
 const OtpCode = ({
@@ -26,22 +24,19 @@ const OtpCode = ({
   setButtonAction: (e: LoginFormAction) => void;
 }) => {
   const navigate = useNavigation<StackNavigation>();
-  const inputRef = useRef<OtpInputRef>();
-  const [code, setCode] = useState('');
-  const [errorOtp, setErrorOtp] = useState(false);
-  const [sendOtpCode, setSendOtpCode] = useState(false);
-  const [counter, setCounter] = useState(60);
   const {colors, dark, theme} = actualTheme();
-
-  useEffect(() => {
-    getOtp(buttonAction, setSendOtpCode);
-  }, []);
-
-  useEffect(() => {
-    counter === 60 &&
-      timerCount(setCounter, setSendOtpCode, sendOtpCode, counter);
-    code === '' && (setErrorOtp(false), setCode(''));
-  }, [sendOtpCode, code]);
+  const {
+    inputRef,
+    code,
+    setCode,
+    counter,
+    errorOtp,
+    setErrorOtp,
+    sendOtpCode,
+    setSendOtpCode
+  } = otpHook({
+    buttonAction
+  });
 
   return (
     <View style={otpStyles.containerOtp}>

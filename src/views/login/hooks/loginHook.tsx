@@ -6,7 +6,7 @@ import {LoginFormAction} from '@src/types/loginTypes';
 import {useEffect, useState} from 'react';
 
 const loginHook = () => {
-  const navigation = useNavigation() as StackNavigation;
+  const navigation = useNavigation<StackNavigation>();
   const [errorPhone, setErrorPhone] = useState(false);
   const [buttonAction, setButtonAction] = useState(buttonActionInitialState);
   const [currentButtonAction, setCurrentButtonAction] =

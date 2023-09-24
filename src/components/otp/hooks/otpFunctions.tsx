@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {useLogin} from '@src/hooks/firebase/login/loginWithPhoneNumber';
-import {headerShown} from '@src/hooks/navigator/headerShown';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {OtpInputRef} from 'react-native-otp-entry';

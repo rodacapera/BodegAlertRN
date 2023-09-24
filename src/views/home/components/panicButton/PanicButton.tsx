@@ -12,7 +12,7 @@ const PanicButton = () => {
   const [loading, setLoading] = useState(false);
   const [errorDistance, setErrorDistance] = useState(false);
   const {colors, dark} = actualTheme();
-  const navigation = useNavigation() as StackNavigation;
+  const navigation = useNavigation<StackNavigation>();
 
   return (
     <Fragment>

@@ -1,4 +1,4 @@
-import {handleBack} from '@src/components/otp/hooks/otpHooks';
+import {handleBack} from '@src/components/otp/hooks/otpFunctions';
 import {actualTheme} from '@src/types/contextTypes';
 import {HeaderOtpParams} from '@src/types/otptypes';
 import {t} from 'i18next';
