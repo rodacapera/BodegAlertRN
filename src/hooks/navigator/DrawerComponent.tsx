@@ -1,16 +1,12 @@
-import AsyncStorage, {
-  useAsyncStorage
-} from '@react-native-async-storage/async-storage';
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
   DrawerItem
 } from '@react-navigation/drawer';
 import {shop} from '@src/globals/constants/fakeData';
-import {actualTheme} from '@src/types/contextTypes';
+import {StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
-import {useEffect, useState} from 'react';
-import {Appearance, Image, StatusBar, View} from 'react-native';
+import {Image, StatusBar, View} from 'react-native';
 import {
   Avatar,
   Caption,
@@ -21,54 +17,13 @@ import {
   Title
 } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {drawerComponentStyles} from './styles/drawerComppnentStyles';
-import {useGetUser} from '../user/useGetUser';
 import {drawerComponentHook} from './hook/drawerComponentHook';
-import {StackNavigation} from '@src/types/globalTypes';
+import {drawerComponentStyles} from './styles/drawerComponentStyles';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
-  const {name, phone} = useGetUser();
-  const {colors, theme, setDarkTheme, setLightTheme} = actualTheme();
-  const {getItem} = useAsyncStorage('@theme');
-  const [isDark, setIsDark] = useState(false);
-  const colorScheme = Appearance.getColorScheme();
-  const onToggleSwitch = () => {
-    setIsDark(!isDark);
-    !isDark ? setDarkTheme() : setLightTheme();
-  };
-  const {handleLogout} = drawerComponentHook(
-    navigation as unknown as StackNavigation
-  );
-
-  const handleClickButtonMenuDrawer = (path: string, params?: object) =>
-    navigation.navigate(path, params);
-
-  const validateSwitch = async () => {
-    const item = await getItem();
-    if (colorScheme && colorScheme == 'dark') {
-      setIsDark(true);
-      Appearance.addChangeListener(() => console.log('remove')).remove();
-    } else {
-      item ? setIsDark(item === 'dark' ? true : false) : setIsDark(true);
-    }
-    item
-      ? setIsDark(item === 'dark' ? true : false)
-      : setIsDark(colorScheme === 'dark' ? true : false);
-  };
-
-  useEffect(() => {
-    validateSwitch();
-  }, []);
-
-  useEffect(() => {
-    Appearance.addChangeListener(() => {
-      validateSwitch();
-    });
-    return () => {
-      Appearance.addChangeListener(() => console.log('remove')).remove();
-    };
-  }, []);
+  const {handleLogout, onToggleSwitch, isDark, colors, theme} =
+    drawerComponentHook(navigation as unknown as StackNavigation);
 
   return (
     <DrawerContentScrollView
@@ -144,7 +99,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           labelStyle={{color: colors.onSurface}}
           label={t('drawer.home')}
           onPress={() =>
-            handleClickButtonMenuDrawer('Home', {administrator: false, shop})
+            navigation.navigate('Home', {administrator: false, shop})
           }
         />
         <DrawerItem
@@ -158,7 +113,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           labelStyle={{color: colors.onSurface}}
           label={t('drawer.profile')}
           onPress={() =>
-            handleClickButtonMenuDrawer('Profile', {administrator: false, shop})
+            navigation.navigate('Profile', {administrator: false, shop})
           }
         />
         <DrawerItem
@@ -171,7 +126,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           )}
           labelStyle={{color: colors.onSurface}}
           label={t('drawer.employees')}
-          onPress={() => handleClickButtonMenuDrawer('Employees')}
+          onPress={() => navigation.navigate('Employees')}
         />
         <DrawerItem
           icon={({size}) => (
@@ -183,7 +138,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           )}
           labelStyle={{color: colors.onSurface}}
           label={t('drawer.buttons')}
-          onPress={() => handleClickButtonMenuDrawer('Buttons')}
+          onPress={() => navigation.navigate('Buttons')}
         />
       </Drawer.Section>
       <Drawer.Section theme={theme} title="Preferences">
