@@ -8,6 +8,7 @@ import {otpStyles} from '../styles/otpStyles';
 
 const HeaderOtp = ({setButtonAction, setCode, counter}: HeaderOtpParams) => {
   const {colors, theme, dark} = actualTheme();
+
   return (
     <View style={otpStyles.headerOtp}>
       <View style={otpStyles.contentBackButtonOtp}>

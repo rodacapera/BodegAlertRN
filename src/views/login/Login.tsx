@@ -1,43 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {ImageBackground, SafeAreaView, ScrollView, View} from 'react-native';
-import {Text, Avatar} from 'react-native-paper';
-import {backgroundStyle} from '@src/globals/styles/screenMode';
-import {loginFormStyles} from './styles/loginFormStyles';
 import {login_background, logo_app} from '@src/assets/images';
-import {APP_NAME} from '@src/globals/constants/config';
-import LoginForm from './components/LoginForm';
-import {buttonActionInitialState} from '@src/globals/constants/login';
-import {LoginProps} from '@src/types/globalTypes';
 import OtpCode from '@src/components/otp/OtpCode';
-import {headerShown} from '@src/hooks/navigator/headerShown';
-import {LoginFormAction} from '@src/types/loginTypes';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {APP_NAME} from '@src/globals/constants/config';
+import {backgroundStyle} from '@src/globals/styles/screenMode';
+import {LoginProps} from '@src/types/globalTypes';
+import {ImageBackground, SafeAreaView, ScrollView, View} from 'react-native';
+import {Avatar, Text} from 'react-native-paper';
+import LoginForm from './components/LoginForm';
+import {loginHook} from './hooks/loginHook';
+import {loginFormStyles} from './styles/loginFormStyles';
 
 const Login = ({route, navigation}: LoginProps) => {
-  const [errorPhone, setErrorPhone] = useState(false);
-  const [buttonAction, setButtonAction] = useState(buttonActionInitialState);
-  const [currentButtonAction, setCurrentButtonAction] =
-    useState<LoginFormAction>(buttonActionInitialState);
-
-  const validatePhoneNumber = () => {
-    buttonAction.logged &&
-    (buttonAction.phone.length == 2 || buttonAction.phone.length < 10)
-      ? setErrorPhone(true)
-      : setErrorPhone(false);
-  };
-
-  useEffect(() => {
-    validatePhoneNumber();
-  }, [buttonAction]);
-
-  useEffect(() => {
-    !currentButtonAction.logged &&
-      headerShown({
-        navigation,
-        visible: false,
-        transparent: false
-      });
-  });
+  const {
+    buttonAction,
+    setButtonAction,
+    errorPhone,
+    currentButtonAction,
+    setCurrentButtonAction
+  } = loginHook();
 
   return (
     <SafeAreaView style={backgroundStyle}>

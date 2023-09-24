@@ -47,15 +47,21 @@ export const handleValidateOtp = (
   };
 
   if (code.length === 6) {
-    currentButtonAction.confirmation?.confirm(code).then(result => {
-      if (validateOtp(result?.user)) {
-        handleBack(setButtonAction, setCode);
-        setErrorOtp(false);
-        navigate('Home');
-      } else {
+    currentButtonAction.confirmation
+      ?.confirm(code)
+      .then(result => {
+        if (validateOtp(result?.user)) {
+          handleBack(setButtonAction, setCode);
+          setErrorOtp(false);
+          navigate('Home');
+        } else {
+          setErrorOtp(true);
+        }
+      })
+      .catch(err => {
+        console.debug(err);
         setErrorOtp(true);
-      }
-    });
+      });
   }
 };
 
