@@ -3,23 +3,18 @@ import CustomFab from '@src/components/customFab/CustomFab';
 import {fakeMarkers, fakePosition} from '@src/globals/constants/fakeData';
 import {Fragment, useEffect, useRef, useState} from 'react';
 import MapView, {Marker, PROVIDER_GOOGLE, Region} from 'react-native-maps';
-import {animateCamera, getMyLocation} from '../../hooks/homeHook';
 import {homeStyles} from '../../styles/homeStyles';
 import {
   mapStyleDark,
   mapStyleLight
 } from '@src/globals/constants/mapsStylesMode';
 import {actualTheme} from '@src/types/contextTypes';
+import {homeHook} from '../../hooks/homeHook';
 
 const CustomMap = () => {
-  const {dark} = actualTheme();
-  const [region, setRegion] = useState<Region>(fakePosition);
   const mapRef = useRef<any>();
-  const setMyCurrentLocation = async () => setRegion(await getMyLocation());
-
-  useEffect(() => {
-    setMyCurrentLocation();
-  }, []);
+  const {dark} = actualTheme();
+  const {region, animateCamera} = homeHook();
 
   return (
     <Fragment>
