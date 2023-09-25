@@ -150,48 +150,45 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
             <Switch value={isDark} onValueChange={onToggleSwitch} />
           </View>
         </View>
-        {/* <TouchableRipple onPress={() => {}}>
-          <View style={drawerComponentStyles.preference}>
-            <Text>RTL</Text>
-            <View pointerEvents="none">
-              <Switch value={false} />
-            </View>
-          </View>
-        </TouchableRipple> */}
       </Drawer.Section>
-      <Drawer.Section style={drawerComponentStyles.drawerSection}>
-        <Title
-          style={[drawerComponentStyles.titleLogos, {color: colors.onSurface}]}>
-          {t('drawer.supportingEntities')}
-        </Title>
-        <View style={drawerComponentStyles.logos}>
-          {logos?.map((value, index) => {
-            console.log('value', value);
+      {user?.city != 'bogota' && (
+        <Drawer.Section style={drawerComponentStyles.drawerSection}>
+          <Title
+            style={[
+              drawerComponentStyles.titleLogos,
+              {color: colors.onSurface}
+            ]}>
+            {t('drawer.supportingEntities')}
+          </Title>
+          <View style={drawerComponentStyles.logos}>
+            {logos?.map((value, index) => {
+              console.log('value', value);
 
-            return (
-              <Image
-                source={{
-                  uri: value.path
-                }}
-                style={drawerComponentStyles.imagesLogos}
-                key={index}
+              return (
+                <Image
+                  source={{
+                    uri: value.path
+                  }}
+                  style={drawerComponentStyles.imagesLogos}
+                  key={index}
+                />
+              );
+            })}
+          </View>
+          <DrawerItem
+            icon={({size}) => (
+              <MaterialCommunityIcons
+                name="logout"
+                color={colors.onSurface}
+                size={size}
               />
-            );
-          })}
-        </View>
-        <DrawerItem
-          icon={({size}) => (
-            <MaterialCommunityIcons
-              name="logout"
-              color={colors.onSurface}
-              size={size}
-            />
-          )}
-          labelStyle={{color: colors.onSurface}}
-          label={t('logOut')}
-          onPress={handleLogout}
-        />
-      </Drawer.Section>
+            )}
+            labelStyle={{color: colors.onSurface}}
+            label={t('logOut')}
+            onPress={handleLogout}
+          />
+        </Drawer.Section>
+      )}
     </DrawerContentScrollView>
   );
 };
