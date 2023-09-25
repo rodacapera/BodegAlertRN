@@ -49,23 +49,25 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           {t('drawer.shopName')} : {user?.alias}
         </Caption>
         <View style={drawerComponentStyles.row}>
-          <View style={drawerComponentStyles.section}>
-            <Paragraph
-              style={[
-                drawerComponentStyles.paragraph,
-                drawerComponentStyles.caption,
-                {color: colors.onSurface}
-              ]}>
-              3
-            </Paragraph>
-            <Caption
-              style={[
-                drawerComponentStyles.caption,
-                {color: colors.onSurfaceDisabled}
-              ]}>
-              {t('drawer.employees')}
-            </Caption>
-          </View>
+          {user?.administrator && (
+            <View style={drawerComponentStyles.section}>
+              <Paragraph
+                style={[
+                  drawerComponentStyles.paragraph,
+                  drawerComponentStyles.caption,
+                  {color: colors.onSurface}
+                ]}>
+                3
+              </Paragraph>
+              <Caption
+                style={[
+                  drawerComponentStyles.caption,
+                  {color: colors.onSurfaceDisabled}
+                ]}>
+                {t('drawer.employees')}
+              </Caption>
+            </View>
+          )}
           <View style={drawerComponentStyles.section}>
             <Paragraph
               style={[
