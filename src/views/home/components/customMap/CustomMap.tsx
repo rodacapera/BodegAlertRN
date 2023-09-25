@@ -25,12 +25,14 @@ const CustomMap = () => {
         style={homeStyles.map}
         region={region}
         customMapStyle={dark ? mapStyleDark : mapStyleLight}>
-        <Marker
-          coordinate={region}
-          title={'home'}
-          description={'ooooo'}
-          image={house}
-        />
+        {region && (
+          <Marker
+            coordinate={region}
+            title={'home'}
+            description={'ooooo'}
+            image={house}
+          />
+        )}
         {fakeMarkers.map((marker, index) => {
           return (
             <Marker
@@ -46,7 +48,7 @@ const CustomMap = () => {
       <CustomFab
         icon={'target'}
         position={'bottomRight'}
-        onPress={() => animateCamera(mapRef, region, 1000)}
+        onPress={() => animateCamera(mapRef, region!, 1000)}
         style={{
           borderRadius: 80,
           backgroundColor: 'rgba(255, 255, 255, 0.5)'

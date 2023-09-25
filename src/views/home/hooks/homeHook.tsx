@@ -1,10 +1,13 @@
 import {fakePosition} from '@src/globals/constants/fakeData';
 import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
+import {useGetUser} from '@src/hooks/user/useGetUser';
 import {useEffect, useState} from 'react';
 import {Region} from 'react-native-maps';
 
 const homeHook = () => {
-  const [region, setRegion] = useState<Region>(fakePosition);
+  const {user} = useGetUser();
+  const [region, setRegion] = useState<Region>();
+
   const animateCamera = async (mapRef: any, region: Region, speed: number) => {
     const camera = await mapRef.current.getCamera();
     // camera.heading += 40;
@@ -13,6 +16,7 @@ const homeHook = () => {
     camera.center = {latitude: region.latitude, longitude: region.longitude};
     mapRef.current.animateCamera(camera, {duration: speed});
   };
+
   const getMyLocation = async () => {
     const location = await getCurrentPosition();
     return {
@@ -23,11 +27,19 @@ const homeHook = () => {
     };
   };
 
-  const setMyCurrentLocation = async () => setRegion(await getMyLocation());
+  const shopLocation = {
+    latitude: user?.location.lat!,
+    longitude: user?.location.lng!,
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121
+  };
+
+  const setMyCurrentLocation = () => setRegion(shopLocation);
 
   useEffect(() => {
-    setMyCurrentLocation();
-  }, []);
+    user && setMyCurrentLocation();
+  }, [user]);
+
   return {region, setRegion, animateCamera, getMyLocation};
 };
 
