@@ -2,21 +2,33 @@ import AsyncStorage, {
   useAsyncStorage
 } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
+import storage from '@react-native-firebase/storage';
 import {DrawerActions, StackActions} from '@react-navigation/native';
-import {useAuth} from '@src/hooks/auth/useAuth';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
+import {Logos} from '@src/types/imageTypes';
 import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
 
 const drawerComponentHook = (navigation: StackNavigation) => {
   const {colors, theme} = actualTheme();
-
   const {user} = useGetUser();
   const {getItem} = useAsyncStorage('@theme');
   const {setDarkTheme, setLightTheme, dark} = actualTheme();
   const [isDark, setIsDark] = useState(false);
+  const [logos, setLogos] = useState<Logos>([]);
+
+  const getImages = () => {
+    const reference = storage().ref(`logos/${user?.city}/`);
+    reference.list().then(result => {
+      const res = result.items;
+      res.forEach(async value => {
+        const url = await value.getDownloadURL();
+        setLogos(prev => [...prev, {path: url}]);
+      });
+    });
+  };
 
   const onToggleSwitch = () => {
     setIsDark(!isDark);
@@ -54,6 +66,10 @@ const drawerComponentHook = (navigation: StackNavigation) => {
   };
 
   useEffect(() => {
+    user && getImages();
+  }, [user]);
+
+  useEffect(() => {
     validateSwitch();
   }, []);
 
@@ -73,7 +89,8 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     isDark,
     colors,
     theme,
-    user
+    user,
+    logos
   };
 };
 

@@ -7,3 +7,7 @@ export type ImageProps = {
 export type ImageStyles = {
   imageContainer: object;
 };
+
+export type Logos = {
+  path: string;
+}[];

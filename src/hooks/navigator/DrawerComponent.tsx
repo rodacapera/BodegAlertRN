@@ -22,7 +22,7 @@ import {drawerComponentStyles} from './styles/drawerComponentStyles';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
-  const {handleLogout, onToggleSwitch, isDark, colors, theme, user} =
+  const {handleLogout, onToggleSwitch, isDark, colors, theme, user, logos} =
     drawerComponentHook(navigation as unknown as StackNavigation);
 
   return (
@@ -165,24 +165,19 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           {t('drawer.supportingEntities')}
         </Title>
         <View style={drawerComponentStyles.logos}>
-          <Image
-            source={{
-              uri: 'https://www.florencia-caqueta.gov.co/sites/florenciacaqueta/content/files/000861/43037_pag-wb-escudo_200x200.png'
-            }}
-            style={drawerComponentStyles.imagesLogos}
-          />
-          <Image
-            source={{
-              uri: 'https://scontent.fbog2-5.fna.fbcdn.net/v/t39.30808-1/360098370_588153136823100_6601367482560876322_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=c6021c&_nc_ohc=SBUR5C-j4zMAX-foIrh&_nc_ht=scontent.fbog2-5.fna&oh=00_AfDl3uT-tK7FGd_twV7CAf_Rkpfsaswq-hWCOz4koUu7vA&oe=64E8410C'
-            }}
-            style={drawerComponentStyles.imagesLogos}
-          />
-          <Image
-            source={{
-              uri: 'http://site.ccflorencia.org.co/wp-content/uploads/2022/01/icono-camara.png'
-            }}
-            style={drawerComponentStyles.imagesLogos}
-          />
+          {logos?.map((value, index) => {
+            console.log('value', value);
+
+            return (
+              <Image
+                source={{
+                  uri: value.path
+                }}
+                style={drawerComponentStyles.imagesLogos}
+                key={index}
+              />
+            );
+          })}
         </View>
         <DrawerItem
           icon={({size}) => (
