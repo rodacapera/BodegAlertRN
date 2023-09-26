@@ -10,11 +10,15 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {homeHook} from '../../hooks/homeHook';
 import {homeStyles} from '../../styles/homeStyles';
 import PanicButton from '../panicButton/PanicButton';
+import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
+import {t} from 'i18next';
+import {BackHandler} from 'react-native';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
   const {dark} = actualTheme();
-  const {region, animateCamera, panics, user} = homeHook();
+  const {region, animateCamera, panics, user, alertVisible, setAlertVisible} =
+    homeHook();
 
   return (
     <Fragment>
@@ -61,6 +65,14 @@ const CustomMap = () => {
           backgroundColor: 'rgba(255, 255, 255, 0.5)'
         }}
         iconColor="black"
+      />
+      <CustomDialogAlert
+        visible={alertVisible}
+        setVisible={setAlertVisible}
+        cancelButton
+        title={t('home.alertTitleExitApp')}
+        description={t('home.alertDescriptionExitApp')}
+        actionSuccess={() => BackHandler.exitApp()}
       />
     </Fragment>
   );

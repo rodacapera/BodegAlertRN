@@ -1,11 +1,20 @@
+import {useNavigation} from '@react-navigation/native';
+import {fakePosition} from '@src/globals/constants/fakeData';
 import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
+import {headerShown} from '@src/hooks/navigator/headerShown';
 import {useGetUser} from '@src/hooks/user/useGetUser';
+import {actualTheme} from '@src/types/contextTypes';
+import {StackNavigation} from '@src/types/globalTypes';
 import {useEffect, useState} from 'react';
+import {BackHandler} from 'react-native';
 import {Region} from 'react-native-maps';
 
 const homeHook = () => {
   const {user, panics} = useGetUser();
-  const [region, setRegion] = useState<Region>();
+  const [region, setRegion] = useState<Region>(fakePosition);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const {colors} = actualTheme();
+  const navigation = useNavigation<StackNavigation>();
 
   const animateCamera = async (mapRef: any, region: Region, speed: number) => {
     const camera = await mapRef.current.getCamera();
@@ -33,6 +42,16 @@ const homeHook = () => {
     longitudeDelta: 0.0121
   };
 
+  const backAction = (navigation: StackNavigation) => {
+    if (navigation.getState().index === 1) {
+      setAlertVisible(true);
+      return true;
+    } else {
+      setAlertVisible(false);
+      return false;
+    }
+  };
+
   const setMyCurrentLocation = () => setRegion(shopLocation);
 
   useEffect(() => {
@@ -40,8 +59,32 @@ const homeHook = () => {
       setMyCurrentLocation();
     }
   }, [user]);
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () =>
+      backAction(navigation)
+    );
+    return () => backHandler.remove();
+  }, []);
 
-  return {region, setRegion, animateCamera, getMyLocation, panics, user};
+  useEffect(() => {
+    headerShown({
+      navigation,
+      visible: true,
+      transparent: true,
+      titleColor: colors.onPrimaryContainer
+    });
+  });
+
+  return {
+    region,
+    setRegion,
+    animateCamera,
+    getMyLocation,
+    panics,
+    user,
+    alertVisible,
+    setAlertVisible
+  };
 };
 
 export {homeHook};
