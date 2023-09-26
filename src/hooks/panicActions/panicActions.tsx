@@ -64,14 +64,14 @@ export const panicNotification = async (
     longitude: currentPosition.coords.longitude
   };
 
-  const newRegisterPosition = {
-    lat: 4.443289,
-    lng: -75.198824
-  };
+  // const newRegisterPosition = {
+  //   lat: 4.443289,
+  //   lng: -75.198824
+  // };
   const data = {
     title: `${user.alias} ${t('notifications.title')}`,
     body: t('notifications.body'),
-    my_location: newRegisterPosition,
+    my_location: registerPosition,
     name: user.name + ' ' + user.lastname,
     phone: user.phone,
     alias: user.alias,
