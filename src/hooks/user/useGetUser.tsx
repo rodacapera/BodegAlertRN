@@ -2,7 +2,6 @@ import {Panics, User} from '@src/types/user';
 import {useEffect, useState} from 'react';
 import {useAuth} from '../auth/useAuth';
 import {getPanics, getUser} from '../firebase/user/user';
-import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 
 const useGetUser = () => {
   const {userUid} = useAuth();

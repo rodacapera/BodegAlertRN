@@ -5,7 +5,6 @@ import {HomeProps} from '@src/types/globalTypes';
 import {useEffect} from 'react';
 import {BackHandler, View} from 'react-native';
 import CustomMap from './components/customMap/CustomMap';
-import PanicButton from './components/panicButton/PanicButton';
 import {homeStyles} from './styles/homeStyles';
 
 const Home = ({navigation, route}: HomeProps) => {
