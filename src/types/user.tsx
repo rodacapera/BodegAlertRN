@@ -1,3 +1,5 @@
+import {Region} from './locationTypes';
+
 export interface User {
   address: string;
   administrator: boolean;
@@ -24,4 +26,17 @@ export interface User {
 export interface Location {
   lat: number;
   lng: number;
+}
+
+export interface Panics {
+  alias: string;
+  body: string;
+  countryCode: string;
+  created: string;
+  expiration_time: string;
+  my_location: Region;
+  name: string;
+  phone: string;
+  title: string;
+  zip_code: string;
 }

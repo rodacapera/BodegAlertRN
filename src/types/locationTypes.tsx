@@ -1,6 +1,6 @@
 export type Region = {
-  latitude: Number;
-  longitude: Number;
+  latitude: number;
+  longitude: number;
   latitudeDelta: Number;
   longitudeDelta: Number;
 };

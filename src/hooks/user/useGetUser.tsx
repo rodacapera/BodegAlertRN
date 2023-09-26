@@ -1,22 +1,35 @@
-import {User} from '@src/types/user';
+import {Panics, User} from '@src/types/user';
 import {useEffect, useState} from 'react';
 import {useAuth} from '../auth/useAuth';
-import {getUser} from '../firebase/user/user';
+import {getPanics, getUser} from '../firebase/user/user';
 
 const useGetUser = () => {
-  const {userUid, phone} = useAuth();
+  const {userUid} = useAuth();
   const [user, setUser] = useState<User>();
+  const [panics, setPanics] = useState<Panics[]>([]);
 
-  const result = async (userUid: string) => {
+  const resultUser = async (userUid: string) => {
     const userData = (await getUser(userUid)) as User;
     setUser(userData);
   };
 
+  const resultPanics = (userUid: string) => {
+    getPanics(userUid).then(querySnapshot => {
+      querySnapshot.forEach(value => {
+        const data = value.data() as Panics;
+        setPanics(prev => [...prev, data]);
+      });
+    });
+  };
+
   useEffect(() => {
-    userUid && result(userUid);
+    if (userUid) {
+      resultUser(userUid);
+      resultPanics(userUid);
+    }
   }, [userUid]);
 
-  return {user};
+  return {user, panics};
 };
 
 export {useGetUser};

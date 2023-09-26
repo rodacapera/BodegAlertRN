@@ -1,11 +1,10 @@
-import {fakePosition} from '@src/globals/constants/fakeData';
 import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {useEffect, useState} from 'react';
 import {Region} from 'react-native-maps';
 
 const homeHook = () => {
-  const {user} = useGetUser();
+  const {user, panics} = useGetUser();
   const [region, setRegion] = useState<Region>();
 
   const animateCamera = async (mapRef: any, region: Region, speed: number) => {
@@ -37,10 +36,12 @@ const homeHook = () => {
   const setMyCurrentLocation = () => setRegion(shopLocation);
 
   useEffect(() => {
-    user && setMyCurrentLocation();
+    if (user) {
+      setMyCurrentLocation();
+    }
   }, [user]);
 
-  return {region, setRegion, animateCamera, getMyLocation};
+  return {region, setRegion, animateCamera, getMyLocation, panics, user};
 };
 
 export {homeHook};

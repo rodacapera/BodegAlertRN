@@ -162,8 +162,6 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           </Title>
           <View style={drawerComponentStyles.logos}>
             {logos?.map((value, index) => {
-              console.log('value', value);
-
               return (
                 <Image
                   source={{
