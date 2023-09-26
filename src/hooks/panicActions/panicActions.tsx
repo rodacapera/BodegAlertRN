@@ -2,15 +2,16 @@ import {
   SERVER_PANIC_API_PUSH,
   SERVER_PANIC_URL_PATH
 } from '@src/globals/constants/panicService';
+import {Configuration} from '@src/types/configuration';
+import {StackNavigation} from '@src/types/globalTypes';
 import {SendNotificationProps} from '@src/types/panicTypes';
-import {getAxios} from '../axios';
+import {User} from '@src/types/user';
 import * as geolib from 'geolib';
 import {GeolibInputCoordinates} from 'geolib/es/types';
-import {getCurrentPosition} from '../locations/permissionsHook';
 import {t} from 'i18next';
-import {NavigationProp} from '@react-navigation/native';
+import {getAxios} from '../axios';
+import {getCurrentPosition} from '../locations/permissionsHook';
 import {headerShown} from '../navigator/headerShown';
-import {StackNavigation} from '@src/types/globalTypes';
 
 const url = `${SERVER_PANIC_URL_PATH}${SERVER_PANIC_API_PUSH}`;
 
@@ -22,6 +23,8 @@ const sendNotification = async ({
   setLoading(true);
   headerShown({navigation, visible: false, transparent: true});
   const response = await getAxios.post(url, data);
+  console.log('response', response.data);
+
   if (response.status == 201) {
     headerShown({navigation, visible: true, transparent: true});
     setLoading(false);
@@ -46,30 +49,37 @@ const getDistanceBetween = (
 export const panicNotification = async (
   setLoading: (e: boolean) => void,
   setErrorDistance: (e: boolean) => void,
-  navigation: StackNavigation
+  navigation: StackNavigation,
+  configuration: Configuration,
+  user: User
 ) => {
   const currentPosition = await getCurrentPosition();
-  console.log('currentPosition', currentPosition);
-  const validDistance = 100;
-  const user = 'user';
+  const validDistance = configuration.distance_panic;
+  const registerPosition = {
+    lat: user.location.lat,
+    lng: user.location.lng
+  };
   const latLng = {
-    lat: currentPosition.coords.latitude,
-    lng: currentPosition.coords.longitude
+    latitude: currentPosition.coords.latitude,
+    longitude: currentPosition.coords.longitude
+  };
+
+  const newRegisterPosition = {
+    lat: 4.443289,
+    lng: -75.198824
   };
   const data = {
-    title: `${user} ${t('notifications.title')}`,
+    title: `${user.alias} ${t('notifications.title')}`,
     body: t('notifications.body'),
-    my_location: latLng,
-    name: user,
-    phone: '3102712547',
-    alias: 'FerreConsumo',
-    zip_code: '110800',
-    countryCode: 'CO'
+    my_location: newRegisterPosition,
+    name: user.name + ' ' + user.lastname,
+    phone: user.phone,
+    alias: user.alias,
+    zip_code: user.zipcode,
+    countryCode: user.countryCode
   };
-  const registerPosition = {latitude: 4.441517, longitude: -75.191001};
 
   const distance = getDistanceBetween(registerPosition, latLng);
-  console.log('isValid', distance);
   if (distance < validDistance) {
     sendNotification({data, setLoading, navigation});
     setErrorDistance(false);

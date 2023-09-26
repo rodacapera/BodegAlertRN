@@ -2,10 +2,10 @@ import {
   GOOGLE_API_ANDROID,
   GOOGLE_API_IOS
 } from '@src/globals/constants/location';
-import {GetLocationParams, ResultLocations} from '@src/types/locationTypes';
+import {ResultLocations} from '@src/types/locationTypes';
+import {Platform} from 'react-native';
 import Geocoder from 'react-native-geocoding';
 import {getCurrentPosition} from './permissionsHook';
-import {Platform} from 'react-native';
 
 export const geocoding = (latLng: Geocoder.fromParams) => {
   Geocoder.init(

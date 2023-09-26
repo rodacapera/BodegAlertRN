@@ -7,8 +7,14 @@ import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {Fragment, useState} from 'react';
+import {panicButtonHook} from '@src/views/home/hooks/panicButtonHook';
+import {Configuration} from '@src/types/configuration';
+import {useGetUser} from '@src/hooks/user/useGetUser';
+import {User} from '@src/types/user';
 
 const PanicButton = () => {
+  const {user} = useGetUser();
+  const {configuration} = panicButtonHook();
   const [loading, setLoading] = useState(false);
   const [errorDistance, setErrorDistance] = useState(false);
   const {colors, dark} = actualTheme();
@@ -28,7 +34,13 @@ const PanicButton = () => {
         label={t('home.panicButton')}
         position={'bottomCenter'}
         onPress={() =>
-          panicNotification(setLoading, setErrorDistance, navigation)
+          panicNotification(
+            setLoading,
+            setErrorDistance,
+            navigation,
+            configuration as Configuration,
+            user as User
+          )
         }
         style={{
           backgroundColor: dark ? colors.onPrimary : colors.onErrorContainer,

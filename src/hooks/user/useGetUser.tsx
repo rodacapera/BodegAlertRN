@@ -2,6 +2,7 @@ import {Panics, User} from '@src/types/user';
 import {useEffect, useState} from 'react';
 import {useAuth} from '../auth/useAuth';
 import {getPanics, getUser} from '../firebase/user/user';
+import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 
 const useGetUser = () => {
   const {userUid} = useAuth();
@@ -13,19 +14,20 @@ const useGetUser = () => {
     setUser(userData);
   };
 
-  const resultPanics = (userUid: string) => {
-    getPanics(userUid).then(querySnapshot => {
-      querySnapshot.forEach(value => {
-        const data = value.data() as Panics;
-        setPanics(prev => [...prev, data]);
-      });
+  const resultPanics = (documentSnapshot: any) => {
+    documentSnapshot.forEach((value: {data: () => Panics}) => {
+      const data = value.data() as Panics;
+      setPanics(prev => [...prev, data]);
     });
   };
 
   useEffect(() => {
     if (userUid) {
       resultUser(userUid);
-      resultPanics(userUid);
+      const subscriber = getPanics(userUid).onSnapshot(documentSnapshot => {
+        resultPanics(documentSnapshot);
+      });
+      return () => subscriber();
     }
   }, [userUid]);
 

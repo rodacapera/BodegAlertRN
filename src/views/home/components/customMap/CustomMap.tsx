@@ -9,6 +9,7 @@ import {Fragment, useRef} from 'react';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {homeHook} from '../../hooks/homeHook';
 import {homeStyles} from '../../styles/homeStyles';
+import PanicButton from '../panicButton/PanicButton';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
@@ -33,10 +34,16 @@ const CustomMap = () => {
           />
         )}
         {panics.map((marker, index) => {
+          const latLng = {
+            latitude: marker.my_location.lat,
+            longitude: marker.my_location.lng,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121
+          };
           return (
             <Marker
               key={index}
-              coordinate={marker.my_location}
+              coordinate={latLng}
               title={marker.title}
               description={marker.body}
               image={shop}
@@ -44,6 +51,7 @@ const CustomMap = () => {
           );
         })}
       </MapView>
+      <PanicButton />
       <CustomFab
         icon={'target'}
         position={'bottomRight'}

@@ -31,7 +31,6 @@ const Home = ({navigation, route}: HomeProps) => {
   return (
     <View style={homeStyles.container}>
       <CustomMap />
-      <PanicButton />
     </View>
   );
 };

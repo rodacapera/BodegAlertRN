@@ -34,7 +34,7 @@ export interface Panics {
   countryCode: string;
   created: string;
   expiration_time: string;
-  my_location: Region;
+  my_location: Location;
   name: string;
   phone: string;
   title: string;

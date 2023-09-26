@@ -5,12 +5,11 @@ export const getUser = async (userUid: string) => {
   return dbUser.data();
 };
 
-export const getPanics = async (userUid: string) => {
+export const getPanics = (userUid: string) => {
   const now = Date.now();
-  const dbPanics = await firestore()
+  const dbPanics = firestore()
     .collection('panics')
-    .where('expiration_time', '>=', now)
-    .get();
+    .where('expiration_time', '>=', now);
 
   return dbPanics;
 };
