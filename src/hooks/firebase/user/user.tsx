@@ -10,6 +10,5 @@ export const getPanics = (userUid: string) => {
   const dbPanics = firestore()
     .collection('panics')
     .where('expiration_time', '>=', now);
-
   return dbPanics;
 };

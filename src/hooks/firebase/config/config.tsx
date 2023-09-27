@@ -5,6 +5,5 @@ export const getConfiguration = async (country: string) => {
     .collection('configuration')
     .where('countryCode', '==', country)
     .get();
-
   return dbConfiguration;
 };

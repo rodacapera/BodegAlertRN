@@ -22,8 +22,16 @@ import {drawerComponentStyles} from './styles/drawerComponentStyles';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
-  const {handleLogout, onToggleSwitch, isDark, colors, theme, user, logos} =
-    drawerComponentHook(navigation as unknown as StackNavigation);
+  const {
+    handleLogout,
+    onToggleSwitch,
+    isDark,
+    colors,
+    theme,
+    user,
+    logos,
+    counterEmployees
+  } = drawerComponentHook(navigation as unknown as StackNavigation);
 
   return (
     <DrawerContentScrollView
@@ -57,7 +65,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
                   drawerComponentStyles.caption,
                   {color: colors.onSurface}
                 ]}>
-                3
+                {counterEmployees}
               </Paragraph>
               <Caption
                 style={[

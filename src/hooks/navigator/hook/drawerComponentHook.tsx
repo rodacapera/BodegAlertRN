@@ -4,7 +4,8 @@ import AsyncStorage, {
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import {DrawerActions, StackActions} from '@react-navigation/native';
-import {useGetUser} from '@src/hooks/user/useGetUser';
+import {useAuth} from '@src/hooks/auth/useAuth';
+import {dataUSer, useGetUser} from '@src/hooks/user/useGetUser';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Logos} from '@src/types/imageTypes';
@@ -12,15 +13,23 @@ import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
 
 const drawerComponentHook = (navigation: StackNavigation) => {
+  const {userUid} = useAuth();
   const {colors, theme} = actualTheme();
-  const {user} = useGetUser();
+  console.log('drawer');
+
+  const {user, counterEmployees} = useGetUser();
   const {getItem} = useAsyncStorage('@theme');
   const {setDarkTheme, setLightTheme, dark} = actualTheme();
   const [isDark, setIsDark] = useState(false);
   const [logos, setLogos] = useState<Logos>([]);
 
-  const getImages = () => {
-    const reference = storage().ref(`logos/${user?.city}/`);
+  const getImages = async (userUid: string) => {
+    console.log('userUid', userUid);
+
+    const user = await dataUSer(userUid);
+    console.log('user>>>>', user);
+
+    const reference = storage().ref(`logos/${user.city}/`);
     reference.list().then(result => {
       const res = result.items;
       res.forEach(async value => {
@@ -66,8 +75,8 @@ const drawerComponentHook = (navigation: StackNavigation) => {
   };
 
   useEffect(() => {
-    user && getImages();
-  }, [user]);
+    userUid && getImages(userUid);
+  }, [userUid]);
 
   useEffect(() => {
     validateSwitch();
@@ -90,7 +99,8 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     colors,
     theme,
     user,
-    logos
+    logos,
+    counterEmployees
   };
 };
 
