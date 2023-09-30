@@ -126,7 +126,7 @@ i18n.use(initReactI18next).init({
           helperFooterQrFirst: `Learn how it's done, click`
         },
         home: {
-          panicButton: 'Send Support',
+          panicButton: 'Request Support',
           alertTitleExitApp: 'Exit application',
           alertDescriptionExitApp:
             'Are you sure you want to exit the application?'
@@ -257,7 +257,7 @@ i18n.use(initReactI18next).init({
           helperFooterQrFirst: 'Conocer como se hace, click'
         },
         home: {
-          panicButton: 'Enviar Asistencia',
+          panicButton: 'Solicitar Asistencia',
           alertTitleExitApp: 'Salir de la app',
           alertDescriptionExitApp:
             '¿Estás seguro que deseas saril de la aplicación?'

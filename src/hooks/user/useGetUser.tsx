@@ -1,8 +1,8 @@
-import {Panics, User} from '@src/types/user';
+import {getUserQuery} from '@src/reactQuery/userQuery';
+import {Buttons, Panics, User} from '@src/types/user';
 import {useEffect, useState} from 'react';
 import {useAuth} from '../auth/useAuth';
-import {getPanics, getUser} from '../firebase/user/user';
-import {getEmployees} from '../firebase/employees/employees';
+import {getUser} from '../firebase/user/user';
 
 export const dataUSer = async (userUid: string) => {
   const userData = (await getUser(userUid)) as User;
@@ -10,18 +10,12 @@ export const dataUSer = async (userUid: string) => {
 };
 
 const useGetUser = () => {
-  const {userUid} = useAuth();
-  const [user, setUser] = useState<User>();
+  const {isLoading, error, data} = getUserQuery();
   const [panics, setPanics] = useState<Panics[]>([]);
   const [employees, setEmployees] = useState<User[]>([]);
-  const [buttons, setButtons] = useState();
-  const [counterEmployees, setCounterEmployees] = useState<number>();
+  const [buttons, setButtons] = useState<Buttons[]>([]);
   const [counterButtons, setCounterButtons] = useState<number>();
-
-  const resultUser = async (userUid: string) => {
-    const userData = (await getUser(userUid)) as User;
-    setUser(userData);
-  };
+  const [counterEmployees, setCounterEmployees] = useState<number>();
 
   const resultPanics = (documentSnapshot: any) => {
     documentSnapshot.forEach((value: {data: () => Panics}) => {
@@ -30,39 +24,54 @@ const useGetUser = () => {
     });
   };
 
-  const resultEmployees = () => {
-    getEmployees(user?.shop).then(querySnapshot => {
-      querySnapshot.forEach(value => {
-        const data = value.data() as User;
-        // console.log('data', data.alias);
+  const resultEmployees = (querySnapshot: any) => {
+    querySnapshot.forEach((value: {data: () => User}) => {
+      const data = value.data() as User;
+      // console.log('data', data);
 
-        setEmployees(prev => [...prev, data]);
-      });
-      setCounterEmployees(querySnapshot.size);
+      setEmployees(prev => [...prev, data]);
     });
+    setCounterEmployees(querySnapshot.size);
   };
 
-  const resultButtons = (userUid: string) => {};
-
-  // useEffect(() => {
-  //   console.log('ooooo>>>>', user);
-
-  //   user && resultEmployees();
-  // }, [user]);
+  const resultButtons = (querySnapshot: any) => {
+    querySnapshot.forEach((value: {data: () => Buttons}) => {
+      const data = value.data() as Buttons;
+      setButtons(prev => [...prev, data]);
+    });
+    setCounterButtons(querySnapshot.size);
+  };
 
   useEffect(() => {
-    if (userUid) {
-      console.log('ppppp');
-
-      // resultUser(userUid);
-      const subscriber = getPanics(userUid).onSnapshot(documentSnapshot => {
+    if (data) {
+      const panicObserver = data.panicsObserver.onSnapshot(documentSnapshot => {
         resultPanics(documentSnapshot);
       });
-      return () => subscriber();
+      const employeesObserver = data.employeesObserver.onSnapshot(
+        documentSnapshot => {
+          resultEmployees(documentSnapshot);
+        }
+      );
+      const buttonsObserver = data.buttonsObserver.onSnapshot(
+        documentSnapshot => {
+          resultButtons(documentSnapshot);
+        }
+      );
+      return () => (panicObserver(), employeesObserver(), buttonsObserver());
     }
-  }, [userUid]);
+  }, [data]);
 
-  return {user, panics, employees, counterEmployees};
+  return {
+    user: data?.user,
+    panics,
+    employees,
+    counterEmployees,
+    images: data?.images,
+    isLoading,
+    error,
+    buttons,
+    counterButtons
+  };
 };
 
 export {useGetUser};

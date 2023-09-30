@@ -40,3 +40,13 @@ export interface Panics {
   title: string;
   zip_code: string;
 }
+
+export interface Buttons {
+  body: string;
+  cost: number;
+  date: string;
+  name: string;
+  reference: string;
+  shop: string;
+  uid: string;
+}

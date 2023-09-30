@@ -30,7 +30,9 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     theme,
     user,
     logos,
-    counterEmployees
+    counterEmployees,
+    buttons,
+    counterButtons
   } = drawerComponentHook(navigation as unknown as StackNavigation);
 
   return (
@@ -83,7 +85,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
                 drawerComponentStyles.caption,
                 {color: colors.onSurface}
               ]}>
-              2
+              {counterButtons}
             </Paragraph>
             <Caption
               style={[

@@ -2,10 +2,9 @@ import AsyncStorage, {
   useAsyncStorage
 } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
-import storage from '@react-native-firebase/storage';
 import {DrawerActions, StackActions} from '@react-navigation/native';
 import {useAuth} from '@src/hooks/auth/useAuth';
-import {dataUSer, useGetUser} from '@src/hooks/user/useGetUser';
+import {useGetUser} from '@src/hooks/user/useGetUser';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Logos} from '@src/types/imageTypes';
@@ -13,31 +12,13 @@ import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
 
 const drawerComponentHook = (navigation: StackNavigation) => {
-  const {userUid} = useAuth();
   const {colors, theme} = actualTheme();
-  console.log('drawer');
-
-  const {user, counterEmployees} = useGetUser();
+  const {user, counterEmployees, images, buttons, counterButtons} =
+    useGetUser();
   const {getItem} = useAsyncStorage('@theme');
   const {setDarkTheme, setLightTheme, dark} = actualTheme();
   const [isDark, setIsDark] = useState(false);
   const [logos, setLogos] = useState<Logos>([]);
-
-  const getImages = async (userUid: string) => {
-    console.log('userUid', userUid);
-
-    const user = await dataUSer(userUid);
-    console.log('user>>>>', user);
-
-    const reference = storage().ref(`logos/${user.city}/`);
-    reference.list().then(result => {
-      const res = result.items;
-      res.forEach(async value => {
-        const url = await value.getDownloadURL();
-        setLogos(prev => [...prev, {path: url}]);
-      });
-    });
-  };
 
   const onToggleSwitch = () => {
     setIsDark(!isDark);
@@ -75,8 +56,8 @@ const drawerComponentHook = (navigation: StackNavigation) => {
   };
 
   useEffect(() => {
-    userUid && getImages(userUid);
-  }, [userUid]);
+    images && setLogos(images);
+  }, [images]);
 
   useEffect(() => {
     validateSwitch();
@@ -100,7 +81,9 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     theme,
     user,
     logos,
-    counterEmployees
+    counterEmployees,
+    buttons,
+    counterButtons
   };
 };
 
