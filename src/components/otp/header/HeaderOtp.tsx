@@ -1,6 +1,6 @@
 import {handleBack} from '@src/components/otp/hooks/otpFunctions';
 import {actualTheme} from '@src/types/contextTypes';
-import {HeaderOtpParams} from '@src/types/otptypes';
+import {HeaderOtpParams} from '@src/types/otpTypes';
 import {t} from 'i18next';
 import {Text, View} from 'react-native';
 import {Button} from 'react-native-paper';

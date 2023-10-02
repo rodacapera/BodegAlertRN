@@ -1,5 +1,4 @@
 import {useNavigation} from '@react-navigation/native';
-import {fakePosition} from '@src/globals/constants/fakeData';
 import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {useGetUser} from '@src/hooks/user/useGetUser';
@@ -10,8 +9,8 @@ import {BackHandler} from 'react-native';
 import {Region} from 'react-native-maps';
 
 const homeHook = () => {
-  const {user, panics} = useGetUser();
-  const [region, setRegion] = useState<Region>(fakePosition);
+  const {user, panics, isLoading} = useGetUser();
+  const [region, setRegion] = useState<Region>();
   const [alertVisible, setAlertVisible] = useState(false);
   const {colors} = actualTheme();
   const navigation = useNavigation<StackNavigation>();
@@ -59,6 +58,7 @@ const homeHook = () => {
       setMyCurrentLocation();
     }
   }, [user]);
+
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () =>
       backAction(navigation)
@@ -67,13 +67,14 @@ const homeHook = () => {
   }, []);
 
   useEffect(() => {
+    console.log('header home');
     headerShown({
       navigation,
-      visible: true,
+      visible: !isLoading,
       transparent: true,
       titleColor: colors.onPrimaryContainer
     });
-  });
+  }, [user]);
 
   return {
     region,
@@ -83,7 +84,8 @@ const homeHook = () => {
     panics,
     user,
     alertVisible,
-    setAlertVisible
+    setAlertVisible,
+    isLoading
   };
 };
 

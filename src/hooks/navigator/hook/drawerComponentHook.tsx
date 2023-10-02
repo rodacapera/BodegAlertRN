@@ -3,7 +3,6 @@ import AsyncStorage, {
 } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import {DrawerActions, StackActions} from '@react-navigation/native';
-import {useAuth} from '@src/hooks/auth/useAuth';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';

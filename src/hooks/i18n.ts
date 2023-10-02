@@ -21,7 +21,8 @@ i18n.use(initReactI18next).init({
           preferences: 'Preferences',
           darkTheme: 'Dark theme',
           supportingEntities: 'Supporting entities',
-          shopName: 'Shop Name'
+          shopName: 'Shop Name',
+          notify: 'Notify'
         },
         employeesView: {
           banner:
@@ -31,6 +32,12 @@ i18n.use(initReactI18next).init({
           alertTitleErrorDeleteUser: 'Remove user',
           alertDescriptionErrorDeleteUser:
             'Are you sure you want to delete this user, if so press Ok button.'
+        },
+        notifyView: {
+          banner:
+            'Below you will find a list of the notify registered in your store!',
+          notifyNotFound:
+            'We have not found any notify registered to your store'
         },
         buttonsView: {
           banner:
@@ -132,7 +139,7 @@ i18n.use(initReactI18next).init({
             'Are you sure you want to exit the application?'
         },
         notifications: {
-          title: 'says: I need an assistance!',
+          title: 'I need support!',
           body: 'I have an event in progress and would like to have your assistance.',
           errorDistanceTitle: 'Shipping error!',
           errorDistanceDescription:
@@ -150,7 +157,8 @@ i18n.use(initReactI18next).init({
           preferences: 'Preferencias',
           darkTheme: 'Modo oscuro',
           supportingEntities: 'Entidades que apoyan',
-          shopName: 'Nombre de la tienda'
+          shopName: 'Nombre de la tienda',
+          notify: 'Notificaciones'
         },
         employeesView: {
           banner:
@@ -160,6 +168,12 @@ i18n.use(initReactI18next).init({
           alertTitleErrorDeleteUser: 'Eliminar usuario',
           alertDescriptionErrorDeleteUser:
             'Está seguro de eliminar este usuario?, si es así presione el boton OK.'
+        },
+        notifyView: {
+          banner:
+            'Below you will find a list of the notify registered in your store!',
+          notifyNotFound:
+            'We have not found any notify registered to your store'
         },
         buttonsView: {
           banner:
@@ -263,8 +277,8 @@ i18n.use(initReactI18next).init({
             '¿Estás seguro que deseas saril de la aplicación?'
         },
         notifications: {
-          title: 'dice: Necesito una asistencia!',
-          body: 'tengo un evento en curso y me gustaría contar con tu asistencia.',
+          title: 'Necesito asistencia!',
+          body: 'tengo un evento en curso y desearía tener con tu asistencia.',
           errorDistanceTitle: 'Error de envío!',
           errorDistanceDescription:
             'Al parecer estás fuera de cobertura para enviar la notificación.'

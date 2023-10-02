@@ -1,3 +1,5 @@
+import {Images, User} from './userTypes';
+
 export interface UserAuthData {
   displayName: null;
   email: null;
@@ -26,4 +28,12 @@ export interface MultiFactor {
 export interface ProviderDatum {
   phoneNumber: string;
   providerId: string;
+}
+
+export interface GetUserData {
+  user: User;
+  images: Images[];
+  panicsObserver: any;
+  employeesObserver: any;
+  buttonsObserver: any;
 }

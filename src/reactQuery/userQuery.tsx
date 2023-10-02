@@ -1,7 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useQuery} from '@tanstack/react-query';
 
-import {User} from '@src/types/user';
+import {getUseAuth} from '@src/hooks/auth/useAuth';
 import {
   getButtons,
   getCompanyImages,
@@ -9,19 +8,15 @@ import {
   getPanics
 } from '@src/hooks/firebase/company/company';
 import {getUser} from '@src/hooks/firebase/user/user';
+import {Images, User} from '@src/types/userTypes';
 
-const getUserUid = async () => {
-  const result = await AsyncStorage.getItem('@userAuth');
-  return result ? JSON.parse(result) : null;
-};
-
-export const getUserQuery = () => {
+export const setUserQuery = () => {
   const query = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
-      const {uid} = await getUserUid();
+      const {uid} = await getUseAuth();
       const user = (await getUser(uid)) as User;
-      const images = await getCompanyImages(user.city);
+      const images = (await getCompanyImages(user.city)) as Images[];
       const panicsObserver = getPanics();
       const employeesObserver = getEmployees(user.shop);
       const buttonsObserver = getButtons(user.shop);
@@ -36,4 +31,9 @@ export const getUserQuery = () => {
     }
   });
   return query;
+};
+
+export const getUserQuery = () => {
+  const res = useQuery(['user'], {refetchOnWindowFocus: false});
+  return res;
 };

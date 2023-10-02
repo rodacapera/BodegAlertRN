@@ -10,7 +10,7 @@ import {Fragment, useState} from 'react';
 import {panicButtonHook} from '@src/views/home/hooks/panicButtonHook';
 import {Configuration} from '@src/types/configuration';
 import {useGetUser} from '@src/hooks/user/useGetUser';
-import {User} from '@src/types/user';
+import {User} from '@src/types/userTypes';
 
 const PanicButton = () => {
   const {user} = useGetUser();

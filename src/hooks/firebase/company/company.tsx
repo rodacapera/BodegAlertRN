@@ -1,6 +1,4 @@
-import firestore, {
-  FirebaseFirestoreTypes
-} from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
 export const getEmployees = (shop: any) => {

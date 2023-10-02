@@ -15,12 +15,14 @@ const TextWithCustomLink = ({text, link, visible}: TextWithCustomLinkProps) => {
           color: colors.onSurface
         }}>
         {text}{' '}
-        <CustomLink
-          text={t('general.here')}
-          link={link} //get register video link from youtube
-          underline
-          color={dark ? colors.secondary : colors.primary}
-        />
+        {link && (
+          <CustomLink
+            text={t('general.here')}
+            link={link} //get register video link from youtube
+            underline
+            color={dark ? colors.secondary : colors.primary}
+          />
+        )}
       </Paragraph>
     </View>
   ) : (

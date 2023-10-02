@@ -5,8 +5,7 @@ export const customLoadingOverlayStyles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255, 0.60)',
     flex: 1,
     width: '100%',
-    alignItems: 'center',
-    zIndex: 999999
+    alignItems: 'center'
   },
   loader: {
     flex: 1,

@@ -4,6 +4,7 @@ import {
   DrawerItem
 } from '@react-navigation/drawer';
 import {shop} from '@src/globals/constants/fakeData';
+import {setUserQuery} from '@src/reactQuery/userQuery';
 import {StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {Image, StatusBar, View} from 'react-native';
@@ -22,6 +23,7 @@ import {drawerComponentStyles} from './styles/drawerComponentStyles';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const {navigation} = props;
+  const {isLoading, error} = setUserQuery();
   const {
     handleLogout,
     onToggleSwitch,
@@ -31,11 +33,12 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     user,
     logos,
     counterEmployees,
-    buttons,
     counterButtons
   } = drawerComponentHook(navigation as unknown as StackNavigation);
 
-  return (
+  return isLoading ? (
+    <></>
+  ) : (
     <DrawerContentScrollView
       {...props}
       style={drawerComponentStyles.drawerContent}>
@@ -151,6 +154,18 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           labelStyle={{color: colors.onSurface}}
           label={t('drawer.buttons')}
           onPress={() => navigation.navigate('Buttons')}
+        />
+        <DrawerItem
+          icon={({size}) => (
+            <MaterialCommunityIcons
+              name="bell"
+              color={colors.onSurface}
+              size={size}
+            />
+          )}
+          labelStyle={{color: colors.onSurface}}
+          label={t('drawer.notify')}
+          onPress={() => navigation.navigate('Notify')}
         />
       </Drawer.Section>
       <Drawer.Section theme={theme} title="Preferences">

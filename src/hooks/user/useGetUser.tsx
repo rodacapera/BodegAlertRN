@@ -1,16 +1,13 @@
 import {getUserQuery} from '@src/reactQuery/userQuery';
-import {Buttons, Panics, User} from '@src/types/user';
+import {GetUserData} from '@src/types/auth';
+import {Buttons, Panics, User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
-import {useAuth} from '../auth/useAuth';
-import {getUser} from '../firebase/user/user';
-
-export const dataUSer = async (userUid: string) => {
-  const userData = (await getUser(userUid)) as User;
-  return userData;
-};
 
 const useGetUser = () => {
-  const {isLoading, error, data} = getUserQuery();
+  const res = getUserQuery();
+  const {isLoading, error} = res;
+  const data = res.data as GetUserData;
+
   const [panics, setPanics] = useState<Panics[]>([]);
   const [employees, setEmployees] = useState<User[]>([]);
   const [buttons, setButtons] = useState<Buttons[]>([]);
@@ -19,7 +16,7 @@ const useGetUser = () => {
 
   const resultPanics = (documentSnapshot: any) => {
     documentSnapshot.forEach((value: {data: () => Panics}) => {
-      const data = value.data() as Panics;
+      const data = value.data();
       setPanics(prev => [...prev, data]);
     });
   };
@@ -27,8 +24,6 @@ const useGetUser = () => {
   const resultEmployees = (querySnapshot: any) => {
     querySnapshot.forEach((value: {data: () => User}) => {
       const data = value.data() as User;
-      // console.log('data', data);
-
       setEmployees(prev => [...prev, data]);
     });
     setCounterEmployees(querySnapshot.size);
@@ -44,16 +39,18 @@ const useGetUser = () => {
 
   useEffect(() => {
     if (data) {
-      const panicObserver = data.panicsObserver.onSnapshot(documentSnapshot => {
-        resultPanics(documentSnapshot);
-      });
+      const panicObserver = data.panicsObserver.onSnapshot(
+        (documentSnapshot: any) => {
+          resultPanics(documentSnapshot);
+        }
+      );
       const employeesObserver = data.employeesObserver.onSnapshot(
-        documentSnapshot => {
+        (documentSnapshot: any) => {
           resultEmployees(documentSnapshot);
         }
       );
       const buttonsObserver = data.buttonsObserver.onSnapshot(
-        documentSnapshot => {
+        (documentSnapshot: any) => {
           resultButtons(documentSnapshot);
         }
       );

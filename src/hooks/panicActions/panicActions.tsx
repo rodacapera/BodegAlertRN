@@ -5,7 +5,7 @@ import {
 import {Configuration} from '@src/types/configuration';
 import {StackNavigation} from '@src/types/globalTypes';
 import {SendNotificationProps} from '@src/types/panicTypes';
-import {User} from '@src/types/user';
+import {User} from '@src/types/userTypes';
 import * as geolib from 'geolib';
 import {GeolibInputCoordinates} from 'geolib/es/types';
 import {t} from 'i18next';
@@ -69,8 +69,8 @@ export const panicNotification = async (
   //   lng: -75.198824
   // };
   const data = {
-    title: `${user.alias} ${t('notifications.title')}`,
-    body: t('notifications.body'),
+    title: t('notifications.title'),
+    body: `${user.alias}: ${t('notifications.body')}`,
     my_location: registerPosition,
     name: user.name + ' ' + user.lastname,
     phone: user.phone,

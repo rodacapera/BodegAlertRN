@@ -25,6 +25,7 @@ export type RootStackParamList = {
   Profile: RegisterParams;
   Buttons: undefined;
   Employees: undefined;
+  Notify: undefined;
 };
 
 export type SelectedTypes = 'phone' | 'city';
@@ -57,6 +58,7 @@ export type MyOnboardingProps = NativeStackScreenProps<
   RootStackParamList,
   'MyOnboarding'
 >;
+export type NotifyProps = NativeStackScreenProps<RootStackParamList, 'Notify'>;
 
 export type CustomLinkProps = {
   text: string;
@@ -67,7 +69,7 @@ export type CustomLinkProps = {
 
 export type TextWithCustomLinkProps = {
   text: string;
-  link: string;
+  link?: string;
   visible: boolean;
 };
 

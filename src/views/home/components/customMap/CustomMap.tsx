@@ -1,26 +1,36 @@
 import {house, shop} from '@src/assets/images';
+import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 import CustomFab from '@src/components/customFab/CustomFab';
 import {
   mapStyleDark,
   mapStyleLight
 } from '@src/globals/constants/mapsStylesMode';
 import {actualTheme} from '@src/types/contextTypes';
+import {t} from 'i18next';
 import {Fragment, useRef} from 'react';
+import {BackHandler} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {homeHook} from '../../hooks/homeHook';
 import {homeStyles} from '../../styles/homeStyles';
 import PanicButton from '../panicButton/PanicButton';
-import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
-import {t} from 'i18next';
-import {BackHandler} from 'react-native';
+import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
   const {dark} = actualTheme();
-  const {region, animateCamera, panics, user, alertVisible, setAlertVisible} =
-    homeHook();
+  const {
+    region,
+    animateCamera,
+    panics,
+    user,
+    alertVisible,
+    setAlertVisible,
+    isLoading
+  } = homeHook();
 
-  return (
+  return isLoading ? (
+    <CustomLoadingOverlay visible />
+  ) : (
     <Fragment>
       <MapView
         ref={mapRef}

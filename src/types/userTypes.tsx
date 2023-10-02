@@ -1,5 +1,3 @@
-import {Region} from './locationTypes';
-
 export interface User {
   address: string;
   administrator: boolean;
@@ -49,4 +47,8 @@ export interface Buttons {
   reference: string;
   shop: string;
   uid: string;
+}
+
+export interface Images {
+  path: string;
 }
