@@ -20,9 +20,10 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {drawerComponentHook} from './hook/drawerComponentHook';
 import {drawerComponentStyles} from './styles/drawerComponentStyles';
+import {useNavigation} from '@react-navigation/native';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
-  const {navigation} = props;
+  const navigation = useNavigation() as StackNavigation;
   const {isLoading, error} = setUserQuery();
   const {
     handleLogout,
@@ -34,7 +35,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     logos,
     counterEmployees,
     counterButtons
-  } = drawerComponentHook(navigation as unknown as StackNavigation);
+  } = drawerComponentHook(navigation);
 
   return isLoading ? (
     <></>
@@ -114,7 +115,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           labelStyle={{color: colors.onSurface}}
           label={t('drawer.home')}
           onPress={() =>
-            navigation.navigate('Home', {administrator: false, shop})
+            navigation.navigate('Home', {isLogin: false, isBack: true})
           }
         />
         <DrawerItem

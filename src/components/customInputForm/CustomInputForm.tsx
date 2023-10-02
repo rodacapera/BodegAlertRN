@@ -53,7 +53,7 @@ const CustomInputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
       </View>
 
       <TextInput
-        style={loginFormStyles.email}
+        style={loginFormStyles.phone}
         mode="flat"
         outlineColor={'transparent'}
         placeholder="3003543968"
@@ -61,11 +61,12 @@ const CustomInputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
         underlineStyle={{
           backgroundColor: 'transparent'
         }}
-        // theme={{
-        //   colors: {
-        //     primary: 'blue',
-        //   },
-        // }}
+        textColor={colors.onSurface}
+        theme={{
+          colors: {
+            primary: colors.error
+          }
+        }}
         onFocus={() => setFocusPhone(true)}
         onBlur={() => setFocusPhone(false)}
         dense={true}

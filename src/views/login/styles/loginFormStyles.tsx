@@ -11,7 +11,7 @@ export const loginFormStyles = StyleSheet.create({
   loginContent: {
     flex: 1
   },
-  email: {
+  phone: {
     width: 200,
     backgroundColor: 'transparent'
   },

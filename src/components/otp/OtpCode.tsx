@@ -23,7 +23,7 @@ const OtpCode = ({
   buttonAction: LoginFormAction;
   setButtonAction: (e: LoginFormAction) => void;
 }) => {
-  const navigate = useNavigation<StackNavigation>();
+  const navigation = useNavigation<StackNavigation>();
   const {colors, dark, theme} = actualTheme();
   const {
     inputRef,
@@ -93,7 +93,7 @@ const OtpCode = ({
           onPress={() =>
             handleValidateOtp(
               code,
-              navigate,
+              navigation,
               setErrorOtp,
               buttonAction,
               setButtonAction,

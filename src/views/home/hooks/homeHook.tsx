@@ -1,9 +1,14 @@
-import {useNavigation} from '@react-navigation/native';
+import {
+  ParamListBase,
+  RouteProp,
+  useNavigation,
+  useRoute
+} from '@react-navigation/native';
 import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {actualTheme} from '@src/types/contextTypes';
-import {StackNavigation} from '@src/types/globalTypes';
+import {HomeParams, StackNavigation} from '@src/types/globalTypes';
 import {useEffect, useState} from 'react';
 import {BackHandler} from 'react-native';
 import {Region} from 'react-native-maps';
@@ -13,6 +18,8 @@ const homeHook = () => {
   const [region, setRegion] = useState<Region>();
   const [alertVisible, setAlertVisible] = useState(false);
   const {colors, dark} = actualTheme();
+  const route = useRoute();
+  const params = route.params as HomeParams;
   const navigation = useNavigation<StackNavigation>();
 
   const animateCamera = async (mapRef: any, region: Region, speed: number) => {
@@ -67,14 +74,14 @@ const homeHook = () => {
   }, []);
 
   useEffect(() => {
-    navigation.getState().index === 1 &&
+    (!params || params.isBack) &&
       headerShown({
         navigation,
         visible: !isLoading,
         transparent: true,
         titleColor: colors.onPrimaryContainer
       });
-  }, [user, navigation.getState().index]);
+  }, [params]);
 
   return {
     region,

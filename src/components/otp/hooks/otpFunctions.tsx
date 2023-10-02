@@ -52,7 +52,7 @@ export const handleValidateOtp = (
         if (validateOtp(result?.user)) {
           handleBack(setButtonAction, setCode);
           setErrorOtp(false);
-          navigate('Home');
+          navigate('Home', {isLogin: true});
         } else {
           setErrorOtp(true);
         }

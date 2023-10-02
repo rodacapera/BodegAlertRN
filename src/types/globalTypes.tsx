@@ -14,10 +14,15 @@ export type RegisterParams = {
   administrator: boolean;
   shop?: ShopProps;
 };
+
+export type HomeParams = {
+  isLogin?: boolean;
+  isBack?: boolean;
+};
 export type RootStackParamList = {
   Splash: undefined;
   MyOnboarding: undefined;
-  Home: undefined;
+  Home: HomeParams;
   LoginSplash: undefined;
   Login: undefined;
   LoginForm: undefined;
