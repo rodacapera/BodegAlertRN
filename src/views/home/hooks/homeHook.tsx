@@ -81,7 +81,7 @@ const homeHook = () => {
         transparent: true,
         titleColor: colors.onPrimaryContainer
       });
-  }, [params]);
+  }, [params, dark]);
 
   return {
     region,
