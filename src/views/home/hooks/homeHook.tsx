@@ -12,7 +12,7 @@ const homeHook = () => {
   const {user, panics, isLoading} = useGetUser();
   const [region, setRegion] = useState<Region>();
   const [alertVisible, setAlertVisible] = useState(false);
-  const {colors} = actualTheme();
+  const {colors, dark} = actualTheme();
   const navigation = useNavigation<StackNavigation>();
 
   const animateCamera = async (mapRef: any, region: Region, speed: number) => {
@@ -67,14 +67,14 @@ const homeHook = () => {
   }, []);
 
   useEffect(() => {
-    console.log('header home');
-    headerShown({
-      navigation,
-      visible: !isLoading,
-      transparent: true,
-      titleColor: colors.onPrimaryContainer
-    });
-  }, [user]);
+    navigation.getState().index === 1 &&
+      headerShown({
+        navigation,
+        visible: !isLoading,
+        transparent: true,
+        titleColor: colors.onPrimaryContainer
+      });
+  }, [user, navigation.getState().index]);
 
   return {
     region,

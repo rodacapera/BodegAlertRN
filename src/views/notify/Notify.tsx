@@ -2,11 +2,11 @@ import CustomBanner from '@src/components/customBanner/CustomBanner';
 import SimpleRemoveItemCards from '@src/components/simpleRemoveItemCards/SimpleRemoveItemCards';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {t} from 'i18next';
-import {SafeAreaView, View} from 'react-native';
-import NotifyNotFound from './components/NotifyNotFound';
-import {notifyStyles} from './styles/notifyStyles';
-import {notifyHook} from './hooks/notifyHook';
+import {SafeAreaView} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import NotifyNotFound from './components/NotifyNotFound';
+import {notifyHook} from './hooks/notifyHook';
+import {notifyStyles} from './styles/notifyStyles';
 
 export const Notify = () => {
   const {panics, setModalVisible, modalVisible} = notifyHook();

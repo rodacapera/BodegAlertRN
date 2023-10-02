@@ -37,8 +37,7 @@ const notifyHook = () => {
       );
       return () => panicObserver();
     }
-  }, [isSuccess]);
-
+  }, [isSuccess, dark]);
   return {
     panics,
     setModalVisible,
