@@ -8,13 +8,22 @@ import {
   getPanics
 } from '@src/hooks/firebase/company/company';
 import {getUser} from '@src/hooks/firebase/user/user';
-import {Images, User} from '@src/types/userTypes';
+import {Images, Panics, User} from '@src/types/userTypes';
 
 export const setEmployeesQuery = (employees: User[]) => {
   const query = useQuery({
     queryKey: ['employees'],
     queryFn: async () => {
       return employees;
+    }
+  });
+  return query;
+};
+export const setPanicsQuery = (panics: Panics[]) => {
+  const query = useQuery({
+    queryKey: ['panics'],
+    queryFn: async () => {
+      return panics;
     }
   });
   return query;
@@ -49,5 +58,9 @@ export const getUserQuery = () => {
 };
 export const getEmployeesQuery = () => {
   const res = useQuery(['employees'], {refetchOnWindowFocus: false});
+  return res;
+};
+export const getPanicsQuery = () => {
+  const res = useQuery(['panics'], {refetchOnWindowFocus: false});
   return res;
 };

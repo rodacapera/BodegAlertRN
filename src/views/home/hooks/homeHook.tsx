@@ -69,11 +69,7 @@ const homeHook = () => {
   }, []);
 
   useEffect(() => {
-    console.log('params', params);
-
     if (!params && user) {
-      console.log('entro');
-
       headerShown({
         navigation,
         visible: !isLoading,
@@ -81,7 +77,6 @@ const homeHook = () => {
         titleColor: colors.onPrimaryContainer
       });
     } else if (params && user && params.isBack) {
-      console.log('is back', params.isBack);
       headerShown({
         navigation,
         visible: !isLoading,

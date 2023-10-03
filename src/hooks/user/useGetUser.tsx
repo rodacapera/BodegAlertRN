@@ -1,4 +1,8 @@
-import {getUserQuery, setEmployeesQuery} from '@src/reactQuery/userQuery';
+import {
+  getUserQuery,
+  setEmployeesQuery,
+  setPanicsQuery
+} from '@src/reactQuery/userQuery';
 import {GetUserData} from '@src/types/auth';
 import {Buttons, Panics, User} from '@src/types/userTypes';
 import {useLayoutEffect, useState} from 'react';
@@ -13,6 +17,7 @@ const useGetUser = () => {
   const [counterButtons, setCounterButtons] = useState<number>();
   const [counterEmployees, setCounterEmployees] = useState<number>();
   setEmployeesQuery(employees);
+  setPanicsQuery(panics);
 
   const resultPanics = (documentSnapshot: any) => {
     setPanics([]);
