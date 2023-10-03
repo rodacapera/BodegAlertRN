@@ -2,6 +2,7 @@ import AsyncStorage, {
   useAsyncStorage
 } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
+import {useDrawerStatus} from '@react-navigation/drawer';
 import {DrawerActions, StackActions} from '@react-navigation/native';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {actualTheme} from '@src/types/contextTypes';
@@ -12,8 +13,9 @@ import {Appearance} from 'react-native';
 
 const drawerComponentHook = (navigation: StackNavigation) => {
   const {colors, theme} = actualTheme();
+  const isDrawerOpened = useDrawerStatus();
   const {user, counterEmployees, images, buttons, counterButtons} =
-    useGetUser();
+    isDrawerOpened && useGetUser();
   const {getItem} = useAsyncStorage('@theme');
   const {setDarkTheme, setLightTheme, dark} = actualTheme();
   const [isDark, setIsDark] = useState(false);
@@ -33,11 +35,7 @@ const drawerComponentHook = (navigation: StackNavigation) => {
         navigation.dispatch(StackActions.replace('Login'));
       })
       .catch(async error => {
-        console.log(error);
-        // console.log('locals', await AsyncStorage.getAllKeys());
-        // await AsyncStorage.clear();
-        // navigation.dispatch(DrawerActions.closeDrawer());
-        // navigation.dispatch(StackActions.replace('Login'));
+        console.debug(error);
       });
   };
 
@@ -45,7 +43,7 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     const item = await getItem();
     if (dark) {
       setIsDark(true);
-      Appearance.addChangeListener(() => console.log('remove')).remove();
+      Appearance.addChangeListener(() => console.debug('remove')).remove();
     } else {
       item ? setIsDark(item === 'dark' ? true : false) : setIsDark(true);
     }
@@ -67,7 +65,7 @@ const drawerComponentHook = (navigation: StackNavigation) => {
       validateSwitch();
     });
     return () => {
-      Appearance.addChangeListener(() => console.log('remove')).remove();
+      Appearance.addChangeListener(() => console.debug('remove')).remove();
     };
   }, []);
 

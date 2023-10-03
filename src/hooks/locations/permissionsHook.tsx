@@ -14,10 +14,10 @@ export const requestLocationPermission = async () => {
       }
     );
     if (granted === 'granted') {
-      console.log('You can use Geolocation');
+      console.debug('You can use Geolocation');
       return true;
     } else {
-      console.log('You cannot use Geolocation');
+      console.debug('You cannot use Geolocation');
       return false;
     }
   } catch (err) {
@@ -32,7 +32,7 @@ export const getCurrentPosition = async (): Promise<GeoPosition> =>
         resolve(position);
       },
       error => {
-        console.log('error', error.code, 'message', error.message);
+        console.error('error', error.code, 'message', error.message);
         reject(error);
       },
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000}

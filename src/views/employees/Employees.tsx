@@ -1,56 +1,48 @@
 import CustomBanner from '@src/components/customBanner/CustomBanner';
+import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 import CustomFab from '@src/components/customFab/CustomFab';
 import QrModal from '@src/components/qrModal/QrModal';
 import SimpleRemoveItemCards from '@src/components/simpleRemoveItemCards/SimpleRemoveItemCards';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {EmployeesProps} from '@src/types/globalTypes';
-import {useEffect, useState} from 'react';
+import {t} from 'i18next';
 import {SafeAreaView, View} from 'react-native';
 import UsersNotFound from './components/UsersNotFound';
+import {employeesHook} from './hooks/employeesHook';
 import {employeeStyles} from './styles/employeesStyles';
-import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
-import {t} from 'i18next';
-import {employees} from '../../globals/constants/fakeData';
-import {headerShown} from '@src/hooks/navigator/headerShown';
-import {actualTheme} from '@src/types/contextTypes';
+import {useIsFocused} from '@react-navigation/native';
 
 const Employees = ({navigation, route}: EmployeesProps) => {
-  const {colors, dark} = actualTheme();
-  const [visible, setVisible] = useState(false);
-  const [alertVisible, setAlertVisible] = useState(false);
-  const [myEmployees, setMyEmployees] =
-    useState<{title: string; subtitle: string}[]>(employees); // employees
-
-  const removeItem = (index: number) => {
-    setAlertVisible(true);
-  };
-  useEffect(() => {
-    headerShown({
-      navigation,
-      visible: true,
-      transparent: false,
-      titleColor: dark ? colors.onSurface : colors.onPrimaryContainer
-    });
-  });
+  const {
+    employees,
+    visible,
+    setVisible,
+    alertVisible,
+    removeItem,
+    setAlertVisible
+  } = employeesHook();
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <CustomBanner
-        visible={myEmployees.length > 0 ? true : false}
+        visible={employees.length > 0 ? true : false}
         text={t('employeesView.banner')}
         icon="account-group-outline"
       />
       <View style={employeeStyles.container}>
-        {myEmployees.length == 0 && <UsersNotFound />}
-        {myEmployees.map((value, index) => (
-          <SimpleRemoveItemCards
-            title={value.title}
-            index={index}
-            subtitle={value.subtitle}
-            removeItem={removeItem}
-            key={index}
-          />
-        ))}
+        {employees.length <= 1 && <UsersNotFound />}
+        {employees.map(
+          (value, index) =>
+            !value.administrator && (
+              <SimpleRemoveItemCards
+                title={`${value.name} ${value.lastname}`}
+                index={index}
+                subtitle={value.alias}
+                removeItem={removeItem}
+                key={index}
+              />
+            )
+        )}
       </View>
       <CustomFab
         position="bottomRight"

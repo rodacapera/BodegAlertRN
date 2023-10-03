@@ -1,20 +1,21 @@
-import {getUserQuery} from '@src/reactQuery/userQuery';
+import {getUserQuery, setEmployeesQuery} from '@src/reactQuery/userQuery';
 import {GetUserData} from '@src/types/auth';
 import {Buttons, Panics, User} from '@src/types/userTypes';
-import {useEffect, useState} from 'react';
+import {useLayoutEffect, useState} from 'react';
 
 const useGetUser = () => {
   const res = getUserQuery();
   const {isLoading, error} = res;
   const data = res.data as GetUserData;
-
   const [panics, setPanics] = useState<Panics[]>([]);
   const [employees, setEmployees] = useState<User[]>([]);
   const [buttons, setButtons] = useState<Buttons[]>([]);
   const [counterButtons, setCounterButtons] = useState<number>();
   const [counterEmployees, setCounterEmployees] = useState<number>();
+  setEmployeesQuery(employees);
 
   const resultPanics = (documentSnapshot: any) => {
+    setPanics([]);
     documentSnapshot.forEach((value: {data: () => Panics}) => {
       const data = value.data();
       setPanics(prev => [...prev, data]);
@@ -22,6 +23,7 @@ const useGetUser = () => {
   };
 
   const resultEmployees = (querySnapshot: any) => {
+    setEmployees([]);
     querySnapshot.forEach((value: {data: () => User}) => {
       const data = value.data() as User;
       setEmployees(prev => [...prev, data]);
@@ -30,6 +32,8 @@ const useGetUser = () => {
   };
 
   const resultButtons = (querySnapshot: any) => {
+    setButtons([]);
+    setCounterButtons(0);
     querySnapshot.forEach((value: {data: () => Buttons}) => {
       const data = value.data() as Buttons;
       setButtons(prev => [...prev, data]);
@@ -37,8 +41,8 @@ const useGetUser = () => {
     setCounterButtons(querySnapshot.size);
   };
 
-  useEffect(() => {
-    if (data) {
+  useLayoutEffect(() => {
+    if (data && data.user) {
       const panicObserver = data.panicsObserver.onSnapshot(
         (documentSnapshot: any) => {
           resultPanics(documentSnapshot);

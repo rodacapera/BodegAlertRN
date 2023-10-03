@@ -8,13 +8,13 @@ export const pushConfigure = () => {
   PushNotification.configure({
     // (optional) Called when Token is generated (iOS and Android)
     onRegister: function (token) {
-      // console.log('TOKEN:', token);
+      console.debug('TOKEN:', token);
       requestUserPermission();
     },
 
     // (required) Called when a remote is received or opened, or local notification is opened
     onNotification: function (notification) {
-      console.log('NOTIFICATION:', notification);
+      console.debug('NOTIFICATION:', notification);
 
       // process the notification
 
@@ -24,8 +24,8 @@ export const pushConfigure = () => {
 
     // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
     onAction: function (notification) {
-      console.log('ACTION:', notification.action);
-      console.log('NOTIFICATION:', notification);
+      console.debug('ACTION:', notification.action);
+      console.debug('NOTIFICATION:', notification);
 
       // process the action
     },
@@ -58,7 +58,7 @@ export const pushConfigure = () => {
 };
 
 export const remoteMessageAction = (remoteMessage: any) => {
-  console.log('remoteMessage', remoteMessage);
+  console.debug('remoteMessage', remoteMessage);
 };
 
 const updateTokenFcm = async (newToken: string) => {
@@ -67,7 +67,7 @@ const updateTokenFcm = async (newToken: string) => {
     ? newToken != token && AsyncStorage.setItem('@fcmToken', newToken)
     : AsyncStorage.setItem('@fcmToken', newToken);
 
-  console.log('fcmToken', token);
+  console.debug('fcmToken', token);
 };
 
 const requestUserPermission = async () => {
@@ -78,7 +78,6 @@ const requestUserPermission = async () => {
 
   if (enabled) {
     const newToken = await messaging().getToken();
-    // console.log('Authorization status:', authStatus);
     updateTokenFcm(newToken);
   }
 };

@@ -6,6 +6,6 @@ export const confirmCode = async (
     const resultConfirm = await confirm.confirm(code);
     console.log('resultConfirm', resultConfirm);
   } catch (error) {
-    console.log('Invalid code.');
+    console.error('Invalid code.');
   }
 };

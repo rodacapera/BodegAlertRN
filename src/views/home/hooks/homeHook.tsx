@@ -1,9 +1,4 @@
-import {
-  ParamListBase,
-  RouteProp,
-  useNavigation,
-  useRoute
-} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {useGetUser} from '@src/hooks/user/useGetUser';
@@ -74,14 +69,27 @@ const homeHook = () => {
   }, []);
 
   useEffect(() => {
-    (!params || params.isBack) &&
+    console.log('params', params);
+
+    if (!params && user) {
+      console.log('entro');
+
       headerShown({
         navigation,
         visible: !isLoading,
         transparent: true,
         titleColor: colors.onPrimaryContainer
       });
-  }, [params, dark]);
+    } else if (params && user && params.isBack) {
+      console.log('is back', params.isBack);
+      headerShown({
+        navigation,
+        visible: !isLoading,
+        transparent: true,
+        titleColor: colors.onPrimaryContainer
+      });
+    }
+  }, [params, dark, user]);
 
   return {
     region,

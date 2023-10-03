@@ -3,7 +3,7 @@ export interface ItemCardProps {
   subtitle?: string;
   index: number;
   touchable?: boolean;
-  modalVisible: boolean;
+  modalVisible?: boolean;
   removeItem?: (e: number) => void;
   setModalVisible?: (e: boolean) => void;
 }

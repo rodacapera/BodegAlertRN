@@ -23,7 +23,6 @@ const sendNotification = async ({
   setLoading(true);
   headerShown({navigation, visible: false, transparent: true});
   const response = await getAxios.post(url, data);
-  console.log('response', response.data);
 
   if (response.status == 201) {
     headerShown({navigation, visible: true, transparent: true});
@@ -41,7 +40,6 @@ const getDistanceBetween = (
     registerPosition,
     currentPosition
   );
-  console.log(calculate);
 
   return calculate;
 };

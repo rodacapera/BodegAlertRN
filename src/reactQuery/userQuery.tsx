@@ -10,6 +10,16 @@ import {
 import {getUser} from '@src/hooks/firebase/user/user';
 import {Images, User} from '@src/types/userTypes';
 
+export const setEmployeesQuery = (employees: User[]) => {
+  const query = useQuery({
+    queryKey: ['employees'],
+    queryFn: async () => {
+      return employees;
+    }
+  });
+  return query;
+};
+
 export const setUserQuery = () => {
   const query = useQuery({
     queryKey: ['user'],
@@ -35,5 +45,9 @@ export const setUserQuery = () => {
 
 export const getUserQuery = () => {
   const res = useQuery(['user'], {refetchOnWindowFocus: false});
+  return res;
+};
+export const getEmployeesQuery = () => {
+  const res = useQuery(['employees'], {refetchOnWindowFocus: false});
   return res;
 };
