@@ -7,6 +7,7 @@ import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {User} from '@src/types/userTypes';
 import {OtpInputRef} from 'react-native-otp-entry';
+let count: any = null;
 
 export const handleBack = (
   setButtonAction: (e: LoginFormAction) => void,
@@ -51,6 +52,8 @@ export const handleValidateOtp = (
           await setUser(data);
           handleBack(setButtonAction, setCode);
           setErrorOtp(false);
+          clearInterval(count);
+          count = null;
           navigate('Home', {isLogin: true});
         } else {
           setErrorOtp(true);
@@ -73,7 +76,7 @@ export const handleSendOtp = async (
   setSendOtpCode(true);
 };
 
-const removeOtpCode = async () => {
+export const removeOtpCode = async () => {
   AsyncStorage.removeItem('@otp');
 };
 
@@ -93,25 +96,27 @@ export const handleChange = (
 
 export const timerCount = (
   setCounter: (e: number) => void,
-  sendOtpCode: (e: boolean) => void,
+  setSendOtpCode: (e: boolean) => void,
   sendCode: boolean,
   counter: number
 ) => {
-  let count: any = null;
   let newCount = counter;
   if (sendCode) {
     if (!count) {
       count = setInterval(() => {
         if (newCount <= 1) {
           setCounter(60);
-          sendOtpCode(false);
           clearInterval(count);
+          count = null;
+          setSendOtpCode(false);
           removeOtpCode();
         } else {
           newCount = counter--;
           setCounter(newCount);
         }
       }, 1000);
+    } else {
+      console.log('exist interval');
     }
   }
 };

@@ -1,7 +1,7 @@
 import {LoginFormAction} from '@src/types/loginTypes';
 import {useEffect, useRef, useState} from 'react';
 import {OtpInputRef} from 'react-native-otp-entry';
-import {getOtp, timerCount} from './otpFunctions';
+import {getOtp, removeOtpCode, timerCount} from './otpFunctions';
 
 const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
   const inputRef = useRef<OtpInputRef>();
@@ -10,8 +10,14 @@ const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
   const [sendOtpCode, setSendOtpCode] = useState(false);
   const [counter, setCounter] = useState(60);
 
-  useEffect(() => {
+  const initOtp = async () => {
+    await removeOtpCode();
+    console.log('remove');
     getOtp(buttonAction, setSendOtpCode);
+  };
+
+  useEffect(() => {
+    initOtp();
   }, []);
 
   useEffect(() => {
