@@ -4,7 +4,6 @@ import {
   DrawerItem
 } from '@react-navigation/drawer';
 import {shop} from '@src/globals/constants/fakeData';
-import {setUserQuery} from '@src/reactQuery/userQuery';
 import {StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {Image, StatusBar, View} from 'react-native';
@@ -24,7 +23,6 @@ import {useNavigation} from '@react-navigation/native';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const navigation = useNavigation() as StackNavigation;
-  const {isLoading, error} = setUserQuery();
   const {
     handleLogout,
     onToggleSwitch,
@@ -34,7 +32,8 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     user,
     logos,
     counterEmployees,
-    counterButtons
+    counterButtons,
+    isLoading
   } = drawerComponentHook(navigation);
 
   return isLoading ? (

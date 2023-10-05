@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   getUserQuery,
   setEmployeesQuery,
@@ -8,9 +9,8 @@ import {Buttons, Panics, User} from '@src/types/userTypes';
 import {useLayoutEffect, useState} from 'react';
 
 const useGetUser = () => {
-  const res = getUserQuery();
-  const {isLoading, error} = res;
-  const data = res.data as GetUserData;
+  const {isLoading, error, data} = getUserQuery();
+  const currentData = data as GetUserData;
   const [panics, setPanics] = useState<Panics[]>([]);
   const [employees, setEmployees] = useState<User[]>([]);
   const [buttons, setButtons] = useState<Buttons[]>([]);
@@ -33,7 +33,8 @@ const useGetUser = () => {
       const data = value.data() as User;
       setEmployees(prev => [...prev, data]);
     });
-    setCounterEmployees(querySnapshot.size);
+
+    setCounterEmployees(querySnapshot.size > 1 ? querySnapshot.size : 0);
   };
 
   const resultButtons = (querySnapshot: any) => {
@@ -47,32 +48,32 @@ const useGetUser = () => {
   };
 
   useLayoutEffect(() => {
-    if (data && data.user) {
-      const panicObserver = data.panicsObserver.onSnapshot(
+    if (currentData && currentData.user) {
+      const panicObserver = currentData.panicsObserver.onSnapshot(
         (documentSnapshot: any) => {
           resultPanics(documentSnapshot);
         }
       );
-      const employeesObserver = data.employeesObserver.onSnapshot(
+      const employeesObserver = currentData.employeesObserver.onSnapshot(
         (documentSnapshot: any) => {
           resultEmployees(documentSnapshot);
         }
       );
-      const buttonsObserver = data.buttonsObserver.onSnapshot(
+      const buttonsObserver = currentData.buttonsObserver.onSnapshot(
         (documentSnapshot: any) => {
           resultButtons(documentSnapshot);
         }
       );
       return () => (panicObserver(), employeesObserver(), buttonsObserver());
     }
-  }, [data]);
+  }, [currentData]);
 
   return {
-    user: data?.user,
+    user: currentData?.user,
     panics,
     employees,
     counterEmployees,
-    images: data?.images,
+    images: currentData?.images,
     isLoading,
     error,
     buttons,

@@ -31,9 +31,11 @@ export interface ProviderDatum {
 }
 
 export interface GetUserData {
-  user: User;
+  user: User | undefined;
   images: Images[];
   panicsObserver: any;
   employeesObserver: any;
   buttonsObserver: any;
 }
+
+export type SetUserAuthParams = {uid: string; user: User};

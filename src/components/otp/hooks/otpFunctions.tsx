@@ -1,8 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {useLogin} from '@src/hooks/firebase/login/loginWithPhoneNumber';
+import {getUser} from '@src/hooks/firebase/user/user';
+import {SetUserAuthParams} from '@src/types/auth';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
+import {User} from '@src/types/userTypes';
 import {OtpInputRef} from 'react-native-otp-entry';
 
 export const handleBack = (
@@ -31,25 +34,21 @@ export const handleValidateOtp = (
   setButtonAction: (e: LoginFormAction) => void,
   setCode: (e: string) => void
 ) => {
-  const setUser = async (user: any) => {
+  const setUser = async (user: SetUserAuthParams) => {
     await AsyncStorage.setItem('@userAuth', JSON.stringify(user));
-  };
-
-  const validateOtp = (result: any) => {
-    if (result) {
-      setUser(result);
-      return true;
-    } else {
-      setUser(false);
-      return false;
-    }
   };
 
   if (code.length === 6) {
     currentButtonAction.confirmation
       ?.confirm(code)
-      .then(result => {
-        if (validateOtp(result?.user)) {
+      .then(async result => {
+        if (result) {
+          const user = (await getUser(result.user.uid)) as User;
+          const data = {
+            uid: result.user.uid,
+            user: user
+          } as unknown as SetUserAuthParams;
+          await setUser(data);
           handleBack(setButtonAction, setCode);
           setErrorOtp(false);
           navigate('Home', {isLogin: true});

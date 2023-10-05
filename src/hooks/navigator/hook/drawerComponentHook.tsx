@@ -5,21 +5,30 @@ import auth from '@react-native-firebase/auth';
 import {useDrawerStatus} from '@react-navigation/drawer';
 import {DrawerActions, StackActions} from '@react-navigation/native';
 import {useGetUser} from '@src/hooks/user/useGetUser';
+import {
+  getCompanyImagesQuery,
+  setCompanyImagesQuery,
+  setUserQuery
+} from '@src/reactQuery/userQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Logos} from '@src/types/imageTypes';
+import {UseGetUser} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
 
 const drawerComponentHook = (navigation: StackNavigation) => {
+  setUserQuery();
+  setCompanyImagesQuery();
+  // const isDrawerOpened = useDrawerStatus();
   const {colors, theme} = actualTheme();
-  const isDrawerOpened = useDrawerStatus();
-  const {user, counterEmployees, images, buttons, counterButtons} =
-    isDrawerOpened && useGetUser();
   const {getItem} = useAsyncStorage('@theme');
   const {setDarkTheme, setLightTheme, dark} = actualTheme();
+  const {data} = getCompanyImagesQuery();
+  const {user, counterEmployees, counterButtons, isLoading} = useGetUser();
+  const images = data ?? null;
   const [isDark, setIsDark] = useState(false);
-  const [logos, setLogos] = useState<Logos>([]);
+  const [logos, setLogos] = useState<Logos[]>([]);
 
   const onToggleSwitch = () => {
     setIsDark(!isDark);
@@ -53,14 +62,11 @@ const drawerComponentHook = (navigation: StackNavigation) => {
   };
 
   useEffect(() => {
-    images && setLogos(images);
+    images && setLogos(images as Logos[]);
   }, [images]);
 
   useEffect(() => {
     validateSwitch();
-  }, []);
-
-  useEffect(() => {
     Appearance.addChangeListener(() => {
       validateSwitch();
     });
@@ -79,8 +85,8 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     user,
     logos,
     counterEmployees,
-    buttons,
-    counterButtons
+    counterButtons,
+    isLoading
   };
 };
 

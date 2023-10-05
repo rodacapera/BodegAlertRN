@@ -1,3 +1,5 @@
+import {Logos} from './imageTypes';
+
 export interface User {
   address: string;
   administrator: boolean;
@@ -51,4 +53,16 @@ export interface Buttons {
 
 export interface Images {
   path: string;
+}
+
+export interface UseGetUser {
+  user: User;
+  panics: Panics;
+  employees: User[];
+  counterEmployees: number;
+  images: Logos[];
+  isLoading: boolean;
+  error: boolean;
+  buttons: Buttons[];
+  counterButtons: number;
 }

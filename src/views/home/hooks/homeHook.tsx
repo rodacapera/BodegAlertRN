@@ -69,14 +69,14 @@ const homeHook = () => {
   }, []);
 
   useEffect(() => {
-    if (!params && user) {
+    if (params && (params.isLogin || params.isBack)) {
       headerShown({
         navigation,
         visible: !isLoading,
         transparent: true,
         titleColor: colors.onPrimaryContainer
       });
-    } else if (params && user && params.isBack) {
+    } else if (!params) {
       headerShown({
         navigation,
         visible: !isLoading,

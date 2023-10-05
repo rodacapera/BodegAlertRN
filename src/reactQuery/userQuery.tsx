@@ -9,6 +9,8 @@ import {
 } from '@src/hooks/firebase/company/company';
 import {getUser} from '@src/hooks/firebase/user/user';
 import {Images, Panics, User} from '@src/types/userTypes';
+import {Logos} from '@src/types/imageTypes';
+import {SetUserAuthParams} from '@src/types/auth';
 
 export const setEmployeesQuery = (employees: User[]) => {
   const query = useQuery({
@@ -19,6 +21,7 @@ export const setEmployeesQuery = (employees: User[]) => {
   });
   return query;
 };
+
 export const setPanicsQuery = (panics: Panics[]) => {
   const query = useQuery({
     queryKey: ['panics'],
@@ -29,38 +32,63 @@ export const setPanicsQuery = (panics: Panics[]) => {
   return query;
 };
 
-export const setUserQuery = () => {
+export const setCompanyImagesQuery = () => {
   const query = useQuery({
-    queryKey: ['user'],
+    queryKey: ['companyImages'],
     queryFn: async () => {
-      const {uid} = await getUseAuth();
-      const user = (await getUser(uid)) as User;
-      const images = (await getCompanyImages(user.city)) as Images[];
-      const panicsObserver = getPanics();
-      const employeesObserver = getEmployees(user.shop);
-      const buttonsObserver = getButtons(user.shop);
-      const userData = {
-        user,
-        images,
-        panicsObserver,
-        employeesObserver,
-        buttonsObserver
-      };
-      return userData;
+      const resultAuth = (await getUseAuth()) as SetUserAuthParams;
+      return (
+        resultAuth &&
+        ((await getCompanyImages(resultAuth.user.city)) as Logos[])
+      );
     }
   });
   return query;
 };
 
-export const getUserQuery = () => {
-  const res = useQuery(['user'], {refetchOnWindowFocus: false});
-  return res;
+export const setUserQuery = () => {
+  const query = useQuery({
+    queryKey: ['user'],
+    queryFn: async () => {
+      const resultAuth = (await getUseAuth()) as SetUserAuthParams;
+      if (resultAuth) {
+        const panicsObserver = getPanics();
+        const employeesObserver = getEmployees(resultAuth.user.shop);
+        const buttonsObserver = getButtons(resultAuth.user.shop);
+        const userData = {
+          user: resultAuth.user,
+          panicsObserver,
+          employeesObserver,
+          buttonsObserver
+        };
+        return userData;
+      }
+      return null;
+    }
+  });
+  return query;
 };
-export const getEmployeesQuery = () => {
-  const res = useQuery(['employees'], {refetchOnWindowFocus: false});
-  return res;
-};
-export const getPanicsQuery = () => {
-  const res = useQuery(['panics'], {refetchOnWindowFocus: false});
-  return res;
-};
+
+export const getUserQuery = () =>
+  useQuery(['user'], {
+    refetchOnWindowFocus: false,
+    initialData: {
+      user: undefined,
+      images: [],
+      panicsObserver: undefined,
+      employeesObserver: undefined,
+      buttonsObserver: undefined
+    }
+  });
+
+export const getEmployeesQuery = () =>
+  useQuery(['employees'], {refetchOnWindowFocus: false});
+
+export const getPanicsQuery = () =>
+  useQuery(['panics'], {refetchOnWindowFocus: false});
+
+export const getCompanyImagesQuery = () =>
+  useQuery(['companyImages'], {
+    refetchOnWindowFocus: false,
+    initialData: null
+  });

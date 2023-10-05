@@ -10,4 +10,4 @@ export type ImageStyles = {
 
 export type Logos = {
   path: string;
-}[];
+};
