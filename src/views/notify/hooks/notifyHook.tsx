@@ -3,6 +3,7 @@ import {headerShown} from '@src/hooks/navigator/headerShown';
 import {getPanicsQuery} from '@src/reactQuery/userQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
+import {Panics} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 
 const notifyHook = () => {
@@ -23,7 +24,7 @@ const notifyHook = () => {
   }, [isSuccess, dark]);
 
   return {
-    panics: data,
+    panics: data as Panics[],
     setModalVisible,
     modalVisible
   };

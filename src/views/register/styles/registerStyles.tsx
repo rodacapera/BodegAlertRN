@@ -17,7 +17,7 @@ export const registerStyles = StyleSheet.create({
     paddingHorizontal: 50
   },
   footer: {
-    marginVertical: 40
+    marginVertical: 30
   },
   contentFooterText: {
     display: 'flex',

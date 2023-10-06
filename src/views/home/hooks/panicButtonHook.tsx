@@ -1,6 +1,6 @@
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {useEffect, useState} from 'react';
-import {getConfiguration} from '@src/hooks/firebase/config/config';
+import {getConfigurationFirebase} from '@src/hooks/firebase/config/config';
 import {Configuration} from '@src/types/configuration';
 
 const panicButtonHook = () => {
@@ -8,7 +8,7 @@ const panicButtonHook = () => {
   const [configuration, setConfiguration] = useState<Configuration>();
 
   const getConfig = (countryCode: string) => {
-    getConfiguration(countryCode).then(querySnapshot => {
+    getConfigurationFirebase(countryCode).then(querySnapshot => {
       querySnapshot.forEach(value => {
         const data = value.data() as Configuration;
         setConfiguration(data);

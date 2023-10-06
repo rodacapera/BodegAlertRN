@@ -7,29 +7,21 @@ import {SafeAreaView, Text, View} from 'react-native';
 import UserForm from '../register/forms/UserForm';
 import {profileStyles} from './styles/profileStyles';
 import {useEffect} from 'react';
+import {profileHook} from './hooks/profileHook';
+import CustomBanner from '@src/components/customBanner/CustomBanner';
 
 const Profile = ({navigation, route}: ProfileProps) => {
-  const {colors, dark} = actualTheme();
-
-  useEffect(() => {
-    headerShown({
-      navigation,
-      visible: true,
-      transparent: false,
-      titleColor: dark ? colors.onSurface : colors.onPrimaryContainer
-    });
-  });
+  const {colors} = actualTheme();
+  profileHook();
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <View style={profileStyles.container}>
-        <View style={profileStyles.contentProfileTitle}>
-          <Text style={[profileStyles.profileTitle, {color: colors.onSurface}]}>
-            {t('profileTitle')}
-          </Text>
-        </View>
-        <UserForm />
-      </View>
+      <CustomBanner
+        visible={true}
+        text={t('profileTitle')}
+        icon="account-edit"
+      />
+      <UserForm />
     </SafeAreaView>
   );
 };

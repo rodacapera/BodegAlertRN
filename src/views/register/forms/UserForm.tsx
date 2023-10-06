@@ -11,14 +11,17 @@ import {useTranslation} from 'react-i18next';
 import {ScrollView, Text, View} from 'react-native';
 import {Button, Caption, TextInput} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
+import {userFormHook} from './hooks/userFormHook';
 
 const UserForm = () => {
   const {t} = useTranslation();
   const phoneRef = useRef<any>();
   const {colors, theme} = actualTheme();
   const {navigate} = useNavigation<StackNavigation>();
-  const [currentButtonAction, setCurrentButtonAction] =
-    useState<LoginFormAction>(buttonActionInitialState);
+  const {user, isLoadingUserData, currentButtonAction, setCurrentButtonAction} =
+    userFormHook();
+
+  // console.log('currentButtonAction', currentButtonAction);
 
   return (
     <ScrollView
@@ -28,6 +31,8 @@ const UserForm = () => {
         phoneRef={phoneRef}
         setButtonAction={setCurrentButtonAction}
         type="phone"
+        value={user.phone.slice(3)}
+        code={user.countryCode.toLowerCase()}
       />
 
       <TextInput
@@ -45,6 +50,7 @@ const UserForm = () => {
             )}
           />
         }
+        value={user.name ?? ''}
       />
       <TextInput
         label={t('adminFormView.lastNames')}
@@ -61,6 +67,7 @@ const UserForm = () => {
             )}
           />
         }
+        value={user.lastname ?? ''}
       />
       <TextInput
         label={t('adminFormView.email')}
@@ -77,6 +84,7 @@ const UserForm = () => {
             )}
           />
         }
+        value={user.email ?? ''}
       />
       <View style={[registerStyles.footer]}>
         <View style={registerStyles.contentFooterText}>
@@ -84,31 +92,46 @@ const UserForm = () => {
             {t('adminFormView.address')}
           </Text>
           <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
-            {shop.address}
+            {user.address}
           </Caption>
         </View>
         <View style={registerStyles.contentFooterText}>
           <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
             {t('adminFormView.city')}
           </Text>
-          <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
-            {shop.city}
+          <Caption
+            style={{
+              color: colors.onSurfaceDisabled,
+              fontSize: 16,
+              textTransform: 'capitalize'
+            }}>
+            {user.city}
           </Caption>
         </View>
         <View style={registerStyles.contentFooterText}>
           <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
             {t('adminFormView.state')}
           </Text>
-          <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
-            {shop.state}
+          <Caption
+            style={{
+              color: colors.onSurfaceDisabled,
+              fontSize: 16,
+              textTransform: 'capitalize'
+            }}>
+            {user.departament}
           </Caption>
         </View>
         <View style={registerStyles.contentFooterText}>
           <Text style={[registerStyles.footerText, {color: colors.onSurface}]}>
             {t('adminFormView.aliasName')}
           </Text>
-          <Caption style={{color: colors.onSurfaceDisabled, fontSize: 16}}>
-            {shop.alias}
+          <Caption
+            style={{
+              color: colors.onSurfaceDisabled,
+              fontSize: 16,
+              textTransform: 'capitalize'
+            }}>
+            {user.alias}
           </Caption>
         </View>
       </View>

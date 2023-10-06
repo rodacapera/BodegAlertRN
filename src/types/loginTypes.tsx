@@ -18,6 +18,8 @@ export type InputFormProps = {
   type: SelectedTypes;
   phoneRef: any;
   setButtonAction: (data: LoginFormAction) => void;
+  value?: string;
+  code?: string;
 };
 
 export type LoginFormProps = {

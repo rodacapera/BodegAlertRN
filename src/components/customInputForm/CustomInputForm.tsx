@@ -8,8 +8,16 @@ import {TextInput} from 'react-native-paper';
 import PhoneInput from 'react-native-phone-input';
 import {loginFormStyles} from '../../views/login/styles/loginFormStyles';
 
-const CustomInputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
-  const [phone, setPhone] = useState('');
+const CustomInputForm = ({
+  type,
+  phoneRef,
+  setButtonAction,
+  value,
+  code
+}: InputFormProps) => {
+  console.log('value', value, 'code', code);
+
+  const [phone, setPhone] = useState(value ?? '');
   const [focusPhone, setFocusPhone] = useState(false);
   const {colors} = actualTheme();
 
@@ -45,7 +53,10 @@ const CustomInputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
             pickerBackgroundColor={colors.background}
             cancelTextStyle={{color: colors.onSecondaryContainer}}
             confirmTextStyle={{color: colors.onSecondaryContainer}}
-            initialCountry={'co'}
+            pickerItemStyle={{color: colors.onSurface}}
+            initialCountry={code ?? 'co'}
+            disabled={value ? true : false}
+            // initialValue="1"
           />
         ) : (
           <></>
@@ -80,6 +91,7 @@ const CustomInputForm = ({type, phoneRef, setButtonAction}: InputFormProps) => {
         label={t('general.phone')}
         value={phone}
         onChangeText={text => handlePhoneNumber(text)}
+        editable={!value ? true : false}
       />
     </View>
   );
