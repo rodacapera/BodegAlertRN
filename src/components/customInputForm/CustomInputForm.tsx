@@ -2,7 +2,7 @@ import {lightTheme} from '@src/hooks/lightMode';
 import {actualTheme} from '@src/types/contextTypes';
 import {InputFormProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Keyboard, View} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import PhoneInput from 'react-native-phone-input';
@@ -15,9 +15,7 @@ const CustomInputForm = ({
   value,
   code
 }: InputFormProps) => {
-  console.log('value', value, 'code', code);
-
-  const [phone, setPhone] = useState(value ?? '');
+  const [phone, setPhone] = useState<string>();
   const [focusPhone, setFocusPhone] = useState(false);
   const {colors} = actualTheme();
 
@@ -33,6 +31,10 @@ const CustomInputForm = ({
     });
     setPhone(text);
   };
+
+  useEffect(() => {
+    value && setPhone(value);
+  }, [value]);
 
   return (
     <View
@@ -75,7 +77,8 @@ const CustomInputForm = ({
         textColor={colors.onSurface}
         theme={{
           colors: {
-            primary: colors.error
+            primary: colors.error,
+            onSurfaceVariant: colors.onSurface
           }
         }}
         onFocus={() => setFocusPhone(true)}
@@ -91,7 +94,7 @@ const CustomInputForm = ({
         label={t('general.phone')}
         value={phone}
         onChangeText={text => handlePhoneNumber(text)}
-        editable={!value ? true : false}
+        // editable={!value ? true : false}
       />
     </View>
   );

@@ -115,8 +115,6 @@ export const timerCount = (
           setCounter(newCount);
         }
       }, 1000);
-    } else {
-      console.log('exist interval');
     }
   }
 };

@@ -2,7 +2,6 @@ import AsyncStorage, {
   useAsyncStorage
 } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
-import {useDrawerStatus} from '@react-navigation/drawer';
 import {DrawerActions, StackActions} from '@react-navigation/native';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {
@@ -13,7 +12,6 @@ import {
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Logos} from '@src/types/imageTypes';
-import {UseGetUser} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
 

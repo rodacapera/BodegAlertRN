@@ -32,7 +32,13 @@ export interface ProviderDatum {
 
 export interface GetUserData {
   user: User | undefined;
-  images: Images[];
+  panicsObserver: any;
+  employeesObserver: any;
+  buttonsObserver: any;
+}
+
+export interface OldData {
+  user: User;
   panicsObserver: any;
   employeesObserver: any;
   buttonsObserver: any;

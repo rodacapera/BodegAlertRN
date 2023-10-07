@@ -15,7 +15,7 @@ export const Notify = () => {
     <SafeAreaView style={backgroundStyle}>
       <CustomBanner
         visible={true}
-        text={t('buttonsView.banner')}
+        text={t('notifyView.banner')}
         icon="security"
       />
       <ScrollView contentContainerStyle={notifyStyles.container}>

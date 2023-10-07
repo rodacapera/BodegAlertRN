@@ -115,6 +115,7 @@ export type CustomLoaderProps = {
   label: string;
   visible: boolean;
   size?: 'small' | 'large';
+  dots?: boolean;
 };
 
 export type CustomFabStyles =

@@ -73,7 +73,6 @@ const useGetUser = () => {
     panics,
     employees,
     counterEmployees,
-    images: currentData?.images,
     isLoading,
     error,
     buttons,

@@ -66,3 +66,25 @@ export interface UseGetUser {
   buttons: Buttons[];
   counterButtons: number;
 }
+
+export type DataKey =
+  | 'address'
+  | 'administrator'
+  | 'alias'
+  | 'avatar'
+  | 'city'
+  | 'countryCode'
+  | 'created'
+  | 'date'
+  | 'departament'
+  | 'devices'
+  | 'email'
+  | 'lastname'
+  | 'location'
+  | 'name'
+  | 'pay'
+  | 'phone'
+  | 'shop'
+  | 'type'
+  | 'user_uid'
+  | 'zipcode';

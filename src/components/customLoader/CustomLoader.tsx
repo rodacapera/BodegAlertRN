@@ -3,7 +3,7 @@ import {CustomLoaderProps} from '@src/types/globalTypes';
 import {Fragment} from 'react';
 import {ActivityIndicator, Caption} from 'react-native-paper';
 
-const CustomLoader = ({label, visible, size}: CustomLoaderProps) => {
+const CustomLoader = ({label, visible, size, dots}: CustomLoaderProps) => {
   const {colors} = actualTheme();
   return visible ? (
     <Fragment>
@@ -13,7 +13,8 @@ const CustomLoader = ({label, visible, size}: CustomLoaderProps) => {
         size={size ?? 'small'}
       />
       <Caption style={{color: colors.onSurface, fontWeight: 'bold'}}>
-        {label}...
+        {label}
+        {dots ? '...' : ''}
       </Caption>
     </Fragment>
   ) : (
