@@ -2,7 +2,7 @@ import CustomIcon from '@src/components/customIcon/CustomIcon';
 import CustomInputForm from '@src/components/customInputForm/CustomInputForm';
 import CustomLoader from '@src/components/customLoader/CustomLoader';
 import {actualTheme} from '@src/types/contextTypes';
-import {useRef} from 'react';
+import {Fragment, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
   KeyboardAvoidingView,
@@ -97,44 +97,50 @@ const UserForm = () => {
           value={user?.email ?? ''}
           onChangeText={text => handleOnchangeInput(text as never, 'email')}
         />
-        <TextInput
-          label={t('adminFormView.aliasName')}
-          style={registerStyles.input}
-          theme={theme}
-          left={
-            <TextInput.Icon
-              icon={() => (
-                <CustomIcon
-                  name={'home'}
-                  font={'awesome'}
-                  color={colors.onSurface}
-                  size={28}
+        {user?.administrator && (
+          <Fragment>
+            <TextInput
+              label={t('adminFormView.aliasName')}
+              style={registerStyles.input}
+              theme={theme}
+              left={
+                <TextInput.Icon
+                  icon={() => (
+                    <CustomIcon
+                      name={'home'}
+                      font={'awesome'}
+                      color={colors.onSurface}
+                      size={28}
+                    />
+                  )}
                 />
-              )}
+              }
+              value={user?.alias ?? ''}
+              onChangeText={text => handleOnchangeInput(text as never, 'alias')}
             />
-          }
-          value={user?.alias ?? ''}
-          onChangeText={text => handleOnchangeInput(text as never, 'alias')}
-        />
-        <TextInput
-          label={t('adminFormView.address')}
-          style={registerStyles.input}
-          theme={theme}
-          left={
-            <TextInput.Icon
-              icon={() => (
-                <CustomIcon
-                  name={'map-marker'}
-                  font={'awesome'}
-                  color={colors.onSurface}
-                  size={28}
+            <TextInput
+              label={t('adminFormView.address')}
+              style={registerStyles.input}
+              theme={theme}
+              left={
+                <TextInput.Icon
+                  icon={() => (
+                    <CustomIcon
+                      name={'map-marker'}
+                      font={'awesome'}
+                      color={colors.onSurface}
+                      size={28}
+                    />
+                  )}
                 />
-              )}
+              }
+              value={user?.address ?? ''}
+              onChangeText={text =>
+                handleOnchangeInput(text as never, 'address')
+              }
             />
-          }
-          value={user?.address ?? ''}
-          onChangeText={text => handleOnchangeInput(text as never, 'address')}
-        />
+          </Fragment>
+        )}
         <View style={[registerStyles.footer]}>
           <View style={registerStyles.contentFooterText}>
             <Text

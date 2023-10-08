@@ -94,7 +94,7 @@ const CustomInputForm = ({
         label={t('general.phone')}
         value={phone}
         onChangeText={text => handlePhoneNumber(text)}
-        // editable={!value ? true : false}
+        editable={!value ? true : false}
       />
     </View>
   );
