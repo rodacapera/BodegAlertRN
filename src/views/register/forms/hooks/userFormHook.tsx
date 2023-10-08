@@ -16,11 +16,8 @@ const userFormHook = () => {
   const userData = getUserQuery();
   const {colors, dark} = actualTheme();
   const navigation = useNavigation<StackNavigation>();
-
   const [user, setUser] = useState<User>();
   const {isLoading, isSuccess, error, mutate, data} = updateUserQuery();
-
-  const isLoadingUserData = userData.isLoading;
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);
 
@@ -60,7 +57,6 @@ const userFormHook = () => {
 
   return {
     user,
-    isLoadingUserData,
     setCurrentButtonAction,
     handleOnchangeInput,
     handleEditUser,

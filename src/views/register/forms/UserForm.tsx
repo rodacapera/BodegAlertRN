@@ -25,7 +25,6 @@ const UserForm = () => {
 
   const {
     user,
-    isLoadingUserData,
     setCurrentButtonAction,
     handleOnchangeInput,
     handleEditUser,

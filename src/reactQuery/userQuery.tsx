@@ -105,6 +105,7 @@ export const updateUserQuery = () => {
   const queryClient = useQueryClient();
   const responseMutation = useMutation({
     mutationFn: (user: User) => editUserFirebase(user),
+    retry: true,
     onSuccess: async data => {
       const newData = (await dataSetUser(data)) as OldData;
       queryClient.setQueryData(['user'], () => newData);
