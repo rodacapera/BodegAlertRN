@@ -16,7 +16,7 @@ i18n.use(initReactI18next).init({
         drawer: {
           home: 'Home',
           profile: 'Profile',
-          employees: 'Employees',
+          users: 'Users',
           buttons: 'Buttons',
           preferences: 'Preferences',
           darkTheme: 'Dark theme',
@@ -26,24 +26,24 @@ i18n.use(initReactI18next).init({
         },
         employeesView: {
           banner:
-            'Below you will find a list of the employees registered in your store, which you can delete or add using the floating button!',
+            'Below you will find a list of the users registered in your shop/residence, which you can delete or add using the floating button!',
           employeeNotFound:
-            'We have not found any employees registered to your store, we invite you to watch the following video to learn how to register one',
+            'We have not found any users registered to your shop/residence, we invite you to watch the following video to learn how to register one',
           alertTitleErrorDeleteUser: 'Remove user',
           alertDescriptionErrorDeleteUser:
             'Are you sure you want to delete this user, if so press Ok button.'
         },
         notifyView: {
           banner:
-            'Below you will find a list of the notify registered in your store!',
+            'Below you will find a list of the notify registered in your shop/residence!',
           notifyNotFound:
-            'We have not found any notify registered to your store'
+            'We have not found any notify registered to your shop/residence'
         },
         buttonsView: {
           banner:
-            'Below you will find a list of the buttons registered in your store, which you can remove or add using the floating button!',
+            'Below you will find a list of the buttons registered in your shop/residence, which you can remove or add using the floating button!',
           employeeNotFound:
-            'We have not found any buttons registered to your store, we invite you to watch the following video to learn how to create one',
+            'We have not found any buttons registered to your shop/residence, we invite you to watch the following video to learn how to create one',
           alertTitleErrorDeleteUser: 'Remove button',
           alertDescriptionErrorDeleteUser:
             'Are you sure you want to delete this button, if so press Ok button.'
@@ -119,7 +119,7 @@ i18n.use(initReactI18next).init({
         },
         qrModal: {
           helperTitleQr:
-            'Ask your collaborator to scan this code from their app in order to be able to to be able to register to your store!',
+            'Ask your collaborator to scan this code from their app in order to be able to to be able to register to your shop/residence!',
           helperFooterQrFirst: `Learn how it's done, click`
         },
         buttonsModal: {
@@ -152,34 +152,34 @@ i18n.use(initReactI18next).init({
         drawer: {
           home: 'Inicio',
           profile: 'Perfil',
-          employees: 'Empleados',
+          users: 'Usuarios',
           buttons: 'Botones',
           preferences: 'Preferencias',
           darkTheme: 'Modo oscuro',
           supportingEntities: 'Entidades que apoyan',
-          shopName: 'Nombre de la tienda',
+          shopName: 'Nombre de la tienda/residencia',
           notify: 'Notificaciones'
         },
         employeesView: {
           banner:
-            'A continuación encontraras una lista de los empleados registrados en tu tienda, los cuales podrás eliminar o en su defecto agregar utilizando el botón flotante!',
+            'A continuación encontraras una lista de los empleados registrados en tu tienda/residencia, los cuales podrás eliminar o en su defecto agregar utilizando el botón flotante!',
           employeeNotFound:
-            'No hemos encontrado empleados registrados a tu tienda, te invitamos a ver el siguiente video para que aprendas como debes registrar uno',
+            'No hemos encontrado empleados registrados a tu tienda/residencia, te invitamos a ver el siguiente video para que aprendas como debes registrar uno',
           alertTitleErrorDeleteUser: 'Eliminar usuario',
           alertDescriptionErrorDeleteUser:
             'Está seguro de eliminar este usuario?, si es así presione el boton OK.'
         },
         notifyView: {
           banner:
-            'Below you will find a list of the notify registered in your store!',
+            'Below you will find a list of the notify registered in your shop/residence!',
           notifyNotFound:
-            'We have not found any notify registered to your store'
+            'We have not found any notify registered to your shop/residence'
         },
         buttonsView: {
           banner:
-            'A continuación encontrará una lista de los botones registrados en su tienda, que puede eliminar o añadir utilizando el botón flotante!',
+            'A continuación encontrará una lista de los botones registrados en su tienda/residencia, que puede eliminar o añadir utilizando el botón flotante!',
           employeeNotFound:
-            'No hemos encontrado ningún botón registrado en su tienda, le invitamos a ver el siguiente vídeo para aprender a crear uno',
+            'No hemos encontrado ningún botón registrado en su tienda/residencia, le invitamos a ver el siguiente vídeo para aprender a crear uno',
           alertTitleErrorDeleteUser: 'Remove button',
           alertDescriptionErrorDeleteUser:
             '¿Está seguro de que desea eliminar este botón, si es así pulse el botón Ok.'
@@ -199,7 +199,7 @@ i18n.use(initReactI18next).init({
           city: 'Ciudad',
           country: 'Country',
           state: 'Estado/Departamento',
-          aliasName: 'Alias de la tienda'
+          aliasName: 'Alias de la tienda/residencia'
         },
         registerView: {
           titleCreateAccountAdmin: 'Crear una cuenta',
@@ -256,7 +256,7 @@ i18n.use(initReactI18next).init({
         },
         qrModal: {
           helperTitleQr:
-            'Pidele a tu colaborador que escannee este código desde su app para poder registrarse a tu tienda!',
+            'Pidele a tu colaborador que escannee este código desde su app para poder registrarse a tu tienda/residencia!',
           helperFooterQrFirst: 'Conocer como se hace, click'
         },
         buttonsModal: {

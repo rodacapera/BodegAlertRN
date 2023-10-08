@@ -74,7 +74,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
                   drawerComponentStyles.caption,
                   {color: colors.onSurfaceDisabled}
                 ]}>
-                {t('drawer.employees')}
+                {t('drawer.users')}
               </Caption>
             </View>
           )}
@@ -137,7 +137,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
             />
           )}
           labelStyle={{color: colors.onSurface}}
-          label={t('drawer.employees')}
+          label={t('drawer.users')}
           onPress={() => navigation.navigate('Employees')}
         />
         <DrawerItem
