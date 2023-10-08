@@ -1,9 +1,8 @@
-import {useNavigation} from '@react-navigation/native';
 import CustomIcon from '@src/components/customIcon/CustomIcon';
 import CustomInputForm from '@src/components/customInputForm/CustomInputForm';
+import CustomLoader from '@src/components/customLoader/CustomLoader';
 import {actualTheme} from '@src/types/contextTypes';
-import {StackNavigation} from '@src/types/globalTypes';
-import {Fragment, useRef} from 'react';
+import {useRef} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
   KeyboardAvoidingView,
@@ -15,8 +14,6 @@ import {
 import {Button, Caption, TextInput} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
 import {userFormHook} from './hooks/userFormHook';
-import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
-import CustomLoader from '@src/components/customLoader/CustomLoader';
 
 const UserForm = () => {
   const {t} = useTranslation();

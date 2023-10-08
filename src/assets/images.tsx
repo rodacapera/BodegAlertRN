@@ -15,3 +15,4 @@ export const pin = require('./icons/pin.png');
 export const house = require('./icons/house.png');
 export const shop = require('./icons/shop.png');
 export const shop1 = require('./icons/shop1.png');
+export const avatar = require('./icons/avatar.png');

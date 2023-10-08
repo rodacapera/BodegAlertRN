@@ -20,6 +20,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {drawerComponentHook} from './hook/drawerComponentHook';
 import {drawerComponentStyles} from './styles/drawerComponentStyles';
 import {useNavigation} from '@react-navigation/native';
+import {avatar} from '@src/assets/images';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const navigation = useNavigation() as StackNavigation;
@@ -33,7 +34,8 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     logos,
     counterEmployees,
     counterButtons,
-    isLoading
+    isLoading,
+    imageAvatar
   } = drawerComponentHook(navigation);
 
   return isLoading ? (
@@ -48,12 +50,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
         barStyle={isDark ? 'light-content' : 'dark-content'}
       />
       <View style={drawerComponentStyles.userInfoSection}>
-        <Avatar.Image
-          source={{
-            uri: 'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg'
-          }}
-          size={50}
-        />
+        <Avatar.Image source={imageAvatar} size={50} />
         <Title style={[drawerComponentStyles.title, {color: colors.onSurface}]}>
           {user?.name} {user?.lastname}
         </Title>

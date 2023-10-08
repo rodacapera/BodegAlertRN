@@ -3,6 +3,7 @@ import AsyncStorage, {
 } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import {DrawerActions, StackActions} from '@react-navigation/native';
+import {avatar} from '@src/assets/images';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {
   getCompanyImagesQuery,
@@ -59,6 +60,12 @@ const drawerComponentHook = (navigation: StackNavigation) => {
       : setIsDark(dark ? true : false);
   };
 
+  const imageAvatar = user?.avatar
+    ? {
+        uri: user?.avatar
+      }
+    : avatar;
+
   useEffect(() => {
     images && setLogos(images as Logos[]);
   }, [images]);
@@ -84,7 +91,8 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     logos,
     counterEmployees,
     counterButtons,
-    isLoading
+    isLoading,
+    imageAvatar
   };
 };
 
