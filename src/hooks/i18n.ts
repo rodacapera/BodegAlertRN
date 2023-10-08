@@ -63,7 +63,7 @@ i18n.use(initReactI18next).init({
           city: 'City',
           country: 'Country',
           state: 'State',
-          aliasName: 'Alias Shop'
+          aliasName: 'Alias Shop/Residence'
         },
         registerView: {
           titleCreateAccountAdmin: 'Create an account',
