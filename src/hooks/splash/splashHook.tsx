@@ -7,7 +7,7 @@ const splashHook = async ({route, navigation}: SplashProps) => {
 
   if (appInit !== null) {
     if (user) {
-      navigation.navigate('Home');
+      navigation.navigate('Home', {isLogin: false, isBack: true});
     } else {
       navigation.navigate('LoginSplash');
     }

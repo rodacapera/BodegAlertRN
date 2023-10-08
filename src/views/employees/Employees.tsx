@@ -10,7 +10,6 @@ import {SafeAreaView, View} from 'react-native';
 import UsersNotFound from './components/UsersNotFound';
 import {employeesHook} from './hooks/employeesHook';
 import {employeeStyles} from './styles/employeesStyles';
-import {useIsFocused} from '@react-navigation/native';
 
 const Employees = ({navigation, route}: EmployeesProps) => {
   const {

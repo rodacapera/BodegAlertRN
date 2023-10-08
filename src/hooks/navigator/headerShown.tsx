@@ -1,4 +1,3 @@
-import {NavigationProp} from '@react-navigation/native';
 import {StackNavigation} from '@src/types/globalTypes';
 
 export const headerShown = ({
