@@ -1,15 +1,16 @@
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {getUseAuth, updateUserAuth} from '@src/hooks/auth/useAuth';
 import {
   getButtonsFirebase,
   getCompanyImagesFirebase,
   getEmployeesFirebase,
-  getPanicsFirebase
+  getPanicsFirebase,
+  getShopFirebase
 } from '@src/hooks/firebase/company/company';
-import {GetUserData, OldData, SetUserAuthParams} from '@src/types/auth';
+import {editUserFirebase} from '@src/hooks/firebase/user/user';
+import {OldData, SetUserAuthParams} from '@src/types/auth';
 import {Logos} from '@src/types/imageTypes';
 import {Panics, User} from '@src/types/userTypes';
-import {editUserFirebase} from '@src/hooks/firebase/user/user';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
 //set data
 
@@ -18,16 +19,6 @@ export const setEmployeesQuery = (employees: User[]) => {
     queryKey: ['employees'],
     queryFn: async () => {
       return employees;
-    }
-  });
-  return query;
-};
-
-export const setPanicsQuery = (panics: Panics[]) => {
-  const query = useQuery({
-    queryKey: ['panics'],
-    queryFn: async () => {
-      return panics;
     }
   });
   return query;
@@ -43,6 +34,25 @@ export const setCompanyImagesQuery = () => {
         ((await getCompanyImagesFirebase(resultAuth.user.city)) as Logos[])
       );
     }
+  });
+  return query;
+};
+
+export const setPanicsQuery = (panics: Panics[]) => {
+  const query = useQuery({
+    queryKey: ['panics'],
+    queryFn: async () => {
+      return panics;
+    }
+  });
+  return query;
+};
+
+export const setShopQuery = (doc: string | undefined) => {
+  const query = useQuery({
+    queryKey: ['shop'],
+    queryFn: async () => await getShopFirebase(doc!),
+    enabled: !!doc
   });
   return query;
 };
@@ -92,6 +102,9 @@ export const getEmployeesQuery = () =>
 
 export const getPanicsQuery = () =>
   useQuery(['panics'], {refetchOnWindowFocus: false});
+
+export const getShopQuery = () =>
+  useQuery(['shop'], {refetchOnWindowFocus: false});
 
 export const getCompanyImagesQuery = () =>
   useQuery(['companyImages'], {

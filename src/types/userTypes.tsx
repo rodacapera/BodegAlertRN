@@ -1,4 +1,5 @@
 import {Logos} from './imageTypes';
+import {location} from '../assets/images';
 
 export interface User {
   address: string;
@@ -65,6 +66,16 @@ export interface UseGetUser {
   error: boolean;
   buttons: Buttons[];
   counterButtons: number;
+}
+
+export interface Shop {
+  address: string;
+  alias: string;
+  countryCode: string;
+  location: Location;
+  nit: string;
+  phone: string;
+  zipcode: string;
 }
 
 export type DataKey =

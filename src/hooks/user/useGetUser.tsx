@@ -2,7 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   getUserQuery,
   setEmployeesQuery,
-  setPanicsQuery
+  setPanicsQuery,
+  setShopQuery
 } from '@src/reactQuery/userQuery';
 import {GetUserData} from '@src/types/auth';
 import {Buttons, Panics, User} from '@src/types/userTypes';
@@ -16,8 +17,10 @@ const useGetUser = () => {
   const [buttons, setButtons] = useState<Buttons[]>([]);
   const [counterButtons, setCounterButtons] = useState<number>();
   const [counterEmployees, setCounterEmployees] = useState<number>();
+  const [shopId, setShopId] = useState<string>();
   setEmployeesQuery(employees);
   setPanicsQuery(panics);
+  setShopQuery(shopId);
 
   const resultPanics = (documentSnapshot: any) => {
     setPanics([]);
@@ -64,6 +67,7 @@ const useGetUser = () => {
           resultButtons(documentSnapshot);
         }
       );
+      setShopId(currentData.user.shop.split('/')[1]);
       return () => (panicObserver(), employeesObserver(), buttonsObserver());
     }
   }, [currentData]);

@@ -36,7 +36,8 @@ export const loginFormStyles = StyleSheet.create({
   },
   loginButtonsContainer: {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    position: 'relative'
   },
   buttonLogin: {
     width: 250,

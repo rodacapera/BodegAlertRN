@@ -56,7 +56,7 @@ const OtpCode = ({
             }
           }}
           focusColor={dark ? colors.onSurface : colors.onPrimaryContainer}
-          onTextChange={text => handleChange(text, inputRef, setCode)}
+          onTextChange={(text: string) => handleChange(text, inputRef, setCode)}
           focusStickBlinkingDuration={500}
         />
         {errorOtp && <Text style={otpStyles.errorOtp}>{t('otp.error')}</Text>}

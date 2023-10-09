@@ -31,6 +31,7 @@ export type RootStackParamList = {
   Buttons: undefined;
   Employees: undefined;
   Notify: undefined;
+  QrScanner: undefined;
 };
 
 export type SelectedTypes = 'phone' | 'city';
@@ -62,6 +63,10 @@ export type EmployeesProps = NativeStackScreenProps<
 export type MyOnboardingProps = NativeStackScreenProps<
   RootStackParamList,
   'MyOnboarding'
+>;
+export type QrScannerProps = NativeStackScreenProps<
+  RootStackParamList,
+  'QrScanner'
 >;
 export type NotifyProps = NativeStackScreenProps<RootStackParamList, 'Notify'>;
 

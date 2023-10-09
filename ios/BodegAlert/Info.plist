@@ -20,6 +20,16 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+	<array>
+		<string>https://bodegalert.page.link/register</string>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>To be able to take a photo to upload it as a profile photo, you need to grant permissions to use the camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>In order to add a profile photo, you need to grant photo reading permissions</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To be able to upload audios it is necessary that you grant permissions to use the microphone</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -46,8 +56,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app needs location access when it is in the background, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
 	<key>NSLocationUsageDescription</key>
 	<string>This app needs access to location when open, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

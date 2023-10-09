@@ -10,6 +10,7 @@ import Profile from '@src/views/profile/Profile';
 import Register from '@src/views/register/Register';
 import LoginSplash from '../../views/login/LoginSplash';
 import Splash from '../../views/splash/Splash';
+import QrScanner from '@src/views/qrScanner/QrScanner';
 
 const NavigationProvider = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -89,6 +90,14 @@ const NavigationProvider = () => {
       <Stack.Screen
         name="Notify"
         component={Notify}
+        options={{
+          headerShown: false,
+          animation: 'slide_from_right'
+        }}
+      />
+      <Stack.Screen
+        name="QrScanner"
+        component={QrScanner}
         options={{
           headerShown: false,
           animation: 'slide_from_right'

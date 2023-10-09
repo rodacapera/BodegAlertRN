@@ -4,6 +4,7 @@ import {
   getCurrentPosition,
   requestLocationPermission
 } from '../locations/permissionsHook';
+import Geolocation from 'react-native-geolocation-service';
 
 const grantedAndroid = async (
   setVisible: (e: boolean) => void,
@@ -14,9 +15,12 @@ const grantedAndroid = async (
 };
 
 const grantedIos = async (setVisible: (e: boolean) => void, navigate: any) => {
-  const granted = await getCurrentPosition();
-  const isGrantedValid = granted.coords ? true : false;
-  isGranted(isGrantedValid, setVisible, navigate);
+  const status = await Geolocation.requestAuthorization('whenInUse');
+  if (status === 'granted') {
+    const granted = await getCurrentPosition();
+    const isGrantedValid = granted.coords ? true : false;
+    isGranted(isGrantedValid, setVisible, navigate);
+  }
 };
 
 const isGranted = async (
