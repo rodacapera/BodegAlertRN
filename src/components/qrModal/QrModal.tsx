@@ -8,8 +8,8 @@ import QRCode from 'react-native-qrcode-svg';
 import {logo_app} from '../../assets/images';
 import TextWithCustomLink from '../textWithCustomLink/TextWithCustomLink';
 import {qrModalStyles} from './styles/qrModalStyles';
-import {getShopQuery} from '@src/reactQuery/userQuery';
-import {Shop} from '@src/types/userTypes';
+import {getShopQuery, getUserQuery} from '@src/reactQuery/userQuery';
+import {Shop, User} from '@src/types/userTypes';
 import {getDynamicLinkFirebase} from '@src/hooks/firebase/company/company';
 import {useEffect, useState} from 'react';
 
@@ -17,12 +17,12 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
   const hideModal = () => setVisible(false);
   const [qrLink, setQrLink] = useState<string>();
   const {colors, theme} = actualTheme();
-  const {data} = getShopQuery();
+  const {data} = getUserQuery();
 
   const getQrLink = async () => {
-    const shop = data as Shop;
-    const result = await getDynamicLinkFirebase(JSON.stringify(shop));
-    console.log('result', result);
+    const user = data.user as unknown as User;
+    const shop_id = user.shop.split('/')[1];
+    const result = await getDynamicLinkFirebase(shop_id);
     setQrLink(result);
   };
 

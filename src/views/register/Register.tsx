@@ -10,7 +10,7 @@ import {registerStyles} from './styles/registerStyles';
 
 const Register = ({navigation, route}: RegisterProps) => {
   const {t} = useTranslation();
-  const {administrator} = route.params;
+  const {administrator, qr} = route.params;
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -22,7 +22,7 @@ const Register = ({navigation, route}: RegisterProps) => {
               : t('registerView.titleCreateAccountUser')
           }
         />
-        {administrator ? <AdminForm /> : <UserForm />}
+        {administrator ? <AdminForm /> : <UserForm qr={qr} />}
       </View>
     </SafeAreaView>
   );

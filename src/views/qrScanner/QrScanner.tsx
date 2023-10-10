@@ -1,11 +1,14 @@
-import {View, Text, SafeAreaView} from 'react-native';
-import QrScan from '../login/components/QrScan';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
+import {SafeAreaView, View} from 'react-native';
+import QrScan from '../login/components/QrScan';
+import {qrScanStyles} from './styles/qrscanStyles';
 
 const QrScanner = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
-      <QrScan />
+      <View style={qrScanStyles.viewContainer}>
+        <QrScan />
+      </View>
     </SafeAreaView>
   );
 };

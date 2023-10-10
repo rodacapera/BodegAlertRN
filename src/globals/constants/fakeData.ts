@@ -1,3 +1,5 @@
+import {User} from '@src/types/userTypes';
+
 export const shop = {
   address: 'cl 10 86 90',
   city: 'Ibagué',
@@ -62,3 +64,44 @@ export const qrLink = 'http://awesome.link.qr'; //get url to user data from fire
 export const userNotFoundVideoUrl = 'https://www.google.com'; //get video from youtube
 export const addUserVideo = 'https://www.google.com'; //get video from youtube
 export const addButton = 'https://www.google.com'; //get video from youtube
+
+export const userInitialData = {
+  user: undefined,
+  panicsObserver: undefined,
+  employeesObserver: undefined,
+  buttonsObserver: undefined
+};
+export const shopInitialData = {
+  address: undefined,
+  alias: undefined,
+  city: undefined,
+  countryCode: undefined,
+  department: undefined,
+  location: undefined,
+  nit: undefined,
+  phone: undefined,
+  zipcode: undefined
+};
+
+export const userFakeData = {
+  address: null,
+  administrator: null,
+  alias: null,
+  avatar: null,
+  city: null,
+  countryCode: null,
+  created: null,
+  date: null,
+  departament: null,
+  devices: [],
+  email: null,
+  lastname: null,
+  location: null,
+  name: null,
+  pay: false,
+  phone: null,
+  shop: null,
+  type: null,
+  user_uid: null,
+  zipcode: null
+} as unknown as User;

@@ -15,7 +15,7 @@ import {Button, Caption, TextInput} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
 import {userFormHook} from './hooks/userFormHook';
 
-const UserForm = () => {
+const UserForm = ({qr}: {qr?: boolean}) => {
   const {t} = useTranslation();
   const phoneRef = useRef<any>();
   const {colors, theme, dark} = actualTheme();
@@ -26,8 +26,10 @@ const UserForm = () => {
     handleOnchangeInput,
     handleEditUser,
     isLoading,
-    error
+    error,
+    shop
   } = userFormHook();
+  console.log('user phone param', user?.phone);
 
   return (
     <KeyboardAvoidingView
@@ -42,6 +44,7 @@ const UserForm = () => {
           type="phone"
           value={user?.phone.slice(3)}
           code={user?.countryCode.toLowerCase()}
+          qr={qr}
         />
         <TextInput
           label={t('adminFormView.names')}
@@ -154,7 +157,7 @@ const UserForm = () => {
                   : colors.onSurfaceDisabled,
                 fontSize: 16
               }}>
-              {user?.address}
+              {shop?.address}
             </Caption>
           </View>
           <View style={registerStyles.contentFooterText}>
@@ -170,7 +173,7 @@ const UserForm = () => {
                 fontSize: 16,
                 textTransform: 'capitalize'
               }}>
-              {user?.city}
+              {shop?.city}
             </Caption>
           </View>
           <View style={registerStyles.contentFooterText}>
@@ -186,7 +189,7 @@ const UserForm = () => {
                 fontSize: 16,
                 textTransform: 'capitalize'
               }}>
-              {user?.departament}
+              {shop?.department}
             </Caption>
           </View>
           <View style={registerStyles.contentFooterText}>
@@ -202,7 +205,7 @@ const UserForm = () => {
                 fontSize: 16,
                 textTransform: 'capitalize'
               }}>
-              {user?.alias}
+              {shop?.alias}
             </Caption>
           </View>
         </View>

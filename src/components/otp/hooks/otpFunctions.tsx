@@ -70,6 +70,8 @@ export const handleSendOtp = async (
   buttonAction: LoginFormAction,
   setSendOtpCode: (e: boolean) => void
 ) => {
+  console.log('button pone', buttonAction.phone);
+
   const confirmation = await useLoginFirebase(buttonAction.phone);
   buttonAction.confirmation = confirmation;
   AsyncStorage.setItem('@otp', JSON.stringify(true));

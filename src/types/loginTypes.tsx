@@ -20,6 +20,7 @@ export type InputFormProps = {
   setButtonAction: (data: LoginFormAction) => void;
   value?: string;
   code?: string;
+  qr?: boolean;
 };
 
 export type LoginFormProps = {

@@ -1,6 +1,7 @@
 import {firebase} from '@react-native-firebase/dynamic-links';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import {Shop, User} from '@src/types/userTypes';
 
 export const getEmployeesFirebase = (shop: any) => {
   const dbUser = firestore().collection('users').where('shop', '==', shop);
@@ -37,9 +38,9 @@ export const getButtonsFirebase = (shop: any) => {
   return dbPanics;
 };
 
-export const getDynamicLinkFirebase = async (shop: string) => {
+export const getDynamicLinkFirebase = async (shop_id: string) => {
   const link = await firebase.dynamicLinks().buildLink({
-    link: 'https://orlyvisions.vercel.app/dynamiclink/?view=Register&shop=111',
+    link: `https://orlyvisions.vercel.app/dynamiclink/?view=Register&id_shop=${shop_id}`,
     domainUriPrefix: 'https://bodegalert.page.link',
     android: {
       packageName: 'io.cordova.alarmu',
@@ -52,5 +53,7 @@ export const getDynamicLinkFirebase = async (shop: string) => {
       fallbackUrl: 'https://apps.apple.com/us/app/bodegalert/id1428944146'
     }
   });
+  console.log('linkooooo', link);
+
   return link;
 };

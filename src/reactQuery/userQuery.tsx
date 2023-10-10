@@ -1,3 +1,7 @@
+import {
+  shopInitialData,
+  userInitialData
+} from '@src/globals/constants/fakeData';
 import {getUseAuth, updateUserAuth} from '@src/hooks/auth/useAuth';
 import {
   getButtonsFirebase,
@@ -59,9 +63,9 @@ export const setShopQuery = (doc: string | undefined) => {
 
 const dataSetUser = async (data?: User) => {
   const userAuth = await getUseAuth();
-  const resultAuth = userAuth as SetUserAuthParams;
-  const user = data ?? resultAuth.user;
-  if (user) {
+  if (userAuth) {
+    const resultAuth = userAuth as SetUserAuthParams;
+    const user = data ?? resultAuth.user;
     const panicsObserver = getPanicsFirebase();
     const employeesObserver = getEmployeesFirebase(user.shop);
     const buttonsObserver = getButtonsFirebase(user.shop);
@@ -72,8 +76,9 @@ const dataSetUser = async (data?: User) => {
       buttonsObserver
     };
     return userData;
+  } else {
+    return userInitialData;
   }
-  return null;
 };
 
 export const setUserQuery = (data?: User) => {
@@ -89,12 +94,7 @@ export const setUserQuery = (data?: User) => {
 export const getUserQuery = () =>
   useQuery(['user'], {
     refetchOnWindowFocus: false,
-    initialData: {
-      user: undefined,
-      panicsObserver: undefined,
-      employeesObserver: undefined,
-      buttonsObserver: undefined
-    }
+    initialData: userInitialData
   });
 
 export const getEmployeesQuery = () =>
@@ -104,7 +104,9 @@ export const getPanicsQuery = () =>
   useQuery(['panics'], {refetchOnWindowFocus: false});
 
 export const getShopQuery = () =>
-  useQuery(['shop'], {refetchOnWindowFocus: false});
+  useQuery(['shop'], {
+    refetchOnWindowFocus: false
+  });
 
 export const getCompanyImagesQuery = () =>
   useQuery(['companyImages'], {

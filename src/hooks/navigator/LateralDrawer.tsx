@@ -12,6 +12,7 @@ export const LateralDrawer = () => {
   const MyDrawer = createDrawerNavigator();
   const {colors, theme, dark} = actualTheme();
   const {} = LateralDrawerHook();
+
   return (
     <NavigationContainer theme={theme}>
       <MyDrawer.Navigator

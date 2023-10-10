@@ -3,7 +3,7 @@ import AsyncStorage, {
 } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import {DrawerActions, StackActions} from '@react-navigation/native';
-import {avatar} from '@src/assets/images';
+import {avatar, avatarw} from '@src/assets/images';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {
   getCompanyImagesQuery,
@@ -19,7 +19,6 @@ import {Appearance} from 'react-native';
 const drawerComponentHook = (navigation: StackNavigation) => {
   setUserQuery();
   setCompanyImagesQuery();
-  // const isDrawerOpened = useDrawerStatus();
   const {colors, theme} = actualTheme();
   const {getItem} = useAsyncStorage('@theme');
   const {setDarkTheme, setLightTheme, dark} = actualTheme();
@@ -64,7 +63,9 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     ? {
         uri: user?.avatar
       }
-    : avatar;
+    : dark
+    ? avatar
+    : avatarw;
 
   useEffect(() => {
     images && setLogos(images as Logos[]);

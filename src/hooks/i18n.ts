@@ -144,6 +144,10 @@ i18n.use(initReactI18next).init({
           errorDistanceTitle: 'Shipping error!',
           errorDistanceDescription:
             'Apparently you are out of coverage to send the notification.'
+        },
+        qrScan: {
+          title:
+            'Scan the QR and register your data to send your first support notify!'
         }
       }
     },
@@ -282,6 +286,10 @@ i18n.use(initReactI18next).init({
           errorDistanceTitle: 'Error de envío!',
           errorDistanceDescription:
             'Al parecer estás fuera de cobertura para enviar la notificación.'
+        },
+        qrScan: {
+          title:
+            'Scan the QR and register your data to send your first support notify!'
         }
       }
     },

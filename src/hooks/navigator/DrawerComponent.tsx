@@ -3,6 +3,7 @@ import {
   DrawerContentScrollView,
   DrawerItem
 } from '@react-navigation/drawer';
+import {useNavigation} from '@react-navigation/native';
 import {shop} from '@src/globals/constants/fakeData';
 import {StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
@@ -19,8 +20,6 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {drawerComponentHook} from './hook/drawerComponentHook';
 import {drawerComponentStyles} from './styles/drawerComponentStyles';
-import {useNavigation} from '@react-navigation/native';
-import {avatar} from '@src/assets/images';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const navigation = useNavigation() as StackNavigation;
@@ -50,7 +49,16 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
         barStyle={isDark ? 'light-content' : 'dark-content'}
       />
       <View style={drawerComponentStyles.userInfoSection}>
-        <Avatar.Image source={imageAvatar} size={50} />
+        <Avatar.Image
+          theme={{
+            colors: {
+              primary: isDark ? 'white' : 'black'
+            }
+          }}
+          // style={{backgroundColor: colors.onBackground}}
+          source={imageAvatar}
+          size={50}
+        />
         <Title style={[drawerComponentStyles.title, {color: colors.onSurface}]}>
           {user?.name} {user?.lastname}
         </Title>

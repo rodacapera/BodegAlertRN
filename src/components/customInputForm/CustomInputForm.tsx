@@ -13,7 +13,8 @@ const CustomInputForm = ({
   phoneRef,
   setButtonAction,
   value,
-  code
+  code,
+  qr
 }: InputFormProps) => {
   const [phone, setPhone] = useState<string>();
   const [focusPhone, setFocusPhone] = useState(false);
@@ -21,7 +22,8 @@ const CustomInputForm = ({
 
   const handlePhoneNumber = (text: string) => {
     let myPhone = phoneRef.current.getCountryCode();
-    myPhone = `+${myPhone} ${text}`;
+    myPhone = `+${myPhone}${text}`;
+
     setButtonAction({
       name: 'login',
       show: false,
@@ -94,7 +96,7 @@ const CustomInputForm = ({
         label={t('general.phone')}
         value={phone}
         onChangeText={text => handlePhoneNumber(text)}
-        editable={!value ? true : false}
+        editable={!value ? true : qr ? true : false}
       />
     </View>
   );

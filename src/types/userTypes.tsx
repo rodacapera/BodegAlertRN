@@ -69,6 +69,7 @@ export interface UseGetUser {
 }
 
 export interface Shop {
+  city: string;
   address: string;
   alias: string;
   countryCode: string;
@@ -76,6 +77,7 @@ export interface Shop {
   nit: string;
   phone: string;
   zipcode: string;
+  department: string;
 }
 
 export type DataKey =

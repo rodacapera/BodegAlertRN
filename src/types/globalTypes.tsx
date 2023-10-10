@@ -13,6 +13,7 @@ export type ShopProps = {
 export type RegisterParams = {
   administrator: boolean;
   shop?: ShopProps;
+  qr?: boolean;
 };
 
 export type HomeParams = {

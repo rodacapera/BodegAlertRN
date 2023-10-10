@@ -6,12 +6,9 @@ import {t} from 'i18next';
 import {View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {loginFormStyles} from '../styles/loginFormStyles';
-import QrScan from './QrScan';
-import {Fragment, useState} from 'react';
 
 const Buttons = ({setButtonAction, currentButtonAction}: LoginButtonsProps) => {
   const {navigate} = useNavigation<StackNavigation>();
-  const [qrOpen, setQrOpen] = useState(false);
   const {colors, theme} = actualTheme();
 
   return (
