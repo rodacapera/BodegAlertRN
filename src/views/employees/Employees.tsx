@@ -10,6 +10,7 @@ import {SafeAreaView, View} from 'react-native';
 import UsersNotFound from './components/UsersNotFound';
 import {employeesHook} from './hooks/employeesHook';
 import {employeeStyles} from './styles/employeesStyles';
+import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 
 const Employees = ({navigation, route}: EmployeesProps) => {
   const {
@@ -18,18 +19,21 @@ const Employees = ({navigation, route}: EmployeesProps) => {
     setVisible,
     alertVisible,
     removeItem,
-    setAlertVisible
+    setAlertVisible,
+    isLoading
   } = employeesHook();
 
-  return (
+  return isLoading ? (
+    <CustomLoadingOverlay visible />
+  ) : (
     <SafeAreaView style={backgroundStyle}>
       <CustomBanner
-        visible={employees.length > 0 ? true : false}
+        visible={true}
         text={t('employeesView.banner')}
         icon="account-group-outline"
       />
       <View style={employeeStyles.container}>
-        {employees.length <= 1 && <UsersNotFound />}
+        {employees.length < 1 && <UsersNotFound />}
         {employees.map(
           (value, index) =>
             !value.administrator && (

@@ -4,7 +4,7 @@ export const confirmCode = async (
 ) => {
   try {
     const resultConfirm = await confirm.confirm(code);
-    console.log('resultConfirm', resultConfirm);
+    console.debug('resultConfirm', resultConfirm);
   } catch (error) {
     console.error('Invalid code.');
   }

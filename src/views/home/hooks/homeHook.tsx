@@ -56,12 +56,6 @@ const homeHook = () => {
   const setMyCurrentLocation = () => setRegion(shopLocation);
 
   useEffect(() => {
-    if (user) {
-      setMyCurrentLocation();
-    }
-  }, [user]);
-
-  useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () =>
       backAction(navigation)
     );
@@ -84,7 +78,8 @@ const homeHook = () => {
         titleColor: colors.onPrimaryContainer
       });
     }
-  }, [params, dark, user]);
+    !region && setMyCurrentLocation();
+  }, [params, dark, user, region]);
 
   return {
     region,

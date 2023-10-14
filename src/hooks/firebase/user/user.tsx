@@ -23,3 +23,11 @@ export const editUserFirebase = async (user: User) => {
   await editShopFirebase(shop, user.shop.split('/')[1]);
   return user;
 };
+
+export const createUserFirebase = async (user: User) => {
+  const result = await firestore()
+    .collection('users')
+    .doc(user.user_uid)
+    .set(user);
+  return result;
+};

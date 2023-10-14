@@ -1,17 +1,17 @@
 import {addUserVideo} from '@src/globals/constants/fakeData';
+import {getDynamicLinkFirebase} from '@src/hooks/firebase/company/company';
+import {getUserQuery} from '@src/reactQuery/userQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {QrModalProps} from '@src/types/globalTypes';
+import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
+import {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {Caption, Modal} from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
 import {logo_app} from '../../assets/images';
 import TextWithCustomLink from '../textWithCustomLink/TextWithCustomLink';
 import {qrModalStyles} from './styles/qrModalStyles';
-import {getShopQuery, getUserQuery} from '@src/reactQuery/userQuery';
-import {Shop, User} from '@src/types/userTypes';
-import {getDynamicLinkFirebase} from '@src/hooks/firebase/company/company';
-import {useEffect, useState} from 'react';
 
 const QrModal = ({visible, setVisible}: QrModalProps) => {
   const hideModal = () => setVisible(false);

@@ -3,9 +3,10 @@ import {buttonActionInitialState} from '@src/globals/constants/login';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
+import {User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 
-const loginHook = () => {
+const loginHook = (data?: User) => {
   const navigation = useNavigation<StackNavigation>();
   const [errorPhone, setErrorPhone] = useState(false);
   const [buttonAction, setButtonAction] = useState(buttonActionInitialState);
@@ -20,8 +21,12 @@ const loginHook = () => {
   };
 
   useEffect(() => {
+    if (data) {
+      buttonAction.logged = true;
+      buttonAction.phone = data.phone;
+    }
     validatePhoneNumber();
-  }, [buttonAction]);
+  }, [buttonAction, data]);
 
   useEffect(() => {
     !currentButtonAction.logged &&
@@ -31,6 +36,7 @@ const loginHook = () => {
         transparent: false
       });
   });
+
   return {
     errorPhone,
     setErrorPhone,

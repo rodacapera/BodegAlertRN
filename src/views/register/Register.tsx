@@ -7,10 +7,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import AdminForm from './forms/AdminForm';
 import UserForm from './forms/UserForm';
 import {registerStyles} from './styles/registerStyles';
+import {Text} from 'react-native-paper';
 
 const Register = ({navigation, route}: RegisterProps) => {
   const {t} = useTranslation();
-  const {administrator, qr} = route.params;
+  const {administrator, qr, shopId} = route.params;
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -22,7 +23,7 @@ const Register = ({navigation, route}: RegisterProps) => {
               : t('registerView.titleCreateAccountUser')
           }
         />
-        {administrator ? <AdminForm /> : <UserForm qr={qr} />}
+        {administrator ? <AdminForm /> : <UserForm qr={qr} shopId={shopId} />}
       </View>
     </SafeAreaView>
   );

@@ -41,7 +41,7 @@ const LoginSplash = ({route, navigation}: LoginSplashProps) => {
                 }
                 icon="check"
                 mode="contained"
-                onPress={() => navigation.navigate('Login')}>
+                onPress={() => navigation.navigate('Login', {})}>
                 {t('general.continue')}
               </Button>
             </View>

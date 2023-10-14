@@ -1,13 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
-import {ThemeContext, actualTheme} from '@src/types/contextTypes';
-import {StackNavigation} from '@src/types/globalTypes';
-import {useContext} from 'react';
+import {actualTheme} from '@src/types/contextTypes';
 import {Text, View} from 'react-native';
 import {IconButton} from 'react-native-paper';
 import {headerStyles} from './styes/headerStyles';
 
 const HeaderTitle = ({title}: {title: string}) => {
-  const {goBack} = useNavigation<StackNavigation>();
+  const {goBack} = useNavigation();
   const {colors, theme, dark} = actualTheme();
   return (
     <View style={headerStyles.header}>

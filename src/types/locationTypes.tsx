@@ -76,4 +76,5 @@ export type ResultLocations = {
   city: ResultLocationItems;
   state: ResultLocationItems;
   country: ResultLocationItems;
+  zipCode: number;
 };

@@ -59,7 +59,7 @@ const CustomInputForm = ({
             confirmTextStyle={{color: colors.onSecondaryContainer}}
             pickerItemStyle={{color: colors.onSurface}}
             initialCountry={code ?? 'co'}
-            disabled={value ? true : false}
+            disabled={value ? true : qr ? true : false}
             // initialValue="1"
           />
         ) : (

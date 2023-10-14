@@ -22,7 +22,7 @@ import {drawerComponentHook} from './hook/drawerComponentHook';
 import {drawerComponentStyles} from './styles/drawerComponentStyles';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
-  const navigation = useNavigation() as StackNavigation;
+  const navigation = useNavigation<StackNavigation>();
   const {
     handleLogout,
     onToggleSwitch,

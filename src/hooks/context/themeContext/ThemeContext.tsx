@@ -24,7 +24,6 @@ export const ThemeProvider = ({children}: any) => {
 
   const getCurrentTheme = async () => {
     const myCurrentTheme = await AsyncStorage.getItem('@theme');
-
     if (myCurrentTheme) {
       myCurrentTheme === 'dark' ? setDarkTheme() : setLightTheme();
     } else {

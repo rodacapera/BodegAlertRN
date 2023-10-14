@@ -1,31 +1,22 @@
 import {useNavigation} from '@react-navigation/native';
+import {headerShown} from '@src/hooks/navigator/headerShown';
 import {setShopQuery} from '@src/reactQuery/userQuery';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Shop} from '@src/types/userTypes';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {DimensionValue, View} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 
 const qrScanHook = () => {
-  const {navigate} = useNavigation<StackNavigation>();
+  const navigation = useNavigation<StackNavigation>();
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
-  const [shopId, setShopId] = useState<string>();
-  const {data} = setShopQuery(shopId);
+  const [shopId, setShopId] = useState<string | undefined>(undefined);
+  setShopQuery(shopId);
   const onSuccess = (e: {data: string}) => {
-    console.log('uuuu', e.data);
-    const urla = decodeURI(e.data);
-    console.log('urla', urla);
-
     const url = e.data.split('=')[6];
-    console.log('url', url);
-
     const urlDecode = decodeURI(url);
-    console.log('urlDecode', urlDecode);
-
     const shop_id = urlDecode.split('%3D')[2];
-    console.log('shop', shop_id);
     setShopId(shop_id);
-    navigate('Register', {administrator: false, qr: true});
     // Linking.openURL(e.data).catch(err =>
     //   console.error('An error occured', err)
     // );
@@ -91,6 +82,24 @@ const qrScanHook = () => {
       </View>
     );
   };
+
+  useEffect(() => {
+    shopId &&
+      navigation.replace('Register', {
+        administrator: false,
+        qr: true,
+        shopId: shopId
+      });
+  }, [shopId]);
+
+  useEffect(() => {
+    headerShown({
+      navigation,
+      visible: false,
+      transparent: false
+    });
+  });
+
   return {onSuccess, flash, setFlash, marker};
 };
 

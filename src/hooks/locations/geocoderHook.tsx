@@ -28,7 +28,11 @@ export const findDataLocation = (
     value => value.types.find(j => j == 'country') && value
   );
 
-  return {address, city, state, country} as unknown as ResultLocations;
+  const zipCode = myCurrentLocation.results[0].address_components.find(
+    value => value.types.find(j => j == 'postal_code') && value
+  );
+
+  return {address, city, state, country, zipCode} as unknown as ResultLocations;
 };
 
 export const getLocation = async (

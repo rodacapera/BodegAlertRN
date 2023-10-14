@@ -53,7 +53,6 @@ export const getDynamicLinkFirebase = async (shop_id: string) => {
       fallbackUrl: 'https://apps.apple.com/us/app/bodegalert/id1428944146'
     }
   });
-  console.log('linkooooo', link);
 
   return link;
 };

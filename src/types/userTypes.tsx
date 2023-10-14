@@ -11,7 +11,7 @@ export interface User {
   created: string;
   date: string;
   departament: string;
-  devices: Array<null[]>;
+  devices: {os: string; device: string}[];
   email: string;
   lastname: string;
   location: Location;

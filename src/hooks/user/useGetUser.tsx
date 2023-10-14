@@ -1,3 +1,4 @@
+import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 import {
   getUserQuery,
   setEmployeesQuery,
@@ -6,7 +7,7 @@ import {
 } from '@src/reactQuery/userQuery';
 import {GetUserData} from '@src/types/auth';
 import {Buttons, Panics, User} from '@src/types/userTypes';
-import {useLayoutEffect, useState} from 'react';
+import {useEffect, useLayoutEffect, useState} from 'react';
 
 const useGetUser = () => {
   const {isLoading, error, data} = getUserQuery();
@@ -17,59 +18,78 @@ const useGetUser = () => {
   const [counterButtons, setCounterButtons] = useState<number>();
   const [counterEmployees, setCounterEmployees] = useState<number>();
   const [shopId, setShopId] = useState<string>();
+  const [isDataLoad, setIsDataLoad] = useState(false);
+
   setEmployeesQuery(employees);
   setPanicsQuery(panics);
   setShopQuery(shopId);
 
-  const resultPanics = (documentSnapshot: any) => {
+  const resultPanics = (
+    documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot
+  ) => {
     setPanics([]);
-    documentSnapshot.forEach((value: {data: () => Panics}) => {
-      const data = value.data();
+    documentSnapshot.forEach(value => {
+      const data = value.data() as Panics;
       setPanics(prev => [...prev, data]);
     });
   };
 
-  const resultEmployees = (querySnapshot: any) => {
+  const resultEmployees = (
+    querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
+  ) => {
     setEmployees([]);
-    querySnapshot.forEach((value: {data: () => User}) => {
+    querySnapshot.forEach(value => {
       const data = value.data() as User;
-      setEmployees(prev => [...prev, data]);
+      !data.administrator && setEmployees(prev => [...prev, data]);
     });
-
-    setCounterEmployees(querySnapshot.size > 1 ? querySnapshot.size : 0);
+    setCounterEmployees(employees.length);
   };
 
-  const resultButtons = (querySnapshot: any) => {
+  const resultButtons = (
+    querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
+  ) => {
     setButtons([]);
     setCounterButtons(0);
-    querySnapshot.forEach((value: {data: () => Buttons}) => {
+    querySnapshot.forEach(value => {
       const data = value.data() as Buttons;
       setButtons(prev => [...prev, data]);
     });
-    setCounterButtons(querySnapshot.size);
+    setCounterButtons(querySnapshot.size > 1 ? querySnapshot.size : 0);
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (currentData && currentData.user) {
       const panicObserver = currentData.panicsObserver.onSnapshot(
-        (documentSnapshot: any) => {
-          resultPanics(documentSnapshot);
-        }
-      );
-      const employeesObserver = currentData.employeesObserver.onSnapshot(
-        (documentSnapshot: any) => {
-          resultEmployees(documentSnapshot);
-        }
-      );
-      const buttonsObserver = currentData.buttonsObserver.onSnapshot(
-        (documentSnapshot: any) => {
-          resultButtons(documentSnapshot);
+        (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
+          documentSnapshot.size > 0 && resultPanics(documentSnapshot);
         }
       );
       setShopId(currentData.user.shop.split('/')[1]);
-      return () => (panicObserver(), employeesObserver(), buttonsObserver());
+      return () => panicObserver();
     }
   }, [currentData]);
+
+  useEffect(() => {
+    if (currentData && currentData.user && !counterEmployees) {
+      const employeesObserver = currentData.employeesObserver.onSnapshot(
+        (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
+          documentSnapshot.size > 0 && resultEmployees(documentSnapshot);
+        }
+      );
+      return () => employeesObserver();
+    }
+  }, [currentData, counterEmployees]);
+
+  useEffect(() => {
+    if (currentData && currentData.user && !counterButtons) {
+      const buttonsObserver = currentData.buttonsObserver.onSnapshot(
+        (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
+          documentSnapshot.size > 0 && resultButtons(documentSnapshot);
+        }
+      );
+      return () => buttonsObserver();
+    }
+  }, [currentData, counterButtons]);
 
   return {
     user: currentData?.user,

@@ -55,7 +55,12 @@ export const setPanicsQuery = (panics: Panics[]) => {
 export const setShopQuery = (doc: string | undefined) => {
   const query = useQuery({
     queryKey: ['shop'],
-    queryFn: async () => await getShopFirebase(doc!),
+    queryFn: async () => {
+      if (doc) {
+        return await getShopFirebase(doc);
+      }
+      return null;
+    },
     enabled: !!doc
   });
   return query;
@@ -105,7 +110,8 @@ export const getPanicsQuery = () =>
 
 export const getShopQuery = () =>
   useQuery(['shop'], {
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    initialData: shopInitialData
   });
 
 export const getCompanyImagesQuery = () =>

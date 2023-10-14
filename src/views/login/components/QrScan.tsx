@@ -22,7 +22,15 @@ const QrScan = () => {
       showMarker
       customMarker={marker('white', 250, '25%', 6, 20)}
       topContent={
-        <Text style={qrScanStyles.centerText}>{t('qrScan.title')}</Text>
+        <Text
+          style={[
+            qrScanStyles.centerText,
+            {
+              color: colors.onSurface
+            }
+          ]}>
+          {t('qrScan.title')}
+        </Text>
       }
       bottomContent={
         <View style={qrScanStyles.buttonContainer}>
@@ -59,8 +67,7 @@ const QrScan = () => {
       }
       // cameraProps={{autoFocus: 'on', videoStabilizationMode: 'auto'}}
       cameraStyle={{
-        backgroundColor: 'blue',
-        height: height * 0.75
+        height: height * 0.7
       }}
     />
   );

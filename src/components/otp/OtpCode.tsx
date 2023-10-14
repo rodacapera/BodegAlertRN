@@ -15,13 +15,16 @@ import {Button, Text} from 'react-native-paper';
 import HeaderOtp from './header/HeaderOtp';
 import {otpHook} from './hooks/otpHook';
 import {otpStyles} from './styles/otpStyles';
+import {User} from '@src/types/userTypes';
 
 const OtpCode = ({
   buttonAction,
-  setButtonAction
+  setButtonAction,
+  data
 }: {
   buttonAction: LoginFormAction;
   setButtonAction: (e: LoginFormAction) => void;
+  data?: User;
 }) => {
   const navigation = useNavigation<StackNavigation>();
   const {colors, dark, theme} = actualTheme();
@@ -97,7 +100,8 @@ const OtpCode = ({
               setErrorOtp,
               buttonAction,
               setButtonAction,
-              setCode
+              setCode,
+              data
             )
           }>
           {t('general.verify')}

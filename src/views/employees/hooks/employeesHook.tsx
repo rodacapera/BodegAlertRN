@@ -9,7 +9,7 @@ import {User} from '@src/types/userTypes';
 
 const employeesHook = () => {
   const navigation = useNavigation<StackNavigation>();
-  const {data} = getEmployeesQuery();
+  const {data, isLoading} = getEmployeesQuery();
   const employees = data as User[];
   const {colors, dark} = actualTheme();
   const [visible, setVisible] = useState(false);
@@ -34,7 +34,8 @@ const employeesHook = () => {
     setVisible,
     alertVisible,
     removeItem,
-    setAlertVisible
+    setAlertVisible,
+    isLoading
   };
 };
 

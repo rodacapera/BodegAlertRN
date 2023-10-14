@@ -67,7 +67,7 @@ const updateTokenFcm = async (newToken: string) => {
     ? newToken != token && AsyncStorage.setItem('@fcmToken', newToken)
     : AsyncStorage.setItem('@fcmToken', newToken);
 
-  console.debug('fcmToken', token);
+  console.debug('fcmTokenm', token);
 };
 
 const requestUserPermission = async () => {

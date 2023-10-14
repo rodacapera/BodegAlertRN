@@ -15,11 +15,10 @@ import {Button, Caption, TextInput} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
 import {userFormHook} from './hooks/userFormHook';
 
-const UserForm = ({qr}: {qr?: boolean}) => {
+const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
   const {t} = useTranslation();
   const phoneRef = useRef<any>();
   const {colors, theme, dark} = actualTheme();
-
   const {
     user,
     setCurrentButtonAction,
@@ -28,8 +27,7 @@ const UserForm = ({qr}: {qr?: boolean}) => {
     isLoading,
     error,
     shop
-  } = userFormHook();
-  console.log('user phone param', user?.phone);
+  } = userFormHook(qr, shopId);
 
   return (
     <KeyboardAvoidingView
@@ -97,6 +95,7 @@ const UserForm = ({qr}: {qr?: boolean}) => {
               )}
             />
           }
+          inputMode="email"
           value={user?.email ?? ''}
           onChangeText={text => handleOnchangeInput(text as never, 'email')}
         />

@@ -1,7 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {useLoginFirebase} from '@src/hooks/firebase/login/loginWithPhoneNumber';
-import {getUserFirebase} from '@src/hooks/firebase/user/user';
+import {
+  createUserFirebase,
+  getUserFirebase
+} from '@src/hooks/firebase/user/user';
 import {SetUserAuthParams} from '@src/types/auth';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
@@ -33,7 +36,8 @@ export const handleValidateOtp = (
   setErrorOtp: (e: boolean) => void,
   currentButtonAction: LoginFormAction,
   setButtonAction: (e: LoginFormAction) => void,
-  setCode: (e: string) => void
+  setCode: (e: string) => void,
+  data?: User
 ) => {
   const setUser = async (user: SetUserAuthParams) => {
     await AsyncStorage.setItem('@userAuth', JSON.stringify(user));
@@ -44,12 +48,23 @@ export const handleValidateOtp = (
       ?.confirm(code)
       .then(async result => {
         if (result) {
+          if (data) {
+            const newData = {...data};
+            newData.user_uid = result.user.uid;
+            //insert data in user collection on firestore
+            const userCreated = await createUserFirebase(newData);
+            console.log('userCreated', userCreated);
+          }
+          //consult user if was created or if exist
           const user = (await getUserFirebase(result.user.uid)) as User;
-          const data = {
+          console.log('user found', user);
+
+          const newUserData = {
             uid: result.user.uid,
             user: user
           } as unknown as SetUserAuthParams;
-          await setUser(data);
+
+          await setUser(newUserData);
           handleBack(setButtonAction, setCode);
           setErrorOtp(false);
           clearInterval(count);
@@ -70,8 +85,6 @@ export const handleSendOtp = async (
   buttonAction: LoginFormAction,
   setSendOtpCode: (e: boolean) => void
 ) => {
-  console.log('button pone', buttonAction.phone);
-
   const confirmation = await useLoginFirebase(buttonAction.phone);
   buttonAction.confirmation = confirmation;
   AsyncStorage.setItem('@otp', JSON.stringify(true));

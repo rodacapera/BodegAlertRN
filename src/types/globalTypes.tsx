@@ -1,8 +1,10 @@
 import {NavigationProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {ReactNode} from 'react';
 import {Button, ViewStyle} from 'react-native';
 import {$RemoveChildren} from 'react-native-paper/lib/typescript/src/types';
+import {User} from './userTypes';
 
 export type ShopProps = {
   address: string;
@@ -14,18 +16,24 @@ export type RegisterParams = {
   administrator: boolean;
   shop?: ShopProps;
   qr?: boolean;
+  shopId?: string;
 };
 
 export type HomeParams = {
   isLogin?: boolean;
   isBack?: boolean;
 };
+
+export type LoginParams = {
+  qr?: boolean;
+  data?: User;
+};
 export type RootStackParamList = {
   Splash: undefined;
   MyOnboarding: undefined;
   Home: HomeParams;
   LoginSplash: undefined;
-  Login: undefined;
+  Login: LoginParams;
   LoginForm: undefined;
   Register: RegisterParams;
   Profile: RegisterParams;
@@ -37,7 +45,7 @@ export type RootStackParamList = {
 
 export type SelectedTypes = 'phone' | 'city';
 
-export type StackNavigation = NavigationProp<RootStackParamList>;
+export type StackNavigation = StackNavigationProp<RootStackParamList>;
 export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
 export type SplashProps = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 export type LoginSplashProps = NativeStackScreenProps<
