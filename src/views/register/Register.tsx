@@ -7,7 +7,6 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import AdminForm from './forms/AdminForm';
 import UserForm from './forms/UserForm';
 import {registerStyles} from './styles/registerStyles';
-import {Text} from 'react-native-paper';
 
 const Register = ({navigation, route}: RegisterProps) => {
   const {t} = useTranslation();

@@ -1,8 +1,7 @@
-import {buttonActionInitialState} from '@src/globals/constants/login';
 import {actualTheme} from '@src/types/contextTypes';
-import {LoginFormAction, LoginFormProps} from '@src/types/loginTypes';
+import {LoginFormProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import {Fragment, useRef, useState} from 'react';
+import {Fragment, useRef} from 'react';
 import {Text} from 'react-native-paper';
 import ErrorInputForm from '../../../components/customErrorInputForm/CustomErrorInputForm';
 import CustomInputForm from '../../../components/customInputForm/CustomInputForm';

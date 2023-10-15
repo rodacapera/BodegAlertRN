@@ -61,7 +61,9 @@ const useGetUser = () => {
     if (currentData && currentData.user) {
       const panicObserver = currentData.panicsObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
-          documentSnapshot.size > 0 && resultPanics(documentSnapshot);
+          documentSnapshot.size > 0
+            ? resultPanics(documentSnapshot)
+            : setPanics([]);
         }
       );
       setShopId(currentData.user.shop.split('/')[1]);
@@ -73,7 +75,9 @@ const useGetUser = () => {
     if (currentData && currentData.user && !counterEmployees) {
       const employeesObserver = currentData.employeesObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
-          documentSnapshot.size > 0 && resultEmployees(documentSnapshot);
+          documentSnapshot.size > 0
+            ? resultEmployees(documentSnapshot)
+            : setEmployees([]);
         }
       );
       return () => employeesObserver();
@@ -84,7 +88,9 @@ const useGetUser = () => {
     if (currentData && currentData.user && !counterButtons) {
       const buttonsObserver = currentData.buttonsObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
-          documentSnapshot.size > 0 && resultButtons(documentSnapshot);
+          documentSnapshot.size > 0
+            ? resultButtons(documentSnapshot)
+            : setButtons([]);
         }
       );
       return () => buttonsObserver();

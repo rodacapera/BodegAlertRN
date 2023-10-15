@@ -23,7 +23,6 @@ const sendNotification = async ({
   setLoading(true);
   headerShown({navigation, visible: false, transparent: true});
   const response = await getAxios.post(url, data);
-
   if (response.status == 201) {
     headerShown({navigation, visible: true, transparent: true});
     setLoading(false);
@@ -54,18 +53,16 @@ export const panicNotification = async (
   const currentPosition = await getCurrentPosition();
   const validDistance = configuration.distance_panic;
   const registerPosition = {
-    lat: user.location.lat,
-    lng: user.location.lng
+    latitude: user.location.lat,
+    longitude: user.location.lng,
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121
   };
   const latLng = {
     latitude: currentPosition.coords.latitude,
     longitude: currentPosition.coords.longitude
   };
 
-  // const newRegisterPosition = {
-  //   lat: 4.443289,
-  //   lng: -75.198824
-  // };
   const data = {
     title: t('notifications.title'),
     body: `${user.alias}: ${t('notifications.body')}`,

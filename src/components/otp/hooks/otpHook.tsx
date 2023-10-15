@@ -2,7 +2,6 @@ import {LoginFormAction} from '@src/types/loginTypes';
 import {useEffect, useRef, useState} from 'react';
 import {OtpInputRef} from 'react-native-otp-entry';
 import {getOtp, removeOtpCode, timerCount} from './otpFunctions';
-import {User} from '@src/types/userTypes';
 
 const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
   const inputRef = useRef<OtpInputRef>();

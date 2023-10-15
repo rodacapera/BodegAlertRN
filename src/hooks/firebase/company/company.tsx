@@ -1,7 +1,6 @@
 import {firebase} from '@react-native-firebase/dynamic-links';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {Shop, User} from '@src/types/userTypes';
 
 export const getEmployeesFirebase = (shop: any) => {
   const dbUser = firestore().collection('users').where('shop', '==', shop);

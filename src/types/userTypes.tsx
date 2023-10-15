@@ -1,5 +1,4 @@
 import {Logos} from './imageTypes';
-import {location} from '../assets/images';
 
 export interface User {
   address: string;
@@ -29,17 +28,25 @@ export interface Location {
   lng: number;
 }
 
+export type LatLng = {
+  latitude: number;
+  longitude: number;
+  latitudeDelta: number;
+  longitudeDelta: number;
+};
+
 export interface Panics {
   alias: string;
   body: string;
   countryCode: string;
   created: string;
   expiration_time: string;
-  my_location: Location;
+  my_location: LatLng;
   name: string;
   phone: string;
   title: string;
   zip_code: string;
+  user_uid: string;
 }
 
 export interface Buttons {

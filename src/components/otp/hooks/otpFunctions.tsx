@@ -53,17 +53,13 @@ export const handleValidateOtp = (
             newData.user_uid = result.user.uid;
             //insert data in user collection on firestore
             const userCreated = await createUserFirebase(newData);
-            console.log('userCreated', userCreated);
           }
           //consult user if was created or if exist
           const user = (await getUserFirebase(result.user.uid)) as User;
-          console.log('user found', user);
-
           const newUserData = {
             uid: result.user.uid,
             user: user
           } as unknown as SetUserAuthParams;
-
           await setUser(newUserData);
           handleBack(setButtonAction, setCode);
           setErrorOtp(false);

@@ -2,7 +2,6 @@ import {useNavigation} from '@react-navigation/native';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {setShopQuery} from '@src/reactQuery/userQuery';
 import {StackNavigation} from '@src/types/globalTypes';
-import {Shop} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 import {DimensionValue, View} from 'react-native';
 import {RNCamera} from 'react-native-camera';
