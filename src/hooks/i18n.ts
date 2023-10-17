@@ -67,7 +67,10 @@ i18n.use(initReactI18next).init({
         },
         registerView: {
           titleCreateAccountAdmin: 'Create an account',
-          titleCreateAccountUser: 'Join a registered account'
+          titleCreateAccountUser: 'Join a registered account',
+          errorUserRegisterTitle: 'Existing account',
+          errorUserRegisterDescription:
+            'The account exist in our system pleas try another phone number.'
         },
         loginView: {
           title: 'Login with your cell phone number!',
@@ -207,7 +210,10 @@ i18n.use(initReactI18next).init({
         },
         registerView: {
           titleCreateAccountAdmin: 'Crear una cuenta',
-          titleCreateAccountUser: 'Asociate a una cuententa registrada'
+          titleCreateAccountUser: 'Asociate a una cuententa registrada',
+          errorUserRegisterTitle: 'Cuenta existente',
+          errorUserRegisterDescription:
+            'La cuenta ya existe en nuestro sistema, por favor intente con otro número telefónico.'
         },
         loginView: {
           title: 'Ingresa con tu número celular!',

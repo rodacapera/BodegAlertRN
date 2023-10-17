@@ -7,7 +7,7 @@ import {View, useWindowDimensions} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {IconButton, Text} from 'react-native-paper';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import {qrScanHook} from '../hooks/qrScanHook';
+import {qrScanHook} from '../../login/hooks/qrScanHook';
 
 const QrScan = () => {
   const {colors, dark} = actualTheme();

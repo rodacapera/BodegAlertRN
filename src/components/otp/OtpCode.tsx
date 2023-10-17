@@ -16,6 +16,7 @@ import HeaderOtp from './header/HeaderOtp';
 import {otpHook} from './hooks/otpHook';
 import {otpStyles} from './styles/otpStyles';
 import {User} from '@src/types/userTypes';
+import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
 
 const OtpCode = ({
   buttonAction,
@@ -36,7 +37,9 @@ const OtpCode = ({
     errorOtp,
     setErrorOtp,
     sendOtpCode,
-    setSendOtpCode
+    setSendOtpCode,
+    errorNetwork,
+    setErrorNetwork
   } = otpHook({
     buttonAction
   });
@@ -47,6 +50,13 @@ const OtpCode = ({
         setButtonAction={setButtonAction}
         setCode={setCode}
         counter={counter}
+        goBack={data ? true : false}
+      />
+      <CustomDialogAlert
+        visible={errorNetwork}
+        setVisible={() => setErrorNetwork(false)}
+        title={'Network Error.'}
+        description={'Your current network have not internet access.'}
       />
 
       <View style={otpStyles.contentOtpInput}>

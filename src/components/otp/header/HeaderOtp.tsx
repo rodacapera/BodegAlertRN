@@ -5,8 +5,16 @@ import {t} from 'i18next';
 import {Text, View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {otpStyles} from '../styles/otpStyles';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigation} from '@src/types/globalTypes';
 
-const HeaderOtp = ({setButtonAction, setCode, counter}: HeaderOtpParams) => {
+const HeaderOtp = ({
+  setButtonAction,
+  setCode,
+  counter,
+  goBack
+}: HeaderOtpParams) => {
+  const navigator = useNavigation<StackNavigation>();
   const {colors, theme, dark} = actualTheme();
 
   return (
@@ -19,7 +27,9 @@ const HeaderOtp = ({setButtonAction, setCode, counter}: HeaderOtpParams) => {
             style={{backgroundColor: 'transparent'}}
             theme={theme}
             mode="text"
-            onPress={() => handleBack(setButtonAction, setCode)}>
+            onPress={() =>
+              handleBack(setButtonAction, setCode, goBack, navigator)
+            }>
             {t('general.back')}
           </Button>
         )}

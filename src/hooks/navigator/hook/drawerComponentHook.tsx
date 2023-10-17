@@ -2,31 +2,35 @@ import AsyncStorage, {
   useAsyncStorage
 } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 import {DrawerActions, StackActions} from '@react-navigation/native';
 import {avatar, avatarw} from '@src/assets/images';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {
-  getCompanyImagesQuery,
   setCompanyImagesQuery,
+  setShopQuery,
   setUserQuery
 } from '@src/reactQuery/userQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Logos} from '@src/types/imageTypes';
+import {User} from '@src/types/userTypes';
+import {UseQueryResult} from '@tanstack/react-query';
 import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
 
 const drawerComponentHook = (navigation: StackNavigation) => {
-  setUserQuery();
-  setCompanyImagesQuery();
-  const {colors, theme} = actualTheme();
   const {getItem} = useAsyncStorage('@theme');
-  const {setDarkTheme, setLightTheme, dark} = actualTheme();
-  const {data} = getCompanyImagesQuery();
-  const {user, counterEmployees, counterButtons, isLoading} = useGetUser();
-  const images = data ?? null;
+  const setUser = setUserQuery();
+  const setImages = setCompanyImagesQuery(setUser.data?.user as User);
+  const {colors, theme, setDarkTheme, setLightTheme, dark} = actualTheme();
   const [isDark, setIsDark] = useState(false);
   const [logos, setLogos] = useState<Logos[]>([]);
+  const [shopId, setShopId] = useState<string | undefined>(undefined);
+  const {user, counterEmployees, counterButtons, isLoading} = useGetUser(
+    setUser as UseQueryResult
+  );
+  setShopQuery(shopId);
 
   const onToggleSwitch = () => {
     setIsDark(!isDark);
@@ -59,17 +63,31 @@ const drawerComponentHook = (navigation: StackNavigation) => {
       : setIsDark(dark ? true : false);
   };
 
-  const imageAvatar = user?.avatar
-    ? {
-        uri: user?.avatar
-      }
-    : dark
-    ? avatar
-    : avatarw;
+  const handleDynamicLink = (link: {url: string}) => {
+    // Handle dynamic link inside your own application
+    const params = link.url.split('?')[1].split('&');
+    const viewParam = params[0].split('=');
+    const shopParam = params[1].split('=');
+    const view = viewParam[0] == 'view' ? viewParam[1] : undefined;
+    const id_shop = shopParam[0] == 'id_shop' ? shopParam[1] : undefined;
+
+    link.url ===
+      'https://orlyvisions.vercel.app/dynamiclink/?view=Register&id_shop=bRTxd914DXpGNAiM6sOz' &&
+      setShopId(id_shop);
+  };
+
+  const imageAvatar =
+    user && user?.avatar
+      ? {
+          uri: user?.avatar
+        }
+      : dark
+      ? avatar
+      : avatarw;
 
   useEffect(() => {
-    images && setLogos(images as Logos[]);
-  }, [images]);
+    setImages.data && setLogos(setImages.data as Logos[]);
+  }, [setImages.data]);
 
   useEffect(() => {
     validateSwitch();
@@ -80,6 +98,24 @@ const drawerComponentHook = (navigation: StackNavigation) => {
       Appearance.addChangeListener(() => console.debug('remove')).remove();
     };
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
+    // When the component is unmounted, remove the listener
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (!user && shopId) {
+      navigation.navigate('Register', {
+        administrator: false,
+        qr: true,
+        shopId: shopId
+      });
+    } else {
+      console.debug('user is logged or app was not open');
+    }
+  }, [shopId]);
 
   return {
     handleLogout,

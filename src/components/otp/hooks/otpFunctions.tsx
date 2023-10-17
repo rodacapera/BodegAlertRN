@@ -14,10 +14,20 @@ let count: any = null;
 
 export const handleBack = (
   setButtonAction: (e: LoginFormAction) => void,
-  setCode: (e: string) => void
+  setCode: (e: string) => void,
+  goBack?: boolean,
+  navigator?: StackNavigation
 ) => {
-  setButtonAction(buttonActionInitialState);
-  setCode('');
+  if (goBack) {
+    buttonActionInitialState.logged = false;
+    buttonActionInitialState.phone = '';
+    setButtonAction(buttonActionInitialState);
+    setCode('');
+    navigator?.goBack();
+  } else {
+    setButtonAction(buttonActionInitialState);
+    setCode('');
+  }
 };
 
 export const handleClear = (

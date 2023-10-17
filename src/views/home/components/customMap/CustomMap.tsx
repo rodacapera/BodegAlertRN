@@ -14,10 +14,12 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {homeHook} from '../../hooks/homeHook';
 import {homeStyles} from '../../styles/homeStyles';
 import PanicButton from '../panicButton/PanicButton';
+import {fakePosition} from '../../../../globals/constants/fakeData';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
   const {dark} = actualTheme();
+
   const {
     region,
     animateCamera,
@@ -32,36 +34,39 @@ const CustomMap = () => {
     <CustomLoadingOverlay visible />
   ) : (
     <Fragment>
-      <MapView
-        ref={mapRef}
-        userLocationAnnotationTitle={'Map'}
-        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-        style={homeStyles.map}
-        region={region}
-        customMapStyle={dark ? mapStyleDark : mapStyleLight}>
-        {region && (
-          <Marker
-            coordinate={region}
-            title={user?.alias}
-            description={user?.address}
-            image={house}
-          />
-        )}
-        {panics.map((marker, index) => {
-          return (
-            marker.my_location.latitude != user?.location.lat &&
-            marker.my_location.longitude != user?.location.lng && (
-              <Marker
-                key={index}
-                coordinate={marker.my_location}
-                title={marker.title}
-                description={marker.body}
-                image={shop}
-              />
-            )
-          );
-        })}
-      </MapView>
+      {region && (
+        <MapView
+          ref={mapRef}
+          userLocationAnnotationTitle={'Map'}
+          provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+          style={homeStyles.map}
+          region={region ?? fakePosition}
+          customMapStyle={dark ? mapStyleDark : mapStyleLight}>
+          {region && (
+            <Marker
+              coordinate={region}
+              title={user?.alias}
+              description={user?.address}
+              image={house}
+            />
+          )}
+          {panics.map((marker, index) => {
+            return (
+              marker.my_location.latitude != user?.location.lat &&
+              marker.my_location.longitude != user?.location.lng && (
+                <Marker
+                  key={index}
+                  coordinate={marker.my_location}
+                  title={marker.title}
+                  description={marker.body}
+                  image={shop}
+                />
+              )
+            );
+          })}
+        </MapView>
+      )}
+
       <PanicButton />
       <CustomFab
         icon={'target'}

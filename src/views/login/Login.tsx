@@ -10,14 +10,14 @@ import {loginHook} from './hooks/loginHook';
 import {loginFormStyles} from './styles/loginFormStyles';
 
 const Login = ({route, navigation}: LoginProps) => {
-  const {qr, data} = route.params;
+  const params = route.params;
   const {
     buttonAction,
     setButtonAction,
     errorPhone,
     currentButtonAction,
     setCurrentButtonAction
-  } = loginHook(data);
+  } = loginHook(params?.data);
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -37,7 +37,7 @@ const Login = ({route, navigation}: LoginProps) => {
             </ImageBackground>
           </View>
           <View style={loginFormStyles.loginBody}>
-            {!qr &&
+            {!params?.qr &&
             (buttonAction.phone.length == 2 ||
               buttonAction.phone.length < 10) ? (
               <LoginForm
@@ -50,7 +50,7 @@ const Login = ({route, navigation}: LoginProps) => {
               <OtpCode
                 buttonAction={buttonAction}
                 setButtonAction={setButtonAction}
-                data={data}
+                data={params?.data}
               />
             )}
           </View>

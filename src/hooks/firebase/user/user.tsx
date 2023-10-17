@@ -6,6 +6,14 @@ export const getUserFirebase = async (userUid: string) => {
   return dbUser.data();
 };
 
+export const geUserByPhoneNumberFirebase = async (phone: string) => {
+  const dbUser = await firestore()
+    .collection('users')
+    .where('phone', '==', phone)
+    .get();
+  return dbUser;
+};
+
 export const editShopFirebase = async (
   shop: {
     alias: string;

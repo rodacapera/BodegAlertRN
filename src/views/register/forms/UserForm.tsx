@@ -14,6 +14,7 @@ import {
 import {Button, Caption, TextInput} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
 import {userFormHook} from './hooks/userFormHook';
+import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 
 const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
   const {t} = useTranslation();
@@ -26,7 +27,9 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
     handleEditUser,
     isLoading,
     error,
-    shop
+    shop,
+    alertUserExist,
+    setAlertUserExist
   } = userFormHook(qr, shopId);
 
   return (
@@ -36,6 +39,12 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
       <ScrollView
         style={registerStyles.body}
         showsVerticalScrollIndicator={false}>
+        <CustomDialogAlert
+          visible={alertUserExist}
+          setVisible={() => setAlertUserExist(false)}
+          title={t('registerView.errorUserRegisterTitle')}
+          description={t('registerView.errorUserRegisterDescription')}
+        />
         <CustomInputForm
           phoneRef={phoneRef}
           setButtonAction={setCurrentButtonAction}

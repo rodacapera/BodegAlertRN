@@ -5,13 +5,11 @@ import {actualTheme} from '@src/types/contextTypes';
 import {useWindowDimensions} from 'react-native';
 import DrawerComponent from './DrawerComponent';
 import NavigationProvider from './NavigationProvider';
-import {LateralDrawerHook} from './hook/lateralDrawerhook';
 
 export const LateralDrawer = () => {
   const {width} = useWindowDimensions();
   const MyDrawer = createDrawerNavigator();
   const {colors, theme, dark} = actualTheme();
-  const {} = LateralDrawerHook();
 
   return (
     <NavigationContainer theme={theme}>

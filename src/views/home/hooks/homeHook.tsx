@@ -36,13 +36,6 @@ const homeHook = () => {
     };
   };
 
-  const shopLocation = {
-    latitude: user?.location.lat!,
-    longitude: user?.location.lng!,
-    latitudeDelta: 0.015,
-    longitudeDelta: 0.0121
-  };
-
   const backAction = (navigation: StackNavigation) => {
     if (navigation.getState().index === 1) {
       setAlertVisible(true);
@@ -53,7 +46,17 @@ const homeHook = () => {
     }
   };
 
-  const setMyCurrentLocation = () => setRegion(shopLocation);
+  const setMyCurrentLocation = () => {
+    if (user?.location) {
+      const shopLocation = {
+        latitude: user?.location.lat!,
+        longitude: user?.location.lng!,
+        latitudeDelta: 0.015,
+        longitudeDelta: 0.0121
+      };
+      setRegion(shopLocation);
+    }
+  };
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () =>
@@ -83,7 +86,6 @@ const homeHook = () => {
 
   return {
     region,
-    setRegion,
     animateCamera,
     getMyLocation,
     panics,

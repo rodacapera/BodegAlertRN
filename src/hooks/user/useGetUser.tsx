@@ -7,10 +7,11 @@ import {
 } from '@src/reactQuery/userQuery';
 import {GetUserData} from '@src/types/auth';
 import {Buttons, Panics, User} from '@src/types/userTypes';
-import {useEffect, useLayoutEffect, useState} from 'react';
+import {UseQueryResult} from '@tanstack/react-query';
+import {useEffect, useState} from 'react';
 
-const useGetUser = () => {
-  const {isLoading, error, data} = getUserQuery();
+const useGetUser = (setUser?: UseQueryResult) => {
+  const {isLoading, error, data} = setUser ?? getUserQuery();
   const currentData = data as GetUserData;
   const [panics, setPanics] = useState<Panics[]>([]);
   const [employees, setEmployees] = useState<User[]>([]);
@@ -18,7 +19,6 @@ const useGetUser = () => {
   const [counterButtons, setCounterButtons] = useState<number>();
   const [counterEmployees, setCounterEmployees] = useState<number>();
   const [shopId, setShopId] = useState<string>();
-  const [isDataLoad, setIsDataLoad] = useState(false);
 
   setEmployeesQuery(employees);
   setPanicsQuery(panics);
@@ -40,9 +40,14 @@ const useGetUser = () => {
     setEmployees([]);
     querySnapshot.forEach(value => {
       const data = value.data() as User;
-      !data.administrator && setEmployees(prev => [...prev, data]);
+      console.log('data', data.administrator);
+      if (querySnapshot.size > 1) {
+        !data.administrator && setEmployees(prev => [...prev, data]);
+      } else {
+        setEmployees([]);
+      }
     });
-    setCounterEmployees(employees.length);
+    setCounterEmployees(querySnapshot.size > 1 ? employees.length : 0);
   };
 
   const resultButtons = (
@@ -72,30 +77,31 @@ const useGetUser = () => {
   }, [currentData]);
 
   useEffect(() => {
-    if (currentData && currentData.user && !counterEmployees) {
+    if (currentData && currentData.user) {
       const employeesObserver = currentData.employeesObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
+          console.log('documentSnapshot.size ', documentSnapshot.size);
           documentSnapshot.size > 0
             ? resultEmployees(documentSnapshot)
-            : setEmployees([]);
+            : (setEmployees([]), setCounterEmployees(0));
         }
       );
       return () => employeesObserver();
     }
-  }, [currentData, counterEmployees]);
+  }, [currentData]);
 
   useEffect(() => {
-    if (currentData && currentData.user && !counterButtons) {
+    if (currentData && currentData.user) {
       const buttonsObserver = currentData.buttonsObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
           documentSnapshot.size > 0
             ? resultButtons(documentSnapshot)
-            : setButtons([]);
+            : (setButtons([]), setCounterButtons(0));
         }
       );
       return () => buttonsObserver();
     }
-  }, [currentData, counterButtons]);
+  }, [currentData]);
 
   return {
     user: currentData?.user,

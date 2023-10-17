@@ -28,7 +28,7 @@ export const setEmployeesQuery = (employees: User[]) => {
   return query;
 };
 
-export const setCompanyImagesQuery = () => {
+export const setCompanyImagesQuery = (userExist: User) => {
   const query = useQuery({
     queryKey: ['companyImages'],
     queryFn: async () => {
@@ -37,7 +37,8 @@ export const setCompanyImagesQuery = () => {
         resultAuth &&
         ((await getCompanyImagesFirebase(resultAuth.user.city)) as Logos[])
       );
-    }
+    },
+    enabled: !!userExist
   });
   return query;
 };
@@ -69,6 +70,8 @@ export const setShopQuery = (doc: string | undefined) => {
 const dataSetUser = async (data?: User) => {
   const userAuth = await getUseAuth();
   if (userAuth) {
+    console.log('ooooo');
+
     const resultAuth = userAuth as SetUserAuthParams;
     const user = data ?? resultAuth.user;
     const panicsObserver = getPanicsFirebase();
@@ -114,10 +117,10 @@ export const getShopQuery = () =>
     initialData: shopInitialData
   });
 
-export const getCompanyImagesQuery = () =>
+export const getCompanyImagesQuery = (setImages: boolean) =>
   useQuery(['companyImages'], {
     refetchOnWindowFocus: false,
-    initialData: null
+    enabled: !!setImages
   });
 
 //mutate data
