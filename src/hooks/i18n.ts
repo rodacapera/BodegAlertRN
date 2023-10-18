@@ -78,14 +78,15 @@ i18n.use(initReactI18next).init({
           titleCreateAccountUser: 'Join a registered account',
           errorUserRegisterTitle: 'Existing account',
           errorUserRegisterDescription:
-            'The account exist in our system pleas try another phone number.'
+            'The account exist in our system, please try another phone number.'
         },
         loginView: {
           title: 'Login with your cell phone number!',
           signIn: 'Sign in',
           scanButton: 'Scan',
           signUp: 'Sign up',
-          errorPhone: 'The phone number is not valid or is empty'
+          errorPhone: 'The phone number is not valid or is empty',
+          goBack: 'Back'
         },
         loginSplashView: {
           welcome: 'Welcome to',
@@ -238,7 +239,8 @@ i18n.use(initReactI18next).init({
           signIn: 'Ingresar',
           scanButton: 'Escanear',
           signUp: 'Registrarse',
-          errorPhone: 'El número de teléfono no es válido o está vacío'
+          errorPhone: 'El número de teléfono no es válido o está vacío',
+          goBack: 'Volver'
         },
         loginSplashView: {
           welcome: 'Bienvenido a ',

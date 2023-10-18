@@ -5,6 +5,12 @@ export const loginFormStyles = StyleSheet.create({
   logo: {
     backgroundColor: 'transparent'
   },
+  bacKButton: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    left: 0,
+    top: 15
+  },
   loginHeader: {
     height: 250
   },

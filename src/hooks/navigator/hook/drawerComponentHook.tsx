@@ -43,7 +43,7 @@ const drawerComponentHook = (navigation: StackNavigation) => {
       .then(async () => {
         await AsyncStorage.multiRemove(['@otp', '@userAuth']);
         navigation.dispatch(DrawerActions.closeDrawer());
-        navigation.dispatch(StackActions.replace('Login'));
+        navigation.dispatch(StackActions.replace('LoginSplash'));
       })
       .catch(async error => {
         console.debug(error);

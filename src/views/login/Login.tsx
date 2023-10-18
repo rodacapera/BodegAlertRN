@@ -2,15 +2,20 @@ import {login_background, logo_app} from '@src/assets/images';
 import OtpCode from '@src/components/otp/OtpCode';
 import {APP_NAME} from '@src/globals/constants/config';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
-import {LoginParams, LoginProps} from '@src/types/globalTypes';
+import {LoginParams, LoginProps, StackNavigation} from '@src/types/globalTypes';
 import {ImageBackground, SafeAreaView, ScrollView, View} from 'react-native';
-import {Avatar, Text} from 'react-native-paper';
+import {Avatar, Button, Text} from 'react-native-paper';
 import LoginForm from './components/LoginForm';
 import {loginHook} from './hooks/loginHook';
 import {loginFormStyles} from './styles/loginFormStyles';
+import {actualTheme} from '@src/types/contextTypes';
+import {useNavigation} from '@react-navigation/native';
+import {t} from 'i18next';
 
 const Login = ({route, navigation}: LoginProps) => {
   const params = route.params;
+  const {navigate, goBack} = useNavigation<StackNavigation>();
+  const {theme} = actualTheme();
   const {
     buttonAction,
     setButtonAction,
@@ -18,6 +23,8 @@ const Login = ({route, navigation}: LoginProps) => {
     currentButtonAction,
     setCurrentButtonAction
   } = loginHook(params?.data);
+
+  console.log(params.type);
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -34,6 +41,15 @@ const Login = ({route, navigation}: LoginProps) => {
                 source={logo_app}
               />
               <Text style={loginFormStyles.appName}>{APP_NAME}</Text>
+              <Button
+                icon="arrow-left"
+                textColor={'white'}
+                style={loginFormStyles.bacKButton}
+                theme={theme}
+                mode="text"
+                onPress={() => goBack()}>
+                {t('general.back')}
+              </Button>
             </ImageBackground>
           </View>
           <View style={loginFormStyles.loginBody}>

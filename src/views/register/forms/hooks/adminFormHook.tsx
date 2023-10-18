@@ -8,6 +8,7 @@ import {userFakeData} from '@src/globals/constants/fakeData';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {createShopFirebase} from '@src/hooks/firebase/company/company';
 import {getConfigurationFirebase} from '@src/hooks/firebase/config/config';
+import {geUserByPhoneNumberFirebase} from '@src/hooks/firebase/user/user';
 import {getLocation} from '@src/hooks/locations/geocoderHook';
 import {Configuration} from '@src/types/configuration';
 import {RegisterType, StackNavigation} from '@src/types/globalTypes';
@@ -25,6 +26,7 @@ const adminFormHook = (type: RegisterType) => {
   const [alertGroupFound, setAlertGroupFound] = useState(false);
   const [groupFound, setGroupFound] = useState(false);
   const [user, setUser] = useState<User>();
+  const [alertUserExist, setAlertUserExist] = useState(false);
   const [tokenPush, setTokenPush] = useState<string>();
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);
@@ -46,9 +48,17 @@ const adminFormHook = (type: RegisterType) => {
   const submitForm = () => {
     // console.log('data>>>>>>>>', user);
     if (user) {
-      navigation.navigate('Login', {
-        qr: true,
-        data: user
+      const userExist = geUserByPhoneNumberFirebase(user.phone);
+      userExist.then(querySnapshot => {
+        if (querySnapshot.empty) {
+          navigation.navigate('Login', {
+            qr: true,
+            data: user,
+            type
+          });
+        } else {
+          setAlertUserExist(true);
+        }
       });
     }
   };
@@ -147,7 +157,9 @@ const adminFormHook = (type: RegisterType) => {
     onChangeInput,
     groupFound,
     submitForm,
-    user
+    user,
+    alertUserExist,
+    setAlertUserExist
   };
 };
 export {adminFormHook};

@@ -1,15 +1,28 @@
 import {login_background} from '@src/assets/images';
 import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
 import {actualTheme} from '@src/types/contextTypes';
-import {LoginSplashProps} from '@src/types/globalTypes';
+import {LoginSplashProps, StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {ImageBackground, SafeAreaView, View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {backgroundStyle} from '../../globals/styles/screenMode';
 import {loginStyles} from './styles/loginStyles';
+import {headerShown} from '@src/hooks/navigator/headerShown';
+import {useEffect} from 'react';
+import {useNavigation} from '@react-navigation/native';
 
-const LoginSplash = ({route, navigation}: LoginSplashProps) => {
+const LoginSplash = ({route}: LoginSplashProps) => {
   const {colors, theme} = actualTheme();
+  const navigation = useNavigation<StackNavigation>();
+
+  useEffect(() => {
+    headerShown({
+      navigation,
+      visible: false,
+      transparent: false
+    });
+  });
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <ImageBackground

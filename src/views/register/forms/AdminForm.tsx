@@ -27,7 +27,9 @@ const AdminForm = ({type}: {type: RegisterType}) => {
     onChangeInput,
     groupFound,
     submitForm,
-    user
+    user,
+    alertUserExist,
+    setAlertUserExist
   } = adminFormHook(type);
 
   return (
@@ -42,6 +44,12 @@ const AdminForm = ({type}: {type: RegisterType}) => {
         setVisible={setAlertGroupFound}
         title={t('adminFormView.alertGroupFoundTitle')}
         description={t('adminFormView.alertGroupFoundDescription')}
+      />
+      <CustomDialogAlert
+        visible={alertUserExist}
+        setVisible={() => setAlertUserExist(false)}
+        title={t('registerView.errorUserRegisterTitle')}
+        description={t('registerView.errorUserRegisterDescription')}
       />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
