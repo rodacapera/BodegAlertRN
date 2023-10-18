@@ -1,5 +1,4 @@
 import {addUserVideo} from '@src/globals/constants/fakeData';
-import {getDynamicLinkFirebase} from '@src/hooks/firebase/company/company';
 import {getUserQuery} from '@src/reactQuery/userQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {QrModalProps} from '@src/types/globalTypes';
@@ -12,6 +11,7 @@ import QRCode from 'react-native-qrcode-svg';
 import {logo_app} from '../../assets/images';
 import TextWithCustomLink from '../textWithCustomLink/TextWithCustomLink';
 import {qrModalStyles} from './styles/qrModalStyles';
+import {getDynamicLinkFirebase} from '@src/hooks/firebase/dynamicLink/dynamicLink';
 
 const QrModal = ({visible, setVisible}: QrModalProps) => {
   const hideModal = () => setVisible(false);

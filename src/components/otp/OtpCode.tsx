@@ -55,8 +55,8 @@ const OtpCode = ({
       <CustomDialogAlert
         visible={errorNetwork}
         setVisible={() => setErrorNetwork(false)}
-        title={'Network Error.'}
-        description={'Your current network have not internet access.'}
+        title={t('network.alertErrorTitle')}
+        description={t('network.alertErrorDescription')}
       />
 
       <View style={otpStyles.contentOtpInput}>

@@ -162,6 +162,11 @@ i18n.use(initReactI18next).init({
         qrScan: {
           title:
             'Scan the QR and register your data to send your first support notify!'
+        },
+        network: {
+          alertErrorTitle: 'Network Error',
+          alertErrorDescription:
+            'Your current network have not internet access.'
         }
       }
     },
@@ -318,6 +323,11 @@ i18n.use(initReactI18next).init({
         qrScan: {
           title:
             'Scan the QR and register your data to send your first support notify!'
+        },
+        network: {
+          alertErrorTitle: 'Error de conexión',
+          alertErrorDescription:
+            'Tu conexión no tiene internet, conectate a otra red e intenta de nuevo.'
         }
       }
     },

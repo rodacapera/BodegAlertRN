@@ -1,4 +1,4 @@
-import {getPanicsFirebase} from '@src/hooks/firebase/company/company';
+import {getPanicsFirebase} from '@src/hooks/firebase/panics/panics';
 import {useQuery} from '@tanstack/react-query';
 
 export const getPanicsQuery = () => {

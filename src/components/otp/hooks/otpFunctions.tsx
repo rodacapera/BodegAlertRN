@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {createShopFirebase} from '@src/hooks/firebase/company/company';
+import {createGroupFirebase} from '@src/hooks/firebase/groups/groups';
 import {useLoginFirebase} from '@src/hooks/firebase/login/loginWithPhoneNumber';
 import {
   createUserFirebase,
@@ -8,6 +9,7 @@ import {
 } from '@src/hooks/firebase/user/user';
 import {SetUserAuthParams} from '@src/types/auth';
 import {StackNavigation} from '@src/types/globalTypes';
+import {Group} from '@src/types/groups';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {Shop, User} from '@src/types/userTypes';
 import {OtpInputRef} from 'react-native-otp-entry';
@@ -69,7 +71,12 @@ export const handleValidateOtp = (
     navigate('Home', {isLogin: true});
   };
 
-  const createShopAndUser = (data: User, newData: User, user_uid: string) => {
+  const createShopAndUser = (
+    data: User,
+    newData: User,
+    user_uid: string,
+    group_id: string
+  ) => {
     const shop: Shop = {
       address: data.address,
       alias: data.alias,
@@ -79,7 +86,8 @@ export const handleValidateOtp = (
       location: data.location,
       nit: '',
       phone: data.phone,
-      zipcode: data.zipcode
+      zipcode: data.zipcode,
+      group_id: `groups/${group_id}`
     };
     createShopFirebase(shop).then(async shopResult => {
       //insert data in shop collection on firestore
@@ -88,6 +96,16 @@ export const handleValidateOtp = (
       newData.shop = `shops/${shopResult.id}`;
       await createUserFirebase(newData); //insert data in user collection on firestore
       await loginUser(user_uid);
+    });
+  };
+
+  const createGroup = (data: User, newData: User, user_uid: string) => {
+    const group: Group = {
+      group_number: data.group_number,
+      group_name: data.group_name
+    };
+    createGroupFirebase(group).then(() => {
+      createShopAndUser(data, newData, user_uid, data.group_number);
     });
   };
 
@@ -103,7 +121,7 @@ export const handleValidateOtp = (
               await createUserFirebase(newData); //insert data in user collection on firestore
               await loginUser(result.user.uid);
             } else {
-              createShopAndUser(data, newData, result.user.uid);
+              createGroup(data, newData, result.user.uid);
             }
           } else {
             await loginUser(result.user.uid);

@@ -3,13 +3,13 @@ import {
   userInitialData
 } from '@src/globals/constants/fakeData';
 import {getUseAuth, updateUserAuth} from '@src/hooks/auth/useAuth';
+import {getButtonsFirebase} from '@src/hooks/firebase/buttons/buttons';
 import {
-  getButtonsFirebase,
   getCompanyImagesFirebase,
-  getEmployeesFirebase,
-  getPanicsFirebase,
   getShopFirebase
 } from '@src/hooks/firebase/company/company';
+import {getEmployeesFirebase} from '@src/hooks/firebase/employees/employees';
+import {getPanicsFirebase} from '@src/hooks/firebase/panics/panics';
 import {editUserFirebase} from '@src/hooks/firebase/user/user';
 import {OldData, SetUserAuthParams} from '@src/types/auth';
 import {Logos} from '@src/types/imageTypes';
