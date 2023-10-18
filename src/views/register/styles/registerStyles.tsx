@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const registerStyles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 20,
     alignItems: 'center'
   },
   input: {
