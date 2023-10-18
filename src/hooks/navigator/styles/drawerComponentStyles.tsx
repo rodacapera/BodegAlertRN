@@ -5,18 +5,19 @@ export const drawerComponentStyles = StyleSheet.create({
     flex: 1
   },
   userInfoSection: {
-    marginTop: Platform.OS === 'android' ? 30 : 0,
-    paddingLeft: 20
+    marginTop: Platform.OS === 'android' ? 30 : 10,
+    paddingHorizontal: 20
   },
   title: {
-    marginTop: 20,
+    marginTop: 10,
     fontWeight: 'bold',
     textTransform: 'capitalize'
   },
   caption: {
     fontSize: 14,
     lineHeight: 14,
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
+    fontWeight: '500'
   },
   row: {
     marginTop: 20,
@@ -33,7 +34,7 @@ export const drawerComponentStyles = StyleSheet.create({
     marginRight: 3
   },
   drawerSection: {
-    marginTop: 15
+    marginTop: 10
   },
   preference: {
     flexDirection: 'row',
@@ -45,7 +46,7 @@ export const drawerComponentStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginVertical: 20
+    marginVertical: 10
   },
   imagesLogos: {
     width: 70,

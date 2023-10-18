@@ -63,6 +63,12 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           {user?.name} {user?.lastname}
         </Title>
         <Caption
+          numberOfLines={1}
+          style={[drawerComponentStyles.caption, {color: colors.onSurface}]}>
+          {t('drawer.groupName')} : {user?.group_name}
+        </Caption>
+        <Caption
+          numberOfLines={1}
           style={[drawerComponentStyles.caption, {color: colors.onSurface}]}>
           {t('drawer.aliasName')} : {user?.alias}
         </Caption>
@@ -182,7 +188,8 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
         </View>
       </Drawer.Section>
       {user?.city != 'bogota' && (
-        <Drawer.Section style={drawerComponentStyles.drawerSection}>
+        <Drawer.Section
+          style={[drawerComponentStyles.drawerSection, {marginBottom: 20}]}>
           <Title
             style={[
               drawerComponentStyles.titleLogos,

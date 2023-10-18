@@ -22,7 +22,8 @@ i18n.use(initReactI18next).init({
           darkTheme: 'Dark theme',
           supportingEntities: 'Supporting entities',
           aliasName: 'Alias',
-          notify: 'Notify'
+          notify: 'Notify',
+          groupName: 'Group'
         },
         employeesView: {
           banner:
@@ -181,7 +182,8 @@ i18n.use(initReactI18next).init({
           darkTheme: 'Modo oscuro',
           supportingEntities: 'Entidades que apoyan',
           aliasName: 'Alias',
-          notify: 'Notificaciones'
+          notify: 'Notificaciones',
+          groupName: 'Grupo'
         },
         employeesView: {
           banner:
