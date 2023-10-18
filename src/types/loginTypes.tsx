@@ -1,5 +1,5 @@
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {SelectedTypes} from './globalTypes';
+import {RegisterType, SelectedTypes} from './globalTypes';
 
 export type LoginFormAction = {
   name: string;
@@ -12,6 +12,7 @@ export type LoginFormAction = {
 export type LoginButtonsProps = {
   setButtonAction: (e: LoginFormAction) => void;
   currentButtonAction: LoginFormAction;
+  type?: RegisterType;
 };
 
 export type InputFormProps = {
@@ -28,4 +29,5 @@ export type LoginFormProps = {
   errorPhone: boolean;
   currentButtonAction: LoginFormAction;
   setCurrentButtonAction: (e: LoginFormAction) => void;
+  type?: RegisterType;
 };

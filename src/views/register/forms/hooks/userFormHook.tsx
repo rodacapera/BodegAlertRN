@@ -54,7 +54,7 @@ const userFormHook = (qr?: boolean, shopId?: string) => {
           userClone.location = shop?.location;
           userClone.shop = `shops/${shopId}`;
           userClone.type = 'tienda';
-          userClone.zipcode = parseInt(shop?.zipcode!);
+          userClone.zipcode = shop?.zipcode;
           navigation.navigate('Login', {qr, data: userClone as User});
         } else {
           setAlertUserExist(true);

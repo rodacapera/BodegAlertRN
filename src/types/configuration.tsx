@@ -6,4 +6,6 @@ export interface Configuration {
   price: number;
   versionAndroid: string;
   versionIOS: string;
+  farm_random: number;
+  vehicle_code: number;
 }

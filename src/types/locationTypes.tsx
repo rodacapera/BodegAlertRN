@@ -6,8 +6,10 @@ export type Region = {
 };
 
 export interface LatLng {
-  lat: number;
-  lng: number;
+  lat?: number | undefined;
+  lng?: number | undefined;
+  latitude?: number | undefined;
+  longitude?: number | undefined;
 }
 
 export type GetLocationParams = {
@@ -76,5 +78,6 @@ export type ResultLocations = {
   city: ResultLocationItems;
   state: ResultLocationItems;
   country: ResultLocationItems;
-  zipCode: number;
+  zipCode: ResultLocationItems;
+  location: LatLng;
 };

@@ -16,6 +16,7 @@ export type RegisterParams = {
   shop?: ShopProps;
   qr?: boolean;
   shopId?: string;
+  type?: RegisterType;
 };
 
 export type HomeParams = {
@@ -23,9 +24,12 @@ export type HomeParams = {
   isBack?: boolean;
 };
 
+export type RegisterType = 'vehicle' | 'residence';
+
 export type LoginParams = {
   qr?: boolean;
   data?: User;
+  type?: RegisterType;
 };
 export type RootStackParamList = {
   Splash: undefined;

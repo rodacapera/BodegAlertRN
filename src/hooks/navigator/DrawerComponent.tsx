@@ -64,7 +64,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
         </Title>
         <Caption
           style={[drawerComponentStyles.caption, {color: colors.onSurface}]}>
-          {t('drawer.shopName')} : {user?.alias}
+          {t('drawer.aliasName')} : {user?.alias}
         </Caption>
         <View style={drawerComponentStyles.row}>
           {user?.administrator && (

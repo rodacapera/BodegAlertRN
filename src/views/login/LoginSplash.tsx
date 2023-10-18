@@ -39,10 +39,23 @@ const LoginSplash = ({route, navigation}: LoginSplashProps) => {
                 buttonColor={
                   theme.dark ? colors.onPrimary : colors.onPrimaryContainer
                 }
-                icon="check"
+                icon="bike"
                 mode="contained"
-                onPress={() => navigation.navigate('Login', {})}>
-                {t('general.continue')}
+                onPress={() => navigation.navigate('Login', {type: 'vehicle'})}>
+                {t('general.continueBike')}
+              </Button>
+              <Button
+                style={loginStyles.button}
+                textColor="white"
+                buttonColor={
+                  theme.dark ? colors.onPrimary : colors.onPrimaryContainer
+                }
+                icon="office-building-marker-outline"
+                mode="contained"
+                onPress={() =>
+                  navigation.navigate('Login', {type: 'residence'})
+                }>
+                {t('general.continueResidence')}
               </Button>
             </View>
           </View>

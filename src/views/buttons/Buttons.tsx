@@ -3,36 +3,23 @@ import CustomBanner from '@src/components/customBanner/CustomBanner';
 import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 import CustomFab from '@src/components/customFab/CustomFab';
 import SimpleRemoveItemCards from '@src/components/simpleRemoveItemCards/SimpleRemoveItemCards';
-import {buttons} from '@src/globals/constants/fakeData';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {ButtonsProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
-import {useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import UsersNotFound from '../employees/components/UsersNotFound';
 import {employeeStyles} from '../employees/styles/employeesStyles';
-import {headerShown} from '@src/hooks/navigator/headerShown';
-import {actualTheme} from '@src/types/contextTypes';
+import {buttonhook} from './hooks/buttonHook';
 
 const Buttons = ({navigation, route}: ButtonsProps) => {
-  const {colors, dark} = actualTheme();
-  const [visible, setVisible] = useState(false);
-  const [alertVisible, setAlertVisible] = useState(false);
-  const [myButtons, setMyButtons] =
-    useState<{title: string; subtitle: string}[]>(buttons); // get buttons list from bd
-
-  const removeItem = (index: number) => {
-    setAlertVisible(true);
-  };
-
-  useEffect(() => {
-    headerShown({
-      navigation,
-      visible: true,
-      transparent: false,
-      titleColor: dark ? colors.onSurface : colors.onPrimaryContainer
-    });
-  });
+  const {
+    alertVisible,
+    setAlertVisible,
+    removeItem,
+    myButtons,
+    visible,
+    setVisible
+  } = buttonhook();
 
   return (
     <SafeAreaView style={backgroundStyle}>

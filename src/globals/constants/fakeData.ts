@@ -103,5 +103,7 @@ export const userFakeData = {
   shop: null,
   type: null,
   user_uid: null,
-  zipcode: null
+  zipcode: null,
+  group_number: null,
+  group_name: null
 } as unknown as User;

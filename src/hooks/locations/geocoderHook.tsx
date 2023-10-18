@@ -19,7 +19,7 @@ export const findDataLocation = (
 ) => {
   const address = myCurrentLocation.results[0].formatted_address.split(',')[0];
   const state = myCurrentLocation.results[0].address_components.find(
-    value => value.types.find(j => j == 'locality') && value
+    value => value.types.find(j => j == 'administrative_area_level_1') && value
   );
   const city = myCurrentLocation.results[0].address_components.find(
     value => value.types.find(j => j == 'administrative_area_level_2') && value
@@ -41,12 +41,12 @@ export const getLocation = async (
   const myPosition = await getCurrentPosition();
 
   const latLng = {
-    latitude: myPosition.coords.latitude,
-    longitude: myPosition.coords.longitude
+    lat: myPosition.coords.latitude,
+    lng: myPosition.coords.longitude
   };
 
   const getGeocoding = await geocoding(latLng);
   const getMyCurrentLocation = findDataLocation(getGeocoding);
-
+  getMyCurrentLocation.location = latLng;
   setMyCurrentLocation(getMyCurrentLocation);
 };

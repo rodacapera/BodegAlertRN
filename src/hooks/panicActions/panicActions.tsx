@@ -12,19 +12,31 @@ import {t} from 'i18next';
 import {getAxios} from '../axios';
 import {getCurrentPosition} from '../locations/permissionsHook';
 import {headerShown} from '../navigator/headerShown';
+import {MD3Colors} from 'react-native-paper/lib/typescript/src/types';
 
 const url = `${SERVER_PANIC_URL_PATH}${SERVER_PANIC_API_PUSH}`;
 
 const sendNotification = async ({
   data,
   setLoading,
-  navigation
+  navigation,
+  colors
 }: SendNotificationProps) => {
   setLoading(true);
-  headerShown({navigation, visible: false, transparent: true});
+  headerShown({
+    navigation,
+    visible: false,
+    transparent: true,
+    titleColor: colors.onPrimaryContainer
+  });
   const response = await getAxios.post(url, data);
   if (response.status == 201) {
-    headerShown({navigation, visible: true, transparent: true});
+    headerShown({
+      navigation,
+      visible: true,
+      transparent: true,
+      titleColor: colors.onPrimaryContainer
+    });
     setLoading(false);
     return true;
   }
@@ -48,13 +60,14 @@ export const panicNotification = async (
   setErrorDistance: (e: boolean) => void,
   navigation: StackNavigation,
   configuration: Configuration,
-  user: User
+  user: User,
+  colors: MD3Colors
 ) => {
   const currentPosition = await getCurrentPosition();
   const validDistance = configuration.distance_panic;
   const registerPosition = {
-    latitude: user.location.lat,
-    longitude: user.location.lng,
+    latitude: user.location.lat!,
+    longitude: user.location.lng!,
     latitudeDelta: 0.015,
     longitudeDelta: 0.0121
   };
@@ -76,7 +89,7 @@ export const panicNotification = async (
 
   const distance = getDistanceBetween(registerPosition, latLng);
   if (distance < validDistance) {
-    sendNotification({data, setLoading, navigation});
+    sendNotification({data, setLoading, navigation, colors});
     setErrorDistance(false);
   } else {
     setErrorDistance(true);

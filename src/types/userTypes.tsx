@@ -21,11 +21,15 @@ export interface User {
   type: string;
   user_uid: string;
   zipcode: number;
+  group_number: string;
+  group_name: string;
 }
 
 export interface Location {
-  lat: number;
-  lng: number;
+  latitude?: number | undefined;
+  longitude?: number | undefined;
+  lat?: number | undefined;
+  lng?: number | undefined;
 }
 
 export type LatLng = {
@@ -83,7 +87,7 @@ export interface Shop {
   location: Location;
   nit: string;
   phone: string;
-  zipcode: string;
+  zipcode: number;
   department: string;
 }
 
@@ -107,4 +111,6 @@ export type DataKey =
   | 'shop'
   | 'type'
   | 'user_uid'
-  | 'zipcode';
+  | 'zipcode'
+  | 'group_number'
+  | 'group_name';

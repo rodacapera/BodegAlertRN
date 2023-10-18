@@ -1,6 +1,7 @@
 import {firebase} from '@react-native-firebase/dynamic-links';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import {Shop} from '@src/types/userTypes';
 
 export const getEmployeesFirebase = (shop: any) => {
   const dbUser = firestore().collection('users').where('shop', '==', shop);
@@ -54,4 +55,9 @@ export const getDynamicLinkFirebase = async (shop_id: string) => {
   });
 
   return link;
+};
+
+export const createShopFirebase = async (shop: Shop) => {
+  const result = await firestore().collection('shops').add(shop);
+  return result;
 };

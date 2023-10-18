@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {buttonActionInitialState} from '@src/globals/constants/login';
+import {createShopFirebase} from '@src/hooks/firebase/company/company';
 import {useLoginFirebase} from '@src/hooks/firebase/login/loginWithPhoneNumber';
 import {
   createUserFirebase,
@@ -8,7 +9,7 @@ import {
 import {SetUserAuthParams} from '@src/types/auth';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
-import {User} from '@src/types/userTypes';
+import {Shop, User} from '@src/types/userTypes';
 import {OtpInputRef} from 'react-native-otp-entry';
 let count: any = null;
 
@@ -53,6 +54,43 @@ export const handleValidateOtp = (
     await AsyncStorage.setItem('@userAuth', JSON.stringify(user));
   };
 
+  const loginUser = async (user_uid: string) => {
+    //consult user if was created or if exist
+    const user = (await getUserFirebase(user_uid)) as User;
+    const newUserData = {
+      uid: user_uid,
+      user: user
+    } as unknown as SetUserAuthParams;
+    await setUser(newUserData);
+    handleBack(setButtonAction, setCode);
+    setErrorOtp(false);
+    clearInterval(count);
+    count = null;
+    navigate('Home', {isLogin: true});
+  };
+
+  const createShopAndUser = (data: User, newData: User, user_uid: string) => {
+    const shop: Shop = {
+      address: data.address,
+      alias: data.alias,
+      city: data.city,
+      countryCode: data.countryCode,
+      department: data.departament,
+      location: data.location,
+      nit: '',
+      phone: data.phone,
+      zipcode: data.zipcode
+    };
+    createShopFirebase(shop).then(async shopResult => {
+      //insert data in shop collection on firestore
+      console.log('shopId', shopResult.id);
+      newData.user_uid = user_uid;
+      newData.shop = `shops/${shopResult.id}`;
+      await createUserFirebase(newData); //insert data in user collection on firestore
+      await loginUser(user_uid);
+    });
+  };
+
   if (code.length === 6) {
     currentButtonAction.confirmation
       ?.confirm(code)
@@ -60,22 +98,16 @@ export const handleValidateOtp = (
         if (result) {
           if (data) {
             const newData = {...data};
-            newData.user_uid = result.user.uid;
-            //insert data in user collection on firestore
-            const userCreated = await createUserFirebase(newData);
+            if (data.shop) {
+              newData.user_uid = result.user.uid;
+              await createUserFirebase(newData); //insert data in user collection on firestore
+              await loginUser(result.user.uid);
+            } else {
+              createShopAndUser(data, newData, result.user.uid);
+            }
+          } else {
+            await loginUser(result.user.uid);
           }
-          //consult user if was created or if exist
-          const user = (await getUserFirebase(result.user.uid)) as User;
-          const newUserData = {
-            uid: result.user.uid,
-            user: user
-          } as unknown as SetUserAuthParams;
-          await setUser(newUserData);
-          handleBack(setButtonAction, setCode);
-          setErrorOtp(false);
-          clearInterval(count);
-          count = null;
-          navigate('Home', {isLogin: true});
         } else {
           setErrorOtp(true);
         }
@@ -89,12 +121,12 @@ export const handleValidateOtp = (
 
 export const handleSendOtp = async (
   buttonAction: LoginFormAction,
-  setSendOtpCode: (e: boolean) => void
+  setSendOtpCode?: (e: boolean) => void
 ) => {
   const confirmation = await useLoginFirebase(buttonAction.phone);
   buttonAction.confirmation = confirmation;
   AsyncStorage.setItem('@otp', JSON.stringify(true));
-  setSendOtpCode(true);
+  setSendOtpCode && setSendOtpCode(true);
 };
 
 export const removeOtpCode = async () => {

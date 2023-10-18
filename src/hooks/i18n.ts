@@ -21,7 +21,7 @@ i18n.use(initReactI18next).init({
           preferences: 'Preferences',
           darkTheme: 'Dark theme',
           supportingEntities: 'Supporting entities',
-          shopName: 'Shop Name',
+          aliasName: 'Alias',
           notify: 'Notify'
         },
         employeesView: {
@@ -63,9 +63,17 @@ i18n.use(initReactI18next).init({
           city: 'City',
           country: 'Country',
           state: 'State',
-          aliasName: 'Alias Shop/Residence'
+          aliasName: 'Alias',
+          group: 'Group No',
+          groupAlias: 'Alias group',
+          placeHolderAliasGroup: 'My residential complex',
+          alertGroupFoundTitle: 'Group not found',
+          alertGroupFoundDescription:
+            'The group code does not exist in our system, try again or create a new group if required.'
         },
         registerView: {
+          banner:
+            'The group number is the number of your community, for example, a residential unit, an apartment complex or a commercial complex, if you already have a group number please enter it in the Group No field and do not generate a new one.',
           titleCreateAccountAdmin: 'Create an account',
           titleCreateAccountUser: 'Join a registered account',
           errorUserRegisterTitle: 'Existing account',
@@ -118,7 +126,9 @@ i18n.use(initReactI18next).init({
           continue: 'Continue',
           here: 'here.',
           scanning: 'Scanning',
-          loading: 'Loading'
+          loading: 'Loading',
+          continueBike: 'Continue as vehicle',
+          continueResidence: 'Continue as residence'
         },
         qrModal: {
           helperTitleQr:
@@ -164,7 +174,7 @@ i18n.use(initReactI18next).init({
           preferences: 'Preferencias',
           darkTheme: 'Modo oscuro',
           supportingEntities: 'Entidades que apoyan',
-          shopName: 'Nombre de la tienda/residencia',
+          aliasName: 'Alias',
           notify: 'Notificaciones'
         },
         employeesView: {
@@ -206,9 +216,17 @@ i18n.use(initReactI18next).init({
           city: 'Ciudad',
           country: 'Country',
           state: 'Estado/Departamento',
-          aliasName: 'Alias de la tienda/residencia'
+          aliasName: 'Alias',
+          group: 'Grupo No',
+          groupAlias: 'Alias del grupo',
+          placeHolderAliasGroup: 'Mi unidad residencial',
+          alertGroupFoundTitle: 'Grupo no encontrado',
+          alertGroupFoundDescription:
+            'El código del grupo no existe en nuestro sistema, intenta de nuevo o crea un grupo nuevo si así lo requieres.'
         },
         registerView: {
+          banner:
+            'El número de grupo es el número de su comunidad, por ejemplo, una unidad de residencia, un complejo de apartamentos o un complejo comercial, si ya tienes un numero de grupo por favor ingreselo en el campo Grupo No y no genere uno nuevo.',
           titleCreateAccountAdmin: 'Crear una cuenta',
           titleCreateAccountUser: 'Asociate a una cuententa registrada',
           errorUserRegisterTitle: 'Cuenta existente',
@@ -262,7 +280,9 @@ i18n.use(initReactI18next).init({
           continue: 'Continuar',
           here: 'aquí.',
           scanning: 'Escaneando',
-          loading: 'Cargando'
+          loading: 'Cargando',
+          continueBike: 'Continuar como vehículo',
+          continueResidence: 'Continuar como residencia'
         },
         qrModal: {
           helperTitleQr:

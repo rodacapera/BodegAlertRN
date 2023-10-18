@@ -2,7 +2,7 @@ import {login_background, logo_app} from '@src/assets/images';
 import OtpCode from '@src/components/otp/OtpCode';
 import {APP_NAME} from '@src/globals/constants/config';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
-import {LoginProps} from '@src/types/globalTypes';
+import {LoginParams, LoginProps} from '@src/types/globalTypes';
 import {ImageBackground, SafeAreaView, ScrollView, View} from 'react-native';
 import {Avatar, Text} from 'react-native-paper';
 import LoginForm from './components/LoginForm';
@@ -45,6 +45,7 @@ const Login = ({route, navigation}: LoginProps) => {
                 errorPhone={errorPhone}
                 currentButtonAction={currentButtonAction}
                 setCurrentButtonAction={setCurrentButtonAction}
+                type={params?.type}
               />
             ) : (
               <OtpCode

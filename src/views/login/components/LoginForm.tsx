@@ -11,7 +11,8 @@ const LoginForm = ({
   setButtonAction,
   errorPhone,
   currentButtonAction,
-  setCurrentButtonAction
+  setCurrentButtonAction,
+  type
 }: LoginFormProps) => {
   const phoneRef = useRef<any>();
   const {colors, theme} = actualTheme();
@@ -34,6 +35,7 @@ const LoginForm = ({
       <Buttons
         setButtonAction={setButtonAction}
         currentButtonAction={currentButtonAction}
+        type={type}
       />
     </Fragment>
   );

@@ -1,18 +1,17 @@
 import {useNavigation} from '@react-navigation/native';
+import {buttons} from '@src/globals/constants/fakeData';
 import {headerShown} from '@src/hooks/navigator/headerShown';
-import {getEmployeesQuery} from '@src/reactQuery/userQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
-import {User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 
-const employeesHook = () => {
-  const navigation = useNavigation<StackNavigation>();
-  const {data, isLoading} = getEmployeesQuery();
-  const employees = data as User[];
+const buttonhook = () => {
   const {colors, dark} = actualTheme();
+  const navigation = useNavigation<StackNavigation>();
+  const [alertVisible, setAlertVisible] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [alertVisible, setAlertVisible] = useState(false); // employees
+  const [myButtons, setMyButtons] =
+    useState<{title: string; subtitle: string}[]>(buttons); // get buttons list from bd
 
   const removeItem = (index: number) => {
     setAlertVisible(true);
@@ -27,17 +26,13 @@ const employeesHook = () => {
     });
   });
 
-  console.log('data', employees);
-
   return {
-    employees,
-    visible,
-    setVisible,
     alertVisible,
-    removeItem,
     setAlertVisible,
-    isLoading
+    removeItem,
+    myButtons,
+    visible,
+    setVisible
   };
 };
-
-export {employeesHook};
+export {buttonhook};

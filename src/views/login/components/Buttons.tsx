@@ -7,7 +7,11 @@ import {View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {loginFormStyles} from '../styles/loginFormStyles';
 
-const Buttons = ({setButtonAction, currentButtonAction}: LoginButtonsProps) => {
+const Buttons = ({
+  setButtonAction,
+  currentButtonAction,
+  type
+}: LoginButtonsProps) => {
   const {navigate} = useNavigation<StackNavigation>();
   const {colors, theme} = actualTheme();
 
@@ -42,7 +46,7 @@ const Buttons = ({setButtonAction, currentButtonAction}: LoginButtonsProps) => {
       <Button
         mode="text"
         textColor={colors.onSurface}
-        onPress={() => navigate('Register', {administrator: true})}>
+        onPress={() => navigate('Register', {administrator: true, type})}>
         {t('loginView.signUp')}
       </Button>
     </View>
