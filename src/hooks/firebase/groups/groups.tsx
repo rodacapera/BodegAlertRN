@@ -8,3 +8,8 @@ export const createGroupFirebase = async (group: Group) => {
     .set(group);
   return result;
 };
+
+export const getGroupById = async (id: string) => {
+  const result = await firestore().collection('groups').doc(id).get();
+  return result;
+};

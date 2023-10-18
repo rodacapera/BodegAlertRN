@@ -1,20 +1,17 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
-import {
-  handleSendOtp,
-  handleValidateOtp
-} from '@src/components/otp/hooks/otpFunctions';
 import {userFakeData} from '@src/globals/constants/fakeData';
 import {buttonActionInitialState} from '@src/globals/constants/login';
-import {createShopFirebase} from '@src/hooks/firebase/company/company';
 import {getConfigurationFirebase} from '@src/hooks/firebase/config/config';
 import {geUserByPhoneNumberFirebase} from '@src/hooks/firebase/user/user';
 import {getLocation} from '@src/hooks/locations/geocoderHook';
+import {setGroupQuery, updateGroupQuery} from '@src/reactQuery/groupsQuery';
 import {Configuration} from '@src/types/configuration';
 import {RegisterType, StackNavigation} from '@src/types/globalTypes';
+import {Group} from '@src/types/groups';
 import {ResultLocations} from '@src/types/locationTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
-import {DataKey, Shop, User} from '@src/types/userTypes';
+import {DataKey, User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 import {Platform} from 'react-native';
 
@@ -30,6 +27,8 @@ const adminFormHook = (type: RegisterType) => {
   const [tokenPush, setTokenPush] = useState<string>();
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);
+  setGroupQuery(user?.group_number);
+  const {isLoading, error, mutate, data} = updateGroupQuery();
 
   const getDevice = async () => {
     const device = await AsyncStorage.getItem('@fcmToken');
@@ -46,7 +45,8 @@ const adminFormHook = (type: RegisterType) => {
   };
 
   const submitForm = () => {
-    // console.log('data>>>>>>>>', user);
+    console.log('user', user);
+
     if (user) {
       const userExist = geUserByPhoneNumberFirebase(user.phone);
       userExist.then(querySnapshot => {
@@ -64,27 +64,13 @@ const adminFormHook = (type: RegisterType) => {
   };
 
   const onChangeInput = (text: never, key: DataKey) => {
-    if (user) {
-      const userClone = {...user};
-      userClone[key] = text;
-      setUser(userClone);
-    } else {
-      const newCurrentUser = {...userFakeData};
-      newCurrentUser[key] = text;
-      setUser(newCurrentUser);
-    }
+    const userClone = user ? {...user} : {...userFakeData};
+    userClone[key] = text;
+    setUser(userClone);
   };
 
   const searchGroup = () => {
-    console.log('search>>'); //search on bd
-    const groupSearch: any = null;
-    if (groupSearch) {
-      setGroupFound(true);
-      setAlertGroupFound(false);
-    } else {
-      setGroupFound(false);
-      setAlertGroupFound(true);
-    }
+    user && mutate(user.group_number);
   };
 
   const generateGroupCode = () => {
@@ -143,6 +129,27 @@ const adminFormHook = (type: RegisterType) => {
     getLocation(setMyCurrentLocation);
   }, []);
 
+  useEffect(() => {
+    if (!isLoading && data) {
+      if (data.data()) {
+        const groupData = data.data() as Group;
+        const userClone = {...user};
+        userClone.group_name = groupData.group_name;
+        setUser(userClone as User);
+        setTimeout(() => {
+          setGroupFound(true);
+          setAlertGroupFound(false);
+        }, 2000);
+      } else {
+        setGroupFound(false);
+        setAlertGroupFound(true);
+        const userClone = {...user};
+        userClone.group_name = '';
+        setUser(userClone as User);
+      }
+    }
+  }, [data, isLoading]);
+
   return {
     configuration,
     setConfiguration,
@@ -159,7 +166,8 @@ const adminFormHook = (type: RegisterType) => {
     submitForm,
     user,
     alertUserExist,
-    setAlertUserExist
+    setAlertUserExist,
+    isLoading
   };
 };
 export {adminFormHook};

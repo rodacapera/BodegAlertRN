@@ -73,8 +73,6 @@ const dataSetUser = async (data?: User) => {
   if (userAuth) {
     const resultAuth = userAuth as SetUserAuthParams;
     const user = data ?? resultAuth.user;
-    console.log('user', user);
-
     const panicsObserver = getPanicsFirebase();
     const employeesObserver = getEmployeesFirebase(user.shop);
     const buttonsObserver = getButtonsFirebase(user.shop);

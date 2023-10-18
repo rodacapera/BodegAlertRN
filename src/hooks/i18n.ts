@@ -151,7 +151,12 @@ i18n.use(initReactI18next).init({
           panicButton: 'Request Support',
           alertTitleExitApp: 'Exit application',
           alertDescriptionExitApp:
-            'Are you sure you want to exit the application?'
+            'Are you sure you want to exit the application?',
+          share:
+            'I share with you this application that will help you to request assistance from our community whenever you need it, for this you must install the application and register with the code that I attach, this way you can enjoy its services and join our community',
+          shareTitle: 'Hi this app is great!',
+          code: 'My group code is',
+          link: 'The link'
         },
         notifications: {
           title: 'I need support!',
@@ -313,7 +318,12 @@ i18n.use(initReactI18next).init({
           panicButton: 'Solicitar Asistencia',
           alertTitleExitApp: 'Salir de la app',
           alertDescriptionExitApp:
-            '¿Estás seguro que deseas saril de la aplicación?'
+            '¿Estás seguro que deseas saril de la aplicación?',
+          share:
+            'Te comparto esta aplicación que te ayudatá a solicitar asistencia de nuestra comunidad en el momento que necesites, para esto debes instalar la aplicación y registrarte con el código que te adjunto, de esta manera puedes disfrutar de sus servicios y te unas a nuestra comunidad.',
+          shareTitle: 'Hola esta app es genial!',
+          code: 'My código de grupo es',
+          link: 'El link'
         },
         notifications: {
           title: 'Necesito asistencia!',

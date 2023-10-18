@@ -11,15 +11,14 @@ import {t} from 'i18next';
 import {Fragment, useRef} from 'react';
 import {BackHandler} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import {fakePosition} from '../../../../globals/constants/fakeData';
 import {homeHook} from '../../hooks/homeHook';
 import {homeStyles} from '../../styles/homeStyles';
 import PanicButton from '../panicButton/PanicButton';
-import {fakePosition} from '../../../../globals/constants/fakeData';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
   const {dark} = actualTheme();
-
   const {
     region,
     animateCamera,
@@ -27,7 +26,8 @@ const CustomMap = () => {
     user,
     alertVisible,
     setAlertVisible,
-    isLoading
+    isLoading,
+    onShare
   } = homeHook();
 
   return isLoading ? (
@@ -66,7 +66,16 @@ const CustomMap = () => {
           })}
         </MapView>
       )}
-
+      <CustomFab
+        icon={'share-variant'}
+        position={'bottomLeft'}
+        onPress={onShare}
+        style={{
+          borderRadius: 80,
+          backgroundColor: 'rgba(255, 255, 255, 0.5)'
+        }}
+        iconColor="black"
+      />
       <PanicButton />
       <CustomFab
         icon={'target'}

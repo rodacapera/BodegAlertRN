@@ -27,8 +27,6 @@ const employeesHook = () => {
     });
   });
 
-  console.log('data', employees);
-
   return {
     employees,
     visible,

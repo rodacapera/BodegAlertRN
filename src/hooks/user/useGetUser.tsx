@@ -40,7 +40,6 @@ const useGetUser = (setUser?: UseQueryResult) => {
     setEmployees([]);
     querySnapshot.forEach(value => {
       const data = value.data() as User;
-      console.log('data', data.administrator);
       if (querySnapshot.size > 1) {
         !data.administrator && setEmployees(prev => [...prev, data]);
       } else {
@@ -80,7 +79,6 @@ const useGetUser = (setUser?: UseQueryResult) => {
     if (currentData && currentData.user) {
       const employeesObserver = currentData.employeesObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
-          console.log('documentSnapshot.size ', documentSnapshot.size);
           documentSnapshot.size > 0
             ? resultEmployees(documentSnapshot)
             : (setEmployees([]), setCounterEmployees(0));

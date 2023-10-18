@@ -91,7 +91,6 @@ export const handleValidateOtp = (
     };
     createShopFirebase(shop).then(async shopResult => {
       //insert data in shop collection on firestore
-      console.log('shopId', shopResult.id);
       newData.user_uid = user_uid;
       newData.shop = `shops/${shopResult.id}`;
       await createUserFirebase(newData); //insert data in user collection on firestore

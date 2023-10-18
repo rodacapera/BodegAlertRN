@@ -1,11 +1,13 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
+import {getDynamicLinkFirebase} from '@src/hooks/firebase/dynamicLink/dynamicLink';
 import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {actualTheme} from '@src/types/contextTypes';
 import {HomeParams, StackNavigation} from '@src/types/globalTypes';
+import {t} from 'i18next';
 import {useEffect, useState} from 'react';
-import {BackHandler} from 'react-native';
+import {Alert, BackHandler, Share} from 'react-native';
 import {Region} from 'react-native-maps';
 
 const homeHook = () => {
@@ -58,6 +60,31 @@ const homeHook = () => {
     }
   };
 
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        title: t('home.shareTitle'),
+        message: `${t('home.share')}.\n${t('home.code')}: ${
+          user?.group_number
+        }\n${t('home.link')}: https://t.ly/bodegalert.link`
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+          console.debug('share', result.activityType);
+        } else {
+          // shared
+          console.debug('share', result);
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+        console.debug('dismissed');
+      }
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
+  };
+
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () =>
       backAction(navigation)
@@ -92,7 +119,8 @@ const homeHook = () => {
     user,
     alertVisible,
     setAlertVisible,
-    isLoading
+    isLoading,
+    onShare
   };
 };
 

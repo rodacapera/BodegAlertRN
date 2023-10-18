@@ -12,6 +12,7 @@ import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
 import {adminFormHook} from './hooks/adminFormHook';
+import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 
 const AdminForm = ({type}: {type: RegisterType}) => {
   const phoneRef = useRef<any>();
@@ -29,10 +30,15 @@ const AdminForm = ({type}: {type: RegisterType}) => {
     submitForm,
     user,
     alertUserExist,
-    setAlertUserExist
+    setAlertUserExist,
+    isLoading
   } = adminFormHook(type);
 
-  return (
+  // console.log(isLoading);
+
+  return isLoading ? (
+    <CustomLoadingOverlay visible={isLoading} />
+  ) : (
     <View>
       <CustomBanner
         visible={true}
