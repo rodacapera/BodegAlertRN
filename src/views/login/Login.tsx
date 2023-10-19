@@ -25,8 +25,6 @@ const Login = ({route, navigation}: LoginProps) => {
     setCurrentButtonAction
   } = loginHook(params?.data);
 
-  console.log('hhhhh', validateRegEx());
-
   return (
     <SafeAreaView style={backgroundStyle}>
       <ScrollView keyboardShouldPersistTaps="handled">

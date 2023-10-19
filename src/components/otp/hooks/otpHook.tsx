@@ -6,7 +6,6 @@ import {useNetInfo} from '@react-native-community/netinfo';
 
 const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
   const netInfo = useNetInfo();
-
   const inputRef = useRef<OtpInputRef>();
   const [code, setCode] = useState('');
   const [errorOtp, setErrorOtp] = useState(false);
@@ -14,6 +13,7 @@ const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
   const [counter, setCounter] = useState(60);
   const [errorNetwork, setErrorNetwork] = useState(false);
   const [isCodeRequested, setIsCodeRequested] = useState(false);
+  const [isLoadingValidateOtp, setIsLoadingValidateOtp] = useState(false);
 
   const initOtp = async () => {
     setIsCodeRequested(true);
@@ -46,7 +46,9 @@ const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
     counter,
     setCounter,
     errorNetwork,
-    setErrorNetwork
+    setErrorNetwork,
+    isLoadingValidateOtp,
+    setIsLoadingValidateOtp
   };
 };
 

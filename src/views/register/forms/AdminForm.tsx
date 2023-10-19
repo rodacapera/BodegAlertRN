@@ -34,8 +34,6 @@ const AdminForm = ({type}: {type: RegisterType}) => {
     isLoading
   } = adminFormHook(type);
 
-  // console.log(isLoading);
-
   return isLoading ? (
     <CustomLoadingOverlay visible={isLoading} />
   ) : (

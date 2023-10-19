@@ -39,7 +39,9 @@ const OtpCode = ({
     sendOtpCode,
     setSendOtpCode,
     errorNetwork,
-    setErrorNetwork
+    setErrorNetwork,
+    isLoadingValidateOtp,
+    setIsLoadingValidateOtp
   } = otpHook({
     buttonAction
   });
@@ -72,7 +74,15 @@ const OtpCode = ({
           onTextChange={(text: string) => handleChange(text, inputRef, setCode)}
           focusStickBlinkingDuration={500}
         />
-        {errorOtp && <Text style={otpStyles.errorOtp}>{t('otp.error')}</Text>}
+        {errorOtp && (
+          <Text
+            style={[
+              otpStyles.errorOtp,
+              {color: dark ? colors.onSurface : colors.error}
+            ]}>
+            {t('otp.error')}
+          </Text>
+        )}
       </View>
       <View style={otpStyles.contentOtpButtons}>
         <Button
@@ -103,6 +113,7 @@ const OtpCode = ({
         <Button
           theme={theme}
           mode="elevated"
+          disabled={isLoadingValidateOtp}
           onPress={() =>
             handleValidateOtp(
               code,
@@ -111,6 +122,7 @@ const OtpCode = ({
               buttonAction,
               setButtonAction,
               setCode,
+              setIsLoadingValidateOtp,
               data
             )
           }>

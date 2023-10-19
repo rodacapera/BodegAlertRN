@@ -52,8 +52,10 @@ export const handleValidateOtp = (
   currentButtonAction: LoginFormAction,
   setButtonAction: (e: LoginFormAction) => void,
   setCode: (e: string) => void,
+  setIsLoadingValidateOtp: (e: boolean) => void,
   data?: User
 ) => {
+  setIsLoadingValidateOtp(true);
   const setUser = async (user: SetUserAuthParams) => {
     await AsyncStorage.setItem('@userAuth', JSON.stringify(user));
   };
@@ -61,7 +63,6 @@ export const handleValidateOtp = (
   const loginUser = async (user_uid: string) => {
     const os = Platform.OS;
     const device = await AsyncStorage.getItem('@fcmToken');
-    //consult user if was created or if exist
     const user = (await getUserFirebase(user_uid)) as User;
     const deviceFound = user.devices.find(element => element.device == device);
     if (!deviceFound) {
@@ -74,6 +75,7 @@ export const handleValidateOtp = (
     await setUser(newUserData);
     handleBack(setButtonAction, setCode);
     setErrorOtp(false);
+    setIsLoadingValidateOtp(false);
     clearInterval(count);
     count = null;
     navigate('Home', {isLogin: true});
@@ -133,13 +135,16 @@ export const handleValidateOtp = (
           } else {
             await loginUser(result.user.uid);
           }
+          setIsLoadingValidateOtp(false);
         } else {
           setErrorOtp(true);
+          setIsLoadingValidateOtp(false);
         }
       })
       .catch(err => {
         console.debug(err);
         setErrorOtp(true);
+        setIsLoadingValidateOtp(false);
       });
   }
 };

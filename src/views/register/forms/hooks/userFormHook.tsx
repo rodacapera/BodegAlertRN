@@ -58,10 +58,6 @@ const userFormHook = (qr?: boolean, shopId?: string) => {
           navigation.navigate('Login', {qr, data: userClone as User});
         } else {
           setAlertUserExist(true);
-          // querySnapshot.forEach(value => {
-          //   const data = value.data() as User;
-          //   console.log('user data', data);
-          // });
         }
       });
     } else {

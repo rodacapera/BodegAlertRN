@@ -121,7 +121,6 @@ const adminFormHook = (type: RegisterType) => {
   }, [currentButtonAction, myCurrentLocation, tokenPush]);
 
   useEffect(() => {
-    // console.log('type', type);
     if (type === 'vehicle' && configuration) {
       const userClone = {...user};
       userClone.group_number = configuration.vehicle_code.toString();
