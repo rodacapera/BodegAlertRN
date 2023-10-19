@@ -12,7 +12,7 @@ const employeesHook = () => {
   const employees = data as User[];
   const {colors, dark} = actualTheme();
   const [visible, setVisible] = useState(false);
-  const [alertVisible, setAlertVisible] = useState(false); // employees
+  const [alertVisible, setAlertVisible] = useState(false);
 
   const removeItem = (index: number) => {
     setAlertVisible(true);

@@ -105,8 +105,6 @@ const useGetUser = (setUser?: UseQueryResult) => {
     }
   }, [currentData]);
 
-  // console.log('panicssss', panics);
-
   return {
     user: currentData?.user,
     panics,

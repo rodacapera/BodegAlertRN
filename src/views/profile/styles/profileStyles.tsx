@@ -4,16 +4,15 @@ export const profileStyles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 30,
-    alignItems: 'center',
-    // backgroundColor: 'red',
+    alignItems: 'center'
   },
   profileTitle: {
     textAlign: 'center',
     fontSize: 17,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   contentProfileTitle: {
     paddingHorizontal: 30,
-    marginBottom: 10,
-  },
+    marginBottom: 10
+  }
 });

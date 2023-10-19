@@ -16,8 +16,6 @@ import {Logos} from '@src/types/imageTypes';
 import {Panics, User} from '@src/types/userTypes';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
-//set data
-
 export const setEmployeesQuery = (employees: User[]) => {
   const query = useQuery({
     queryKey: ['employees'],
@@ -126,8 +124,6 @@ export const getCompanyImagesQuery = (setImages: boolean) =>
     refetchOnWindowFocus: false,
     enabled: !!setImages
   });
-
-//mutate data
 
 export const updateUserQuery = () => {
   const queryClient = useQueryClient();

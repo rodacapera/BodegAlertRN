@@ -38,7 +38,7 @@ const CustomMap = () => {
         <MapView
           ref={mapRef}
           userLocationAnnotationTitle={'Map'}
-          provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+          provider={PROVIDER_GOOGLE}
           style={homeStyles.map}
           region={region ?? fakePosition}
           customMapStyle={dark ? mapStyleDark : mapStyleLight}>
