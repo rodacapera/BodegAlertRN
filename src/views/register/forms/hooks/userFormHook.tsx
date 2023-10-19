@@ -53,7 +53,7 @@ const userFormHook = (qr?: boolean, shopId?: string) => {
           userClone.devices = [{device: tokenPush, os}];
           userClone.location = shop?.location;
           userClone.shop = `shops/${shopId}`;
-          userClone.type = 'tienda';
+          userClone.type = 'residence';
           userClone.zipcode = shop?.zipcode;
           navigation.navigate('Login', {qr, data: userClone as User});
         } else {

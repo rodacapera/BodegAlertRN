@@ -32,6 +32,17 @@ export const editUserFirebase = async (user: User) => {
   return user;
 };
 
+export const editFieldUserFirebase = async (
+  user_uid: string,
+  field: object
+) => {
+  const result = await firestore()
+    .collection('users')
+    .doc(user_uid)
+    .update({devices: firestore.FieldValue.arrayUnion(field)});
+  return result;
+};
+
 export const createUserFirebase = async (user: User) => {
   const result = await firestore()
     .collection('users')

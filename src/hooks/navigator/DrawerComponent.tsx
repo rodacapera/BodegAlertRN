@@ -20,6 +20,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {drawerComponentHook} from './hook/drawerComponentHook';
 import {drawerComponentStyles} from './styles/drawerComponentStyles';
+import {Fragment} from 'react';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const navigation = useNavigation<StackNavigation>();
@@ -73,7 +74,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           {t('drawer.aliasName')} : {user?.alias}
         </Caption>
         <View style={drawerComponentStyles.row}>
-          {user?.administrator && (
+          {user?.administrator && user.type !== 'vehicle' && (
             <View style={drawerComponentStyles.section}>
               <Paragraph
                 style={[
@@ -142,18 +143,20 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
             navigation.navigate('Profile', {administrator: false, shop})
           }
         />
-        <DrawerItem
-          icon={({size}) => (
-            <MaterialCommunityIcons
-              name="account-group"
-              color={colors.onSurface}
-              size={size}
-            />
-          )}
-          labelStyle={{color: colors.onSurface}}
-          label={t('drawer.users')}
-          onPress={() => navigation.navigate('Employees')}
-        />
+        {user?.type !== 'vehicle' && (
+          <DrawerItem
+            icon={({size}) => (
+              <MaterialCommunityIcons
+                name="account-group"
+                color={colors.onSurface}
+                size={size}
+              />
+            )}
+            labelStyle={{color: colors.onSurface}}
+            label={t('drawer.users')}
+            onPress={() => navigation.navigate('Employees')}
+          />
+        )}
         <DrawerItem
           icon={({size}) => (
             <MaterialCommunityIcons
@@ -187,43 +190,46 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           </View>
         </View>
       </Drawer.Section>
-      {user?.city != 'bogota' && (
-        <Drawer.Section
-          style={[drawerComponentStyles.drawerSection, {marginBottom: 20}]}>
-          <Title
-            style={[
-              drawerComponentStyles.titleLogos,
-              {color: colors.onSurface}
-            ]}>
-            {t('drawer.supportingEntities')}
-          </Title>
-          <View style={drawerComponentStyles.logos}>
-            {logos?.map((value, index) => {
-              return (
-                <Image
-                  source={{
-                    uri: value.path
-                  }}
-                  style={drawerComponentStyles.imagesLogos}
-                  key={index}
-                />
-              );
-            })}
-          </View>
-          <DrawerItem
-            icon={({size}) => (
-              <MaterialCommunityIcons
-                name="logout"
-                color={colors.onSurface}
-                size={size}
-              />
-            )}
-            labelStyle={{color: colors.onSurface}}
-            label={t('logOut')}
-            onPress={handleLogout}
-          />
-        </Drawer.Section>
-      )}
+
+      <Drawer.Section
+        style={[drawerComponentStyles.drawerSection, {marginBottom: 20}]}>
+        {user?.city != 'bogota' && user?.type !== 'vehicle' && (
+          <Fragment>
+            <Title
+              style={[
+                drawerComponentStyles.titleLogos,
+                {color: colors.onSurface}
+              ]}>
+              {t('drawer.supportingEntities')}
+            </Title>
+            <View style={drawerComponentStyles.logos}>
+              {logos?.map((value, index) => {
+                return (
+                  <Image
+                    source={{
+                      uri: value.path
+                    }}
+                    style={drawerComponentStyles.imagesLogos}
+                    key={index}
+                  />
+                );
+              })}
+            </View>
+          </Fragment>
+        )}
+        <DrawerItem
+          icon={({size}) => (
+            <MaterialCommunityIcons
+              name="logout"
+              color={colors.onSurface}
+              size={size}
+            />
+          )}
+          labelStyle={{color: colors.onSurface}}
+          label={t('logOut')}
+          onPress={handleLogout}
+        />
+      </Drawer.Section>
     </DrawerContentScrollView>
   );
 };

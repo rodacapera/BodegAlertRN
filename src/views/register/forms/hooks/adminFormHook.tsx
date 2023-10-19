@@ -12,6 +12,7 @@ import {Group} from '@src/types/groups';
 import {ResultLocations} from '@src/types/locationTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {DataKey, User} from '@src/types/userTypes';
+import {t} from 'i18next';
 import {useEffect, useState} from 'react';
 import {Platform} from 'react-native';
 
@@ -45,8 +46,6 @@ const adminFormHook = (type: RegisterType) => {
   };
 
   const submitForm = () => {
-    console.log('user', user);
-
     if (user) {
       const userExist = geUserByPhoneNumberFirebase(user.phone);
       userExist.then(querySnapshot => {
@@ -113,6 +112,10 @@ const adminFormHook = (type: RegisterType) => {
       newCurrentUser.devices = [{device: tokenPush, os}];
       newCurrentUser.countryCode = myCurrentLocation.country.short_name;
       newCurrentUser.type = type;
+      if (type === 'vehicle') {
+        newCurrentUser.group_number = configuration?.vehicle_code.toString()!;
+        newCurrentUser.group_name = t('general.vehicle');
+      }
       setUser(newCurrentUser);
     }
   }, [currentButtonAction, myCurrentLocation, tokenPush]);

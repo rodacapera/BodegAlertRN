@@ -14,10 +14,21 @@ const loginHook = (data?: User) => {
     useState<LoginFormAction>(buttonActionInitialState);
 
   const validatePhoneNumber = () => {
-    buttonAction.logged &&
-    (buttonAction.phone.length == 2 || buttonAction.phone.length < 10)
-      ? setErrorPhone(true)
-      : setErrorPhone(false);
+    if (buttonAction.logged) {
+      const validate = validateRegEx();
+      buttonAction.phone.length == 2 || !validate
+        ? setErrorPhone(true)
+        : setErrorPhone(false);
+    }
+  };
+
+  const validateRegEx = () => {
+    if (buttonAction.phone != '') {
+      const re = /[1-9]\d{9,14}$/;
+      const phone = buttonAction.phone.slice(buttonAction.countryCodeSize + 1);
+      return re.test(phone);
+    }
+    return false;
   };
 
   useEffect(() => {
@@ -44,7 +55,7 @@ const loginHook = (data?: User) => {
     setButtonAction,
     currentButtonAction,
     setCurrentButtonAction,
-    validatePhoneNumber
+    validateRegEx
   };
 };
 export {loginHook};

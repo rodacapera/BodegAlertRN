@@ -19,17 +19,17 @@ const CustomInputForm = ({
   const [phone, setPhone] = useState<string>();
   const [focusPhone, setFocusPhone] = useState(false);
   const {colors} = actualTheme();
-
   const handlePhoneNumber = (text: string) => {
-    let myPhone = phoneRef.current.getCountryCode();
-    myPhone = `+${myPhone}${text}`;
+    let countryCode = phoneRef.current.getCountryCode();
+    const myPhone = `+${countryCode}${text}`;
 
     setButtonAction({
       name: 'login',
       show: false,
       phone: myPhone,
       logged: true,
-      confirmation: undefined
+      confirmation: undefined,
+      countryCodeSize: countryCode.length
     });
     setPhone(text);
   };

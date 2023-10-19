@@ -5,6 +5,7 @@ import {createGroupFirebase} from '@src/hooks/firebase/groups/groups';
 import {useLoginFirebase} from '@src/hooks/firebase/login/loginWithPhoneNumber';
 import {
   createUserFirebase,
+  editFieldUserFirebase,
   getUserFirebase
 } from '@src/hooks/firebase/user/user';
 import {SetUserAuthParams} from '@src/types/auth';
@@ -12,6 +13,7 @@ import {StackNavigation} from '@src/types/globalTypes';
 import {Group} from '@src/types/groups';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {Shop, User} from '@src/types/userTypes';
+import {Platform} from 'react-native';
 import {OtpInputRef} from 'react-native-otp-entry';
 let count: any = null;
 
@@ -57,8 +59,14 @@ export const handleValidateOtp = (
   };
 
   const loginUser = async (user_uid: string) => {
+    const os = Platform.OS;
+    const device = await AsyncStorage.getItem('@fcmToken');
     //consult user if was created or if exist
     const user = (await getUserFirebase(user_uid)) as User;
+    const deviceFound = user.devices.find(element => element.device == device);
+    if (!deviceFound) {
+      await editFieldUserFirebase(user_uid, {device: device, os});
+    }
     const newUserData = {
       uid: user_uid,
       user: user

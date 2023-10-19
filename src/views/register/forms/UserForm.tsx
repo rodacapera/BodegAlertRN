@@ -49,7 +49,7 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
           phoneRef={phoneRef}
           setButtonAction={setCurrentButtonAction}
           type="phone"
-          value={user?.phone.slice(3)}
+          value={user?.phone.slice(user?.countryCode.length + 1)}
           code={user?.countryCode.toLowerCase()}
           qr={qr}
         />

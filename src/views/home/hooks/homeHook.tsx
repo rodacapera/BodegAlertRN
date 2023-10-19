@@ -1,5 +1,4 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {getDynamicLinkFirebase} from '@src/hooks/firebase/dynamicLink/dynamicLink';
 import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {useGetUser} from '@src/hooks/user/useGetUser';
@@ -61,12 +60,18 @@ const homeHook = () => {
   };
 
   const onShare = async () => {
+    const message =
+      user?.type === 'residence'
+        ? `${t('home.share')}.\n${t('home.code')}: ${user?.group_number}\n${t(
+            'home.link'
+          )}: https://t.ly/bodegalert.link`
+        : `${t('home.shareToVehicle')}.\n${t(
+            'home.link'
+          )}: https://t.ly/bodegalert.link`;
     try {
       const result = await Share.share({
         title: t('home.shareTitle'),
-        message: `${t('home.share')}.\n${t('home.code')}: ${
-          user?.group_number
-        }\n${t('home.link')}: https://t.ly/bodegalert.link`
+        message
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

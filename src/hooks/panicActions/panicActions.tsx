@@ -31,6 +31,8 @@ const sendNotification = async ({
   });
   const response = await getAxios.post(url, data);
   if (response.status == 201) {
+    console.log('response Data>>>>', JSON.stringify(response.data));
+
     headerShown({
       navigation,
       visible: true,
@@ -73,25 +75,34 @@ export const panicNotification = async (
   };
   const latLng = {
     latitude: currentPosition.coords.latitude,
-    longitude: currentPosition.coords.longitude
+    longitude: currentPosition.coords.longitude,
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121
   };
 
   const data = {
     title: t('notifications.title'),
     body: `${user.alias}: ${t('notifications.body')}`,
-    my_location: registerPosition,
+    my_location: user.type === 'vehicle' ? latLng : registerPosition,
     name: user.name + ' ' + user.lastname,
     phone: user.phone,
     alias: user.alias,
     zip_code: user.zipcode,
-    countryCode: user.countryCode
+    countryCode: user.countryCode,
+    city: user.city,
+    group: user.group_number //modificar funcion en back para que solo envie a los del grupo y de su ciudad y pais
   };
 
   const distance = getDistanceBetween(registerPosition, latLng);
-  if (distance < validDistance) {
+  if (user.type === 'residence') {
+    if (distance < validDistance) {
+      sendNotification({data, setLoading, navigation, colors});
+      setErrorDistance(false);
+    } else {
+      setErrorDistance(true);
+    }
+  } else {
     sendNotification({data, setLoading, navigation, colors});
     setErrorDistance(false);
-  } else {
-    setErrorDistance(true);
   }
 };

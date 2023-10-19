@@ -1,4 +1,4 @@
-import {house, shop} from '@src/assets/images';
+import {bike, bike_help, house, shop} from '@src/assets/images';
 import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 import CustomFab from '@src/components/customFab/CustomFab';
 import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
@@ -9,7 +9,7 @@ import {
 import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
 import {Fragment, useRef} from 'react';
-import {BackHandler} from 'react-native';
+import {BackHandler, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {fakePosition} from '../../../../globals/constants/fakeData';
 import {homeHook} from '../../hooks/homeHook';
@@ -33,7 +33,7 @@ const CustomMap = () => {
   return isLoading ? (
     <CustomLoadingOverlay visible />
   ) : (
-    <Fragment>
+    <>
       {region && (
         <MapView
           ref={mapRef}
@@ -47,7 +47,7 @@ const CustomMap = () => {
               coordinate={region}
               title={user?.alias}
               description={user?.address}
-              image={house}
+              image={user?.type === 'residence' ? house : bike}
             />
           )}
           {panics.map((marker, index) => {
@@ -59,7 +59,7 @@ const CustomMap = () => {
                   coordinate={marker.my_location}
                   title={marker.title}
                   description={marker.body}
-                  image={shop}
+                  image={user?.type === 'residence' ? shop : bike_help}
                 />
               )
             );
@@ -95,7 +95,7 @@ const CustomMap = () => {
         description={t('home.alertDescriptionExitApp')}
         actionSuccess={() => BackHandler.exitApp()}
       />
-    </Fragment>
+    </>
   );
 };
 

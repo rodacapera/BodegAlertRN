@@ -7,6 +7,7 @@ export type LoginFormAction = {
   phone: string;
   logged: boolean;
   confirmation?: FirebaseAuthTypes.ConfirmationResult;
+  countryCodeSize: number;
 };
 
 export type LoginButtonsProps = {

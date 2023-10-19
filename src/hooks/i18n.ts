@@ -130,7 +130,8 @@ i18n.use(initReactI18next).init({
           scanning: 'Scanning',
           loading: 'Loading',
           continueBike: 'Continue as vehicle',
-          continueResidence: 'Continue as residence'
+          continueResidence: 'Continue as residence',
+          vehicle: 'Vehicle'
         },
         qrModal: {
           helperTitleQr:
@@ -152,6 +153,8 @@ i18n.use(initReactI18next).init({
           alertTitleExitApp: 'Exit application',
           alertDescriptionExitApp:
             'Are you sure you want to exit the application?',
+          shareToVehicle:
+            'I share with you this application that will help you to request assistance from our community whenever you need it, for this you must install the application and register as a vehicle, this way you can enjoy its services and join our community',
           share:
             'I share with you this application that will help you to request assistance from our community whenever you need it, for this you must install the application and register with the code that I attach, this way you can enjoy its services and join our community',
           shareTitle: 'Hi this app is great!',
@@ -296,7 +299,8 @@ i18n.use(initReactI18next).init({
           scanning: 'Escaneando',
           loading: 'Cargando',
           continueBike: 'Continuar como vehículo',
-          continueResidence: 'Continuar como residencia'
+          continueResidence: 'Continuar como residencia',
+          vehicle: 'Vehículo'
         },
         qrModal: {
           helperTitleQr:
@@ -319,6 +323,8 @@ i18n.use(initReactI18next).init({
           alertTitleExitApp: 'Salir de la app',
           alertDescriptionExitApp:
             '¿Estás seguro que deseas saril de la aplicación?',
+          shareToVehicle:
+            'Te comparto esta aplicación que te ayudará a solicitar asistencia de nuestra comunidad cada vez que lo necesites, para ello debes instalar la aplicación y registrarte como vehículo, de esta manera podrás disfrutar de sus servicios y unirte a nuestra comunidad',
           share:
             'Te comparto esta aplicación que te ayudatá a solicitar asistencia de nuestra comunidad en el momento que necesites, para esto debes instalar la aplicación y registrarte con el código que te adjunto, de esta manera puedes disfrutar de sus servicios y te unas a nuestra comunidad.',
           shareTitle: 'Hola esta app es genial!',

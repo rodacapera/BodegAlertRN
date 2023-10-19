@@ -16,6 +16,7 @@ const LoginForm = ({
 }: LoginFormProps) => {
   const phoneRef = useRef<any>();
   const {colors, theme} = actualTheme();
+  console.log('error phone', errorPhone);
 
   return (
     <Fragment>

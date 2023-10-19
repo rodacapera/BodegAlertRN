@@ -1,3 +1,4 @@
+import {RegisterType} from './globalTypes';
 import {Logos} from './imageTypes';
 
 export interface User {
@@ -18,7 +19,7 @@ export interface User {
   pay: boolean;
   phone: string;
   shop: string;
-  type: string;
+  type: RegisterType;
   user_uid: string;
   zipcode: number;
   group_number: string;

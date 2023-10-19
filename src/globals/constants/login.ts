@@ -2,5 +2,6 @@ export const buttonActionInitialState = {
   name: 'login',
   show: true,
   phone: '',
-  logged: false
+  logged: false,
+  countryCodeSize: 0
 };
