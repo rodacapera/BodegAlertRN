@@ -1,6 +1,8 @@
 export interface ItemCardProps {
-  title: string;
-  subtitle?: string;
+  titleAlert?: string;
+  subtitleAlert?: string;
+  titleCard: string;
+  subtitleCard?: string;
   index: number;
   touchable?: boolean;
   modalVisible?: boolean;

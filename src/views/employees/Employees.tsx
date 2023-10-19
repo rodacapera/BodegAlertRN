@@ -38,9 +38,9 @@ const Employees = ({navigation, route}: EmployeesProps) => {
           (value, index) =>
             !value.administrator && (
               <SimpleRemoveItemCards
-                title={`${value.name} ${value.lastname}`}
+                titleCard={`${value.name} ${value.lastname}`}
+                subtitleCard={value.alias}
                 index={index}
-                subtitle={value.alias}
                 removeItem={removeItem}
                 key={index}
               />

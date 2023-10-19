@@ -32,9 +32,9 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
         {myButtons.length > 0 ? (
           myButtons.map((value, index) => (
             <SimpleRemoveItemCards
-              title={value.title}
+              titleCard={value.title}
+              subtitleCard={value.subtitle}
               index={index}
-              subtitle={value.subtitle}
               removeItem={removeItem}
               key={index}
             />

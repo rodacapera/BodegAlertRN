@@ -22,9 +22,11 @@ export const Notify = () => {
         {panics.length > 0 ? (
           panics.map((value, index) => (
             <SimpleRemoveItemCards
-              title={value.title}
+              titleCard={value.alias}
+              subtitleCard={value.title}
+              titleAlert={value.title}
+              subtitleAlert={value.body}
               index={index}
-              subtitle={value.body}
               key={index}
               setModalVisible={setModalVisible}
               modalVisible={modalVisible}

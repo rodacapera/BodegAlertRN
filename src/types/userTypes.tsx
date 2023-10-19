@@ -90,7 +90,7 @@ export interface Shop {
   phone: string;
   zipcode: number;
   department: string;
-  group_id: string;
+  group_number: string;
 }
 
 export type DataKey =

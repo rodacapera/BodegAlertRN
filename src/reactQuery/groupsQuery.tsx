@@ -13,7 +13,7 @@ export const setGroupQuery = (group_number?: string) => {
 export const updateGroupQuery = () => {
   const queryClient = useQueryClient();
   const responseMutation = useMutation({
-    mutationFn: (group_id: string) => getGroupById(group_id),
+    mutationFn: (group_number: string) => getGroupById(group_number),
     retry: true,
     onSuccess: async data => {
       queryClient.setQueryData(['groups'], data.data());

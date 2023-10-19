@@ -29,7 +29,9 @@ const CustomDialogAlert = ({
           {title}
         </Dialog.Title>
         <Dialog.Content>
-          <Text variant="bodyMedium" style={{color: colors.onSurface}}>
+          <Text
+            variant="bodyMedium"
+            style={{color: colors.onSurface, textAlign: 'center'}}>
             {description}
           </Text>
         </Dialog.Content>

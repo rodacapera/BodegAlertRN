@@ -73,7 +73,11 @@ const dataSetUser = async (data?: User) => {
   if (userAuth) {
     const resultAuth = userAuth as SetUserAuthParams;
     const user = data ?? resultAuth.user;
-    const panicsObserver = getPanicsFirebase();
+    const panicsObserver = getPanicsFirebase(
+      user.group_number,
+      user.city,
+      user.countryCode
+    );
     const employeesObserver = getEmployeesFirebase(user.shop);
     const buttonsObserver = getButtonsFirebase(user.shop);
     const userData = {
@@ -91,7 +95,8 @@ const dataSetUser = async (data?: User) => {
 export const setUserQuery = (data?: User) => {
   const query = useQuery({
     queryKey: ['user'],
-    queryFn: async () => await dataSetUser(data)
+    queryFn: async () => await dataSetUser(data),
+    enabled: !!data
   });
   return query;
 };

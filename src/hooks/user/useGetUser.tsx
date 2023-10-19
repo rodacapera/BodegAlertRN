@@ -19,17 +19,16 @@ const useGetUser = (setUser?: UseQueryResult) => {
   const [counterButtons, setCounterButtons] = useState<number>();
   const [counterEmployees, setCounterEmployees] = useState<number>();
   const [shopId, setShopId] = useState<string>();
-
   setEmployeesQuery(employees);
   setPanicsQuery(panics);
   setShopQuery(shopId);
 
   const resultPanics = (
-    documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot
+    querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
   ) => {
     setPanics([]);
-    documentSnapshot.forEach(value => {
-      const data = value.data() as Panics;
+    querySnapshot.forEach(documentSnapshot => {
+      const data = documentSnapshot.data() as Panics;
       setPanics(prev => [...prev, data]);
     });
   };
@@ -62,24 +61,29 @@ const useGetUser = (setUser?: UseQueryResult) => {
   };
 
   useEffect(() => {
-    if (currentData && currentData.user) {
-      const panicObserver = currentData.panicsObserver.onSnapshot(
+    currentData &&
+      currentData.user &&
+      setShopId(currentData.user.shop.split('/')[1]);
+  }, [currentData, shopId]);
+
+  useEffect(() => {
+    if (currentData && currentData.panicsObserver) {
+      const panicsObserver = currentData.panicsObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
-          documentSnapshot.size > 0
+          !documentSnapshot.empty && documentSnapshot.size > 0
             ? resultPanics(documentSnapshot)
             : setPanics([]);
         }
       );
-      setShopId(currentData.user.shop.split('/')[1]);
-      return () => panicObserver();
+      return () => panicsObserver();
     }
   }, [currentData]);
 
   useEffect(() => {
-    if (currentData && currentData.user) {
+    if (currentData && currentData.employeesObserver) {
       const employeesObserver = currentData.employeesObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
-          documentSnapshot.size > 0
+          documentSnapshot && documentSnapshot.size > 0
             ? resultEmployees(documentSnapshot)
             : (setEmployees([]), setCounterEmployees(0));
         }
@@ -92,7 +96,7 @@ const useGetUser = (setUser?: UseQueryResult) => {
     if (currentData && currentData.user) {
       const buttonsObserver = currentData.buttonsObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
-          documentSnapshot.size > 0
+          documentSnapshot && documentSnapshot.size > 0
             ? resultButtons(documentSnapshot)
             : (setButtons([]), setCounterButtons(0));
         }
@@ -100,6 +104,8 @@ const useGetUser = (setUser?: UseQueryResult) => {
       return () => buttonsObserver();
     }
   }, [currentData]);
+
+  // console.log('panicssss', panics);
 
   return {
     user: currentData?.user,

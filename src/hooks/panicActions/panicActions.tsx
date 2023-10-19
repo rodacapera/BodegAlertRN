@@ -90,7 +90,7 @@ export const panicNotification = async (
     zip_code: user.zipcode,
     countryCode: user.countryCode,
     city: user.city,
-    group: user.group_number //modificar funcion en back para que solo envie a los del grupo y de su ciudad y pais
+    group_number: user.group_number //modificar funcion en back para que solo envie a los del grupo y de su ciudad y pais
   };
 
   const distance = getDistanceBetween(registerPosition, latLng);

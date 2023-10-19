@@ -7,8 +7,10 @@ import {simpleRemoveItemCardsStyles} from './styles/simpleRemoveItemCards';
 import {Fragment} from 'react';
 
 const SimpleRemoveItemCards = ({
-  title,
-  subtitle,
+  titleCard,
+  subtitleCard,
+  titleAlert,
+  subtitleAlert,
   index,
   touchable = false,
   modalVisible = false,
@@ -18,12 +20,14 @@ const SimpleRemoveItemCards = ({
   const {colors, theme, dark} = actualTheme();
   return (
     <Fragment>
-      <CustomDialogAlert
-        title={title}
-        description={subtitle!}
-        setVisible={setModalVisible}
-        visible={modalVisible}
-      />
+      {titleAlert && subtitleAlert && (
+        <CustomDialogAlert
+          title={titleAlert}
+          description={subtitleAlert}
+          setVisible={setModalVisible}
+          visible={modalVisible}
+        />
+      )}
       <TouchableOpacity
         style={{width: '100%'}}
         onPress={() => setModalVisible(true)}
@@ -38,8 +42,8 @@ const SimpleRemoveItemCards = ({
           theme={theme}
           titleVariant="headlineSmall"
           titleStyle={{textTransform: 'capitalize', color: colors.onSurface}}
-          title={title}
-          subtitle={subtitle}
+          title={titleCard}
+          subtitle={subtitleCard}
           subtitleStyle={{textTransform: 'capitalize', color: colors.onSurface}}
           left={props => <Avatar.Icon {...props} icon="account-star" />}
           right={props =>

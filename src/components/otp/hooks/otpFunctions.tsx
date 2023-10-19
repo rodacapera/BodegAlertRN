@@ -85,7 +85,7 @@ export const handleValidateOtp = (
     data: User,
     newData: User,
     user_uid: string,
-    group_id: string
+    group_number: string
   ) => {
     const shop: Shop = {
       address: data.address,
@@ -97,7 +97,7 @@ export const handleValidateOtp = (
       nit: '',
       phone: data.phone,
       zipcode: data.zipcode,
-      group_id: `groups/${group_id}`
+      group_number
     };
     createShopFirebase(shop).then(async shopResult => {
       //insert data in shop collection on firestore
