@@ -1,4 +1,4 @@
-import {bike, bike_help, house, shop} from '@src/assets/images';
+import {bike, bike_help, family_help, house, shop} from '@src/assets/images';
 import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 import CustomFab from '@src/components/customFab/CustomFab';
 import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
@@ -27,7 +27,8 @@ const CustomMap = () => {
     alertVisible,
     setAlertVisible,
     isLoading,
-    onShare
+    onShare,
+    familyPanic
   } = homeHook();
 
   return isLoading ? (
@@ -45,9 +46,27 @@ const CustomMap = () => {
           {region && (
             <Marker
               coordinate={region}
-              title={user?.alias}
-              description={user?.address}
-              image={user?.type === 'residence' ? house : bike}
+              title={
+                user?.type === 'residence'
+                  ? familyPanic
+                    ? familyPanic.title
+                    : user?.alias
+                  : user?.alias
+              }
+              description={
+                user?.type === 'residence'
+                  ? familyPanic
+                    ? familyPanic.body
+                    : user?.address
+                  : user?.address
+              }
+              image={
+                user?.type === 'residence'
+                  ? familyPanic
+                    ? family_help
+                    : house
+                  : bike
+              }
             />
           )}
           {panics.map((marker, index) => {

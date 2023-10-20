@@ -13,7 +13,7 @@ import {getPanicsFirebase} from '@src/hooks/firebase/panics/panics';
 import {editUserFirebase} from '@src/hooks/firebase/user/user';
 import {OldData, SetUserAuthParams} from '@src/types/auth';
 import {Logos} from '@src/types/imageTypes';
-import {Panics, User} from '@src/types/userTypes';
+import {User} from '@src/types/userTypes';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
 export const setEmployeesQuery = (employees: User[]) => {
@@ -37,16 +37,6 @@ export const setCompanyImagesQuery = (userExist: User) => {
       );
     },
     enabled: !!userExist
-  });
-  return query;
-};
-
-export const setPanicsQuery = (panics: Panics[]) => {
-  const query = useQuery({
-    queryKey: ['panics'],
-    queryFn: async () => {
-      return panics;
-    }
   });
   return query;
 };
@@ -109,9 +99,6 @@ export const getUserQuery = () =>
 
 export const getEmployeesQuery = () =>
   useQuery(['employees'], {refetchOnWindowFocus: false});
-
-export const getPanicsQuery = () =>
-  useQuery(['panics'], {refetchOnWindowFocus: false});
 
 export const getShopQuery = () =>
   useQuery(['shop'], {

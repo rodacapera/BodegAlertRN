@@ -35,7 +35,8 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     counterEmployees,
     counterButtons,
     isLoading,
-    imageAvatar
+    imageAvatar,
+    configuration
   } = drawerComponentHook(navigation);
 
   return isLoading ? (
@@ -143,7 +144,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
             navigation.navigate('Profile', {administrator: false, shop})
           }
         />
-        {user?.type !== 'vehicle' && (
+        {user?.type !== 'vehicle' && user?.administrator && (
           <DrawerItem
             icon={({size}) => (
               <MaterialCommunityIcons
@@ -157,18 +158,20 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
             onPress={() => navigation.navigate('Employees')}
           />
         )}
-        <DrawerItem
-          icon={({size}) => (
-            <MaterialCommunityIcons
-              name="tune"
-              color={colors.onSurface}
-              size={size}
-            />
-          )}
-          labelStyle={{color: colors.onSurface}}
-          label={t('drawer.buttons')}
-          onPress={() => navigation.navigate('Buttons')}
-        />
+        {user?.administrator && (
+          <DrawerItem
+            icon={({size}) => (
+              <MaterialCommunityIcons
+                name="tune"
+                color={colors.onSurface}
+                size={size}
+              />
+            )}
+            labelStyle={{color: colors.onSurface}}
+            label={t('drawer.buttons')}
+            onPress={() => navigation.navigate('Buttons')}
+          />
+        )}
         <DrawerItem
           icon={({size}) => (
             <MaterialCommunityIcons
@@ -193,30 +196,31 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
 
       <Drawer.Section
         style={[drawerComponentStyles.drawerSection, {marginBottom: 20}]}>
-        {user?.city != 'bogota' && user?.type !== 'vehicle' && (
-          <Fragment>
-            <Title
-              style={[
-                drawerComponentStyles.titleLogos,
-                {color: colors.onSurface}
-              ]}>
-              {t('drawer.supportingEntities')}
-            </Title>
-            <View style={drawerComponentStyles.logos}>
-              {logos?.map((value, index) => {
-                return (
-                  <Image
-                    source={{
-                      uri: value.path
-                    }}
-                    style={drawerComponentStyles.imagesLogos}
-                    key={index}
-                  />
-                );
-              })}
-            </View>
-          </Fragment>
-        )}
+        {configuration?.supported_cities.city === user?.city &&
+          user?.type !== 'vehicle' && (
+            <Fragment>
+              <Title
+                style={[
+                  drawerComponentStyles.titleLogos,
+                  {color: colors.onSurface}
+                ]}>
+                {t('drawer.supportingEntities')}
+              </Title>
+              <View style={drawerComponentStyles.logos}>
+                {logos?.map((value, index) => {
+                  return (
+                    <Image
+                      source={{
+                        uri: value.path
+                      }}
+                      style={drawerComponentStyles.imagesLogos}
+                      key={index}
+                    />
+                  );
+                })}
+              </View>
+            </Fragment>
+          )}
         <DrawerItem
           icon={({size}) => (
             <MaterialCommunityIcons

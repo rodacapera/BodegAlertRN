@@ -8,4 +8,5 @@ export interface Configuration {
   versionIOS: string;
   farm_random: number;
   vehicle_code: number;
+  supported_cities: {city: string};
 }

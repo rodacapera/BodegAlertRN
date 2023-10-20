@@ -49,9 +49,13 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
           phoneRef={phoneRef}
           setButtonAction={setCurrentButtonAction}
           type="phone"
-          value={user?.phone.slice(user?.countryCode.length + 1)}
+          value={
+            user?.phone && user?.phone != ''
+              ? user.phone.slice(user?.countryCode.length + 1)
+              : undefined
+          }
           code={user?.countryCode.toLowerCase()}
-          qr={qr}
+          isDisabled={user?.shop ? true : false}
         />
         <TextInput
           label={t('adminFormView.names')}

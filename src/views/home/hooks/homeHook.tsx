@@ -59,6 +59,9 @@ const homeHook = () => {
     }
   };
 
+  const familyPanic =
+    panics.length > 0 && panics.find(val => val.phone !== user?.phone);
+
   const onShare = async () => {
     const message =
       user?.type === 'residence'
@@ -125,7 +128,8 @@ const homeHook = () => {
     alertVisible,
     setAlertVisible,
     isLoading,
-    onShare
+    onShare,
+    familyPanic
   };
 };
 

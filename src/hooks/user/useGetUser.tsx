@@ -2,13 +2,15 @@ import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 import {
   getUserQuery,
   setEmployeesQuery,
-  setPanicsQuery,
   setShopQuery
 } from '@src/reactQuery/userQuery';
 import {GetUserData} from '@src/types/auth';
 import {Buttons, Panics, User} from '@src/types/userTypes';
 import {UseQueryResult} from '@tanstack/react-query';
 import {useEffect, useState} from 'react';
+import {getConfigurationFirebase} from '../firebase/config/config';
+import {Configuration} from '@src/types/configuration';
+import {setPanicsQuery} from '@src/reactQuery/notifyQuery';
 
 const useGetUser = (setUser?: UseQueryResult) => {
   const {isLoading, error, data} = setUser ?? getUserQuery();
@@ -19,9 +21,20 @@ const useGetUser = (setUser?: UseQueryResult) => {
   const [counterButtons, setCounterButtons] = useState<number>();
   const [counterEmployees, setCounterEmployees] = useState<number>();
   const [shopId, setShopId] = useState<string>();
+  const [configuration, setConfiguration] = useState<Configuration>();
+
   setEmployeesQuery(employees);
   setPanicsQuery(panics);
   setShopQuery(shopId);
+
+  const getConfig = (countryCode: string) => {
+    getConfigurationFirebase(countryCode).then(querySnapshot => {
+      querySnapshot.forEach(value => {
+        const data = value.data() as Configuration;
+        setConfiguration(data);
+      });
+    });
+  };
 
   const resultPanics = (
     querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
@@ -63,13 +76,16 @@ const useGetUser = (setUser?: UseQueryResult) => {
   useEffect(() => {
     currentData &&
       currentData.user &&
-      setShopId(currentData.user.shop.split('/')[1]);
+      (setShopId(currentData.user.shop.split('/')[1]),
+      getConfig(currentData.user.countryCode));
   }, [currentData, shopId]);
 
   useEffect(() => {
     if (currentData && currentData.panicsObserver) {
       const panicsObserver = currentData.panicsObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
+          console.log('ooo', documentSnapshot.size);
+
           !documentSnapshot.empty && documentSnapshot.size > 0
             ? resultPanics(documentSnapshot)
             : setPanics([]);
@@ -113,7 +129,8 @@ const useGetUser = (setUser?: UseQueryResult) => {
     isLoading,
     error,
     buttons,
-    counterButtons
+    counterButtons,
+    configuration
   };
 };
 

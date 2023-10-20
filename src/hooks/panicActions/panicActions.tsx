@@ -31,8 +31,6 @@ const sendNotification = async ({
   });
   const response = await getAxios.post(url, data);
   if (response.status == 201) {
-    console.log('response Data>>>>', JSON.stringify(response.data));
-
     headerShown({
       navigation,
       visible: true,
@@ -41,6 +39,8 @@ const sendNotification = async ({
     });
     setLoading(false);
     return true;
+  } else {
+    setLoading(false);
   }
   return false;
 };

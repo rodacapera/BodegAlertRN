@@ -18,7 +18,6 @@ const query =
   currentData &&
   currentData?.panicsObserver.then(
     (querySnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
-      console.log('observeroo');
       if (!querySnapshot.empty) resultPanics(querySnapshot); //setPanics([]);
     }
   );

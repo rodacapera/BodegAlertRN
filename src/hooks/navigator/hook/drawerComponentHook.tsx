@@ -27,9 +27,8 @@ const drawerComponentHook = (navigation: StackNavigation) => {
   const [isDark, setIsDark] = useState(false);
   const [logos, setLogos] = useState<Logos[]>([]);
   const [shopId, setShopId] = useState<string | undefined>(undefined);
-  const {user, counterEmployees, counterButtons, isLoading} = useGetUser(
-    setUser as UseQueryResult
-  );
+  const {user, counterEmployees, counterButtons, isLoading, configuration} =
+    useGetUser(setUser as UseQueryResult);
   setShopQuery(shopId);
 
   const onToggleSwitch = () => {
@@ -129,7 +128,8 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     counterEmployees,
     counterButtons,
     isLoading,
-    imageAvatar
+    imageAvatar,
+    configuration
   };
 };
 

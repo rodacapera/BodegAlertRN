@@ -18,3 +18,4 @@ export const avatar = require('./icons/avatar.png');
 export const avatarw = require('./icons/avatarw.png');
 export const bike = require('./icons/bike.png');
 export const bike_help = require('./icons/bike_help.png');
+export const family_help = require('./icons/family_help1.png');
