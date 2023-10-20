@@ -14,7 +14,8 @@ const CustomInputForm = ({
   setButtonAction,
   value,
   code,
-  qr
+  qr,
+  admin = false
 }: InputFormProps) => {
   const [phone, setPhone] = useState<string>();
   const [focusPhone, setFocusPhone] = useState(false);
@@ -35,7 +36,7 @@ const CustomInputForm = ({
   };
 
   useEffect(() => {
-    value && setPhone(value);
+    value && !phone && setPhone(value);
   }, [value]);
 
   return (
@@ -59,7 +60,7 @@ const CustomInputForm = ({
             confirmTextStyle={{color: colors.onSecondaryContainer}}
             pickerItemStyle={{color: colors.onSurface}}
             initialCountry={code ?? 'co'}
-            disabled={value ? true : qr ? true : false}
+            disabled={value && !admin ? true : qr ? true : false}
             // initialValue="1"
           />
         ) : (
@@ -96,7 +97,7 @@ const CustomInputForm = ({
         label={t('general.phone')}
         value={phone}
         onChangeText={text => handlePhoneNumber(text)}
-        editable={!value ? true : qr ? true : false}
+        editable={value && !admin ? false : qr ? false : true}
       />
     </View>
   );

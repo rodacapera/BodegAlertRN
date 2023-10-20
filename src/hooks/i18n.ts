@@ -70,7 +70,8 @@ i18n.use(initReactI18next).init({
           placeHolderAliasGroup: 'My residential complex',
           alertGroupFoundTitle: 'Group not found',
           alertGroupFoundDescription:
-            'The group code does not exist in our system, try again or create a new group if required.'
+            'The group code does not exist in our system, try again or create a new group if required.',
+          aliasPlaceHolder: 'Cofee shop/Unit 3 res 201'
         },
         registerView: {
           banner:
@@ -238,7 +239,8 @@ i18n.use(initReactI18next).init({
           placeHolderAliasGroup: 'Mi unidad residencial',
           alertGroupFoundTitle: 'Grupo no encontrado',
           alertGroupFoundDescription:
-            'El código del grupo no existe en nuestro sistema, intenta de nuevo o crea un grupo nuevo si así lo requieres.'
+            'El código del grupo no existe en nuestro sistema, intenta de nuevo o crea un grupo nuevo si así lo requieres.',
+          aliasPlaceHolder: 'Cafébar/torre 3 apto 201'
         },
         registerView: {
           banner:

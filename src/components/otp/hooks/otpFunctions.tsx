@@ -23,15 +23,12 @@ export const handleBack = (
   goBack?: boolean,
   navigator?: StackNavigation
 ) => {
+  buttonActionInitialState.logged = false;
+  buttonActionInitialState.phone = '';
+  setButtonAction(buttonActionInitialState);
+  setCode('');
   if (goBack) {
-    buttonActionInitialState.logged = false;
-    buttonActionInitialState.phone = '';
-    setButtonAction(buttonActionInitialState);
-    setCode('');
     navigator?.goBack();
-  } else {
-    setButtonAction(buttonActionInitialState);
-    setCode('');
   }
 };
 

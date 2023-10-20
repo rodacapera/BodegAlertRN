@@ -2,7 +2,7 @@ import {login_background, logo_app} from '@src/assets/images';
 import OtpCode from '@src/components/otp/OtpCode';
 import {APP_NAME} from '@src/globals/constants/config';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
-import {LoginParams, LoginProps, StackNavigation} from '@src/types/globalTypes';
+import {LoginProps, StackNavigation} from '@src/types/globalTypes';
 import {ImageBackground, SafeAreaView, ScrollView, View} from 'react-native';
 import {Avatar, Button, Text} from 'react-native-paper';
 import LoginForm from './components/LoginForm';
@@ -14,7 +14,7 @@ import {t} from 'i18next';
 
 const Login = ({route, navigation}: LoginProps) => {
   const params = route.params;
-  const {navigate, goBack} = useNavigation<StackNavigation>();
+  const {goBack} = useNavigation<StackNavigation>();
   const {theme} = actualTheme();
   const {
     buttonAction,
@@ -40,15 +40,17 @@ const Login = ({route, navigation}: LoginProps) => {
                 source={logo_app}
               />
               <Text style={loginFormStyles.appName}>{APP_NAME}</Text>
-              <Button
-                icon="arrow-left"
-                textColor={'white'}
-                style={loginFormStyles.bacKButton}
-                theme={theme}
-                mode="text"
-                onPress={() => goBack()}>
-                {t('general.back')}
-              </Button>
+              {!params?.qr && (
+                <Button
+                  icon="arrow-left"
+                  textColor={'white'}
+                  style={loginFormStyles.bacKButton}
+                  theme={theme}
+                  mode="text"
+                  onPress={() => goBack()}>
+                  {t('general.back')}
+                </Button>
+              )}
             </ImageBackground>
           </View>
           <View style={loginFormStyles.loginBody}>

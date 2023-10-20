@@ -23,6 +23,7 @@ export type InputFormProps = {
   value?: string;
   code?: string;
   qr?: boolean;
+  admin?: boolean;
 };
 
 export type LoginFormProps = {

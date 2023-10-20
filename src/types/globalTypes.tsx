@@ -153,6 +153,6 @@ export type CustomFabProps = {
 };
 
 type ParamListBase = {
-  //example to index
+  //example to index on array
   [x: string]: object | undefined;
 };
