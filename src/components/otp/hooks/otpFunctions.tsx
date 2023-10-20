@@ -5,7 +5,7 @@ import {createGroupFirebase} from '@src/hooks/firebase/groups/groups';
 import {useLoginFirebase} from '@src/hooks/firebase/login/loginWithPhoneNumber';
 import {
   createUserFirebase,
-  editFieldUserFirebase,
+  editDevicesUserFirebase,
   getUserFirebase
 } from '@src/hooks/firebase/user/user';
 import {SetUserAuthParams} from '@src/types/auth';
@@ -63,7 +63,7 @@ export const handleValidateOtp = (
     const user = (await getUserFirebase(user_uid)) as User;
     const deviceFound = user.devices.find(element => element.device == device);
     if (!deviceFound) {
-      await editFieldUserFirebase(user_uid, {device: device, os});
+      await editDevicesUserFirebase(user_uid, {device: device, os});
     }
     const newUserData = {
       uid: user_uid,

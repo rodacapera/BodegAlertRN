@@ -20,7 +20,10 @@ const Employees = ({navigation, route}: EmployeesProps) => {
     alertVisible,
     removeItem,
     setAlertVisible,
-    isLoading
+    isLoading,
+    setModalVisible,
+    modalVisible,
+    setItemMustRemove
   } = employeesHook();
 
   return isLoading ? (
@@ -40,9 +43,11 @@ const Employees = ({navigation, route}: EmployeesProps) => {
               <SimpleRemoveItemCards
                 titleCard={`${value.name} ${value.lastname}`}
                 subtitleCard={value.alias}
-                index={index}
-                removeItem={removeItem}
+                user_uid={value.user_uid}
                 key={index}
+                setModalVisible={setModalVisible}
+                modalVisible={modalVisible}
+                removeItem={removeItem}
               />
             )
         )}
@@ -59,6 +64,7 @@ const Employees = ({navigation, route}: EmployeesProps) => {
         cancelButton
         title={t('employeesView.alertTitleErrorDeleteUser')}
         description={t('employeesView.alertDescriptionErrorDeleteUser')}
+        actionSuccess={setItemMustRemove}
       />
       <QrModal visible={visible} setVisible={setVisible} />
     </SafeAreaView>

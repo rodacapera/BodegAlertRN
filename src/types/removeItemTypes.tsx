@@ -3,9 +3,9 @@ export interface ItemCardProps {
   subtitleAlert?: string;
   titleCard: string;
   subtitleCard?: string;
-  index: number;
+  user_uid: string;
   touchable?: boolean;
   modalVisible?: boolean;
-  removeItem?: (e: number) => void;
+  removeItem?: (e: string) => void;
   setModalVisible?: (e: boolean) => void;
 }

@@ -1,4 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
+import {Field} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
 
 export const getUserFirebase = async (userUid: string) => {
@@ -32,7 +33,7 @@ export const editUserFirebase = async (user: User) => {
   return user;
 };
 
-export const editFieldUserFirebase = async (
+export const editDevicesUserFirebase = async (
   user_uid: string,
   field: object
 ) => {
@@ -40,6 +41,14 @@ export const editFieldUserFirebase = async (
     .collection('users')
     .doc(user_uid)
     .update({devices: firestore.FieldValue.arrayUnion(field)});
+  return result;
+};
+
+export const editFieldUserFirebase = async (user_uid: string, field: Field) => {
+  const result = await firestore()
+    .collection('users')
+    .doc(user_uid)
+    .update(field);
   return result;
 };
 

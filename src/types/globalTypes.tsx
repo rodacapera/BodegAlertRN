@@ -156,3 +156,7 @@ type ParamListBase = {
   //example to index on array
   [x: string]: object | undefined;
 };
+
+export type Field = {
+  [x: string]: string | boolean | number | object;
+};

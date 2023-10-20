@@ -84,8 +84,6 @@ const useGetUser = (setUser?: UseQueryResult) => {
     if (currentData && currentData.panicsObserver) {
       const panicsObserver = currentData.panicsObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
-          console.log('ooo', documentSnapshot.size);
-
           !documentSnapshot.empty && documentSnapshot.size > 0
             ? resultPanics(documentSnapshot)
             : setPanics([]);
