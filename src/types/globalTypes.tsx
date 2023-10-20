@@ -150,6 +150,7 @@ export type CustomFabProps = {
   style?: ViewStyle;
   label?: string;
   iconColor?: string;
+  disabled?: boolean;
 };
 
 type ParamListBase = {

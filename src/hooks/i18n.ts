@@ -167,7 +167,10 @@ i18n.use(initReactI18next).init({
           body: 'I have an event in progress and would like to have your assistance.',
           errorDistanceTitle: 'Shipping error!',
           errorDistanceDescription:
-            'Apparently you are out of coverage to send the notification.'
+            'Apparently you are out of coverage to send the notification.',
+          disabledTitle: 'Usuario deshabilitado',
+          disabledDescription:
+            'Para activar tu usuario por favor contactate con soporte técnico, podrás encontrar esta opcion en el menú principal.'
         },
         qrScan: {
           title:
@@ -338,7 +341,10 @@ i18n.use(initReactI18next).init({
           body: 'tengo un evento en curso y desearía tener con tu asistencia.',
           errorDistanceTitle: 'Error de envío!',
           errorDistanceDescription:
-            'Al parecer estás fuera de cobertura para enviar la notificación.'
+            'Al parecer estás fuera de cobertura para enviar la notificación.',
+          disabledTitle: 'Usuario deshabilitado',
+          disabledDescription:
+            'Para activar tu usuario por favor contactate con soporte técnico, podrás encontrar esta opcion en el menú principal.'
         },
         qrScan: {
           title:

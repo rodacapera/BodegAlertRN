@@ -94,15 +94,19 @@ export const panicNotification = async (
   };
 
   const distance = getDistanceBetween(registerPosition, latLng);
-  if (user.type === 'residence') {
-    if (distance < validDistance) {
+  if (user.pay) {
+    if (user.type === 'residence') {
+      if (distance < validDistance) {
+        sendNotification({data, setLoading, navigation, colors});
+        setErrorDistance(false);
+      } else {
+        setErrorDistance(true);
+      }
+    } else {
       sendNotification({data, setLoading, navigation, colors});
       setErrorDistance(false);
-    } else {
-      setErrorDistance(true);
     }
   } else {
-    sendNotification({data, setLoading, navigation, colors});
-    setErrorDistance(false);
+    setErrorDistance(true);
   }
 };

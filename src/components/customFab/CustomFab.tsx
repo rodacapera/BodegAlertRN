@@ -4,6 +4,7 @@ import {ViewStyle} from 'react-native';
 import {FAB} from 'react-native-paper';
 import {validatePosition} from './hooks/customFabHook';
 import {customFabStyles} from './styles/customFabStyles';
+import {actualTheme} from '@src/types/contextTypes';
 
 const CustomFab = ({
   onPress,
@@ -11,8 +12,10 @@ const CustomFab = ({
   position,
   style,
   label,
-  iconColor
+  iconColor,
+  disabled = false
 }: CustomFabProps) => {
+  const {colors} = actualTheme();
   const [currentPosition, setCurrentPosition] = useState<ViewStyle>(
     customFabStyles.bottomRight
   );
@@ -23,11 +26,17 @@ const CustomFab = ({
 
   return (
     <FAB
+      theme={{
+        colors: {
+          onSurfaceDisabled: colors.onSurfaceDisabled
+        }
+      }}
       icon={icon}
       label={label}
       color={iconColor}
       style={[currentPosition, style]}
       onPress={() => onPress(true)}
+      disabled={disabled}
     />
   );
 };

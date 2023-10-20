@@ -24,8 +24,16 @@ const PanicButton = () => {
     <Fragment>
       <CustomDialogAlert
         visible={errorDistance}
-        title={t('notifications.errorDistanceTitle')}
-        description={t('notifications.errorDistanceDescription')}
+        title={
+          user?.pay
+            ? t('notifications.errorDistanceTitle')
+            : t('notifications.disabledTitle')
+        }
+        description={
+          user?.pay
+            ? t('notifications.errorDistanceDescription')
+            : t('notifications.disabledDescription')
+        }
         setVisible={setErrorDistance}
       />
       <CustomLoadingOverlay visible={loading} />
