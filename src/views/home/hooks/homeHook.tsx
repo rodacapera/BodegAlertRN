@@ -2,8 +2,10 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {useGetUser} from '@src/hooks/user/useGetUser';
+import {whatsapp} from '@src/hooks/whatsapp/whatsapp';
 import {actualTheme} from '@src/types/contextTypes';
 import {HomeParams, StackNavigation} from '@src/types/globalTypes';
+import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
 import {useEffect, useState} from 'react';
 import {Alert, BackHandler, Share} from 'react-native';
@@ -71,26 +73,7 @@ const homeHook = () => {
         : `${t('home.shareToVehicle')}.\n${t(
             'home.link'
           )}: https://t.ly/bodegalert.link`;
-    try {
-      const result = await Share.share({
-        title: t('home.shareTitle'),
-        message
-      });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-          console.debug('share', result.activityType);
-        } else {
-          // shared
-          console.debug('share', result);
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-        console.debug('dismissed');
-      }
-    } catch (error: any) {
-      Alert.alert(error.message);
-    }
+    whatsapp(t('home.shareTitle'), message);
   };
 
   useEffect(() => {

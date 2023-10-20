@@ -7,7 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {shop} from '@src/globals/constants/fakeData';
 import {StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
-import {Image, StatusBar, View} from 'react-native';
+import {Image, Linking, StatusBar, View} from 'react-native';
 import {
   Avatar,
   Caption,
@@ -21,6 +21,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {drawerComponentHook} from './hook/drawerComponentHook';
 import {drawerComponentStyles} from './styles/drawerComponentStyles';
 import {Fragment} from 'react';
+import {whatsapp} from '../whatsapp/whatsapp';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const navigation = useNavigation<StackNavigation>();
@@ -183,6 +184,24 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           labelStyle={{color: colors.onSurface}}
           label={t('drawer.notify')}
           onPress={() => navigation.navigate('Notify')}
+        />
+        <DrawerItem
+          icon={({size}) => (
+            <MaterialCommunityIcons
+              name="face-agent"
+              color={colors.onSurface}
+              size={size}
+            />
+          )}
+          labelStyle={{color: colors.onSurface}}
+          label={t('drawer.support')}
+          onPress={() => {
+            Linking.openURL(
+              `mailto:support@bodegalert.com?subject=${t(
+                'drawer.shareSubject'
+              )}&body=${t('drawer.shareMessage')}`
+            ).catch(err => console.debug('An error occured', err));
+          }}
         />
       </Drawer.Section>
       <Drawer.Section theme={theme} title="Preferences">

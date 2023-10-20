@@ -23,7 +23,12 @@ i18n.use(initReactI18next).init({
           supportingEntities: 'Supporting entities',
           aliasName: 'Alias',
           notify: 'Notify',
-          groupName: 'Group'
+          groupName: 'Group',
+          support: 'Support',
+          shareTitle: 'Hi, i need a support!',
+          shareMessage:
+            'Hi, I want help on something that is happening with my application.',
+          shareSubject: 'Technical support'
         },
         employeesView: {
           banner:
@@ -195,7 +200,12 @@ i18n.use(initReactI18next).init({
           supportingEntities: 'Entidades que apoyan',
           aliasName: 'Alias',
           notify: 'Notificaciones',
-          groupName: 'Grupo'
+          groupName: 'Grupo',
+          support: 'Soporte',
+          shareTitle: 'Hola requiero ayuda!',
+          shareMessage:
+            'Hola deseo ayuda sobre algo que está pasando con mi applicación',
+          shareSubject: 'Soporte técnico'
         },
         employeesView: {
           banner:
