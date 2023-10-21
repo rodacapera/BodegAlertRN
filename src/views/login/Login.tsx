@@ -22,8 +22,13 @@ const Login = ({route, navigation}: LoginProps) => {
     errorPhone,
     currentButtonAction,
     validateRegEx,
-    setCurrentButtonAction
+    setCurrentButtonAction,
+    errorUserNotExist,
+    setErrorUserNotExist
   } = loginHook(params?.data);
+
+  console.log('params', params.qr);
+  console.log('buttonAction', buttonAction.logged);
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -54,14 +59,14 @@ const Login = ({route, navigation}: LoginProps) => {
             </ImageBackground>
           </View>
           <View style={loginFormStyles.loginBody}>
-            {!params?.qr &&
-            (buttonAction.phone.length == 2 || !validateRegEx()) ? (
+            {!params?.qr && !buttonAction.logged ? (
               <LoginForm
                 setButtonAction={setButtonAction}
                 errorPhone={errorPhone}
                 currentButtonAction={currentButtonAction}
                 setCurrentButtonAction={setCurrentButtonAction}
                 type={params?.type}
+                errorUserNotExist={errorUserNotExist}
               />
             ) : (
               <OtpCode

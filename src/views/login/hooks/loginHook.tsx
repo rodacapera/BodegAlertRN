@@ -1,5 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {buttonActionInitialState} from '@src/globals/constants/login';
+import {geUserByPhoneNumberFirebase} from '@src/hooks/firebase/user/user';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
@@ -12,15 +13,7 @@ const loginHook = (data?: User) => {
   const [buttonAction, setButtonAction] = useState(buttonActionInitialState);
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);
-
-  const validatePhoneNumber = () => {
-    if (buttonAction.logged) {
-      const validate = validateRegEx();
-      buttonAction.phone.length == 2 || !validate
-        ? setErrorPhone(true)
-        : setErrorPhone(false);
-    }
-  };
+  const [errorUserNotExist, setErrorUserNotExist] = useState(false);
 
   const validateRegEx = () => {
     if (buttonAction.phone != '') {
@@ -31,12 +24,36 @@ const loginHook = (data?: User) => {
     return false;
   };
 
-  useEffect(() => {
-    if (data) {
-      buttonAction.logged = true;
-      buttonAction.phone = data.phone;
+  const validatePhoneNumber = () => {
+    const validate = validateRegEx();
+    if (validate) {
+      const userExist = geUserByPhoneNumberFirebase(buttonAction.phone);
+      userExist.then(querySnapshot => {
+        if (querySnapshot.empty) {
+          setErrorPhone(false);
+          setErrorUserNotExist(true);
+        } else {
+          console.log('okkkkk');
+
+          buttonAction.logged = true;
+          setErrorPhone(false);
+          setErrorPhone(false);
+          setErrorUserNotExist(false);
+        }
+      });
+      setTimeout(() => {
+        setErrorUserNotExist(false);
+      }, 5000);
+    } else {
+      setErrorPhone(true);
     }
-    validatePhoneNumber();
+  };
+
+  useEffect(() => {
+    // if (data) {
+    //   buttonAction.phone = data.phone;
+    // }
+    buttonAction.phone.length > 3 && validatePhoneNumber();
   }, [buttonAction, data]);
 
   useEffect(() => {
@@ -55,7 +72,9 @@ const loginHook = (data?: User) => {
     setButtonAction,
     currentButtonAction,
     setCurrentButtonAction,
-    validateRegEx
+    validateRegEx,
+    errorUserNotExist,
+    setErrorUserNotExist
   };
 };
 export {loginHook};

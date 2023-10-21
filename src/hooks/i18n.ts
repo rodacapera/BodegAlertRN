@@ -93,7 +93,8 @@ i18n.use(initReactI18next).init({
           scanButton: 'Scan',
           signUp: 'Sign up',
           errorPhone: 'The phone number is not valid or is empty',
-          goBack: 'Back'
+          goBack: 'Back',
+          errorUserNotExist: 'The user is not exist in our system.'
         },
         loginSplashView: {
           welcome: 'Welcome to',
@@ -275,7 +276,8 @@ i18n.use(initReactI18next).init({
           scanButton: 'Escanear',
           signUp: 'Registrarse',
           errorPhone: 'El número de teléfono no es válido o está vacío',
-          goBack: 'Volver'
+          goBack: 'Volver',
+          errorUserNotExist: 'El usuario no existe en nuestro sistema.'
         },
         loginSplashView: {
           welcome: 'Bienvenido a ',

@@ -12,7 +12,8 @@ const LoginForm = ({
   errorPhone,
   currentButtonAction,
   setCurrentButtonAction,
-  type
+  type,
+  errorUserNotExist
 }: LoginFormProps) => {
   const phoneRef = useRef<any>();
   const {colors, theme} = actualTheme();
@@ -32,6 +33,9 @@ const LoginForm = ({
         type="phone"
       />
       {errorPhone && <ErrorInputForm error={t('loginView.errorPhone')} />}
+      {errorUserNotExist && (
+        <ErrorInputForm error={t('loginView.errorUserNotExist')} />
+      )}
       <Buttons
         setButtonAction={setButtonAction}
         currentButtonAction={currentButtonAction}

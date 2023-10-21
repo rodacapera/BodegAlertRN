@@ -27,7 +27,7 @@ const CustomInputForm = ({
       name: 'login',
       show: false,
       phone: myPhone,
-      logged: true,
+      logged: false,
       confirmation: undefined,
       countryCodeSize: countryCode.length
     });

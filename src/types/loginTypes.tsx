@@ -31,4 +31,5 @@ export type LoginFormProps = {
   currentButtonAction: LoginFormAction;
   setCurrentButtonAction: (e: LoginFormAction) => void;
   type?: RegisterType;
+  errorUserNotExist?: boolean;
 };
