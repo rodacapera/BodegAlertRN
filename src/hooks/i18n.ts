@@ -185,6 +185,11 @@ i18n.use(initReactI18next).init({
           alertErrorTitle: 'Network Error',
           alertErrorDescription:
             'Your current network have not internet access.'
+        },
+        update: {
+          updateTitle: 'App update',
+          updateDescription:
+            'Pleas download the last version from the application store to continue using our services.'
         }
       }
     },
@@ -364,6 +369,11 @@ i18n.use(initReactI18next).init({
           alertErrorTitle: 'Error de conexión',
           alertErrorDescription:
             'Tu conexión no tiene internet, conectate a otra red e intenta de nuevo.'
+        },
+        update: {
+          updateTitle: 'Actualizar app',
+          updateDescription:
+            'Por favor descarga la última version desde la tienda de applicaciones para seguir usando nuestros servicios.'
         }
       }
     },

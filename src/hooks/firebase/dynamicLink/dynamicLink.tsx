@@ -2,7 +2,7 @@ import {firebase} from '@react-native-firebase/auth';
 
 export const getDynamicLinkFirebase = async (shop_id: string) => {
   const link = await firebase.dynamicLinks().buildLink({
-    link: `https://orlyvisions.vercel.app/dynamiclink/?view=Register&id_shop=${shop_id}`,
+    link: `https://bodegalert.com/dynamiclink/?view=Register&id_shop=${shop_id}`,
     domainUriPrefix: 'https://bodegalert.page.link',
     android: {
       packageName: 'io.cordova.alarmu',

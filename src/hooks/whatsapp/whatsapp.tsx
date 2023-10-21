@@ -1,4 +1,3 @@
-import {User} from '@src/types/userTypes';
 import {Alert, Share} from 'react-native';
 
 export const whatsapp = async (

@@ -118,6 +118,7 @@ export type CustomDialogAlertProps = {
   actionSuccess?: (e: boolean) => void;
   title: string;
   description: string;
+  continueButton?: boolean;
 };
 
 type Actions = {label: string & $RemoveChildren<typeof Button>}[];

@@ -20,6 +20,6 @@ const panicButtonHook = () => {
     user && getConfig(user.countryCode);
   }, [user]);
 
-  return {configuration};
+  return {configuration, user};
 };
 export {panicButtonHook};

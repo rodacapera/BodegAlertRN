@@ -8,13 +8,13 @@ import {
 } from '@src/globals/constants/mapsStylesMode';
 import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
-import {Fragment, useRef} from 'react';
-import {BackHandler, View} from 'react-native';
+import {useRef} from 'react';
+import {BackHandler, Linking, Platform} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import {fakePosition} from '../../../../globals/constants/fakeData';
-import {homeHook} from '../../hooks/homeHook';
-import {homeStyles} from '../../styles/homeStyles';
-import PanicButton from '../panicButton/PanicButton';
+import {fakePosition} from '@src/globals/constants/fakeData';
+import {homeHook} from '@src/views/home/hooks/homeHook';
+import {homeStyles} from '@src/views/home/styles/homeStyles';
+import PanicButton from '@src/views/home/components/panicButton/PanicButton';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
@@ -28,11 +28,26 @@ const CustomMap = () => {
     setAlertVisible,
     isLoading,
     onShare,
-    familyPanic
+    familyPanic,
+    appVersion
   } = homeHook();
 
   return isLoading ? (
     <CustomLoadingOverlay visible />
+  ) : appVersion ? (
+    <CustomDialogAlert
+      visible
+      title={t('update.updateTitle')}
+      description={t('update.updateDescription')}
+      setVisible={() =>
+        Linking.openURL(
+          Platform.OS == 'android'
+            ? 'https://play.google.com/store/apps/details?id=io.cordova.alarmu&hl=es_CO&gl=US'
+            : 'https://apps.apple.com/us/app/bodegalert/id1428944146'
+        )
+      }
+      continueButton
+    />
   ) : (
     <>
       {region && (

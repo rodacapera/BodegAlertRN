@@ -10,7 +10,8 @@ const CustomDialogAlert = ({
   cancelButton,
   actionSuccess,
   title,
-  description
+  description,
+  continueButton = false
 }: CustomDialogAlertProps) => {
   const {colors} = actualTheme();
   const handleSuccess = () => {
@@ -44,7 +45,7 @@ const CustomDialogAlert = ({
             </Button>
           )}
           <Button onPress={handleSuccess} textColor={colors.onSurface}>
-            {t('general.ok')}
+            {continueButton ? t('general.continue') : t('general.ok')}
           </Button>
         </Dialog.Actions>
       </Dialog>

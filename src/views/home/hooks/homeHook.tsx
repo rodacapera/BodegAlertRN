@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
 import {headerShown} from '@src/hooks/navigator/headerShown';
@@ -5,20 +6,20 @@ import {useGetUser} from '@src/hooks/user/useGetUser';
 import {whatsapp} from '@src/hooks/whatsapp/whatsapp';
 import {actualTheme} from '@src/types/contextTypes';
 import {HomeParams, StackNavigation} from '@src/types/globalTypes';
-import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
 import {useEffect, useState} from 'react';
-import {Alert, BackHandler, Share} from 'react-native';
+import {BackHandler, Platform} from 'react-native';
 import {Region} from 'react-native-maps';
 
 const homeHook = () => {
-  const {user, panics, isLoading} = useGetUser();
+  const {user, panics, isLoading, configuration} = useGetUser();
   const [region, setRegion] = useState<Region>();
   const [alertVisible, setAlertVisible] = useState(false);
   const {colors, dark} = actualTheme();
   const route = useRoute();
   const params = route.params as HomeParams;
   const navigation = useNavigation<StackNavigation>();
+  const [appVersion, setAppVersion] = useState<boolean>();
 
   const animateCamera = async (mapRef: any, region: Region, speed: number) => {
     const camera = await mapRef.current.getCamera();
@@ -64,6 +65,20 @@ const homeHook = () => {
   const familyPanic =
     panics.length > 0 && panics.find(val => val.phone !== user?.phone);
 
+  const appVersionBd =
+    Platform.OS == 'ios'
+      ? configuration?.versionIOS
+      : configuration?.versionAndroid;
+  const checkVersion = async (appVersionBd: string) => {
+    const currentVersion = await AsyncStorage.getItem('@app_version');
+    if (currentVersion) {
+      const updateVersion = appVersionBd > currentVersion ? true : false;
+      setAppVersion(updateVersion);
+    } else {
+      checkVersion(appVersionBd);
+    }
+  };
+
   const onShare = async () => {
     const message =
       user?.type === 'residence'
@@ -100,7 +115,8 @@ const homeHook = () => {
       });
     }
     !region && setMyCurrentLocation();
-  }, [params, dark, user, region]);
+    appVersionBd && checkVersion(appVersionBd);
+  }, [params, dark, user, region, appVersionBd]);
 
   return {
     region,
@@ -112,7 +128,8 @@ const homeHook = () => {
     setAlertVisible,
     isLoading,
     onShare,
-    familyPanic
+    familyPanic,
+    appVersion
   };
 };
 

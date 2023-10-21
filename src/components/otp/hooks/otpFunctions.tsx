@@ -82,7 +82,8 @@ export const handleValidateOtp = (
     data: User,
     newData: User,
     user_uid: string,
-    group_number: string
+    group_number: string,
+    group_name: string
   ) => {
     const shop: Shop = {
       address: data.address,
@@ -94,7 +95,8 @@ export const handleValidateOtp = (
       nit: '',
       phone: data.phone,
       zipcode: data.zipcode,
-      group_number
+      group_number,
+      group_name
     };
     createShopFirebase(shop).then(async shopResult => {
       //insert data in shop collection on firestore
@@ -111,7 +113,13 @@ export const handleValidateOtp = (
       group_name: data.group_name
     };
     createGroupFirebase(group).then(() => {
-      createShopAndUser(data, newData, user_uid, data.group_number);
+      createShopAndUser(
+        data,
+        newData,
+        user_uid,
+        data.group_number,
+        data.group_name
+      );
     });
   };
 
@@ -132,6 +140,7 @@ export const handleValidateOtp = (
           } else {
             await loginUser(result.user.uid);
           }
+          setErrorOtp(false);
           setIsLoadingValidateOtp(false);
         } else {
           setErrorOtp(true);

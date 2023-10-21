@@ -7,6 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {shop} from '@src/globals/constants/fakeData';
 import {StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
+import {Fragment} from 'react';
 import {Image, Linking, StatusBar, View} from 'react-native';
 import {
   Avatar,
@@ -20,8 +21,6 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {drawerComponentHook} from './hook/drawerComponentHook';
 import {drawerComponentStyles} from './styles/drawerComponentStyles';
-import {Fragment} from 'react';
-import {whatsapp} from '../whatsapp/whatsapp';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
   const navigation = useNavigation<StackNavigation>();

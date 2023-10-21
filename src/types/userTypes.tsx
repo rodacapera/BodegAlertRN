@@ -91,6 +91,7 @@ export interface Shop {
   zipcode: number;
   department: string;
   group_number: string;
+  group_name: string;
 }
 
 export type DataKey =
