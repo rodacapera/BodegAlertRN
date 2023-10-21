@@ -24,7 +24,7 @@ const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
   };
 
   useEffect(() => {
-    const statusNetwork = netInfo.isConnected ? true : false;
+    const statusNetwork = netInfo.isConnected;
     statusNetwork && initOtp();
     setErrorNetwork(!statusNetwork);
   }, [netInfo]);

@@ -21,14 +21,9 @@ const Login = ({route, navigation}: LoginProps) => {
     setButtonAction,
     errorPhone,
     currentButtonAction,
-    validateRegEx,
     setCurrentButtonAction,
-    errorUserNotExist,
-    setErrorUserNotExist
+    errorUserNotExist
   } = loginHook(params?.data);
-
-  console.log('params', params.qr);
-  console.log('buttonAction', buttonAction.logged);
 
   return (
     <SafeAreaView style={backgroundStyle}>

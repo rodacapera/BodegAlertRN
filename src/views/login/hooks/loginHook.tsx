@@ -33,8 +33,6 @@ const loginHook = (data?: User) => {
           setErrorPhone(false);
           setErrorUserNotExist(true);
         } else {
-          console.log('okkkkk');
-
           buttonAction.logged = true;
           setErrorPhone(false);
           setErrorPhone(false);
@@ -50,9 +48,9 @@ const loginHook = (data?: User) => {
   };
 
   useEffect(() => {
-    // if (data) {
-    //   buttonAction.phone = data.phone;
-    // }
+    if (data) {
+      buttonAction.phone = data.phone;
+    }
     buttonAction.phone.length > 3 && validatePhoneNumber();
   }, [buttonAction, data]);
 
