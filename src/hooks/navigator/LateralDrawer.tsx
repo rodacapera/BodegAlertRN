@@ -40,9 +40,7 @@ export const LateralDrawer = () => {
         drawerContent={props => <DrawerComponent {...props} />}>
         <MyDrawer.Screen
           name="StackNavigator"
-          options={{
-            title: APP_NAME
-          }}
+          options={{title: APP_NAME}}
           component={NavigationProvider}
         />
       </MyDrawer.Navigator>

@@ -1,20 +1,20 @@
-import {bike, bike_help, family_help, house, shop} from '@src/assets/images';
 import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 import CustomFab from '@src/components/customFab/CustomFab';
 import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
+import {fakePosition} from '@src/globals/constants/fakeData';
 import {
   mapStyleDark,
   mapStyleLight
 } from '@src/globals/constants/mapsStylesMode';
 import {actualTheme} from '@src/types/contextTypes';
+import PanicButton from '@src/views/home/components/panicButton/PanicButton';
+import {homeHook} from '@src/views/home/hooks/homeHook';
+import {homeStyles} from '@src/views/home/styles/homeStyles';
 import {t} from 'i18next';
 import {useRef} from 'react';
 import {BackHandler, Linking, Platform} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import {fakePosition} from '@src/globals/constants/fakeData';
-import {homeHook} from '@src/views/home/hooks/homeHook';
-import {homeStyles} from '@src/views/home/styles/homeStyles';
-import PanicButton from '@src/views/home/components/panicButton/PanicButton';
+import CalloutBadge from '../calloutBadge/CalloutBadge';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
@@ -28,8 +28,11 @@ const CustomMap = () => {
     setAlertVisible,
     isLoading,
     onShare,
-    familyPanic,
-    appVersion
+    appVersion,
+    markerTitle,
+    markerBody,
+    currentMarkerIcon,
+    panicsMarkerIcon
   } = homeHook();
 
   return isLoading ? (
@@ -50,7 +53,7 @@ const CustomMap = () => {
     />
   ) : (
     <>
-      {region && (
+      {region && markerTitle && markerBody && currentMarkerIcon && (
         <MapView
           ref={mapRef}
           userLocationAnnotationTitle={'Map'}
@@ -59,30 +62,9 @@ const CustomMap = () => {
           region={region ?? fakePosition}
           customMapStyle={dark ? mapStyleDark : mapStyleLight}>
           {region && (
-            <Marker
-              coordinate={region}
-              title={
-                user?.type === 'residence'
-                  ? familyPanic
-                    ? familyPanic.title
-                    : user?.alias
-                  : user?.alias
-              }
-              description={
-                user?.type === 'residence'
-                  ? familyPanic
-                    ? familyPanic.body
-                    : user?.address
-                  : user?.address
-              }
-              image={
-                user?.type === 'residence'
-                  ? familyPanic
-                    ? family_help
-                    : house
-                  : bike
-              }
-            />
+            <Marker coordinate={region} image={currentMarkerIcon}>
+              <CalloutBadge title={markerTitle} body={markerBody} />
+            </Marker>
           )}
           {panics.map((marker, index) => {
             return (
@@ -91,10 +73,9 @@ const CustomMap = () => {
                 <Marker
                   key={index}
                   coordinate={marker.my_location}
-                  title={marker.title}
-                  description={marker.body}
-                  image={user?.type === 'residence' ? shop : bike_help}
-                />
+                  image={panicsMarkerIcon}>
+                  <CalloutBadge title={marker.title} body={marker.body} />
+                </Marker>
               )
             );
           })}

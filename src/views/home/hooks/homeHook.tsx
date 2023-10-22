@@ -8,8 +8,9 @@ import {actualTheme} from '@src/types/contextTypes';
 import {HomeParams, StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {useEffect, useState} from 'react';
-import {BackHandler, Platform} from 'react-native';
+import {BackHandler, ImageURISource, Platform} from 'react-native';
 import {Region} from 'react-native-maps';
+import {bike, bike_help, family_help, house, shop} from '@src/assets/images';
 
 const homeHook = () => {
   const {user, panics, isLoading, configuration} = useGetUser();
@@ -20,6 +21,14 @@ const homeHook = () => {
   const params = route.params as HomeParams;
   const navigation = useNavigation<StackNavigation>();
   const [appVersion, setAppVersion] = useState<boolean>();
+  const [markerTitle, setMarkerTitle] = useState<string>();
+  const [markerBody, setMarkerBody] = useState<string>();
+  const [currentMarkerIcon, setCurrentMarkerIcon] = useState<ImageURISource>();
+  const [panicsMarkerIcon, setPanicsMarkerIcon] = useState<ImageURISource>();
+  const appVersionBd =
+    Platform.OS == 'ios'
+      ? configuration?.versionIOS
+      : configuration?.versionAndroid;
 
   const animateCamera = async (mapRef: any, region: Region, speed: number) => {
     const camera = await mapRef.current.getCamera();
@@ -62,13 +71,35 @@ const homeHook = () => {
     }
   };
 
-  const familyPanic =
-    panics.length > 0 && panics.find(val => val.phone !== user?.phone);
+  const getCalloutText = () => {
+    const familyPanic =
+      panics.length > 0 && panics.find(val => val.phone !== user?.phone);
 
-  const appVersionBd =
-    Platform.OS == 'ios'
-      ? configuration?.versionIOS
-      : configuration?.versionAndroid;
+    const title =
+      user?.type === 'residence'
+        ? familyPanic
+          ? familyPanic.title
+          : user?.alias
+        : user?.alias;
+
+    const body =
+      user?.type === 'residence'
+        ? familyPanic
+          ? familyPanic.body
+          : user?.address
+        : user?.address;
+
+    const currentIcon =
+      user?.type === 'residence' ? (familyPanic ? family_help : house) : bike;
+
+    const panicsIcon = user?.type === 'residence' ? shop : bike_help;
+
+    setMarkerTitle(title);
+    setMarkerBody(body);
+    setCurrentMarkerIcon(currentIcon);
+    setPanicsMarkerIcon(panicsIcon);
+  };
+
   const checkVersion = async (appVersionBd: string) => {
     const currentVersion = await AsyncStorage.getItem('@app_version');
     if (currentVersion) {
@@ -118,6 +149,10 @@ const homeHook = () => {
     appVersionBd && checkVersion(appVersionBd);
   }, [params, dark, user, region, appVersionBd]);
 
+  useEffect(() => {
+    panics && getCalloutText();
+  }, [panics]);
+
   return {
     region,
     animateCamera,
@@ -128,8 +163,11 @@ const homeHook = () => {
     setAlertVisible,
     isLoading,
     onShare,
-    familyPanic,
-    appVersion
+    appVersion,
+    markerTitle,
+    markerBody,
+    currentMarkerIcon,
+    panicsMarkerIcon
   };
 };
 
