@@ -33,7 +33,10 @@ const loginHook = (data?: User) => {
           setErrorPhone(false);
           setErrorUserNotExist(true);
         } else {
-          buttonAction.logged = true;
+          console.log('continue login');
+          const buttonActionClone = {...buttonAction};
+          buttonActionClone.logged = true;
+          setButtonAction(buttonActionClone);
           setErrorPhone(false);
           setErrorPhone(false);
           setErrorUserNotExist(false);
@@ -51,7 +54,9 @@ const loginHook = (data?: User) => {
     if (data) {
       buttonAction.phone = data.phone;
     }
-    buttonAction.phone.length > 3 && validatePhoneNumber();
+    !buttonAction.logged &&
+      buttonAction.phone.length > 3 &&
+      validatePhoneNumber();
   }, [buttonAction, data]);
 
   useEffect(() => {

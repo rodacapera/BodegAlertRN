@@ -11,7 +11,12 @@ export const buttonsModalStyles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 10
   },
-  modalContainer: {padding: 20, flexDirection: 'row'},
+  modalContainer: {
+    padding: 20,
+    flexDirection: 'row',
+    marginHorizontal: 10,
+    borderRadius: 6
+  },
   modalContent: {
     alignItems: 'center',
     paddingBottom: 20
@@ -26,7 +31,7 @@ export const buttonsModalStyles = StyleSheet.create({
     fontSize: 18,
     paddingTop: 20,
     paddingBottom: 30,
-    textAlign: 'center',
+    textAlign: 'left',
     fontWeight: 'bold'
   },
   button: {

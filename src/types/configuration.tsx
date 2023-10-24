@@ -9,4 +9,13 @@ export interface Configuration {
   farm_random: number;
   vehicle_code: number;
   supported_cities: {city: string};
+  videoLinks: VideoLinks;
 }
+
+export type VideoLinks = {
+  qrLink: string;
+  userNotFoundVideoUrl: string;
+  addUserVideo: string;
+  addButton: string;
+  buttonNotFoundVideoUrl: string;
+};

@@ -1,9 +1,11 @@
-import {Alert} from 'react-native';
 import {
+  ACTIONS,
   API,
   BUTTON_ACTION,
   GET_NETWORKS,
-  MQTT
+  MQTT,
+  SET_STA,
+  STATUS
 } from '../globals/constants/shelly';
 type UniqueData = {
   auth: number;
@@ -15,9 +17,33 @@ type UniqueData = {
 
 export type Networks = {
   name?: string;
-  error?: string;
+  description?: string;
+  error?: string | null;
 };
-let unique: Networks[] = [];
+let unique: Networks[] = [{error: null}];
+
+const statusDevice = async () => {
+  return await fetch(STATUS, {method: 'GET'})
+    .then(response => response.json())
+    .then(async data => {
+      //console.log('dataaaaa', data.bat.value); //estado de la batería
+      return data;
+    })
+    .catch(err => {
+      console.debug('err', err && err);
+    });
+};
+
+const statusActionsDevice = async () => {
+  return await fetch(ACTIONS, {method: 'GET'})
+    .then(response => response.json())
+    .then(async data => {
+      return data;
+    })
+    .catch(err => {
+      console.debug('err', err && err);
+    });
+};
 
 const networks = async () => {
   return await fetch(GET_NETWORKS, {method: 'GET'})
@@ -26,20 +52,20 @@ const networks = async () => {
       return data;
     })
     .catch(error => {
-      return error.message;
+      return error && error.message;
     });
 };
 const showNetworks = async () => {
   const result = await networks();
   if (result.wifiscan === 'started' || result.wifiscan === 'inprogress') {
-    await showNetworks();
+    unique.length == 1 && (await showNetworks());
   } else {
     if (result.results) {
       unique.length > 0 && (unique = []);
       result.results.map((val: UniqueData) => {
         const find = unique.findIndex((e: Networks) => e.name === val.ssid);
         if (find === -1) {
-          unique.push({name: val.ssid});
+          unique.push({name: val.ssid, description: val.bssid});
         }
       });
     } else {
@@ -47,6 +73,14 @@ const showNetworks = async () => {
     }
   }
   return unique;
+};
+
+const staConfig = async (value: string) => {
+  return await fetch(SET_STA + value, {method: 'GET'})
+    .then(response => response.json())
+    .then(async data => {
+      return data;
+    });
 };
 
 const mqttConfig = async (value: string) => {
@@ -59,15 +93,17 @@ const mqttConfig = async (value: string) => {
 
 const buttonConfig = async (value: string) => {
   const url = API + BUTTON_ACTION(value);
-  const result = await fetch(url, {method: 'GET'})
+  return await fetch(url, {method: 'GET'})
     .then(response => response.json())
     .then(async data => {
       return data;
+    })
+    .catch(err => {
+      console.log('error', err);
     });
-  console.log('result', result);
 };
 
-const getConfig = async () => {
+export const getConfig = async () => {
   return await fetch(API + '/settings', {method: 'GET'})
     .then(response => response.json())
     .then(async data => {
@@ -75,40 +111,48 @@ const getConfig = async () => {
     });
 };
 
-const networkSettings = async (wifi_name: string, wifi_pass: string) => {
-  const myConfig = await getConfig();
+const finisSettButton = async (wifi_name: string, wifi_pass: string) => {
+  console.log('wifi_name', wifi_name);
+  console.log('wifi_pass', wifi_pass);
   const enable = 'enabled=1';
-  const ssid = 'ssid=' + wifi_name; //recibir el nombre del wifi por parametro
-  const key = 'key=' + wifi_pass; //recibir la clave del wifi por parametro
+  const ssid = 'ssid=' + wifi_name;
+  const key = 'key=' + wifi_pass;
+  console.log('ssid', ssid);
+  const statusSsidResponse = await staConfig(ssid).then(async () => {
+    console.log('ssid', key);
+    return await staConfig(key).then(async () => {
+      console.log('key', enable);
+      return await staConfig(enable);
+    });
+  });
+  console.log('statusSsidResponse', statusSsidResponse);
+  return statusSsidResponse;
+};
+
+const networkSettings = async () => {
+  const myConfig = await getConfig();
+  const btnAction = myConfig.device.hostname.split('-')[1];
+
   const mqttStat = '_enable=1';
   const mqttPeriod = '_update_period=90';
   const mqttServer = '_server=node02.myqtthub.com:1883';
   const mqttUser = '_user=pannic';
   const mqttPass = '_pass=p4nnic2022';
-  const btnAction = myConfig.device.hostname.split('-')[1];
-  const dataBtnBd = {
-    //esta es la data que se debe enviar a la coleccion buttons para crear el nuevo botón en la bd
-    body: 'we need help! in ',
-    cost: 0,
-    date: Date.now(),
-    name: myConfig.device.hostname,
-    reference: btnAction,
-    shop: '/shops/' //obtener la tienda del usuario e insertarla como una referencia
-  };
-
-  console.log(dataBtnBd);
 
   const mqttStatusResponse = await mqttConfig(mqttStat);
   const mqttPeriodResponse = await mqttConfig(mqttPeriod);
   const mqttServerResponse = await mqttConfig(mqttServer);
   const mqttUserResponse = await mqttConfig(mqttUser);
   const mqttPasswordResponse = await mqttConfig(mqttPass);
-  const buttonConfigResponse = await buttonConfig(btnAction);
-
-  // const statusSsidResponse = await staConfig(enable);
-  // const nameSsidResponse = await staConfig(ssid);
-  // const passwordSsidResponse = await staConfig(key);
-  console.log('finish');
+  // const buttonConfigResponse = await buttonConfig(btnAction);
+  const url = API + BUTTON_ACTION(btnAction);
+  return {myConfig, button: url};
 };
 
-export {networkSettings, showNetworks};
+export {
+  networkSettings,
+  showNetworks,
+  statusDevice,
+  statusActionsDevice,
+  finisSettButton
+};

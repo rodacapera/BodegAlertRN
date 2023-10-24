@@ -20,16 +20,6 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>FirebaseDynamicLinksCustomDomains</key>
-	<array>
-		<string>https://bodegalert.page.link/register</string>
-	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>To be able to take a photo to upload it as a profile photo, you need to grant permissions to use the camera</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>In order to add a profile photo, you need to grant photo reading permissions</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>To be able to upload audios it is necessary that you grant permissions to use the microphone</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -43,12 +33,23 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+	<array>
+		<string>https://bodegalert.page.link/register</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>192.168.33.1</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string></string>
+				<key>NSIncludesSubdomains</key>
+				<string></string>
+			</dict>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -56,10 +57,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>To be able to take a photo to upload it as a profile photo, you need to grant permissions to use the camera</string>
 	<key>NSLocationUsageDescription</key>
 	<string>This app needs access to location when open, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs access to location when open, to allow you to send your exact location to other users who will help you as soon as you press the panic button.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To be able to upload audios it is necessary that you grant permissions to use the microphone</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>In order to add a profile photo, you need to grant photo reading permissions</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MaterialCommunityIcons.ttf</string>

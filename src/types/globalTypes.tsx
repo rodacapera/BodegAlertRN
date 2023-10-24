@@ -4,6 +4,7 @@ import {ReactNode} from 'react';
 import {Button, ViewStyle} from 'react-native';
 import {$RemoveChildren} from 'react-native-paper/lib/typescript/src/types';
 import {User} from './userTypes';
+import {Buttons} from './buttons';
 
 export type ShopProps = {
   address: string;
@@ -96,11 +97,6 @@ export type TextWithCustomLinkProps = {
 };
 
 export type QrModalProps = {
-  visible: boolean;
-  setVisible: (e: boolean) => void;
-};
-
-export type ButtonsModalProps = {
   visible: boolean;
   setVisible: (e: boolean) => void;
 };

@@ -43,7 +43,7 @@ const Employees = ({navigation, route}: EmployeesProps) => {
               <SimpleRemoveItemCards
                 titleCard={`${value.name} ${value.lastname}`}
                 subtitleCard={value.alias}
-                user_uid={value.user_uid}
+                id={value.user_uid}
                 key={index}
                 setModalVisible={setModalVisible}
                 modalVisible={modalVisible}

@@ -11,7 +11,7 @@ const SimpleRemoveItemCards = ({
   subtitleCard,
   titleAlert,
   subtitleAlert,
-  user_uid,
+  id,
   touchable = false,
   modalVisible = false,
   removeItem,
@@ -52,7 +52,7 @@ const SimpleRemoveItemCards = ({
                 {...props}
                 icon={'delete'}
                 iconColor={colors.onSurface}
-                onPress={() => removeItem(user_uid)}
+                onPress={() => removeItem(id)}
               />
             ) : (
               <></>

@@ -6,6 +6,7 @@ import {
   remoteMessageAction
 } from '@src/hooks/notifications/notificationsHook';
 import messaging from '@react-native-firebase/messaging';
+import 'react-native-get-random-values';
 
 AppRegistry.registerComponent(appName, () => {
   pushConfigure();

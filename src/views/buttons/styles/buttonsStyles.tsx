@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export const employeeStyles = StyleSheet.create({
+export const buttonsStyles = StyleSheet.create({
   imageContainer: {
     width: 300,
     height: 300,

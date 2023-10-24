@@ -26,7 +26,7 @@ export const Notify = () => {
               subtitleCard={value.title}
               titleAlert={value.title}
               subtitleAlert={value.body}
-              user_uid={value.user_uid}
+              id={value.user_uid}
               key={index}
               setModalVisible={setModalVisible}
               modalVisible={modalVisible}

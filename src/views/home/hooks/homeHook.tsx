@@ -130,20 +130,22 @@ const homeHook = () => {
   }, []);
 
   useEffect(() => {
-    if (params && (params.isLogin || params.isBack)) {
-      headerShown({
-        navigation,
-        visible: !isLoading,
-        transparent: true,
-        titleColor: colors.onPrimaryContainer
-      });
-    } else if (!params) {
-      headerShown({
-        navigation,
-        visible: !isLoading,
-        transparent: true,
-        titleColor: colors.onPrimaryContainer
-      });
+    if (navigation.getState().index == 1) {
+      if (params && (params.isLogin || params.isBack)) {
+        headerShown({
+          navigation,
+          visible: !isLoading,
+          transparent: true,
+          titleColor: colors.onPrimaryContainer
+        });
+      } else if (!params) {
+        headerShown({
+          navigation,
+          visible: !isLoading,
+          transparent: true,
+          titleColor: colors.onPrimaryContainer
+        });
+      }
     }
     !region && setMyCurrentLocation();
     appVersionBd && checkVersion(appVersionBd);

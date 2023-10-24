@@ -46,13 +46,23 @@ i18n.use(initReactI18next).init({
             'We have not found any notify registered to your shop/residence'
         },
         buttonsView: {
+          button: 'Button',
           banner:
             'Below you will find a list of the buttons registered in your shop/residence, which you can remove or add using the floating button!',
-          employeeNotFound:
+          buttonsNotFound:
             'We have not found any buttons registered to your shop/residence, we invite you to watch the following video to learn how to create one',
-          alertTitleErrorDeleteUser: 'Remove button',
-          alertDescriptionErrorDeleteUser:
-            'Are you sure you want to delete this button, if so press Ok button.'
+          alertTitleErrorDeleteButton: 'Remove button',
+          alertDescriptionErrorDeleteButton:
+            'Are you sure you want to delete this button, if so press Ok button.',
+          buttonFindTitle:
+            'We have detected the following button, to add it to your lists, click on the button below',
+          buttonStatus: 'Status',
+          buttonConnected: 'Connected',
+          buttonUnconnected: 'Unconnected',
+          buttonIp: 'Ip',
+          searching: 'Searching',
+          noDetectedButton:
+            'Botón no detectado, desliza hacia abajo para buscar de nuevo.'
         },
         geolocationAlert: {
           errorLocationPermissionsAlert: 'Permission denied',
@@ -147,13 +157,24 @@ i18n.use(initReactI18next).init({
         },
         buttonsModal: {
           formTitle: 'Add your network settings',
+          formTitleFinish: 'The last step',
+          descriptionLastStep:
+            '1* Please copy and past this link in your browser and press enter.\n2* Switch your current network to get internet.',
           formCaption: 'Pleas input your network password and press continue!',
           networkName: 'ISS',
           networkPass: 'Password',
           title: 'Select your network!',
           helperTitleQr:
-            'Turn on your button and connect to the wifi network that starts with shellybuton1, go back to this screen, select your wifi network from the list below and follow the steps!',
-          helperFooterQrFirst: `Learn how it's done, click`
+            '1* Turn on your button.\n2* In your phone connect to the wifi network that one starts with shellybuton1.\n3* Go back to this screen and select your wifi network from the list below.\n4* Follow the next steps.',
+          helperFooterQrFirst: `Learn how it's done, click`,
+          internetError: 'Internet error, try again!',
+          errorButtonExistTitle: 'Button found.',
+          errorButtonExistDescription:
+            'This button exist in our system, pleas try again with another button!',
+          unConnectedShellyButton:
+            'To continue please connect your device to the button network!',
+          buttonNotReady:
+            'The button is not full configured, copy and past the link in your browser and press enter!'
         },
         home: {
           panicButton: 'Request Support',
@@ -229,13 +250,22 @@ i18n.use(initReactI18next).init({
             'We have not found any notify registered to your shop/residence'
         },
         buttonsView: {
+          button: 'Botón',
           banner:
             'A continuación encontrará una lista de los botones registrados en su tienda/residencia, que puede eliminar o añadir utilizando el botón flotante!',
-          employeeNotFound:
-            'No hemos encontrado ningún botón registrado en su tienda/residencia, le invitamos a ver el siguiente vídeo para aprender a crear uno',
-          alertTitleErrorDeleteUser: 'Remove button',
-          alertDescriptionErrorDeleteUser:
-            '¿Está seguro de que desea eliminar este botón, si es así pulse el botón Ok.'
+          buttonsNotFound:
+            'No hemos encontrado ningún botón registrado en su tienda/residencia, te invitamos a ver el siguiente vídeo para aprender a crear uno, o agrega uno oprimiendo el botón de abajo.',
+          alertTitleErrorDeleteButton: 'Remove button',
+          alertDescriptionErrorDeleteButton:
+            '¿Está seguro de que desea eliminar este botón, si es así pulse el botón Ok.',
+          buttonFindTitle:
+            'Hemos detectado el siguiente botón, para agregarlo a tu listas, oprime el botón de abajo',
+          buttonStatus: 'Estatus',
+          buttonConnected: 'Conectado',
+          buttonUnconnected: 'Desconectado',
+          buttonIp: 'Ip',
+          searching: 'Buscando',
+          noDetectedButton: 'Button was not detected, swip down to searh again.'
         },
         geolocationAlert: {
           errorLocationPermissionsAlert: 'Permiso denegado',
@@ -330,7 +360,10 @@ i18n.use(initReactI18next).init({
           helperFooterQrFirst: 'Conocer como se hace, click'
         },
         buttonsModal: {
-          formTitle: 'Add your network settings',
+          formTitle: 'Agrega tu configuración de red',
+          formTitleFinish: 'El último paso',
+          descriptionLastStep:
+            '1* Por favor copia y pega el siguiente enlace en tu navegador y presiona enter.\n2* Vuelve a una red que tenga internet.',
           formCaption:
             'Por favor ingrese la contraseña de su red y oprima continuar!',
           networkName: 'ISS',
@@ -338,7 +371,15 @@ i18n.use(initReactI18next).init({
           title: 'Selecciona tu red!',
           helperTitleQr:
             'Enciende tu botón y conectate a la red wifi que inicia con shellybuton1, volve a esta pantalla, selecciona tu red wifi del listado de abajo y segue los pasos!',
-          helperFooterQrFirst: 'Conocer como se hace, click'
+          helperFooterQrFirst: 'Conocer como se hace, click',
+          internetError: 'Sin internet, intenta de nuevo!',
+          errorButtonExistTitle: 'Botón encontrado.',
+          errorButtonExistDescription:
+            'Este botón existe en nuestro sistema, por favor intenta de nuevo con otro botón!',
+          unConnectedShellyButton:
+            'Para continuar por favor conecte su dispositivo a la red del botón!',
+          buttonNotReady:
+            'El botón no está completamente configurado, por favor copie el link, peguelo en su navegador y oprima enter!'
         },
         home: {
           panicButton: 'Solicitar Asistencia',

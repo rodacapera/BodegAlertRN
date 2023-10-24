@@ -69,7 +69,6 @@ const AdminForm = ({type}: {type: RegisterType}) => {
             setButtonAction={setCurrentButtonAction}
             type="phone"
             value={user?.phone.slice(3) ?? undefined}
-            admin={true}
           />
           {type === 'residence' && (
             <Fragment>

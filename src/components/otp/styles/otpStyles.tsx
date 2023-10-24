@@ -31,7 +31,8 @@ export const otpStyles = StyleSheet.create({
   contentOtpButtons: {
     width: 320,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    paddingBottom: 50
   },
   titleOtp: {
     fontSize: 20,

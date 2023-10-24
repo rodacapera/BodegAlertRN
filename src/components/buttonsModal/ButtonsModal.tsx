@@ -1,50 +1,60 @@
-import {addButton} from '@src/globals/constants/fakeData';
-import {Networks, showNetworks} from '@src/hooks/shellyActions';
-import {ThemeContext, actualTheme} from '@src/types/contextTypes';
-import {ButtonsModalProps} from '@src/types/globalTypes';
+import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
-import {Fragment, useContext, useEffect, useState} from 'react';
-import {AppState, TouchableOpacity, View} from 'react-native';
+import {Fragment} from 'react';
+import {TouchableOpacity, View} from 'react-native';
 import {List, Modal} from 'react-native-paper';
 import ButtonsList from '../buttonsList/ButtonsList';
+import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
 import CustomLoader from '../customLoader/CustomLoader';
 import TextWithCustomLink from '../textWithCustomLink/TextWithCustomLink';
-import Header from './components/header/Header';
-import {buttonsModalStyles} from './styles/buttonsModalStyles';
 import AddButtonForm from './components/addButtonForm/AddButtonForm';
+import Header from './components/header/Header';
+import {ButtonsModalHook} from './hook/ButtonsModalHook';
+import {buttonsModalStyles} from './styles/buttonsModalStyles';
+import {ButtonsModalProps} from '@src/types/buttons';
 
-const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
-  const [networks, setNetworks] = useState<Networks[]>();
-  const [firsStep, setFirsStep] = useState<string>('');
-  const hideModal = () => (setVisible(false), setNetworks(undefined));
-  const networksStatus = !networks ? true : false;
+const ButtonsModal = ({
+  visible,
+  setVisible,
+  buttons,
+  buttonFind,
+  setButtonFind,
+  setNewButtons
+}: ButtonsModalProps) => {
   const {colors, theme} = actualTheme();
-
-  const getMyNetworks = async () => {
-    if (!networks || networks == undefined) {
-      const networksResult = await showNetworks();
-      networksResult[0].error
-        ? setNetworks(undefined)
-        : setNetworks(networksResult);
-    }
-  };
-
-  useEffect(() => {
-    getMyNetworks();
-  }, [networks]);
-
-  useEffect(() => {
-    const appMode = AppState.addEventListener(
-      'change',
-      value => value === 'active' && getMyNetworks()
-    );
-    return () => appMode.remove();
-  }, []);
+  const {
+    networks,
+    firsStep,
+    setFirsStep,
+    hideModal,
+    networksStatus,
+    setSendSetButton,
+    setNameIsd,
+    setPassIsd,
+    urlConfigButton,
+    saveButton,
+    internetError,
+    savingData,
+    passIsd,
+    sendSetButton,
+    config,
+    buttonExist,
+    setButtonExist,
+    unConnectedShellyButton,
+    buttonNotReady
+  } = ButtonsModalHook({
+    setVisible,
+    buttons,
+    buttonFind,
+    setButtonFind,
+    setNewButtons
+  });
 
   return (
     <Modal
       visible={visible}
-      onDismiss={hideModal}
+      dismissable={!urlConfigButton}
+      onDismiss={!urlConfigButton ? hideModal : undefined}
       contentContainerStyle={[
         buttonsModalStyles.modalContainer,
         {
@@ -56,6 +66,12 @@ const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
       <View style={buttonsModalStyles.modalContent}>
         <Header visible={networksStatus} />
         <CustomLoader visible={networksStatus} label={t('general.scanning')} />
+        <CustomDialogAlert
+          visible={buttonExist}
+          setVisible={setButtonExist}
+          title={t('buttonsModal.errorButtonExistTitle')}
+          description={t('buttonsModal.errorButtonExistDescription')}
+        />
         {networks && networks[0].name && (
           <Fragment>
             {firsStep == '' ? (
@@ -69,7 +85,7 @@ const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
                       <List.Item
                         theme={theme}
                         title={value.name}
-                        description={'Some description'}
+                        description={value.description}
                         left={props => <List.Icon {...props} icon="wifi" />}
                       />
                     </TouchableOpacity>
@@ -77,13 +93,29 @@ const ButtonsModal = ({visible, setVisible}: ButtonsModalProps) => {
                 })}
               </ButtonsList>
             ) : (
-              <AddButtonForm backButton={setFirsStep} iss={firsStep} />
+              <View>
+                <AddButtonForm
+                  backButton={setFirsStep}
+                  iss={firsStep}
+                  setSendSetButton={setSendSetButton}
+                  setNameIsd={setNameIsd}
+                  setPassIsd={setPassIsd}
+                  urlConfigButton={urlConfigButton}
+                  saveButton={saveButton}
+                  internetError={internetError}
+                  savingData={savingData}
+                  passIsd={passIsd}
+                  sendSetButton={sendSetButton}
+                  unConnectedShellyButton={unConnectedShellyButton}
+                  buttonNotReady={buttonNotReady}
+                />
+              </View>
             )}
           </Fragment>
         )}
         <TextWithCustomLink
           text={t('buttonsModal.helperFooterQrFirst')}
-          link={addButton}
+          link={config.videoLinks?.addButton}
           visible={networksStatus}
         />
       </View>

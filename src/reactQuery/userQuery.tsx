@@ -12,6 +12,7 @@ import {getEmployeesFirebase} from '@src/hooks/firebase/employees/employees';
 import {getPanicsFirebase} from '@src/hooks/firebase/panics/panics';
 import {editUserFirebase} from '@src/hooks/firebase/user/user';
 import {OldData, SetUserAuthParams} from '@src/types/auth';
+import {Buttons} from '@src/types/buttons';
 import {Logos} from '@src/types/imageTypes';
 import {User} from '@src/types/userTypes';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
@@ -19,9 +20,16 @@ import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 export const setEmployeesQuery = (employees: User[]) => {
   const query = useQuery({
     queryKey: ['employees'],
-    queryFn: async () => {
-      return employees;
-    }
+    queryFn: async () => employees
+  });
+  return query;
+};
+
+export const setButtonsQuery = (buttons: Buttons[]) => {
+  const query = useQuery({
+    queryKey: ['buttons'],
+    queryFn: async () => buttons,
+    enabled: !!buttons
   });
   return query;
 };
@@ -94,6 +102,9 @@ export const getUserQuery = () =>
 
 export const getEmployeesQuery = () =>
   useQuery(['employees'], {refetchOnWindowFocus: false});
+
+export const getButtonsQuery = () =>
+  useQuery(['buttons'], {refetchOnWindowFocus: false});
 
 export const getShopQuery = () =>
   useQuery(['shop'], {

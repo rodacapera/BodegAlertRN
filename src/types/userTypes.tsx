@@ -1,3 +1,4 @@
+import {Buttons} from './buttons';
 import {RegisterType} from './globalTypes';
 import {Logos} from './imageTypes';
 
@@ -52,16 +53,6 @@ export interface Panics {
   title: string;
   zip_code: string;
   user_uid: string;
-}
-
-export interface Buttons {
-  body: string;
-  cost: number;
-  date: string;
-  name: string;
-  reference: string;
-  shop: string;
-  uid: string;
 }
 
 export interface Images {

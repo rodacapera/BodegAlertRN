@@ -1,21 +1,95 @@
 import {useNavigation} from '@react-navigation/native';
-import {buttons} from '@src/globals/constants/fakeData';
+import {removeButtonByIdFirebase} from '@src/hooks/firebase/buttons/buttons';
 import {headerShown} from '@src/hooks/navigator/headerShown';
+import {statusDevice} from '@src/hooks/shellyActions';
+import {getButtonsQuery, setButtonsQuery} from '@src/reactQuery/userQuery';
+import {ButtonFind, Buttons} from '@src/types/buttons';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
+import {AppState} from 'react-native';
 
 const buttonhook = () => {
-  const {colors, dark} = actualTheme();
   const navigation = useNavigation<StackNavigation>();
+  const {colors, dark} = actualTheme();
+  const {isLoading, data} = getButtonsQuery();
+  const buttons = data as Buttons[];
   const [alertVisible, setAlertVisible] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [myButtons, setMyButtons] =
-    useState<{title: string; subtitle: string}[]>(buttons); // get buttons list from bd
+  const [buttonFind, setButtonFind] = useState<ButtonFind>();
+  const [refreshing, setRefreshing] = useState(false);
+  const [itemToRemove, setItemToRemove] = useState<string>();
+  const [sendRemoveItem, setSendRemoveItem] = useState(false);
+  const [newButtons, setNewButtons] = useState<Buttons[]>(buttons);
+  setButtonsQuery(newButtons);
 
-  const removeItem = (index: number) => {
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    !refreshing &&
+      setTimeout(() => {
+        setRefreshing(false);
+        buttonFind && buttonFind.ip == '' ? getDevice() : setButtonFind(null);
+      }, 2000);
+  }, []);
+
+  const removeItem = (index: string) => {
+    setItemToRemove(index);
     setAlertVisible(true);
   };
+
+  const removeButton = () => {
+    if (itemToRemove) {
+      removeButtonByIdFirebase(itemToRemove)
+        .then(result => {
+          const newButtons = [...buttons];
+          const resultFilter = newButtons.filter(
+            value => value.uid != itemToRemove
+          );
+          console.log('resultFilter', resultFilter);
+
+          setNewButtons(resultFilter);
+        })
+        .catch(err => console.log(err));
+    }
+  };
+  // console.log('buttons,,,,,', buttons);
+
+  useEffect(() => {
+    setTimeout(() => {
+      buttons.length > 0 && setNewButtons(buttons);
+    }, 1000);
+  }, [buttons]);
+
+  useEffect(() => {
+    sendRemoveItem && removeButton();
+  }, [sendRemoveItem]);
+
+  const getDevice = () => {
+    statusDevice().then(result => {
+      if (result) {
+        setButtonFind({
+          isValid: result.is_valid,
+          connected: result.wifi_sta.connected,
+          ip: result.wifi_sta.ip
+        });
+      } else {
+        !buttonFind &&
+          setButtonFind({isValid: false, connected: false, ip: ''});
+      }
+    });
+  };
+
+  useEffect(() => {
+    !buttonFind && getDevice();
+  }, [buttonFind]);
+
+  useEffect(() => {
+    const appMode = AppState.addEventListener(
+      'change',
+      value => value === 'active' && getDevice()
+    );
+    return () => appMode.remove();
+  }, []);
 
   useEffect(() => {
     headerShown({
@@ -30,9 +104,17 @@ const buttonhook = () => {
     alertVisible,
     setAlertVisible,
     removeItem,
-    myButtons,
+    buttons: newButtons,
     visible,
-    setVisible
+    setVisible,
+    isLoading,
+    data,
+    buttonFind,
+    onRefresh,
+    refreshing,
+    setButtonFind,
+    setSendRemoveItem,
+    setNewButtons
   };
 };
 export {buttonhook};

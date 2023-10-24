@@ -22,7 +22,7 @@ export const loginFormStyles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   loginBody: {
-    height: 390,
+    height: 'auto',
     paddingTop: '10%',
     justifyContent: 'space-around',
     alignItems: 'center',

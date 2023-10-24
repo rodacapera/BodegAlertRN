@@ -39,7 +39,6 @@ export const getLocation = async (
   setMyCurrentLocation: (e: ResultLocations) => void
 ) => {
   const myPosition = await getCurrentPosition();
-
   const latLng = {
     lat: myPosition.coords.latitude,
     lng: myPosition.coords.longitude

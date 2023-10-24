@@ -6,13 +6,13 @@ const CustomLink = ({
   text,
   link,
   underline,
-  color = 'blue',
+  color = 'blue'
 }: CustomLinkProps) => {
   return (
     <Text
       style={{
         color: color,
-        textDecorationLine: underline ? 'underline' : 'none',
+        textDecorationLine: underline ? 'underline' : 'none'
       }}
       onPress={() => Linking.openURL(link)}>
       {text}
