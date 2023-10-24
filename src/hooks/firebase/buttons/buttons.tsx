@@ -2,7 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import {Buttons} from '@src/types/buttons';
 import {User} from '@src/types/userTypes';
 
-export const getButtonsFirebase = (shop: any) => {
+export const getButtonsFirebase = (shop: string) => {
   const shopDocRef = firestore().doc(shop);
   const dbPanics = firestore()
     .collection('buttons')

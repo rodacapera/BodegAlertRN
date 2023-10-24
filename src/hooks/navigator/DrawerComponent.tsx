@@ -214,7 +214,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
 
       <Drawer.Section
         style={[drawerComponentStyles.drawerSection, {marginBottom: 20}]}>
-        {configuration?.supported_cities.city === user?.city &&
+        {configuration?.supported_cities?.city === user?.city &&
           user?.type !== 'vehicle' && (
             <Fragment>
               <Title

@@ -37,9 +37,7 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
       contentContainerStyle={[
         qrModalStyles.modalContainer,
         {
-          backgroundColor: theme.dark
-            ? colors.surfaceVariant
-            : colors.background
+          backgroundColor: theme.dark ? colors.background : colors.background
         }
       ]}>
       <View style={qrModalStyles.modalContent}>
@@ -52,15 +50,25 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
           ]}>
           {t('qrModal.helperTitleQr')}
         </Caption>
-        <QRCode
-          value={qrLink}
-          size={300}
-          logo={logo_app}
-          logoSize={50}
-          logoBackgroundColor="white"
-          logoBorderRadius={80}
-          color={theme.dark ? colors.onPrimary : colors.onPrimaryContainer}
-        />
+        <View
+          style={{
+            backgroundColor: 'white',
+            width: '100%',
+            height: 350,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10
+          }}>
+          <QRCode
+            value={qrLink}
+            size={300}
+            logo={logo_app}
+            logoSize={50}
+            logoBackgroundColor="white"
+            logoBorderRadius={80}
+            color={theme.dark ? colors.surface : colors.onPrimaryContainer}
+          />
+        </View>
         <TextWithCustomLink
           text={t('qrModal.helperFooterQrFirst')}
           link={addUserVideo}

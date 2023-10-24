@@ -44,7 +44,7 @@ const PanicButton = () => {
             setLoading,
             setErrorDistance,
             navigation,
-            configuration as Configuration,
+            configuration,
             user as User,
             colors
           )

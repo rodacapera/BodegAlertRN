@@ -14,9 +14,10 @@ import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {DataKey, Shop, User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
-import {Platform} from 'react-native';
+import {Platform, useColorScheme} from 'react-native';
 
 const userFormHook = (qr?: boolean, shopId?: string) => {
+  const colorScheme = useColorScheme();
   const os = Platform.OS;
   const userData = getUserQuery();
   const shopData = getShopQuery();
@@ -108,7 +109,14 @@ const userFormHook = (qr?: boolean, shopId?: string) => {
         navigation,
         visible: qr ? false : true,
         transparent: false,
-        titleColor: dark ? colors.onSurface : colors.onPrimaryContainer
+        titleColor:
+          Platform.OS == 'android'
+            ? colorScheme === 'dark'
+              ? '#a23234'
+              : dark
+              ? colors.onSurface
+              : colors.onPrimaryContainer
+            : colors.onPrimaryContainer
       });
   }, [dark, user, qr]);
 

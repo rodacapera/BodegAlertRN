@@ -22,7 +22,7 @@ import {t} from 'i18next';
 const Login = ({route, navigation}: LoginProps) => {
   const params = route.params;
   const {goBack} = useNavigation<StackNavigation>();
-  const {theme} = actualTheme();
+  const {theme, colors, dark} = actualTheme();
   const {
     buttonAction,
     setButtonAction,
@@ -33,37 +33,41 @@ const Login = ({route, navigation}: LoginProps) => {
   } = loginHook(params?.data);
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={{flex: 1}}>
-      <SafeAreaView style={backgroundStyle}>
-        <ScrollView keyboardShouldPersistTaps="handled">
-          <View style={[loginFormStyles.loginContent]}>
-            <View style={loginFormStyles.loginHeader}>
-              <ImageBackground
-                source={login_background}
-                resizeMode="cover"
-                style={loginFormStyles.image}>
-                <Avatar.Image
-                  style={loginFormStyles.logo}
-                  size={150}
-                  source={logo_app}
-                />
-                <Text style={loginFormStyles.appName}>{APP_NAME}</Text>
-                {!params?.qr && (
-                  <Button
-                    icon="arrow-left"
-                    textColor={'white'}
-                    style={loginFormStyles.bacKButton}
-                    theme={theme}
-                    mode="text"
-                    onPress={() => goBack()}>
-                    {t('general.back')}
-                  </Button>
-                )}
-              </ImageBackground>
-            </View>
-            <View style={loginFormStyles.loginBody}>
+    <SafeAreaView style={backgroundStyle}>
+      <View style={[loginFormStyles.loginContent]}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{flex: 1}}>
+          <View style={loginFormStyles.loginHeader}>
+            <ImageBackground
+              source={login_background}
+              resizeMode="cover"
+              style={loginFormStyles.image}>
+              <Avatar.Image
+                style={loginFormStyles.logo}
+                size={150}
+                source={logo_app}
+              />
+              <Text style={loginFormStyles.appName}>{APP_NAME}</Text>
+              {!params?.qr && (
+                <Button
+                  icon="arrow-left"
+                  textColor={'white'}
+                  style={loginFormStyles.bacKButton}
+                  theme={theme}
+                  mode="text"
+                  onPress={() => goBack()}>
+                  {t('general.back')}
+                </Button>
+              )}
+            </ImageBackground>
+          </View>
+          <ScrollView>
+            <View
+              style={[
+                loginFormStyles.loginBody,
+                {backgroundColor: colors.background}
+              ]}>
               {!params?.qr && !buttonAction.logged ? (
                 <LoginForm
                   setButtonAction={setButtonAction}
@@ -81,10 +85,10 @@ const Login = ({route, navigation}: LoginProps) => {
                 />
               )}
             </View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </View>
+    </SafeAreaView>
   );
 };
 

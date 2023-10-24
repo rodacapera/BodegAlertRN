@@ -5,8 +5,10 @@ import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Panics} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
+import {Platform, useColorScheme} from 'react-native';
 
 const notifyHook = () => {
+  const colorScheme = useColorScheme();
   const {colors, dark} = actualTheme();
   const {data, isSuccess} = getPanicsQuery();
   const navigation = useNavigation<StackNavigation>();
@@ -18,7 +20,14 @@ const notifyHook = () => {
         navigation,
         visible: true,
         transparent: false,
-        titleColor: dark ? colors.onSurface : colors.onPrimaryContainer
+        titleColor:
+          Platform.OS == 'android'
+            ? colorScheme === 'dark'
+              ? '#a23234'
+              : dark
+              ? colors.onSurface
+              : colors.onPrimaryContainer
+            : colors.onPrimaryContainer
       });
     }
   }, [isSuccess, dark]);

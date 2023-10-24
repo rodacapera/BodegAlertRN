@@ -32,7 +32,8 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
     refreshing,
     setButtonFind,
     setSendRemoveItem,
-    setNewButtons
+    setNewButtons,
+    user
   } = buttonhook();
 
   return isLoading ? (
@@ -58,7 +59,7 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
                 alignItems: 'center',
                 width: '100%'
               }}>
-              {buttons.length == 0 && <ButtonsNotFound />}
+              {buttons.length == 0 && <ButtonsNotFound user={user} />}
               {buttons.map((value, index) => (
                 <SimpleRemoveItemCards
                   titleCard={`${t('buttonsView.button')}: ${index + 1}`}
@@ -80,7 +81,7 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
                     </View>
                   )
                 ) : (
-                  <View style={{width: 65}}>
+                  <View style={{width: 70}}>
                     <CustomLoader visible label={t('buttonsView.searching')} />
                   </View>
                 )}

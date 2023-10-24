@@ -12,7 +12,11 @@ const qrScanHook = () => {
   const [shopId, setShopId] = useState<string | undefined>(undefined);
   setShopQuery(shopId);
   const onSuccess = (e: {data: string}) => {
+    console.log('eeeee', e.data);
+
     const url = e.data.split('=')[6];
+    console.log('url', url);
+
     const urlDecode = decodeURI(url);
     const shop_id = urlDecode.split('%3D')[2];
     setShopId(shop_id);
@@ -83,6 +87,8 @@ const qrScanHook = () => {
   };
 
   useEffect(() => {
+    console.log('shopId', shopId);
+
     shopId &&
       navigation.replace('Register', {
         administrator: false,

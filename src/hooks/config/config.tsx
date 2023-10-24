@@ -1,13 +1,15 @@
+import {GetUserData} from '@src/types/auth';
 import {Configuration} from '@src/types/configuration';
-import {getConfigurationFirebase} from '../firebase/config/config';
-import {useEffect, useState} from 'react';
-import {getLocation} from '../locations/geocoderHook';
 import {ResultLocations} from '@src/types/locationTypes';
+import {useEffect, useState} from 'react';
+import {getConfigurationFirebase} from '../firebase/config/config';
+import {getLocation} from '../locations/geocoderHook';
+import {User} from '@src/types/userTypes';
 
-const config = () => {
+const config = ({user}: {user?: User}) => {
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
   const [configuration, setConfiguration] = useState<Configuration>();
-  const getConfig = (countryCode: string) => {
+  const getGlobalConfig = (countryCode: string) => {
     getConfigurationFirebase(countryCode)
       .then(querySnapshot => {
         querySnapshot.forEach(value => {
@@ -21,12 +23,16 @@ const config = () => {
   };
 
   useEffect(() => {
-    if (myCurrentLocation) getConfig(myCurrentLocation.country.short_name);
-  }, [myCurrentLocation]);
+    if (myCurrentLocation) {
+      getGlobalConfig(myCurrentLocation.country.short_name);
+    }
+  }, [myCurrentLocation, user]);
 
   useEffect(() => {
-    getLocation(setMyCurrentLocation);
-  }, []);
+    if (user) {
+      getLocation(setMyCurrentLocation);
+    }
+  }, [user]);
 
   return {...configuration};
 };

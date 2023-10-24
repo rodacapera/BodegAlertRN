@@ -30,7 +30,7 @@ const statusDevice = async () => {
       return data;
     })
     .catch(err => {
-      console.debug('err', err && err);
+      console.debug('err', err);
     });
 };
 
@@ -41,7 +41,7 @@ const statusActionsDevice = async () => {
       return data;
     })
     .catch(err => {
-      console.debug('err', err && err);
+      console.debug('err', err);
     });
 };
 
@@ -103,7 +103,7 @@ const buttonConfig = async (value: string) => {
     });
 };
 
-export const getConfig = async () => {
+export const getShellyConfig = async () => {
   return await fetch(API + '/settings', {method: 'GET'})
     .then(response => response.json())
     .then(async data => {
@@ -112,27 +112,20 @@ export const getConfig = async () => {
 };
 
 const finisSettButton = async (wifi_name: string, wifi_pass: string) => {
-  console.log('wifi_name', wifi_name);
-  console.log('wifi_pass', wifi_pass);
   const enable = 'enabled=1';
   const ssid = 'ssid=' + wifi_name;
   const key = 'key=' + wifi_pass;
-  console.log('ssid', ssid);
   const statusSsidResponse = await staConfig(ssid).then(async () => {
-    console.log('ssid', key);
     return await staConfig(key).then(async () => {
-      console.log('key', enable);
       return await staConfig(enable);
     });
   });
-  console.log('statusSsidResponse', statusSsidResponse);
   return statusSsidResponse;
 };
 
 const networkSettings = async () => {
-  const myConfig = await getConfig();
+  const myConfig = await getShellyConfig();
   const btnAction = myConfig.device.hostname.split('-')[1];
-
   const mqttStat = '_enable=1';
   const mqttPeriod = '_update_period=90';
   const mqttServer = '_server=node02.myqtthub.com:1883';

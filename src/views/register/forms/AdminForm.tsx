@@ -183,6 +183,7 @@ const AdminForm = ({type}: {type: RegisterType}) => {
             label={t('adminFormView.email')}
             style={registerStyles.input}
             theme={theme}
+            inputMode="email"
             onChangeText={text =>
               onChangeInput(text as never, 'email' as DataKey)
             }

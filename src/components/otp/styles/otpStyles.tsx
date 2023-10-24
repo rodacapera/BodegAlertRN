@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
 export const otpStyles = StyleSheet.create({
   containerOtp: {
-    width: '100%',
     flex: 1,
     alignItems: 'center',
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    marginTop: 60
   },
   headerOtp: {
     width: '100%',

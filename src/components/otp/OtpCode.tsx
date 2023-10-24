@@ -10,7 +10,7 @@ import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
-import {View} from 'react-native';
+import {View, useColorScheme} from 'react-native';
 import {OtpInput, OtpInputRef} from 'react-native-otp-entry';
 import {Button, Text} from 'react-native-paper';
 import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
@@ -27,6 +27,7 @@ const OtpCode = ({
   setButtonAction: (e: LoginFormAction) => void;
   data?: User;
 }) => {
+  const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
   const {colors, dark, theme} = actualTheme();
   const {
@@ -67,10 +68,21 @@ const OtpCode = ({
           numberOfDigits={6}
           theme={{
             pinCodeTextStyle: {
-              color: dark ? colors.onSurface : colors.onPrimaryContainer
+              color:
+                colorScheme === 'dark'
+                  ? 'white'
+                  : dark
+                  ? colors.onSurface
+                  : colors.onPrimaryContainer
             }
           }}
-          focusColor={dark ? colors.onSurface : colors.onPrimaryContainer}
+          focusColor={
+            colorScheme === 'dark'
+              ? 'gray'
+              : dark
+              ? colors.onSurface
+              : colors.onPrimaryContainer
+          }
           onTextChange={(text: string) => handleChange(text, inputRef, setCode)}
           focusStickBlinkingDuration={500}
         />

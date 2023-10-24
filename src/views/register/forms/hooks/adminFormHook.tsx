@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {userFakeData} from '@src/globals/constants/fakeData';
 import {buttonActionInitialState} from '@src/globals/constants/login';
+import {config} from '@src/hooks/config/config';
 import {getConfigurationFirebase} from '@src/hooks/firebase/config/config';
 import {geUserByPhoneNumberFirebase} from '@src/hooks/firebase/user/user';
 import {getLocation} from '@src/hooks/locations/geocoderHook';
@@ -19,11 +20,11 @@ import {Platform} from 'react-native';
 const adminFormHook = (type: RegisterType) => {
   const os = Platform.OS;
   const navigation = useNavigation<StackNavigation>();
-  const [configuration, setConfiguration] = useState<Configuration>();
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
   const [alertGroupFound, setAlertGroupFound] = useState(false);
   const [groupFound, setGroupFound] = useState(false);
   const [user, setUser] = useState<User>();
+  const configuration = config({user});
   const [alertUserExist, setAlertUserExist] = useState(false);
   const [tokenPush, setTokenPush] = useState<string>();
   const [currentButtonAction, setCurrentButtonAction] =
@@ -36,15 +37,6 @@ const adminFormHook = (type: RegisterType) => {
   const getDevice = async () => {
     const device = await AsyncStorage.getItem('@fcmToken');
     device && setTokenPush(device);
-  };
-
-  const getConfig = (countryCode: string) => {
-    getConfigurationFirebase(countryCode).then(querySnapshot => {
-      querySnapshot.forEach(value => {
-        const data = value.data() as Configuration;
-        setConfiguration(data);
-      });
-    });
   };
 
   const submitForm = () => {
@@ -91,7 +83,6 @@ const adminFormHook = (type: RegisterType) => {
   };
 
   useEffect(() => {
-    if (myCurrentLocation) getConfig(myCurrentLocation.country.short_name);
     getDevice();
     if (currentButtonAction && myCurrentLocation && tokenPush) {
       const newCurrentUser = user ? {...user} : {...userFakeData};
@@ -117,8 +108,8 @@ const adminFormHook = (type: RegisterType) => {
       newCurrentUser.devices = [{device: tokenPush, os}];
       newCurrentUser.countryCode = myCurrentLocation.country.short_name;
       newCurrentUser.type = type;
-      if (type === 'vehicle') {
-        newCurrentUser.group_number = configuration?.vehicle_code.toString()!;
+      if (type === 'vehicle' && configuration) {
+        newCurrentUser.group_number = configuration.vehicle_code?.toString()!;
         newCurrentUser.group_name = t('general.vehicle');
       }
       setUser(newCurrentUser);
@@ -128,7 +119,7 @@ const adminFormHook = (type: RegisterType) => {
   useEffect(() => {
     if (type === 'vehicle' && configuration) {
       const userClone = {...user};
-      userClone.group_number = configuration.vehicle_code.toString();
+      userClone.group_number = configuration.vehicle_code?.toString();
     }
   }, [type, configuration]);
 
@@ -158,7 +149,6 @@ const adminFormHook = (type: RegisterType) => {
 
   return {
     configuration,
-    setConfiguration,
     myCurrentLocation,
     setMyCurrentLocation,
     currentButtonAction,

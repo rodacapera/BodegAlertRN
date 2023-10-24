@@ -12,7 +12,7 @@ export const loginFormStyles = StyleSheet.create({
     top: 15
   },
   loginHeader: {
-    height: 250
+    height: 350
   },
   loginContent: {
     flex: 1
@@ -22,10 +22,9 @@ export const loginFormStyles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   loginBody: {
-    height: 'auto',
-    paddingTop: '10%',
-    justifyContent: 'space-around',
+    flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     marginTop: -19
@@ -43,7 +42,8 @@ export const loginFormStyles = StyleSheet.create({
   loginButtonsContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'relative'
+    position: 'relative',
+    marginTop: 20
   },
   buttonLogin: {
     width: 250,

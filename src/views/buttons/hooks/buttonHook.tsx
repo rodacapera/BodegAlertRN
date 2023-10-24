@@ -2,16 +2,24 @@ import {useNavigation} from '@react-navigation/native';
 import {removeButtonByIdFirebase} from '@src/hooks/firebase/buttons/buttons';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {statusDevice} from '@src/hooks/shellyActions';
-import {getButtonsQuery, setButtonsQuery} from '@src/reactQuery/userQuery';
+import {
+  getButtonsQuery,
+  getUserQuery,
+  setButtonsQuery
+} from '@src/reactQuery/userQuery';
 import {ButtonFind, Buttons} from '@src/types/buttons';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
+import {User} from '@src/types/userTypes';
 import {useCallback, useEffect, useState} from 'react';
-import {AppState} from 'react-native';
+import {AppState, Platform, useColorScheme} from 'react-native';
 
 const buttonhook = () => {
+  const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
   const {colors, dark} = actualTheme();
+  const userData = getUserQuery().data.user;
+  const user = userData as unknown as User;
   const {isLoading, data} = getButtonsQuery();
   const buttons = data as Buttons[];
   const [alertVisible, setAlertVisible] = useState(false);
@@ -96,7 +104,14 @@ const buttonhook = () => {
       navigation,
       visible: true,
       transparent: false,
-      titleColor: dark ? colors.onSurface : colors.onPrimaryContainer
+      titleColor:
+        Platform.OS == 'android'
+          ? colorScheme === 'dark'
+            ? '#a23234'
+            : dark
+            ? colors.onSurface
+            : colors.onPrimaryContainer
+          : colors.onPrimaryContainer
     });
   });
 
@@ -114,7 +129,8 @@ const buttonhook = () => {
     refreshing,
     setButtonFind,
     setSendRemoveItem,
-    setNewButtons
+    setNewButtons,
+    user
   };
 };
 export {buttonhook};

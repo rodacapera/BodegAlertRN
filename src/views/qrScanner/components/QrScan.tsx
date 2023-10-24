@@ -20,6 +20,8 @@ const QrScan = () => {
       onRead={onSuccess}
       flashMode={flash}
       showMarker
+      reactivate
+      fadeIn={false}
       customMarker={marker('white', 250, '25%', 6, 20)}
       topContent={
         <Text

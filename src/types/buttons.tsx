@@ -7,6 +7,7 @@ export type Button = {
 };
 
 export interface Buttons {
+  title: string;
   body: string;
   cost: number;
   date: string;

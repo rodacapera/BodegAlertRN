@@ -11,8 +11,10 @@ import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
+import {Platform, useColorScheme} from 'react-native';
 
 const employeesHook = () => {
+  const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
   const {data, isLoading} = getEmployeesQuery();
   const {shop} = getUserQuery().data.user as unknown as User;
@@ -75,7 +77,14 @@ const employeesHook = () => {
       navigation,
       visible: true,
       transparent: false,
-      titleColor: dark ? colors.onSurface : colors.onPrimaryContainer
+      titleColor:
+        Platform.OS == 'android'
+          ? colorScheme === 'dark'
+            ? '#a23234'
+            : dark
+            ? colors.onSurface
+            : colors.onPrimaryContainer
+          : colors.onPrimaryContainer
     });
   });
 

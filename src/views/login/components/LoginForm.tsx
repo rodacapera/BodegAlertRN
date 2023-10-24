@@ -1,11 +1,12 @@
 import {actualTheme} from '@src/types/contextTypes';
 import {LoginFormProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import {Fragment, useRef} from 'react';
+import {useRef} from 'react';
 import {Text} from 'react-native-paper';
 import ErrorInputForm from '../../../components/customErrorInputForm/CustomErrorInputForm';
 import CustomInputForm from '../../../components/customInputForm/CustomInputForm';
 import Buttons from './Buttons';
+import {View} from 'react-native';
 
 const LoginForm = ({
   setButtonAction,
@@ -19,10 +20,16 @@ const LoginForm = ({
   const {colors, theme} = actualTheme();
 
   return (
-    <Fragment>
+    <View
+      style={{
+        height: 450,
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+      }}>
       <Text
         variant="titleLarge"
         style={{
+          margin: 20,
           color: theme.dark ? colors.onSurface : colors.onPrimaryContainer
         }}>
         {t('loginView.title')}
@@ -41,7 +48,7 @@ const LoginForm = ({
         currentButtonAction={currentButtonAction}
         type={type}
       />
-    </Fragment>
+    </View>
   );
 };
 

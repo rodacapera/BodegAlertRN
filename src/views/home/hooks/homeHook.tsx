@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {getCurrentPosition} from '@src/hooks/locations/permissionsHook';
+import {bike, bike_help, family_help, house, shop} from '@src/assets/images';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {whatsapp} from '@src/hooks/whatsapp/whatsapp';
@@ -8,11 +8,16 @@ import {actualTheme} from '@src/types/contextTypes';
 import {HomeParams, StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {useEffect, useState} from 'react';
-import {BackHandler, ImageURISource, Platform} from 'react-native';
+import {
+  BackHandler,
+  ImageURISource,
+  Platform,
+  useColorScheme
+} from 'react-native';
 import {Region} from 'react-native-maps';
-import {bike, bike_help, family_help, house, shop} from '@src/assets/images';
 
 const homeHook = () => {
+  const colorScheme = useColorScheme();
   const {user, panics, isLoading, configuration} = useGetUser();
   const [region, setRegion] = useState<Region>();
   const [alertVisible, setAlertVisible] = useState(false);
@@ -39,16 +44,6 @@ const homeHook = () => {
     mapRef.current.animateCamera(camera, {duration: speed});
   };
 
-  const getMyLocation = async () => {
-    const location = await getCurrentPosition();
-    return {
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-      latitudeDelta: 0.015,
-      longitudeDelta: 0.0121
-    };
-  };
-
   const backAction = (navigation: StackNavigation) => {
     if (navigation.getState().index === 1) {
       setAlertVisible(true);
@@ -73,7 +68,10 @@ const homeHook = () => {
 
   const getCalloutText = () => {
     const familyPanic =
-      panics.length > 0 && panics.find(val => val.phone !== user?.phone);
+      panics.length > 0 &&
+      panics.find(
+        val => val.phone !== user?.phone || val.name.includes('shellybutton1')
+      );
 
     const title =
       user?.type === 'residence'
@@ -130,22 +128,29 @@ const homeHook = () => {
   }, []);
 
   useEffect(() => {
-    if (navigation.getState().index == 1) {
-      if (params && (params.isLogin || params.isBack)) {
-        headerShown({
-          navigation,
-          visible: !isLoading,
-          transparent: true,
-          titleColor: colors.onPrimaryContainer
-        });
-      } else if (!params) {
-        headerShown({
-          navigation,
-          visible: !isLoading,
-          transparent: true,
-          titleColor: colors.onPrimaryContainer
-        });
-      }
+    // console.log('navigation.getState().index', params.isLogin);
+    if (
+      navigation.getState().index == 1 ||
+      (params && (params.isLogin || params.isBack))
+    ) {
+      headerShown({
+        navigation,
+        visible: !isLoading,
+        transparent: true,
+        titleColor:
+          Platform.OS == 'android'
+            ? colorScheme === 'dark'
+              ? '#a23234'
+              : colors.onPrimaryContainer
+            : colors.onPrimaryContainer
+      });
+    } else {
+      headerShown({
+        navigation,
+        visible: !isLoading,
+        transparent: true,
+        titleColor: colors.onPrimaryContainer
+      });
     }
     !region && setMyCurrentLocation();
     appVersionBd && checkVersion(appVersionBd);
@@ -158,7 +163,7 @@ const homeHook = () => {
   return {
     region,
     animateCamera,
-    getMyLocation,
+    // getMyLocation,
     panics,
     user,
     alertVisible,

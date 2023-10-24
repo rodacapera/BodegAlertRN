@@ -597,6 +597,8 @@
 				DEVELOPMENT_TEAM = XK4QBKULJR;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BodegAlert/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BodegAlert;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -610,8 +612,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.cordova.alarmu;
 				PRODUCT_NAME = BodegAlert;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -628,6 +633,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XK4QBKULJR;
 				INFOPLIST_FILE = BodegAlert/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BodegAlert;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -641,7 +648,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.cordova.alarmu;
 				PRODUCT_NAME = BodegAlert;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

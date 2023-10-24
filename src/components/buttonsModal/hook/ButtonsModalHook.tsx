@@ -1,6 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
 import {SERVER_PANIC_URL_PATH} from '@src/globals/constants/panicService';
-import {API, BUTTON_ACTION} from '@src/globals/constants/shelly';
 import {config} from '@src/hooks/config/config';
 
 import {createButtonsFirebase} from '@src/hooks/firebase/buttons/buttons';
@@ -11,9 +9,8 @@ import {
   showNetworks,
   statusActionsDevice
 } from '@src/hooks/shellyActions';
-import {getUserQuery, setButtonsQuery} from '@src/reactQuery/userQuery';
+import {getUserQuery} from '@src/reactQuery/userQuery';
 import {ButtonFind, Buttons} from '@src/types/buttons';
-import {StackNavigation} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
 import {useEffect, useState} from 'react';
@@ -75,7 +72,8 @@ const ButtonsModalHook = ({
           const url = `${SERVER_PANIC_URL_PATH}api/pushB?id=${btnAction}`;
           const random = uuid();
           const dataBtnBd = {
-            body: t('notifications.title'),
+            title: t('notifications.title'),
+            body: `${user.alias}: ${t('notifications.body')}`,
             cost: 0,
             date: Date.now().toString(),
             name: response.myConfig.device.hostname,
@@ -90,7 +88,7 @@ const ButtonsModalHook = ({
           setUrlConfigButton(response.button);
         })
         .catch(err => {
-          console.debug('error', err && err);
+          console.debug('error', err);
           setSendSetButton(false);
         });
     }
@@ -191,7 +189,7 @@ const ButtonsModalHook = ({
     internetError,
     savingData,
     passIsd,
-    config: config(),
+    config: config({user}),
     buttonExist,
     setButtonExist,
     unConnectedShellyButton,

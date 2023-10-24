@@ -1,4 +1,6 @@
 import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
+import {config} from '@src/hooks/config/config';
+import {setPanicsQuery} from '@src/reactQuery/notifyQuery';
 import {
   getUserQuery,
   setButtonsQuery,
@@ -6,13 +8,10 @@ import {
   setShopQuery
 } from '@src/reactQuery/userQuery';
 import {GetUserData} from '@src/types/auth';
+import {Buttons} from '@src/types/buttons';
 import {Panics, User} from '@src/types/userTypes';
 import {UseQueryResult} from '@tanstack/react-query';
 import {useEffect, useState} from 'react';
-import {getConfigurationFirebase} from '../firebase/config/config';
-import {Configuration} from '@src/types/configuration';
-import {setPanicsQuery} from '@src/reactQuery/notifyQuery';
-import {Buttons} from '@src/types/buttons';
 
 const useGetUser = (setUser?: UseQueryResult) => {
   const {isLoading, error, data} = setUser ?? getUserQuery();
@@ -23,21 +22,13 @@ const useGetUser = (setUser?: UseQueryResult) => {
   const [counterButtons, setCounterButtons] = useState<number>();
   const [counterEmployees, setCounterEmployees] = useState<number>();
   const [shopId, setShopId] = useState<string>();
-  const [configuration, setConfiguration] = useState<Configuration>();
+  const user = currentData?.user as User;
+  const configuration = config({user});
 
   setEmployeesQuery(employees);
   setPanicsQuery(panics);
   setShopQuery(shopId);
   setButtonsQuery(buttons);
-
-  const getConfig = (countryCode: string) => {
-    getConfigurationFirebase(countryCode).then(querySnapshot => {
-      querySnapshot.forEach(value => {
-        const data = value.data() as Configuration;
-        setConfiguration(data);
-      });
-    });
-  };
 
   const resultPanics = (
     querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
@@ -73,14 +64,14 @@ const useGetUser = (setUser?: UseQueryResult) => {
       const data = value.data() as Buttons;
       setButtons(prev => [...prev, data]);
     });
-    setCounterButtons(querySnapshot.size > 1 ? querySnapshot.size : 0);
+
+    setCounterButtons(querySnapshot.size >= 1 ? querySnapshot.size : 0);
   };
 
   useEffect(() => {
     currentData &&
       currentData.user &&
-      (setShopId(currentData.user.shop.split('/')[1]),
-      getConfig(currentData.user.countryCode));
+      setShopId(currentData.user.shop.split('/')[1]);
   }, [currentData, shopId]);
 
   useEffect(() => {
