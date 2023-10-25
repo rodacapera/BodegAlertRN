@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {bike, bike_help, family_help, house, shop} from '@src/assets/images';
+import {bike, bike_help, family_help, home, shop} from '@src/assets/images';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {whatsapp} from '@src/hooks/whatsapp/whatsapp';
@@ -90,7 +90,7 @@ const homeHook = () => {
         : user?.address;
 
     const currentIcon =
-      user?.type === 'residence' ? (familyPanic ? family_help : house) : bike;
+      user?.type === 'residence' ? (familyPanic ? family_help : home) : bike;
 
     const panicsIcon = user?.type === 'residence' ? shop : bike_help;
 

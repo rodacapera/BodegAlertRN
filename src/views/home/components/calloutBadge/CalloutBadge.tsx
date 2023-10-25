@@ -8,7 +8,7 @@ const CalloutBadge = ({title, body}: {title: string; body: string}) => {
   const textColor = dark ? colors.background : colors.onSurface;
   return (
     <Callout style={{maxWidth: 300}}>
-      <View style={{maxWidth: 300}}>
+      <View>
         <Text style={{fontWeight: 'bold', color: textColor}}>{title}</Text>
         <Text style={{color: textColor}}>{body}</Text>
       </View>
