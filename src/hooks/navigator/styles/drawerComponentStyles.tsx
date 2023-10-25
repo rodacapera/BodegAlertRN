@@ -3,6 +3,7 @@ import {Platform, StyleSheet} from 'react-native';
 export const drawerComponentStyles = StyleSheet.create({
   drawerContent: {
     flex: 1
+    // backgroundColor: 'red',
   },
   userInfoSection: {
     marginTop: Platform.OS === 'android' ? 30 : 10,

@@ -32,7 +32,7 @@ export const LateralDrawer = () => {
           headerShown: false, // this remove header
           headerTransparent: true,
           // drawerType: isLargeScreen ? 'permanent' : 'back',
-          overlayColor: 'transparent'
+          overlayColor: 'rgba(0, 0, 0, 0.4)'
           // drawerHideStatusBarOnOpen: true,
           //   overlayColor: 'transparent',
         }}
