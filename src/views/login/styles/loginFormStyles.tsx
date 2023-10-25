@@ -12,7 +12,7 @@ export const loginFormStyles = StyleSheet.create({
     top: 15
   },
   loginHeader: {
-    height: 350
+    height: 280
   },
   loginContent: {
     flex: 1

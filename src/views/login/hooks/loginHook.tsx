@@ -33,7 +33,6 @@ const loginHook = (data?: User) => {
           setErrorPhone(false);
           setErrorUserNotExist(true);
         } else {
-          console.log('continue login');
           const buttonActionClone = {...buttonAction};
           buttonActionClone.logged = true;
           setButtonAction(buttonActionClone);

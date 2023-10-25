@@ -26,7 +26,6 @@ const statusDevice = async () => {
   return await fetch(STATUS, {method: 'GET'})
     .then(response => response.json())
     .then(async data => {
-      //console.log('dataaaaa', data.bat.value); //estado de la batería
       return data;
     })
     .catch(err => {
@@ -99,7 +98,7 @@ const buttonConfig = async (value: string) => {
       return data;
     })
     .catch(err => {
-      console.log('error', err);
+      console.debug('error', err);
     });
 };
 

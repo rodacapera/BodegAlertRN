@@ -11,9 +11,10 @@ import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
-import {Platform, useColorScheme} from 'react-native';
+import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
 const employeesHook = () => {
+  const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
   const {data, isLoading} = getEmployeesQuery();
@@ -74,6 +75,7 @@ const employeesHook = () => {
 
   useEffect(() => {
     headerShown({
+      width: width,
       navigation,
       visible: true,
       transparent: false,

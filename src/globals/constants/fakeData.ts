@@ -23,17 +23,6 @@ export const networks = [
   {name: 'casa thre'}
 ];
 
-export const bannerActions = [
-  {
-    label: 'Fix it',
-    onPress: () => console.log('fix it')
-  },
-  {
-    label: 'Learn more',
-    onPress: () => console.log('learn more')
-  }
-];
-
 export const fakePosition = {
   latitude: 4.441886,
   longitude: -75.197092,

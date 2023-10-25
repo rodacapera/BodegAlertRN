@@ -1,10 +1,9 @@
-import {GetUserData} from '@src/types/auth';
 import {Configuration} from '@src/types/configuration';
 import {ResultLocations} from '@src/types/locationTypes';
+import {User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 import {getConfigurationFirebase} from '../firebase/config/config';
 import {getLocation} from '../locations/geocoderHook';
-import {User} from '@src/types/userTypes';
 
 const config = ({user}: {user?: User}) => {
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();

@@ -5,9 +5,10 @@ import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Panics} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
-import {Platform, useColorScheme} from 'react-native';
+import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
 const notifyHook = () => {
+  const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
   const {colors, dark} = actualTheme();
   const {data, isSuccess} = getPanicsQuery();
@@ -17,6 +18,7 @@ const notifyHook = () => {
   useEffect(() => {
     if (isSuccess) {
       headerShown({
+        width: width,
         navigation,
         visible: true,
         transparent: false,

@@ -49,10 +49,21 @@ export const drawerComponentStyles = StyleSheet.create({
     marginVertical: 10
   },
   imagesLogos: {
-    width: 70,
-    height: 70,
+    width: 50,
+    height: 50,
+    borderRadius: 100
+  },
+  containerLogos: {
     borderRadius: 100,
-    margin: 10
+    margin: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 6
+    },
+    shadowOpacity: 0.39,
+    shadowRadius: 8.3,
+    elevation: 13
   },
   titleLogos: {
     fontSize: 20,

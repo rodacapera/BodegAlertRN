@@ -3,9 +3,6 @@ import {StyleSheet} from 'react-native';
 
 export const loginStyles = StyleSheet.create({
   content: {flex: 1, paddingTop: 50, paddingLeft: 30, paddingRight: 30},
-  header: {
-    flex: 2
-  },
   buttonContainer: {
     width: 250,
     shadowColor: '#000',
@@ -19,7 +16,6 @@ export const loginStyles = StyleSheet.create({
     elevation: 13
   },
   footer: {
-    flex: 1,
     paddingVertical: 70,
     alignItems: 'center',
     justifyContent: 'center'
@@ -46,7 +42,7 @@ export const loginStyles = StyleSheet.create({
     justifyContent: 'center'
   },
   descriptionContainer: {
-    flex: 4,
+    borderRadius: 10,
     padding: 20,
     backgroundColor: lightTheme.colors.onSurfaceDisabled
   },

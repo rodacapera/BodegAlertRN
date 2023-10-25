@@ -227,13 +227,16 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
               <View style={drawerComponentStyles.logos}>
                 {logos?.map((value, index) => {
                   return (
-                    <Image
-                      source={{
-                        uri: value.path
-                      }}
-                      style={drawerComponentStyles.imagesLogos}
-                      key={index}
-                    />
+                    <View
+                      style={drawerComponentStyles.containerLogos}
+                      key={index}>
+                      <Image
+                        source={{
+                          uri: value.path
+                        }}
+                        style={drawerComponentStyles.imagesLogos}
+                      />
+                    </View>
                   );
                 })}
               </View>

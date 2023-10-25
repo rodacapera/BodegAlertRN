@@ -12,11 +12,13 @@ import {
   BackHandler,
   ImageURISource,
   Platform,
-  useColorScheme
+  useColorScheme,
+  useWindowDimensions
 } from 'react-native';
 import {Region} from 'react-native-maps';
 
 const homeHook = () => {
+  const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
   const {user, panics, isLoading, configuration} = useGetUser();
   const [region, setRegion] = useState<Region>();
@@ -128,12 +130,12 @@ const homeHook = () => {
   }, []);
 
   useEffect(() => {
-    // console.log('navigation.getState().index', params.isLogin);
     if (
       navigation.getState().index == 1 ||
       (params && (params.isLogin || params.isBack))
     ) {
       headerShown({
+        width: width,
         navigation,
         visible: !isLoading,
         transparent: true,
@@ -146,6 +148,7 @@ const homeHook = () => {
       });
     } else {
       headerShown({
+        width: width,
         navigation,
         visible: !isLoading,
         transparent: true,

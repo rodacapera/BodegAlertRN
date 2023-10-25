@@ -12,9 +12,15 @@ import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
 import {useCallback, useEffect, useState} from 'react';
-import {AppState, Platform, useColorScheme} from 'react-native';
+import {
+  AppState,
+  Platform,
+  useColorScheme,
+  useWindowDimensions
+} from 'react-native';
 
 const buttonhook = () => {
+  const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
   const {colors, dark} = actualTheme();
@@ -53,14 +59,11 @@ const buttonhook = () => {
           const resultFilter = newButtons.filter(
             value => value.uid != itemToRemove
           );
-          console.log('resultFilter', resultFilter);
-
           setNewButtons(resultFilter);
         })
-        .catch(err => console.log(err));
+        .catch(err => console.debug(err));
     }
   };
-  // console.log('buttons,,,,,', buttons);
 
   useEffect(() => {
     setTimeout(() => {
@@ -101,6 +104,7 @@ const buttonhook = () => {
 
   useEffect(() => {
     headerShown({
+      width: width,
       navigation,
       visible: true,
       transparent: false,

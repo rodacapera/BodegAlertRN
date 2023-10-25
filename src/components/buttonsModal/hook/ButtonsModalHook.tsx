@@ -139,7 +139,6 @@ const ButtonsModalHook = ({
           const newCurrenButtons = [...buttons];
           newCurrenButtons.push(currentButton);
           setSavingData(true);
-          console.log('newCurrenButtons', newCurrenButtons);
           setNewButtons(newCurrenButtons);
           setUrlConfigButton(undefined);
           setInternetError(false);
@@ -149,7 +148,7 @@ const ButtonsModalHook = ({
           hideModal();
         })
         .catch(error => {
-          console.log('error', error && error);
+          console.debug('error', error && error);
         });
   };
 

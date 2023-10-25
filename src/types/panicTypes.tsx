@@ -6,4 +6,5 @@ export type SendNotificationProps = {
   setLoading: (e: boolean) => void;
   navigation: StackNavigation;
   colors: MD3Colors;
+  width: number;
 };

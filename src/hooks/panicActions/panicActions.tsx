@@ -20,10 +20,12 @@ const sendNotification = async ({
   data,
   setLoading,
   navigation,
-  colors
+  colors,
+  width
 }: SendNotificationProps) => {
   setLoading(true);
   headerShown({
+    width: width,
     navigation,
     visible: false,
     transparent: true,
@@ -32,6 +34,7 @@ const sendNotification = async ({
   const response = await getAxios.post(url, data);
   if (response.status == 201) {
     headerShown({
+      width: width,
       navigation,
       visible: true,
       transparent: true,
@@ -63,7 +66,8 @@ export const panicNotification = async (
   navigation: StackNavigation,
   configuration: Configuration,
   user: User,
-  colors: MD3Colors
+  colors: MD3Colors,
+  width: number
 ) => {
   const currentPosition = await getCurrentPosition();
   const validDistance = configuration.distance_panic;
@@ -97,13 +101,13 @@ export const panicNotification = async (
   if (user.pay) {
     if (user.type === 'residence') {
       if (distance < validDistance) {
-        sendNotification({data, setLoading, navigation, colors});
+        sendNotification({data, setLoading, navigation, colors, width});
         setErrorDistance(false);
       } else {
         setErrorDistance(true);
       }
     } else {
-      sendNotification({data, setLoading, navigation, colors});
+      sendNotification({data, setLoading, navigation, colors, width});
       setErrorDistance(false);
     }
   } else {

@@ -14,9 +14,10 @@ import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {DataKey, Shop, User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
-import {Platform, useColorScheme} from 'react-native';
+import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
 const userFormHook = (qr?: boolean, shopId?: string) => {
+  const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
   const os = Platform.OS;
   const userData = getUserQuery();
@@ -106,6 +107,7 @@ const userFormHook = (qr?: boolean, shopId?: string) => {
   useEffect(() => {
     user &&
       headerShown({
+        width: width,
         navigation,
         visible: qr ? false : true,
         transparent: false,

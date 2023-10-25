@@ -62,7 +62,7 @@ const CustomMap = () => {
           region={region ?? fakePosition}
           customMapStyle={dark ? mapStyleDark : mapStyleLight}>
           {region && (
-            <Marker coordinate={region} image={currentMarkerIcon}>
+            <Marker coordinate={region} icon={currentMarkerIcon}>
               <CalloutBadge title={markerTitle} body={markerBody} />
             </Marker>
           )}
@@ -73,7 +73,7 @@ const CustomMap = () => {
                 <Marker
                   key={index}
                   coordinate={marker.my_location}
-                  image={panicsMarkerIcon}>
+                  icon={panicsMarkerIcon}>
                   <CalloutBadge title={marker.title} body={marker.body} />
                 </Marker>
               )

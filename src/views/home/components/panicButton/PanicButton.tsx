@@ -5,13 +5,14 @@ import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoa
 import {panicNotification} from '@src/hooks/panicActions/panicActions';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
+import {User} from '@src/types/userTypes';
+import {panicButtonHook} from '@src/views/home/hooks/panicButtonHook';
 import {t} from 'i18next';
 import {Fragment, useState} from 'react';
-import {panicButtonHook} from '@src/views/home/hooks/panicButtonHook';
-import {Configuration} from '@src/types/configuration';
-import {User} from '@src/types/userTypes';
+import {useWindowDimensions} from 'react-native';
 
 const PanicButton = () => {
+  const {width} = useWindowDimensions();
   const {configuration, user} = panicButtonHook();
   const [loading, setLoading] = useState(false);
   const [errorDistance, setErrorDistance] = useState(false);
@@ -46,7 +47,8 @@ const PanicButton = () => {
             navigation,
             configuration,
             user as User,
-            colors
+            colors,
+            width
           )
         }
         style={{

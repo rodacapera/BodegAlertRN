@@ -2,12 +2,10 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {APP_NAME} from '@src/globals/constants/config';
 import {actualTheme} from '@src/types/contextTypes';
-import {useWindowDimensions} from 'react-native';
 import DrawerComponent from './DrawerComponent';
 import NavigationProvider from './NavigationProvider';
 
 export const LateralDrawer = () => {
-  const {width} = useWindowDimensions();
   const MyDrawer = createDrawerNavigator();
   const {colors, theme, dark} = actualTheme();
 
@@ -15,7 +13,7 @@ export const LateralDrawer = () => {
     <NavigationContainer theme={theme}>
       <MyDrawer.Navigator
         screenOptions={{
-          drawerType: width >= 768 ? 'permanent' : 'front',
+          // drawerType: width >= 768 ? 'permanent' : 'front',
           drawerActiveTintColor: dark ? colors.onSurface : colors.background,
           headerTintColor: dark ? colors.onSurface : colors.onPrimaryContainer,
           headerTitleStyle: {
@@ -25,7 +23,6 @@ export const LateralDrawer = () => {
           headerStyle: {
             backgroundColor: colors.background
           },
-
           // headerStyle: {
           //   borderWidth: 0,
           //   elevation: 0,
@@ -33,14 +30,17 @@ export const LateralDrawer = () => {
           // },
           drawerStyle: {backgroundColor: colors.background},
           headerShown: false, // this remove header
-          headerTransparent: true
+          headerTransparent: true,
+          // drawerType: isLargeScreen ? 'permanent' : 'back',
+          overlayColor: 'transparent'
           // drawerHideStatusBarOnOpen: true,
           //   overlayColor: 'transparent',
         }}
+        defaultStatus="closed"
         drawerContent={props => <DrawerComponent {...props} />}>
         <MyDrawer.Screen
           name="StackNavigator"
-          options={{title: APP_NAME}}
+          options={{title: APP_NAME, drawerItemStyle: {display: 'none'}}}
           component={NavigationProvider}
         />
       </MyDrawer.Navigator>

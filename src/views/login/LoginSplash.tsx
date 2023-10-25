@@ -3,7 +3,12 @@ import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
 import {actualTheme} from '@src/types/contextTypes';
 import {LoginSplashProps, StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
-import {ImageBackground, SafeAreaView, View} from 'react-native';
+import {
+  ImageBackground,
+  SafeAreaView,
+  View,
+  useWindowDimensions
+} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {backgroundStyle} from '../../globals/styles/screenMode';
 import {loginStyles} from './styles/loginStyles';
@@ -12,6 +17,7 @@ import {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 const LoginSplash = ({route}: LoginSplashProps) => {
+  const {width} = useWindowDimensions();
   const {colors, theme} = actualTheme();
   const navigation = useNavigation<StackNavigation>();
 
@@ -30,7 +36,10 @@ const LoginSplash = ({route}: LoginSplashProps) => {
         resizeMode="cover"
         style={loginStyles.image}>
         <View style={[loginStyles.content]}>
-          <View style={loginStyles.header}>
+          <View
+            style={{
+              flex: width >= 768 ? 1 : 2
+            }}>
             <Text style={loginStyles.title}>
               {t('loginSplashView.welcome')} {'! \n'}
               <Text style={loginStyles.appNameInit}>
@@ -39,12 +48,19 @@ const LoginSplash = ({route}: LoginSplashProps) => {
               </Text>
             </Text>
           </View>
-          <View style={loginStyles.descriptionContainer}>
+          <View
+            style={[
+              loginStyles.descriptionContainer,
+              {
+                flex: width >= 768 ? 0 : 4,
+                marginHorizontal: width >= 768 ? 120 : 0
+              }
+            ]}>
             <Text style={loginStyles.loginDescription}>
               {t('loginSplashView.description')}
             </Text>
           </View>
-          <View style={loginStyles.footer}>
+          <View style={[loginStyles.footer, {flex: width >= 768 ? 1 : 1}]}>
             <View style={loginStyles.buttonContainer}>
               <Button
                 style={loginStyles.button}
