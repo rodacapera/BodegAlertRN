@@ -15,7 +15,7 @@ const ButtonsNotFound = ({user}: {user: User}) => {
       <CustomImage source={user_not_found} style={buttonsStyles} />
       <TextWithCustomLink
         text={t('buttonsView.buttonsNotFound')}
-        link={videoLinks?.userNotFoundVideoUrl}
+        link={videoLinks?.buttonNotFoundVideoUrl}
         visible
       />
     </View>

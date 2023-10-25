@@ -1,4 +1,5 @@
-import {addUserVideo} from '@src/globals/constants/fakeData';
+import {config} from '@src/hooks/config/config';
+import {getDynamicLinkFirebase} from '@src/hooks/firebase/dynamicLink/dynamicLink';
 import {getUserQuery} from '@src/reactQuery/userQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {QrModalProps} from '@src/types/globalTypes';
@@ -11,16 +12,16 @@ import QRCode from 'react-native-qrcode-svg';
 import {logo_app} from '../../assets/images';
 import TextWithCustomLink from '../textWithCustomLink/TextWithCustomLink';
 import {qrModalStyles} from './styles/qrModalStyles';
-import {getDynamicLinkFirebase} from '@src/hooks/firebase/dynamicLink/dynamicLink';
 
 const QrModal = ({visible, setVisible}: QrModalProps) => {
   const hideModal = () => setVisible(false);
   const [qrLink, setQrLink] = useState<string>();
   const {colors, theme} = actualTheme();
   const {data} = getUserQuery();
+  const user = data.user as unknown as User;
+  const {videoLinks} = config({user});
 
   const getQrLink = async () => {
-    const user = data.user as unknown as User;
     const shop_id = user.shop.split('/')[1];
     const result = await getDynamicLinkFirebase(shop_id);
     setQrLink(result);
@@ -71,7 +72,7 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
         </View>
         <TextWithCustomLink
           text={t('qrModal.helperFooterQrFirst')}
-          link={addUserVideo}
+          link={videoLinks?.addUserVideo}
           visible
         />
       </View>

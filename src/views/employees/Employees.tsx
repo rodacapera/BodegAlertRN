@@ -23,7 +23,8 @@ const Employees = ({navigation, route}: EmployeesProps) => {
     isLoading,
     setModalVisible,
     modalVisible,
-    setItemMustRemove
+    setItemMustRemove,
+    user
   } = employeesHook();
 
   return isLoading ? (
@@ -36,7 +37,7 @@ const Employees = ({navigation, route}: EmployeesProps) => {
         icon="account-group-outline"
       />
       <View style={employeeStyles.container}>
-        {employees.length < 1 && <UsersNotFound />}
+        {employees.length < 1 && <UsersNotFound user={user} />}
         {employees.map(
           (value, index) =>
             !value.administrator && (

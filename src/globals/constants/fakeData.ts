@@ -49,12 +49,6 @@ export const fakeMarkers = [
   }
 ];
 
-export const qrLink = 'http://awesome.link.qr'; //get url to user data from firebase
-export const userNotFoundVideoUrl = 'https://www.google.com'; //get video from youtube
-export const addUserVideo = 'https://www.google.com'; //get video from youtube
-export const addButton = 'https://www.google.com'; //get video from youtube
-export const buttonNotFoundVideoUrl = 'https://www.google.com';
-
 export const userInitialData = {
   user: undefined,
   panicsObserver: undefined,

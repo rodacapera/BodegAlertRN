@@ -15,6 +15,8 @@ import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
 const employeesHook = () => {
   const {width} = useWindowDimensions();
+  const userData = getUserQuery().data.user;
+  const user = userData as unknown as User;
   const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
   const {data, isLoading} = getEmployeesQuery();
@@ -100,7 +102,8 @@ const employeesHook = () => {
     isLoading,
     modalVisible,
     setModalVisible,
-    setItemMustRemove
+    setItemMustRemove,
+    user
   };
 };
 

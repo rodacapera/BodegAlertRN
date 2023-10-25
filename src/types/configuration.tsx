@@ -13,9 +13,8 @@ export interface Configuration {
 }
 
 export type VideoLinks = {
-  qrLink: string;
-  userNotFoundVideoUrl: string;
-  addUserVideo: string;
-  addButton: string;
-  buttonNotFoundVideoUrl: string;
+  userNotFoundVideoUrl: string; // ok
+  addUserVideo: string; //ok
+  addButton: string; // ok
+  buttonNotFoundVideoUrl: string; //ok
 };
