@@ -158,13 +158,13 @@ i18n.use(initReactI18next).init({
           formTitle: 'Add your network settings',
           formTitleFinish: 'The last step',
           descriptionLastStep:
-            '1. Please copy and paste this link into your browser and press enter. 2. Switch your current network to get internet.',
+            '1. Please copy and paste this link into your browser and press enter.\n2. Switch your current network to get internet.',
           formCaption: 'Please input your network password and press continue!',
           networkName: 'ISS',
           networkPass: 'Password',
           title: 'Select your network!',
           helperTitleQr:
-            '1. Turn on your button. 2. On your phone, connect to the Wi-Fi network that starts with shellybutton1. 3. Go back to this screen and select your Wi-Fi network from the list below. 4. Follow the next steps.',
+            '1. Turn on your button.\n2. On your phone, connect to the Wi-Fi network that starts with shellybutton1.\n3. Go back to this screen and select your Wi-Fi network from the list below.\n4. Follow the next steps.',
           helperFooterQrFirst: "Learn how it's done, click",
           internetError: 'Internet error, try again!',
           errorButtonExistTitle: 'Button found',
@@ -362,14 +362,14 @@ i18n.use(initReactI18next).init({
           formTitle: 'Agrega la configuración de tu red',
           formTitleFinish: 'El último paso',
           descriptionLastStep:
-            '1. Copia y pega este enlace en tu navegador y presiona Enter. 2. Cambia tu red actual para obtener acceso a Internet.',
+            '1. Copia y pega este enlace en tu navegador y presiona Enter.\n2. Cambia tu red actual para obtener acceso a Internet.',
           formCaption:
             'Por favor, ingresa la contraseña de tu red y presiona continuar.',
           networkName: 'ISS',
           networkPass: 'Contraseña',
           title: 'Selecciona tu red',
           helperTitleQr:
-            '1. Enciende tu botón. 2. En tu teléfono, conéctate a la red Wi-Fi que comienza con shellybutton1. 3. Vuelve a esta pantalla y selecciona tu red Wi-Fi de la lista de abajo. 4. Sigue los siguientes pasos.',
+            '1. Enciende tu botón.\n2. En tu teléfono, conéctate a la red Wi-Fi que comienza con shellybutton1.\n3. Vuelve a esta pantalla y selecciona tu red Wi-Fi de la lista de abajo.\n4. Sigue los siguientes pasos.',
           helperFooterQrFirst: 'Aprende cómo se hace, haz clic',
           internetError: 'Error de Internet, ¡inténtalo de nuevo!',
           errorButtonExistTitle: 'Botón encontrado',
@@ -566,13 +566,13 @@ i18n.use(initReactI18next).init({
           formTitle: 'Aggiungi le impostazioni della tua rete',
           formTitleFinish: "L'ultimo passo",
           descriptionLastStep:
-            "1. Copia e incolla questo link nel tuo browser e premi Invio. 2. Cambia la tua rete attuale per ottenere l'accesso a Internet.",
+            "1. Copia e incolla questo link nel tuo browser e premi Invio.\n2. Cambia la tua rete attuale per ottenere l'accesso a Internet.",
           formCaption: 'Inserisci la password della tua rete e premi Continua.',
           networkName: 'ISS',
           networkPass: 'Password',
           title: 'Seleziona la tua rete',
           helperTitleQr:
-            "1. Accendi il tuo pulsante. 2. Sul tuo telefono, collegati alla rete Wi-Fi che inizia con shellybutton1. 3. Torna a questa schermata e seleziona la tua rete Wi-Fi dall'elenco sottostante. 4. Segui i passaggi successivi.",
+            "1. Accendi il tuo pulsante.\n2. Sul tuo telefono, collegati alla rete Wi-Fi che inizia con shellybutton1.\n3. Torna a questa schermata e seleziona la tua rete Wi-Fi dall'elenco sottostante.\n4. Segui i passaggi successivi.",
           helperFooterQrFirst: 'Scopri come si fa, fai clic',
           internetError: 'Errore di Internet, riprova!',
           errorButtonExistTitle: 'Pulsante trovato',
@@ -770,13 +770,13 @@ i18n.use(initReactI18next).init({
           formTitle: 'Adicione as configurações da sua rede',
           formTitleFinish: 'A última etapa',
           descriptionLastStep:
-            '1. Copie e cole este link no seu navegador e pressione Enter. 2. Altere sua rede atual para obter acesso à Internet.',
+            '1. Copie e cole este link no seu navegador e pressione Enter.\n2. Altere sua rede atual para obter acesso à Internet.',
           formCaption: 'Insira a senha da sua rede e pressione Continuar!',
           networkName: 'ISS',
           networkPass: 'Senha',
           title: 'Selecione sua rede!',
           helperTitleQr:
-            '1. Ligue o seu botão. 2. No seu telefone, conecte-se à rede Wi-Fi que começa com shellybutton1. 3. Volte para esta tela e selecione sua rede Wi-Fi na lista abaixo. 4. Siga os próximos passos.',
+            '1. Ligue o seu botão.\n2. No seu telefone, conecte-se à rede Wi-Fi que começa com shellybutton1.\n3. Volte para esta tela e selecione sua rede Wi-Fi na lista abaixo.\n4. Siga os próximos passos.',
           helperFooterQrFirst: 'Saiba como fazer, clique',
           internetError: 'Erro de Internet, tente novamente!',
           errorButtonExistTitle: 'Botão encontrado',
@@ -972,14 +972,14 @@ i18n.use(initReactI18next).init({
           formTitle: 'Ajoutez les paramètres de votre réseau',
           formTitleFinish: 'La dernière étape',
           descriptionLastStep:
-            '1. Copiez et collez ce lien dans votre navigateur, puis appuyez sur Entrée. 2. Modifiez votre réseau actuel pour avoir accès à Internet.',
+            '1. Copiez et collez ce lien dans votre navigateur, puis appuyez sur Entrée.\n2. Modifiez votre réseau actuel pour avoir accès à Internet.',
           formCaption:
             'Saisissez le mot de passe de votre réseau et appuyez sur Continuer !',
           networkName: 'ISS',
           networkPass: 'Mot de passe',
           title: 'Sélectionnez votre réseau !',
           helperTitleQr:
-            '1. Allumez votre bouton. 2. Sur votre téléphone, connectez-vous au réseau Wi-Fi commençant par shellybutton1. 3. Revenez à cet écran et sélectionnez votre réseau Wi-Fi dans la liste ci-dessous. 4. Suivez les étapes suivantes.',
+            '1. Allumez votre bouton.\n2. Sur votre téléphone, connectez-vous au réseau Wi-Fi commençant par shellybutton1.\n3. Revenez à cet écran et sélectionnez votre réseau Wi-Fi dans la liste ci-dessous.\n4. Suivez les étapes suivantes.',
           helperFooterQrFirst: 'Découvrez comment faire, cliquez',
           internetError: 'Erreur Internet, réessayez !',
           errorButtonExistTitle: 'Bouton trouvé',

@@ -57,7 +57,7 @@ const OtpCode = ({
       />
       <CustomDialogAlert
         visible={errorNetwork}
-        setVisible={() => setErrorNetwork(false)}
+        setVisible={() => (setErrorNetwork(false), navigation.goBack())}
         title={t('network.alertErrorTitle')}
         description={t('network.alertErrorDescription')}
       />

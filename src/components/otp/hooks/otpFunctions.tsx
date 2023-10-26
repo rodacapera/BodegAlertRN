@@ -160,9 +160,14 @@ export const handleSendOtp = async (
   setSendOtpCode?: (e: boolean) => void
 ) => {
   const confirmation = await useLoginFirebase(buttonAction.phone);
-  buttonAction.confirmation = confirmation;
-  AsyncStorage.setItem('@otp', JSON.stringify(true));
-  setSendOtpCode && setSendOtpCode(true);
+  if (confirmation) {
+    buttonAction.confirmation = confirmation;
+    AsyncStorage.setItem('@otp', JSON.stringify(true));
+    setSendOtpCode && setSendOtpCode(true);
+    return true;
+  } else {
+    return false;
+  }
 };
 
 export const removeOtpCode = async () => {
@@ -214,8 +219,9 @@ export const getOtp = async (
 ) => {
   const otp = await AsyncStorage.getItem('@otp');
   if (!otp) {
-    handleSendOtp(buttonAction, setSendOtpCode);
+    return await handleSendOtp(buttonAction, setSendOtpCode);
   } else {
     console.debug('the code has been sent', JSON.parse(otp));
+    return false;
   }
 };

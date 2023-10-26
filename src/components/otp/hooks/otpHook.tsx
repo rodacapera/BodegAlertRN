@@ -2,10 +2,8 @@ import {LoginFormAction} from '@src/types/loginTypes';
 import {useEffect, useRef, useState} from 'react';
 import {OtpInputRef} from 'react-native-otp-entry';
 import {getOtp, removeOtpCode, timerCount} from './otpFunctions';
-import {useNetInfo} from '@react-native-community/netinfo';
 
 const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
-  const netInfo = useNetInfo();
   const inputRef = useRef<OtpInputRef>();
   const [code, setCode] = useState('');
   const [errorOtp, setErrorOtp] = useState(false);
@@ -19,15 +17,14 @@ const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
     setIsCodeRequested(true);
     if (!isCodeRequested) {
       await removeOtpCode();
-      getOtp(buttonAction, setSendOtpCode);
+      const sendOtpCode = await getOtp(buttonAction, setSendOtpCode);
+      !sendOtpCode && setErrorNetwork(!sendOtpCode);
     }
   };
 
   useEffect(() => {
-    const statusNetwork = netInfo.isConnected;
-    statusNetwork && initOtp();
-    setErrorNetwork(!statusNetwork);
-  }, [netInfo]);
+    initOtp();
+  }, []);
 
   useEffect(() => {
     counter === 60 &&
