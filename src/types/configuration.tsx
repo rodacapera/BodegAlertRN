@@ -10,6 +10,8 @@ export interface Configuration {
   vehicle_code: number;
   supported_cities: {city: string};
   videoLinks: VideoLinks;
+  link_app: string;
+  support_mail: string;
 }
 
 export type VideoLinks = {

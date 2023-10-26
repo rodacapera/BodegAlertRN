@@ -63,16 +63,16 @@ const drawerComponentHook = (navigation: StackNavigation) => {
   };
 
   const handleDynamicLink = (link: {url: string}) => {
+    setShopId(undefined);
     // Handle dynamic link inside your own application
-    const params = link.url.split('?')[1].split('&');
-    const viewParam = params[0].split('=');
-    const shopParam = params[1].split('=');
-    const view = viewParam[0] == 'view' ? viewParam[1] : undefined;
-    const id_shop = shopParam[0] == 'id_shop' ? shopParam[1] : undefined;
-
-    link.url ===
-      'https://orlyvisions.vercel.app/dynamiclink/?view=Register&id_shop=bRTxd914DXpGNAiM6sOz' &&
+    if (link.url.includes('?')) {
+      const params = link.url.split('?')[1].split('&');
+      const viewParam = params[0].split('=');
+      const shopParam = params[1].split('=');
+      const view = viewParam[0] == 'view' ? viewParam[1] : undefined;
+      const id_shop = shopParam[0] == 'id_shop' ? shopParam[1] : undefined;
       setShopId(id_shop);
+    }
   };
 
   const imageAvatar =

@@ -115,10 +115,10 @@ const homeHook = () => {
       user?.type === 'residence'
         ? `${t('home.share')}.\n${t('home.code')}: ${user?.group_number}\n${t(
             'home.link'
-          )}: https://t.ly/bodegalert.link`
-        : `${t('home.shareToVehicle')}.\n${t(
-            'home.link'
-          )}: https://t.ly/bodegalert.link`;
+          )}: ${configuration.link_app}`
+        : `${t('home.shareToVehicle')}.\n${t('home.link')}:${
+            configuration.link_app
+          }`;
     whatsapp(t('home.shareTitle'), message);
   };
 

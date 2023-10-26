@@ -107,7 +107,7 @@ const userFormHook = (qr?: boolean, shopId?: string) => {
   useEffect(() => {
     user &&
       headerShown({
-        width: width,
+        width: !qr ? width : undefined,
         navigation,
         visible: qr ? false : true,
         transparent: false,

@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "ios-devices": "react-native run-ios --list-devices"
   },
   "dependencies": {
     "@bam.tech/react-native-make": "^3.0.3",
