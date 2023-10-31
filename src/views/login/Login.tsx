@@ -36,8 +36,7 @@ const Login = ({route, navigation}: LoginProps) => {
     errorUserNotExist,
     countryCode
   } = loginHook(params?.data);
-  console.log('dark', dark);
-  console.log('colorScheme', colorScheme);
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <View
