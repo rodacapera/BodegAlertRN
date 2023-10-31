@@ -2,7 +2,7 @@ import {handleBack} from '@src/components/otp/hooks/otpFunctions';
 import {actualTheme} from '@src/types/contextTypes';
 import {HeaderOtpParams} from '@src/types/otpTypes';
 import {t} from 'i18next';
-import {Text, View} from 'react-native';
+import {Text, View, useColorScheme} from 'react-native';
 import {Button} from 'react-native-paper';
 import {otpStyles} from '../styles/otpStyles';
 import {useNavigation} from '@react-navigation/native';
@@ -14,6 +14,7 @@ const HeaderOtp = ({
   counter,
   goBack
 }: HeaderOtpParams) => {
+  const colorScheme = useColorScheme();
   const navigator = useNavigation<StackNavigation>();
   const {colors, theme, dark} = actualTheme();
 
@@ -23,13 +24,19 @@ const HeaderOtp = ({
         {counter === 60 && (
           <Button
             icon="arrow-left"
-            textColor={dark ? colors.onSurface : colors.onPrimaryContainer}
+            textColor={
+              colorScheme === 'dark'
+                ? colors.surface
+                : dark
+                ? colors.onSurface
+                : colors.onPrimaryContainer
+            }
             style={{backgroundColor: 'transparent'}}
             theme={theme}
             mode="text"
-            onPress={() =>
-              handleBack(setButtonAction, setCode, goBack, navigator)
-            }>
+            onPress={() => {
+              handleBack(setButtonAction, setCode, goBack, navigator);
+            }}>
             {t('general.back')}
           </Button>
         )}
@@ -38,14 +45,28 @@ const HeaderOtp = ({
         <Text
           style={[
             otpStyles.titleOtp,
-            {color: theme.dark ? colors.onSurface : colors.outline}
+            {
+              color:
+                colorScheme === 'dark'
+                  ? colors.surface
+                  : dark
+                  ? colors.onSurface
+                  : colors.outline
+            }
           ]}>
           {t('otp.title')} {'\n'}
         </Text>
         <Text
           style={[
             otpStyles.subTitleOtp,
-            {color: theme.dark ? colors.onSurface : colors.outline}
+            {
+              color:
+                colorScheme === 'dark'
+                  ? colors.surface
+                  : dark
+                  ? colors.onSurface
+                  : colors.outline
+            }
           ]}>
           {t('otp.subTitle')}
         </Text>

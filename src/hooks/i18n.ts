@@ -94,7 +94,10 @@ i18n.use(initReactI18next).init({
           titleCreateAccountUser: 'Join a registered account',
           errorUserRegisterTitle: 'Existing account',
           errorUserRegisterDescription:
-            'The account already exists in our system. Please try another phone number.'
+            'The account already exists in our system. Please try another phone number.',
+          errorRegisterTitle: 'Error during registration',
+          errorRegisterDescription:
+            'All fields are required, please check and try again.'
         },
         loginView: {
           title: 'Login with your cell phone number!',
@@ -103,7 +106,8 @@ i18n.use(initReactI18next).init({
           signUp: 'Sign up',
           errorPhone: 'The phone number is not valid or is empty',
           goBack: 'Back',
-          errorUserNotExist: 'The user does not exist in our system.'
+          errorUserNotExist: 'The user does not exist in our system.',
+          errorEmail: 'The entered email is not valid'
         },
         loginSplashView: {
           welcome: 'Welcome to',
@@ -298,7 +302,10 @@ i18n.use(initReactI18next).init({
           titleCreateAccountUser: 'Unirse a una cuenta registrada',
           errorUserRegisterTitle: 'Cuenta existente',
           errorUserRegisterDescription:
-            'La cuenta ya existe en nuestro sistema. Por favor, prueba con otro número de teléfono.'
+            'La cuenta ya existe en nuestro sistema. Por favor, prueba con otro número de teléfono.',
+          errorRegisterTitle: 'Error durante el registro',
+          errorRegisterDescription:
+            'Todos los campos son obligatorios, por favor, verifica e intenta nuevamente.'
         },
         loginView: {
           title: 'Inicia sesión con tu número de teléfono celular.',
@@ -307,7 +314,8 @@ i18n.use(initReactI18next).init({
           signUp: 'Registrarse',
           errorPhone: 'El número de teléfono no es válido o está vacío.',
           goBack: 'Atrás',
-          errorUserNotExist: 'El usuario no existe en nuestro sistema.'
+          errorUserNotExist: 'El usuario no existe en nuestro sistema.',
+          errorEmail: 'El correo ingresado no es valido'
         },
         loginSplashView: {
           welcome: 'Bienvenido a',
@@ -502,7 +510,10 @@ i18n.use(initReactI18next).init({
           titleCreateAccountUser: 'Unisciti a un account registrato',
           errorUserRegisterTitle: 'Account esistente',
           errorUserRegisterDescription:
-            "L'account esiste già nel nostro sistema. Per favore, prova con un altro numero di telefono."
+            "L'account esiste già nel nostro sistema. Per favore, prova con un altro numero di telefono.",
+          errorRegisterTitle: 'Errore durante la registrazione',
+          errorRegisterDescription:
+            'Tutti i campi sono obbligatori, per favore controlla e riprova.'
         },
         loginView: {
           title: 'Accedi con il tuo numero di cellulare!',
@@ -511,7 +522,8 @@ i18n.use(initReactI18next).init({
           signUp: 'Iscriviti',
           errorPhone: 'Il numero di telefono non è valido o è vuoto.',
           goBack: 'Indietro',
-          errorUserNotExist: "L'utente non esiste nel nostro sistema."
+          errorUserNotExist: "L'utente non esiste nel nostro sistema.",
+          errorEmail: "L'indirizzo email inserito non è valido"
         },
         loginSplashView: {
           welcome: 'Benvenuto su',
@@ -706,7 +718,10 @@ i18n.use(initReactI18next).init({
           titleCreateAccountUser: 'Junte-se a uma conta registrada',
           errorUserRegisterTitle: 'Conta existente',
           errorUserRegisterDescription:
-            'A conta já existe em nosso sistema. Por favor, tente outro número de telefone.'
+            'A conta já existe em nosso sistema. Por favor, tente outro número de telefone.',
+          errorRegisterTitle: 'Erro durante o registro',
+          errorRegisterDescription:
+            'Todos os campos são obrigatórios, por favor, verifique e tente novamente.'
         },
         loginView: {
           title: 'Faça login com seu número de celular!',
@@ -715,7 +730,8 @@ i18n.use(initReactI18next).init({
           signUp: 'Cadastrar',
           errorPhone: 'O número de telefone não é válido ou está vazio',
           goBack: 'Voltar',
-          errorUserNotExist: 'O usuário não existe em nosso sistema.'
+          errorUserNotExist: 'O usuário não existe em nosso sistema.',
+          errorEmail: 'O email inserido não é válido'
         },
         loginSplashView: {
           welcome: 'Bem-vindo ao',
@@ -909,7 +925,10 @@ i18n.use(initReactI18next).init({
           titleCreateAccountUser: 'Rejoindre un compte enregistré',
           errorUserRegisterTitle: 'Compte existant',
           errorUserRegisterDescription:
-            'Le compte existe déjà dans notre système. Veuillez essayer avec un autre numéro de téléphone.'
+            'Le compte existe déjà dans notre système. Veuillez essayer avec un autre numéro de téléphone.',
+          errorRegisterTitle: `Erreur lors de l'inscription`,
+          errorRegisterDescription:
+            'Tous les champs sont obligatoires, veuillez vérifier et réessayer.'
         },
         loginView: {
           title: 'Connectez-vous avec votre numéro de téléphone portable !',
@@ -918,7 +937,8 @@ i18n.use(initReactI18next).init({
           signUp: "S'inscrire",
           errorPhone: "Le numéro de téléphone n'est pas valide ou est vide",
           goBack: 'Retour',
-          errorUserNotExist: "L'utilisateur n'existe pas dans notre système."
+          errorUserNotExist: "L'utilisateur n'existe pas dans notre système.",
+          errorEmail: "L'adresse e-mail saisie n'est pas valide"
         },
         loginSplashView: {
           welcome: 'Bienvenue sur',

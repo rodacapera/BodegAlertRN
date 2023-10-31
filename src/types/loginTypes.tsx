@@ -8,6 +8,7 @@ export type LoginFormAction = {
   logged: boolean;
   confirmation?: FirebaseAuthTypes.ConfirmationResult;
   countryCodeSize: number;
+  sendRegister?: boolean;
 };
 
 export type LoginButtonsProps = {
@@ -21,8 +22,9 @@ export type InputFormProps = {
   phoneRef: any;
   setButtonAction: (data: LoginFormAction) => void;
   value?: string;
-  code?: string;
+  code: string;
   isDisabled?: boolean;
+  isRegister?: boolean;
 };
 
 export type LoginFormProps = {
@@ -32,4 +34,5 @@ export type LoginFormProps = {
   setCurrentButtonAction: (e: LoginFormAction) => void;
   type?: RegisterType;
   errorUserNotExist?: boolean;
+  countryCode: string;
 };

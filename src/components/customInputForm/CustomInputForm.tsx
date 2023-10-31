@@ -3,7 +3,7 @@ import {actualTheme} from '@src/types/contextTypes';
 import {InputFormProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
 import {useEffect, useState} from 'react';
-import {Keyboard, View} from 'react-native';
+import {Keyboard, View, useColorScheme} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import PhoneInput from 'react-native-phone-input';
 import {loginFormStyles} from '../../views/login/styles/loginFormStyles';
@@ -14,25 +14,43 @@ const CustomInputForm = ({
   setButtonAction,
   value,
   code,
-  isDisabled
+  isDisabled,
+  isRegister
 }: InputFormProps) => {
+  const colorScheme = useColorScheme();
   const [phone, setPhone] = useState<string>();
   const [focusPhone, setFocusPhone] = useState(false);
   const {colors} = actualTheme();
+  const [currentPhone, setCurrentPhone] = useState<string>();
+
   const handlePhoneNumber = (text: string) => {
     let countryCode = phoneRef.current.getCountryCode();
     const myPhone = `+${countryCode}${text}`;
-
     setButtonAction({
       name: 'login',
       show: false,
       phone: myPhone,
       logged: false,
       confirmation: undefined,
-      countryCodeSize: countryCode.length
+      countryCodeSize: countryCode.length,
+      sendRegister: false
     });
+    setCurrentPhone(myPhone);
     setPhone(text);
   };
+
+  useEffect(() => {
+    let countryCode = phoneRef?.current?.getCountryCode();
+    setButtonAction({
+      name: 'login',
+      show: !focusPhone,
+      phone: currentPhone!,
+      logged: false,
+      confirmation: undefined,
+      countryCodeSize: countryCode?.length,
+      sendRegister: !focusPhone
+    });
+  }, [focusPhone]);
 
   useEffect(() => {
     value && !phone && setPhone(value);
@@ -44,22 +62,31 @@ const CustomInputForm = ({
         loginFormStyles.phoneInputContainer,
         {
           borderBottomWidth: focusPhone ? 1.9 : 0.7,
-          borderBottomColor: focusPhone ? colors.error : colors.onSurface
+          borderBottomColor: focusPhone
+            ? colors.error
+            : colorScheme == 'dark'
+            ? colors.outline
+            : colors.onSurface
         }
       ]}>
       <View style={loginFormStyles.phoneFlagContent}>
-        {type === 'phone' ? (
+        {type === 'phone' && code ? (
           <PhoneInput
             ref={ref => {
               phoneRef.current = ref;
             }}
-            textStyle={{color: colors.onSurface}}
+            textStyle={{
+              color: colorScheme == 'dark' ? colors.surface : colors.onSurface
+            }}
             pickerBackgroundColor={colors.background}
             cancelTextStyle={{color: colors.onSecondaryContainer}}
             confirmTextStyle={{color: colors.onSecondaryContainer}}
-            pickerItemStyle={{color: colors.onSurface}}
-            initialCountry={code ?? 'co'}
+            pickerItemStyle={{
+              color: colorScheme == 'dark' ? colors.surface : colors.onSurface
+            }}
+            initialCountry={code}
             disabled={isDisabled}
+            // onSelectCountry={() => handlePhoneNumber(phone!)}
             // initialValue="1"
           />
         ) : (
@@ -76,11 +103,12 @@ const CustomInputForm = ({
         underlineStyle={{
           backgroundColor: 'transparent'
         }}
-        textColor={colors.onSurface}
+        textColor={colorScheme == 'dark' ? colors.surface : colors.onSurface}
         theme={{
           colors: {
-            primary: colors.error,
-            onSurfaceVariant: colors.onSurface
+            primary: colorScheme == 'dark' ? colors.surface : colors.error,
+            onSurfaceVariant:
+              colorScheme == 'dark' ? colors.surface : colors.onSurface
           }
         }}
         onFocus={() => setFocusPhone(true)}
@@ -96,7 +124,7 @@ const CustomInputForm = ({
         label={t('general.phone')}
         value={phone}
         onChangeText={text => handlePhoneNumber(text)}
-        editable={!isDisabled}
+        editable={isRegister ? true : !isDisabled}
       />
     </View>
   );

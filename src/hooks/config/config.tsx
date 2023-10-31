@@ -1,13 +1,13 @@
 import {Configuration} from '@src/types/configuration';
 import {ResultLocations} from '@src/types/locationTypes';
-import {User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 import {getConfigurationFirebase} from '../firebase/config/config';
 import {getLocation} from '../locations/geocoderHook';
 
-const config = ({user}: {user?: User}) => {
+const config = () => {
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
   const [configuration, setConfiguration] = useState<Configuration>();
+
   const getGlobalConfig = (countryCode: string) => {
     getConfigurationFirebase(countryCode)
       .then(querySnapshot => {
@@ -25,13 +25,11 @@ const config = ({user}: {user?: User}) => {
     if (myCurrentLocation) {
       getGlobalConfig(myCurrentLocation.country.short_name);
     }
-  }, [myCurrentLocation, user]);
+  }, [myCurrentLocation]);
 
   useEffect(() => {
-    if (user) {
-      getLocation(setMyCurrentLocation);
-    }
-  }, [user]);
+    getLocation(setMyCurrentLocation);
+  }, []);
 
   return {...configuration};
 };

@@ -26,8 +26,7 @@ export const loginFormStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    marginTop: -19
+    borderTopRightRadius: 20
   },
   phoneFlagContent: {
     width: 90,
@@ -81,7 +80,6 @@ export const loginFormStyles = StyleSheet.create({
     alignItems: 'center'
   },
   errorContainer: {
-    marginTop: -29,
     width: 278
   },
   error: {fontSize: 12}

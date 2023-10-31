@@ -6,7 +6,7 @@ import {Text} from 'react-native-paper';
 import ErrorInputForm from '../../../components/customErrorInputForm/CustomErrorInputForm';
 import CustomInputForm from '../../../components/customInputForm/CustomInputForm';
 import Buttons from './Buttons';
-import {View} from 'react-native';
+import {View, useColorScheme} from 'react-native';
 
 const LoginForm = ({
   setButtonAction,
@@ -14,10 +14,12 @@ const LoginForm = ({
   currentButtonAction,
   setCurrentButtonAction,
   type,
-  errorUserNotExist
+  errorUserNotExist,
+  countryCode
 }: LoginFormProps) => {
+  const colorScheme = useColorScheme();
   const phoneRef = useRef<any>();
-  const {colors, theme} = actualTheme();
+  const {colors, dark} = actualTheme();
 
   return (
     <View
@@ -30,7 +32,12 @@ const LoginForm = ({
         variant="titleLarge"
         style={{
           margin: 20,
-          color: theme.dark ? colors.onSurface : colors.onPrimaryContainer
+          color:
+            colorScheme == 'dark'
+              ? colors.surface
+              : dark
+              ? colors.onSurface
+              : colors.onPrimaryContainer
         }}>
         {t('loginView.title')}
       </Text>
@@ -38,6 +45,7 @@ const LoginForm = ({
         phoneRef={phoneRef}
         setButtonAction={setCurrentButtonAction}
         type="phone"
+        code={countryCode}
       />
       {errorPhone && <ErrorInputForm error={t('loginView.errorPhone')} />}
       {errorUserNotExist && (

@@ -188,7 +188,7 @@ const ButtonsModalHook = ({
     internetError,
     savingData,
     passIsd,
-    config: config({user}),
+    config: config(),
     buttonExist,
     setButtonExist,
     unConnectedShellyButton,

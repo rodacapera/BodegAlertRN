@@ -11,7 +11,9 @@ export const geocoding = (latLng: Geocoder.fromParams) => {
   Geocoder.init(
     Platform.OS === 'android' ? GOOGLE_API_ANDROID : GOOGLE_API_IOS
   );
-  return Geocoder.from(latLng);
+  return Geocoder.from(latLng).catch(error =>
+    console.debug('Error Network:', error)
+  );
 };
 
 export const findDataLocation = (
@@ -45,7 +47,9 @@ export const getLocation = async (
   };
 
   const getGeocoding = await geocoding(latLng);
-  const getMyCurrentLocation = findDataLocation(getGeocoding);
-  getMyCurrentLocation.location = latLng;
-  setMyCurrentLocation(getMyCurrentLocation);
+  if (getGeocoding) {
+    const getMyCurrentLocation = findDataLocation(getGeocoding);
+    getMyCurrentLocation.location = latLng;
+    setMyCurrentLocation(getMyCurrentLocation);
+  }
 };

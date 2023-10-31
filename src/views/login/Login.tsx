@@ -9,7 +9,8 @@ import {
   Platform,
   SafeAreaView,
   ScrollView,
-  View
+  View,
+  useColorScheme
 } from 'react-native';
 import {Avatar, Button, Text} from 'react-native-paper';
 import LoginForm from './components/LoginForm';
@@ -18,8 +19,11 @@ import {loginFormStyles} from './styles/loginFormStyles';
 import {actualTheme} from '@src/types/contextTypes';
 import {useNavigation} from '@react-navigation/native';
 import {t} from 'i18next';
+import ErrorInputForm from '@src/components/customErrorInputForm/CustomErrorInputForm';
+import {Fragment} from 'react';
 
 const Login = ({route, navigation}: LoginProps) => {
+  const colorScheme = useColorScheme();
   const params = route.params;
   const {goBack} = useNavigation<StackNavigation>();
   const {theme, colors, dark} = actualTheme();
@@ -29,12 +33,21 @@ const Login = ({route, navigation}: LoginProps) => {
     errorPhone,
     currentButtonAction,
     setCurrentButtonAction,
-    errorUserNotExist
+    errorUserNotExist,
+    countryCode
   } = loginHook(params?.data);
-
+  console.log('dark', dark);
+  console.log('colorScheme', colorScheme);
   return (
     <SafeAreaView style={backgroundStyle}>
-      <View style={[loginFormStyles.loginContent]}>
+      <View
+        style={[
+          loginFormStyles.loginContent,
+          {
+            backgroundColor:
+              colorScheme == 'dark' ? colors.onBackground : colors.background
+          }
+        ]}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={{flex: 1}}>
@@ -66,17 +79,31 @@ const Login = ({route, navigation}: LoginProps) => {
             <View
               style={[
                 loginFormStyles.loginBody,
-                {backgroundColor: colors.background}
+                {
+                  backgroundColor:
+                    colorScheme == 'dark'
+                      ? colors.onBackground
+                      : colors.background
+                }
               ]}>
               {!params?.qr && !buttonAction.logged ? (
-                <LoginForm
-                  setButtonAction={setButtonAction}
-                  errorPhone={errorPhone}
-                  currentButtonAction={currentButtonAction}
-                  setCurrentButtonAction={setCurrentButtonAction}
-                  type={params?.type}
-                  errorUserNotExist={errorUserNotExist}
-                />
+                countryCode ? (
+                  <LoginForm
+                    setButtonAction={setButtonAction}
+                    errorPhone={errorPhone}
+                    currentButtonAction={currentButtonAction}
+                    setCurrentButtonAction={setCurrentButtonAction}
+                    type={params?.type}
+                    errorUserNotExist={errorUserNotExist}
+                    countryCode={countryCode}
+                  />
+                ) : (
+                  <View style={{height: 300}}>
+                    <ErrorInputForm
+                      error={t('network.alertErrorDescription')}
+                    />
+                  </View>
+                )
               ) : (
                 <OtpCode
                   buttonAction={buttonAction}

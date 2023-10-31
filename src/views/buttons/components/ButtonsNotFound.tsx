@@ -5,10 +5,9 @@ import {config} from '@src/hooks/config/config';
 import {t} from 'i18next';
 import {View} from 'react-native';
 import {buttonsStyles} from '../styles/buttonsStyles';
-import {User} from '@src/types/userTypes';
 
-const ButtonsNotFound = ({user}: {user: User}) => {
-  const {videoLinks} = config({user});
+const ButtonsNotFound = () => {
+  const {videoLinks} = config();
 
   return (
     <View>

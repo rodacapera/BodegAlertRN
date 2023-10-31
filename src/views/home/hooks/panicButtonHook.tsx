@@ -4,7 +4,7 @@ import {Configuration} from '@src/types/configuration';
 
 const panicButtonHook = () => {
   const {user} = useGetUser();
-  const configuration = config({user}) as Configuration;
+  const configuration = config() as Configuration;
 
   return {configuration, user};
 };

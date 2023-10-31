@@ -17,6 +17,7 @@ import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
 import HeaderOtp from './header/HeaderOtp';
 import {otpHook} from './hooks/otpHook';
 import {otpStyles} from './styles/otpStyles';
+import {backgroundStyle} from '@src/globals/styles/screenMode';
 
 const OtpCode = ({
   buttonAction,
@@ -30,6 +31,7 @@ const OtpCode = ({
   const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
   const {colors, dark, theme} = actualTheme();
+
   const {
     inputRef,
     code,
@@ -48,7 +50,7 @@ const OtpCode = ({
   });
 
   return (
-    <View style={otpStyles.containerOtp}>
+    <View style={[otpStyles.containerOtp]}>
       <HeaderOtp
         setButtonAction={setButtonAction}
         setCode={setCode}
@@ -70,7 +72,15 @@ const OtpCode = ({
             pinCodeTextStyle: {
               color:
                 colorScheme === 'dark'
-                  ? 'white'
+                  ? colors.surface
+                  : dark
+                  ? colors.onSurface
+                  : colors.onPrimaryContainer
+            },
+            pinCodeContainerStyle: {
+              borderColor:
+                colorScheme === 'dark'
+                  ? colors.surface
                   : dark
                   ? colors.onSurface
                   : colors.onPrimaryContainer
@@ -78,7 +88,7 @@ const OtpCode = ({
           }}
           focusColor={
             colorScheme === 'dark'
-              ? 'gray'
+              ? colors.surface
               : dark
               ? colors.onSurface
               : colors.onPrimaryContainer
@@ -90,7 +100,14 @@ const OtpCode = ({
           <Text
             style={[
               otpStyles.errorOtp,
-              {color: dark ? colors.onSurface : colors.error}
+              {
+                color:
+                  colorScheme === 'dark'
+                    ? colors.surface
+                    : dark
+                    ? colors.onSurface
+                    : colors.error
+              }
             ]}>
             {t('otp.error')}
           </Text>
@@ -103,15 +120,45 @@ const OtpCode = ({
             sendOtpCode && (
               <Text
                 style={{
-                  color: theme.dark
-                    ? colors.onSurface
-                    : colors.onPrimaryContainer
+                  color:
+                    colorScheme == 'dark'
+                      ? colors.surface
+                      : dark
+                      ? colors.onSurface
+                      : colors.onPrimaryContainer
                 }}>
                 {counter}
               </Text>
             )
           }
-          theme={theme}
+          // theme={theme}
+          style={{
+            backgroundColor: !sendOtpCode
+              ? colorScheme == 'dark'
+                ? colors.surface
+                : dark
+                ? colors.onSurfaceDisabled
+                : colors.elevation.level1
+              : colorScheme == 'dark'
+              ? colors.elevation.level0
+              : dark
+              ? colors.onSurfaceDisabled
+              : colors.elevation.level1
+          }}
+          theme={{
+            colors: {
+              primary:
+                colorScheme == 'dark'
+                  ? colors.primary
+                  : dark
+                  ? colors.onSurface
+                  : colors.primary,
+
+              onSurfaceDisabled: !sendOtpCode
+                ? colors.onSurfaceVariant
+                : colors.surfaceVariant
+            }
+          }}
           onPress={() => handleSendOtp(buttonAction, setSendOtpCode)}
           disabled={sendOtpCode}>
           {t('otp.resend')}

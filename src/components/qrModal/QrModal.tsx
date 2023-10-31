@@ -19,7 +19,7 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
   const {colors, theme} = actualTheme();
   const {data} = getUserQuery();
   const user = data.user as unknown as User;
-  const {videoLinks} = config({user});
+  const {videoLinks} = config();
 
   const getQrLink = async () => {
     const shop_id = user.shop.split('/')[1];

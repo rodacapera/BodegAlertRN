@@ -23,7 +23,7 @@ const useGetUser = (setUser?: UseQueryResult) => {
   const [counterEmployees, setCounterEmployees] = useState<number>();
   const [shopId, setShopId] = useState<string>();
   const user = currentData?.user as User;
-  const configuration = config({user});
+  const configuration = config();
 
   setEmployeesQuery(employees);
   setPanicsQuery(panics);
