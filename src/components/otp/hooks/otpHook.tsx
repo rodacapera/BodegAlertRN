@@ -18,7 +18,7 @@ const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
     if (!isCodeRequested) {
       await removeOtpCode();
       const sendOtpCode = await getOtp(buttonAction, setSendOtpCode);
-      !sendOtpCode && setErrorNetwork(!sendOtpCode);
+      !sendOtpCode ? setErrorNetwork(!sendOtpCode) : setIsCodeRequested(false);
     }
   };
 
@@ -45,7 +45,8 @@ const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
     errorNetwork,
     setErrorNetwork,
     isLoadingValidateOtp,
-    setIsLoadingValidateOtp
+    setIsLoadingValidateOtp,
+    isCodeRequested
   };
 };
 

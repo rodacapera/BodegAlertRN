@@ -95,8 +95,10 @@ const adminFormHook = (type: RegisterType, phoneRef: any) => {
     } else {
       !user?.group_number || user?.group_number === ''
         ? setAlertGroupFound(true)
-        : (setAlertGroupFound(false), !codeWasGenerated && searchGroup());
-      // setErrorRegister(true)
+        : (setAlertGroupFound(false),
+          !codeWasGenerated && searchGroup(),
+          codeWasGenerated && setErrorRegister(true));
+
       setIsLoadingForm(false);
     }
   };
@@ -232,11 +234,12 @@ const adminFormHook = (type: RegisterType, phoneRef: any) => {
         const groupData = data.data() as Group;
         userClone.group_name = groupData.group_name;
         setUser(userClone as User);
-        setTimeout(() => {
-          setGroupFound(true);
-          setAlertGroupFound(false);
-        }, 2000);
+        // setTimeout(() => {
+        setGroupFound(true);
+        setAlertGroupFound(false);
+        // }, 2000);
       } else {
+        console.log('oooooo');
         setGroupFound(false);
         setAlertGroupFound(true);
         // userClone.group_name = '';

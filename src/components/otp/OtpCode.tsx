@@ -44,7 +44,8 @@ const OtpCode = ({
     errorNetwork,
     setErrorNetwork,
     isLoadingValidateOtp,
-    setIsLoadingValidateOtp
+    setIsLoadingValidateOtp,
+    isCodeRequested
   } = otpHook({
     buttonAction
   });
@@ -135,7 +136,6 @@ const OtpCode = ({
               </Text>
             )
           }
-          // theme={theme}
           style={{
             backgroundColor: !sendOtpCode
               ? colorScheme == 'dark'
@@ -164,7 +164,7 @@ const OtpCode = ({
             }
           }}
           onPress={() => handleSendOtp(buttonAction, setSendOtpCode)}
-          disabled={sendOtpCode}>
+          disabled={isCodeRequested ?? sendOtpCode}>
           {t('otp.resend')}
         </Button>
         <Button
