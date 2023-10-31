@@ -114,7 +114,7 @@ const useGetUser = (setUser?: UseQueryResult) => {
   }, [currentData]);
 
   return {
-    user: currentData?.user,
+    user,
     panics,
     employees,
     counterEmployees,

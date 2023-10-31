@@ -6,11 +6,13 @@ import {customLoadingOverlayStyles} from './styles/customLoadingOverlayStyles';
 const CustomLoadingOverlay = ({
   visible,
   transparent,
-  dots = true
+  dots = true,
+  label
 }: {
   visible: boolean;
   transparent?: boolean;
   dots?: boolean;
+  label?: string;
 }) => {
   return visible ? (
     <View
@@ -26,7 +28,7 @@ const CustomLoadingOverlay = ({
         <CustomLoader
           visible={visible}
           size="large"
-          label={t('general.loading')}
+          label={label ?? t('general.loading')}
           dots={dots}
         />
       </View>

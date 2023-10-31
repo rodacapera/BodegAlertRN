@@ -9,16 +9,16 @@ import {handleFinishOnboarding} from '@src/hooks/onboarding/onboardingHook';
 import {actualTheme} from '@src/types/contextTypes';
 import {MyOnboardingProps, StackNavigation} from '@src/types/globalTypes';
 import {splashStyles} from '@src/views/splash/styles/splashStyles';
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
 
 const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
   const {t} = useTranslation();
-  const {colors, theme} = actualTheme();
+  const {colors} = actualTheme();
   const {navigate} = useNavigation<StackNavigation>();
 
   return (

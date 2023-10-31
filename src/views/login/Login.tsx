@@ -21,6 +21,7 @@ import {useNavigation} from '@react-navigation/native';
 import {t} from 'i18next';
 import ErrorInputForm from '@src/components/customErrorInputForm/CustomErrorInputForm';
 import {Fragment} from 'react';
+import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 
 const Login = ({route, navigation}: LoginProps) => {
   const colorScheme = useColorScheme();
@@ -34,7 +35,8 @@ const Login = ({route, navigation}: LoginProps) => {
     currentButtonAction,
     setCurrentButtonAction,
     errorUserNotExist,
-    countryCode
+    countryCode,
+    loadingText
   } = loginHook(params?.data);
 
   return (
@@ -74,44 +76,48 @@ const Login = ({route, navigation}: LoginProps) => {
               )}
             </ImageBackground>
           </View>
-          <ScrollView>
-            <View
-              style={[
-                loginFormStyles.loginBody,
-                {
-                  backgroundColor:
-                    colorScheme == 'dark'
-                      ? colors.onBackground
-                      : colors.background
-                }
-              ]}>
-              {!params?.qr && !buttonAction.logged ? (
-                countryCode ? (
-                  <LoginForm
-                    setButtonAction={setButtonAction}
-                    errorPhone={errorPhone}
-                    currentButtonAction={currentButtonAction}
-                    setCurrentButtonAction={setCurrentButtonAction}
-                    type={params?.type}
-                    errorUserNotExist={errorUserNotExist}
-                    countryCode={countryCode}
-                  />
-                ) : (
-                  <View style={{height: 300}}>
-                    <ErrorInputForm
-                      error={t('network.alertErrorDescription')}
+          {countryCode ? (
+            <ScrollView>
+              <View
+                style={[
+                  loginFormStyles.loginBody,
+                  {
+                    backgroundColor:
+                      colorScheme == 'dark'
+                        ? colors.onBackground
+                        : colors.background
+                  }
+                ]}>
+                {!params?.qr && !buttonAction.logged ? (
+                  countryCode ? (
+                    <LoginForm
+                      setButtonAction={setButtonAction}
+                      errorPhone={errorPhone}
+                      currentButtonAction={currentButtonAction}
+                      setCurrentButtonAction={setCurrentButtonAction}
+                      type={params?.type}
+                      errorUserNotExist={errorUserNotExist}
+                      countryCode={countryCode}
                     />
-                  </View>
-                )
-              ) : (
-                <OtpCode
-                  buttonAction={buttonAction}
-                  setButtonAction={setButtonAction}
-                  data={params?.data}
-                />
-              )}
-            </View>
-          </ScrollView>
+                  ) : (
+                    <View style={{height: 300}}>
+                      <ErrorInputForm
+                        error={t('network.alertErrorDescription')}
+                      />
+                    </View>
+                  )
+                ) : (
+                  <OtpCode
+                    buttonAction={buttonAction}
+                    setButtonAction={setButtonAction}
+                    data={params?.data}
+                  />
+                )}
+              </View>
+            </ScrollView>
+          ) : (
+            <CustomLoadingOverlay visible dots label={loadingText} />
+          )}
         </KeyboardAvoidingView>
       </View>
     </SafeAreaView>

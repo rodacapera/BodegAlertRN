@@ -8,6 +8,7 @@ import {StackNavigation} from '@src/types/globalTypes';
 import {ResultLocations} from '@src/types/locationTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {User} from '@src/types/userTypes';
+import {t} from 'i18next';
 import {useEffect, useState} from 'react';
 
 const loginHook = (data?: User) => {
@@ -19,7 +20,7 @@ const loginHook = (data?: User) => {
     useState<LoginFormAction>(buttonActionInitialState);
   const [errorUserNotExist, setErrorUserNotExist] = useState(false);
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
-
+  const [loadingText, setLoadingText] = useState(t('general.loading'));
   const validateRegEx = () => {
     if (buttonAction.phone != '') {
       const re = /[1-9]\d{9,14}$/;
@@ -55,6 +56,9 @@ const loginHook = (data?: User) => {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoadingText(t('network.alertErrorTitle'));
+    }, 9000);
     getLocation(setMyCurrentLocation);
   }, []);
 
@@ -87,7 +91,8 @@ const loginHook = (data?: User) => {
     errorUserNotExist,
     setErrorUserNotExist,
     configuration,
-    countryCode: myCurrentLocation?.country.short_name.toLowerCase()
+    countryCode: myCurrentLocation?.country.short_name.toLowerCase(),
+    loadingText
   };
 };
 export {loginHook};

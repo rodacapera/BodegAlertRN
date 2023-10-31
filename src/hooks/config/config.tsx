@@ -3,6 +3,8 @@ import {ResultLocations} from '@src/types/locationTypes';
 import {useEffect, useState} from 'react';
 import {getConfigurationFirebase} from '../firebase/config/config';
 import {getLocation} from '../locations/geocoderHook';
+import {Platform} from 'react-native';
+import {requestLocationPermission} from '../locations/permissionsHook';
 
 const config = () => {
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
@@ -21,6 +23,11 @@ const config = () => {
       });
   };
 
+  const grantedPermissionAndroid = async () => {
+    const granted = await requestLocationPermission();
+    granted && getLocation(setMyCurrentLocation);
+  };
+
   useEffect(() => {
     if (myCurrentLocation) {
       getGlobalConfig(myCurrentLocation.country.short_name);
@@ -28,7 +35,11 @@ const config = () => {
   }, [myCurrentLocation]);
 
   useEffect(() => {
-    getLocation(setMyCurrentLocation);
+    if (Platform.OS === 'android') {
+      grantedPermissionAndroid();
+    } else {
+      getLocation(setMyCurrentLocation);
+    }
   }, []);
 
   return {...configuration};
