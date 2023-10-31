@@ -10,7 +10,7 @@ import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
-import {View, useColorScheme} from 'react-native';
+import {View, useColorScheme, Platform} from 'react-native';
 import {OtpInput, OtpInputRef} from 'react-native-otp-entry';
 import {Button, Text} from 'react-native-paper';
 import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
@@ -80,7 +80,9 @@ const OtpCode = ({
             pinCodeContainerStyle: {
               borderColor:
                 colorScheme === 'dark'
-                  ? colors.surface
+                  ? Platform.OS == 'android'
+                    ? '#757470'
+                    : colors.surface
                   : dark
                   ? colors.onSurface
                   : colors.onPrimaryContainer
@@ -88,7 +90,9 @@ const OtpCode = ({
           }}
           focusColor={
             colorScheme === 'dark'
-              ? colors.surface
+              ? Platform.OS == 'android'
+                ? '#757470'
+                : colors.surface
               : dark
               ? colors.onSurface
               : colors.onPrimaryContainer
