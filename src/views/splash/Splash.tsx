@@ -1,10 +1,12 @@
+import {useNavigation} from '@react-navigation/native';
 import {logo_app} from '@src/assets/images';
 import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
+import {headerShown} from '@src/hooks/navigator/headerShown';
 import splashHook from '@src/hooks/splash/splashHook';
 import {actualTheme} from '@src/types/contextTypes';
-import {SplashProps} from '@src/types/globalTypes';
-import {useEffect} from 'react';
+import {SplashProps, StackNavigation} from '@src/types/globalTypes';
+import {useEffect, useLayoutEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image, StatusBar, View, useColorScheme} from 'react-native';
 import {Text} from 'react-native-paper';
@@ -12,13 +14,19 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {splashStyles} from './styles/splashStyles';
 const Splash = ({route, navigation}: SplashProps) => {
   const colorScheme = useColorScheme();
-  const {i18n, t} = useTranslation();
   const {colors, theme, dark} = actualTheme();
+  const navigator = useNavigation<StackNavigation>();
 
+  useLayoutEffect(() => {});
   useEffect(() => {
     setTimeout(() => {
       splashHook({route, navigation});
     }, 1000);
+    headerShown({
+      navigation: navigator,
+      visible: false,
+      transparent: false
+    });
   }, []);
 
   return (

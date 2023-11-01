@@ -11,8 +11,8 @@ import PanicButton from '@src/views/home/components/panicButton/PanicButton';
 import {homeHook} from '@src/views/home/hooks/homeHook';
 import {homeStyles} from '@src/views/home/styles/homeStyles';
 import {t} from 'i18next';
-import {useRef} from 'react';
-import {BackHandler, Image, Linking, Platform} from 'react-native';
+import {Fragment, useRef} from 'react';
+import {BackHandler, Image, Linking, Platform, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import CalloutBadge from '../calloutBadge/CalloutBadge';
 
@@ -52,8 +52,8 @@ const CustomMap = () => {
       continueButton
     />
   ) : (
-    <>
-      {region && markerTitle && markerBody && currentMarkerIcon && (
+    <Fragment>
+      {region && markerTitle && markerBody && currentMarkerIcon ? (
         <MapView
           ref={mapRef}
           userLocationAnnotationTitle={'Map'}
@@ -90,6 +90,8 @@ const CustomMap = () => {
               );
             })}
         </MapView>
+      ) : (
+        <CustomLoadingOverlay visible />
       )}
       <CustomFab
         icon={'share-variant'}
@@ -120,7 +122,7 @@ const CustomMap = () => {
         description={t('home.alertDescriptionExitApp')}
         actionSuccess={() => BackHandler.exitApp()}
       />
-    </>
+    </Fragment>
   );
 };
 

@@ -7,7 +7,7 @@ import {whatsapp} from '@src/hooks/whatsapp/whatsapp';
 import {actualTheme} from '@src/types/contextTypes';
 import {HomeParams, StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
-import {useEffect, useState} from 'react';
+import {useEffect, useLayoutEffect, useState} from 'react';
 import {
   BackHandler,
   ImageURISource,
@@ -128,7 +128,7 @@ const homeHook = () => {
     return () => backHandler.remove();
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (
       navigation.getState().index == 1 ||
       (params && (params.isLogin || params.isBack))

@@ -4,10 +4,12 @@ import {APP_NAME} from '@src/globals/constants/config';
 import {actualTheme} from '@src/types/contextTypes';
 import DrawerComponent from './DrawerComponent';
 import NavigationProvider from './NavigationProvider';
+import {useWindowDimensions} from 'react-native';
 
 export const LateralDrawer = () => {
   const MyDrawer = createDrawerNavigator();
   const {colors, theme, dark} = actualTheme();
+  const {width} = useWindowDimensions();
 
   return (
     <NavigationContainer theme={theme}>

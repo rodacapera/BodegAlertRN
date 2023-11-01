@@ -9,17 +9,27 @@ import {handleFinishOnboarding} from '@src/hooks/onboarding/onboardingHook';
 import {actualTheme} from '@src/types/contextTypes';
 import {MyOnboardingProps, StackNavigation} from '@src/types/globalTypes';
 import {splashStyles} from '@src/views/splash/styles/splashStyles';
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useLayoutEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
+import {headerShown} from '@src/hooks/navigator/headerShown';
 
 const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
+  const navigator = useNavigation<StackNavigation>();
   const [visible, setVisible] = useState(false);
   const {t} = useTranslation();
   const {colors} = actualTheme();
   const {navigate} = useNavigation<StackNavigation>();
+
+  useLayoutEffect(() => {
+    headerShown({
+      navigation: navigator,
+      visible: false,
+      transparent: false
+    });
+  });
 
   return (
     <Fragment>

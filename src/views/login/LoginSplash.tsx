@@ -13,7 +13,7 @@ import {Button, Text} from 'react-native-paper';
 import {backgroundStyle} from '../../globals/styles/screenMode';
 import {loginStyles} from './styles/loginStyles';
 import {headerShown} from '@src/hooks/navigator/headerShown';
-import {useEffect} from 'react';
+import {useEffect, useLayoutEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 const LoginSplash = ({route}: LoginSplashProps) => {
@@ -21,7 +21,7 @@ const LoginSplash = ({route}: LoginSplashProps) => {
   const {colors, theme} = actualTheme();
   const navigation = useNavigation<StackNavigation>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     headerShown({
       navigation,
       visible: false,

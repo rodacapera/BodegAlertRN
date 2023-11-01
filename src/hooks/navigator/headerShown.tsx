@@ -1,4 +1,6 @@
 import {StackNavigation} from '@src/types/globalTypes';
+type DrawerType = 'permanent' | 'front';
+
 export const headerShown = ({
   navigation,
   visible,
@@ -12,10 +14,17 @@ export const headerShown = ({
   titleColor?: string;
   width?: number;
 }) => {
+  const type: DrawerType = width
+    ? width >= 768
+      ? 'permanent'
+      : 'front'
+    : 'front';
+
   navigation.getParent()?.setOptions({
     headerShown: visible,
     headerTransparent: transparent,
     headerTintColor: titleColor,
-    drawerType: width && width >= 768 ? 'permanent' : 'front'
+    drawerType: type,
+    swipeEnabled: width ? true : false
   });
 };
