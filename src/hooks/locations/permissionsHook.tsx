@@ -27,14 +27,16 @@ export const requestLocationPermission = async () => {
 
 export const getCurrentPosition = async (): Promise<GeoPosition> =>
   new Promise((resolve, reject) => {
-    Geolocation.getCurrentPosition(
-      position => {
-        resolve(position);
-      },
-      error => {
-        console.error('error', error.code, 'message', error.message);
-        reject(error);
-      },
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000}
-    );
+    Geolocation.requestAuthorization('whenInUse').then(result => {
+      Geolocation.getCurrentPosition(
+        position => {
+          resolve(position);
+        },
+        error => {
+          console.error('error', error.code, 'message', error.message);
+          reject(error);
+        },
+        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000}
+      );
+    });
   });

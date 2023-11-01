@@ -6,13 +6,14 @@ import {actualTheme} from '@src/types/contextTypes';
 import {SplashProps} from '@src/types/globalTypes';
 import {useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Image, View} from 'react-native';
+import {Image, StatusBar, View, useColorScheme} from 'react-native';
 import {Text} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {splashStyles} from './styles/splashStyles';
 const Splash = ({route, navigation}: SplashProps) => {
+  const colorScheme = useColorScheme();
   const {i18n, t} = useTranslation();
-  const {colors, theme} = actualTheme();
+  const {colors, theme, dark} = actualTheme();
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,6 +23,23 @@ const Splash = ({route, navigation}: SplashProps) => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
+      <StatusBar
+        backgroundColor={
+          colorScheme == 'dark'
+            ? colors.onPrimaryContainer
+            : dark
+            ? colors.onPrimary
+            : colors.primaryContainer
+        }
+        animated={true}
+        barStyle={
+          colorScheme == 'dark'
+            ? 'light-content'
+            : dark
+            ? 'light-content'
+            : 'dark-content'
+        }
+      />
       <View style={splashStyles.container}>
         <View style={splashStyles.imgContent}>
           <Image source={logo_app} style={splashStyles.logo} />

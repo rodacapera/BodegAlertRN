@@ -71,12 +71,7 @@ const OtpCode = ({
           numberOfDigits={6}
           theme={{
             pinCodeTextStyle: {
-              color:
-                colorScheme === 'dark'
-                  ? colors.surface
-                  : dark
-                  ? colors.onSurface
-                  : colors.onPrimaryContainer
+              color: dark ? colors.onSurface : colors.onPrimaryContainer
             },
             pinCodeContainerStyle: {
               borderColor: dark ? colors.onSurface : colors.onPrimaryContainer
