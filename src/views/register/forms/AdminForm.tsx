@@ -6,19 +6,28 @@ import {lightTheme} from '@src/hooks/lightMode';
 import {actualTheme} from '@src/types/contextTypes';
 import {RegisterType} from '@src/types/globalTypes';
 import {DataKey} from '@src/types/userTypes';
-import {Fragment, useRef} from 'react';
+import {Fragment, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
-import {Button, TextInput} from 'react-native-paper';
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View
+} from 'react-native';
+import {Button, TextInput, Text} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
 import {adminFormHook} from './hooks/adminFormHook';
 import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 import ErrorInputForm from '@src/components/customErrorInputForm/CustomErrorInputForm';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const AdminForm = ({type}: {type: RegisterType}) => {
   const phoneRef = useRef<any>();
-  const {colors, theme} = actualTheme();
+  const {colors, theme, dark} = actualTheme();
   const {t} = useTranslation();
+  const [activeTab, setActiveTab] = useState(2);
+  const windowWidth = Dimensions.get('window').width;
   const {
     myCurrentLocation,
     setCurrentButtonAction,
@@ -46,14 +55,16 @@ const AdminForm = ({type}: {type: RegisterType}) => {
     emailValidate
   } = adminFormHook(type, phoneRef);
 
+  console.log('activeTab', activeTab);
+
   return isLoadingForm ? (
     <CustomLoadingOverlay visible={isLoadingForm} />
   ) : countryCode && (countryCode != undefined || countryCode != '') ? (
     <View>
       <CustomBanner
         visible={true}
-        text={t('registerView.banner')}
-        icon="sitemap"
+        text={`${t('registerView.banner')} ${t('drawer.users')}!`}
+        icon="account-group"
       />
       <CustomDialogAlert
         visible={alertUserExist}
@@ -77,25 +88,56 @@ const AdminForm = ({type}: {type: RegisterType}) => {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={{flex: 1}}>
+        <View style={registerStyles.tabContainer}>
+          <TouchableOpacity
+            style={[
+              activeTab === 2
+                ? [
+                    registerStyles.activeButton,
+                    {
+                      borderBottomColor: dark
+                        ? colors.surface
+                        : colors.onPrimaryContainer,
+                      backgroundColor: dark
+                        ? colors.inversePrimary
+                        : colors.primaryContainer,
+                      shadowColor: colors.elevation.level3
+                    }
+                  ]
+                : [registerStyles.inactiveButton],
+              {width: (windowWidth / 2) * 0.96}
+            ]}
+            onPress={() => setActiveTab(2)}>
+            <Text>{t('adminFormView.newGroup')}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              activeTab === 3
+                ? [
+                    registerStyles.activeButton,
+                    {
+                      borderBottomColor: dark
+                        ? colors.surface
+                        : colors.onPrimaryContainer,
+                      backgroundColor: dark
+                        ? colors.inversePrimary
+                        : colors.primaryContainer,
+                      shadowColor: colors.elevation.level3
+                    }
+                  ]
+                : [registerStyles.inactiveButton],
+              {width: (windowWidth / 2) * 0.96}
+            ]}
+            onPress={() => setActiveTab(3)}>
+            <Text>{t('adminFormView.existentGroup')}</Text>
+          </TouchableOpacity>
+        </View>
         <ScrollView
           style={registerStyles.body}
           showsVerticalScrollIndicator={false}>
-          <CustomInputForm
-            phoneRef={phoneRef}
-            setButtonAction={setCurrentButtonAction}
-            type="phone"
-            value={value ?? undefined}
-            code={countryCode}
-            isDisabled
-            isRegister
-          />
           {type === 'residence' && (
             <Fragment>
-              {errorPhone && (
-                <View style={{paddingTop: 40}}>
-                  <ErrorInputForm error={t('loginView.errorPhone')} />
-                </View>
-              )}
+              <Text style={{marginTop: 10}}>Your group data:</Text>
               <TextInput
                 label={t('adminFormView.group')}
                 style={registerStyles.input}
@@ -107,12 +149,15 @@ const AdminForm = ({type}: {type: RegisterType}) => {
                 onChangeText={text =>
                   onChangeInput(text as never, 'group_number' as DataKey)
                 }
+                disabled={activeTab == 2 ? true : false}
                 onBlur={() => {
-                  setIsNotSubmit(true);
-                  !codeAutogenerated &&
-                    user?.group_number != '' &&
-                    searchGroup();
-                  setCodeAutogenerated(false);
+                  if (activeTab == 3) {
+                    setIsNotSubmit(true);
+                    !codeAutogenerated &&
+                      user?.group_number != '' &&
+                      searchGroup();
+                    setCodeAutogenerated(false);
+                  }
                 }}
                 left={
                   <TextInput.Icon
@@ -127,19 +172,21 @@ const AdminForm = ({type}: {type: RegisterType}) => {
                   />
                 }
                 right={
-                  <TextInput.Icon
-                    icon={() => (
-                      <CustomIcon
-                        name={'refresh'}
-                        color={colors.secondary}
-                        font={'awesome'}
-                      />
-                    )}
-                    onPress={generateGroupCode}
-                  />
+                  activeTab == 2 && (
+                    <TextInput.Icon
+                      icon={() => (
+                        <CustomIcon
+                          name={'refresh'}
+                          color={colors.onPrimaryContainer}
+                          font={'awesome'}
+                        />
+                      )}
+                      onPress={generateGroupCode}
+                    />
+                  )
                 }
               />
-              {alertGroupFound && (
+              {activeTab == 3 && alertGroupFound && (
                 <ErrorInputForm
                   error={t('adminFormView.alertGroupFoundTitle')}
                   marginTop={0}
@@ -156,6 +203,7 @@ const AdminForm = ({type}: {type: RegisterType}) => {
                 onChangeText={text =>
                   onChangeInput(text as never, 'group_name' as DataKey)
                 }
+                disabled={activeTab == 3 ? true : false}
                 left={
                   <TextInput.Icon
                     icon={() => (
@@ -171,7 +219,23 @@ const AdminForm = ({type}: {type: RegisterType}) => {
               />
             </Fragment>
           )}
-
+          <View style={{marginVertical: 15}}>
+            <CustomInputForm
+              phoneRef={phoneRef}
+              setButtonAction={setCurrentButtonAction}
+              type="phone"
+              value={value ?? undefined}
+              code={countryCode}
+              isDisabled
+              isRegister
+            />
+          </View>
+          {errorPhone && (
+            <View style={{paddingTop: 40}}>
+              <ErrorInputForm error={t('loginView.errorPhone')} />
+            </View>
+          )}
+          <Text style={{marginTop: 10}}>Your personal data:</Text>
           <TextInput
             label={t('adminFormView.names')}
             style={registerStyles.input}

@@ -38,5 +38,32 @@ export const registerStyles = StyleSheet.create({
     width: '100%',
     marginHorizontal: 20,
     position: 'relative'
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height: 50
+  },
+  activeButton: {
+    borderBottomWidth: 1,
+    padding: 10,
+    marginHorizontal: 2,
+    alignItems: 'center',
+    borderRadius: 4,
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2 // Android
+  },
+  inactiveButton: {
+    padding: 10,
+    marginHorizontal: 2,
+    alignItems: 'center',
+    backgroundColor: 'rgba(245, 40, 145, 0.05)',
+    borderRadius: 4
   }
 });

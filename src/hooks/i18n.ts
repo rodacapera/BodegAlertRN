@@ -80,16 +80,18 @@ i18n.use(initReactI18next).init({
           state: 'State',
           aliasName: 'Alias',
           group: 'Group No',
-          groupAlias: 'Alias group',
-          placeHolderAliasGroup: 'My residential complex',
+          groupAlias: 'Group name',
+          placeHolderAliasGroup: 'My community name',
           alertGroupFoundTitle: 'Group not found',
           alertGroupFoundDescription:
             'The group code does not exist in our system. Please try again or create a new group if required.',
-          aliasPlaceHolder: 'Coffee shop/Unit 3 res 201'
+          aliasPlaceHolder: 'Coffee shop/Unit 3 res 201',
+          newGroup: 'NEW GROUP',
+          existentGroup: 'EXISTENT GROUP'
         },
         registerView: {
           banner:
-            'The group number is the number of your community, for example, a residential unit, an apartment complex, or a commercial complex. If you already have a group number, please enter it in the Group No field and do not generate a new one.',
+            'Remember to add your family group or group of employees to your account from the main menu in the option',
           titleCreateAccountAdmin: 'Create an account',
           titleCreateAccountUser: 'Join a registered account',
           errorUserRegisterTitle: 'Existing account',
@@ -288,16 +290,18 @@ i18n.use(initReactI18next).init({
           state: 'Estado',
           aliasName: 'Alias',
           group: 'Número de Grupo',
-          groupAlias: 'Alias de Grupo',
-          placeHolderAliasGroup: 'Mi complejo residencial',
+          groupAlias: 'Nombre de grupo',
+          placeHolderAliasGroup: 'Nombre de mi comunidad',
           alertGroupFoundTitle: 'Grupo no encontrado',
           alertGroupFoundDescription:
             'El código de grupo no existe en nuestro sistema. Por favor, inténtalo de nuevo o crea un nuevo grupo si es necesario.',
-          aliasPlaceHolder: 'Cafetería/Unidad 3 res 201'
+          aliasPlaceHolder: 'Cafetería/Unidad 3 res 201',
+          newGroup: 'NUEVO GRUPO',
+          existentGroup: 'GRUPO EXISTENTE'
         },
         registerView: {
           banner:
-            'El número de grupo es el número de tu comunidad, por ejemplo, una unidad residencial, un complejo de apartamentos o un complejo comercial. Si ya tienes un número de grupo, ingrésalo en el campo de Número de Grupo y no generes uno nuevo.',
+            'Recuerda agregar tus usuarios o empleados desde el menú principal en la opciónRecuerda agregar a tu cuenta tu grupo familiar o grupo de empleados desde el menú principal en la opción',
           titleCreateAccountAdmin: 'Crear una cuenta',
           titleCreateAccountUser: 'Unirse a una cuenta registrada',
           errorUserRegisterTitle: 'Cuenta existente',
@@ -496,16 +500,18 @@ i18n.use(initReactI18next).init({
           state: 'Stato',
           aliasName: 'Alias',
           group: 'Numero di Gruppo',
-          groupAlias: 'Alias di Gruppo',
-          placeHolderAliasGroup: 'Il mio complesso residenziale',
+          groupAlias: 'Nome del gruppo',
+          placeHolderAliasGroup: 'Nome della mia comunità',
           alertGroupFoundTitle: 'Gruppo non trovato',
           alertGroupFoundDescription:
             'Il codice del gruppo non esiste nel nostro sistema. Per favore, riprova o crea un nuovo gruppo se necessario.',
-          aliasPlaceHolder: 'Caffetteria/Unità 3 res 201'
+          aliasPlaceHolder: 'Caffetteria/Unità 3 res 201',
+          newGroup: 'NUOVO GRUPPO',
+          existentGroup: 'GRUPPO ESISTENTE'
         },
         registerView: {
           banner:
-            "Il numero del gruppo è il numero della tua comunità, ad esempio, un'unità residenziale, un complesso di appartamenti o un complesso commerciale. Se hai già un numero di gruppo, inseriscilo nel campo Numero di Gruppo e non generare un nuovo numero.",
+            "Ricordatevi di aggiungere il vostro gruppo familiare o il gruppo di dipendenti al vostro account dal menu principale nell'opzione",
           titleCreateAccountAdmin: 'Crea un account',
           titleCreateAccountUser: 'Unisciti a un account registrato',
           errorUserRegisterTitle: 'Account esistente',
@@ -704,16 +710,18 @@ i18n.use(initReactI18next).init({
           state: 'Estado',
           aliasName: 'Apelido',
           group: 'Número do Grupo',
-          groupAlias: 'Alias de Grupo',
-          placeHolderAliasGroup: 'Meu complexo residencial',
+          groupAlias: 'Nome do grupo',
+          placeHolderAliasGroup: 'Nome da minha comunidade',
           alertGroupFoundTitle: 'Grupo não encontrado',
           alertGroupFoundDescription:
             'O código do grupo não existe em nosso sistema. Por favor, tente novamente ou crie um novo grupo, se necessário.',
-          aliasPlaceHolder: 'Cafeteria/Unidade 3 res 201'
+          aliasPlaceHolder: 'Cafeteria/Unidade 3 res 201',
+          newGroup: 'NOVO GRUPO',
+          existentGroup: 'GRUPO EXISTENTE'
         },
         registerView: {
           banner:
-            'O número do grupo é o número da sua comunidade, por exemplo, uma unidade residencial, um complexo de apartamentos ou um complexo comercial. Se você já tiver um número de grupo, insira-o no campo Número do Grupo e não gere um novo.',
+            'Não se esqueça de adicionar o seu grupo familiar ou grupo de empregados à sua conta a partir do menu principal na opção',
           titleCreateAccountAdmin: 'Criar uma conta',
           titleCreateAccountUser: 'Junte-se a uma conta registrada',
           errorUserRegisterTitle: 'Conta existente',
@@ -911,16 +919,18 @@ i18n.use(initReactI18next).init({
           state: 'État',
           aliasName: 'Alias',
           group: 'Numéro de groupe',
-          groupAlias: 'Alias de groupe',
-          placeHolderAliasGroup: 'Mon complexe résidentiel',
+          groupAlias: 'Nom du groupe',
+          placeHolderAliasGroup: 'Nom de ma communauté',
           alertGroupFoundTitle: 'Groupe introuvable',
           alertGroupFoundDescription:
             "Le code du groupe n'existe pas dans notre système. Veuillez réessayer ou créer un nouveau groupe si nécessaire.",
-          aliasPlaceHolder: 'Café/Unité 3 rés. 201'
+          aliasPlaceHolder: 'Café/Unité 3 rés. 201',
+          newGroup: 'NOUVEAU GROUPE',
+          existentGroup: 'GROUPE EXISTANT'
         },
         registerView: {
           banner:
-            "Le numéro de groupe correspond au numéro de votre communauté, par exemple, une unité résidentielle, un complexe d'appartements ou un complexe commercial. Si vous avez déjà un numéro de groupe, saisissez-le dans le champ Numéro de groupe et ne le générez pas à nouveau.",
+            "N'oubliez pas d'ajouter votre groupe familial ou votre groupe d'employés à votre compte à partir du menu principal dans l'option",
           titleCreateAccountAdmin: 'Créer un compte',
           titleCreateAccountUser: 'Rejoindre un compte enregistré',
           errorUserRegisterTitle: 'Compte existant',

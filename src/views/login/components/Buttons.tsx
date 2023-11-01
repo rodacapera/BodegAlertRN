@@ -3,9 +3,16 @@ import {actualTheme} from '@src/types/contextTypes';
 import {type StackNavigation} from '@src/types/globalTypes';
 import {LoginButtonsProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import {View, useColorScheme} from 'react-native';
-import {Button, Text} from 'react-native-paper';
+import {
+  TouchableHighlight,
+  TouchableOpacityBase,
+  TouchableWithoutFeedback,
+  View,
+  useColorScheme
+} from 'react-native';
+import {Button, Text, TouchableRipple} from 'react-native-paper';
 import {loginFormStyles} from '../styles/loginFormStyles';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Buttons = ({
   setButtonAction,
@@ -44,18 +51,20 @@ const Buttons = ({
           {t('loginView.scanButton')}
         </Button>
       </View>
-      <Button
-        mode="text"
-        textColor={dark ? colors.onSurface : colors.onSurface}
+
+      <TouchableOpacity
+        style={{
+          borderBottomWidth: 1,
+          borderBottomColor: dark ? colors.onSurface : colors.onPrimaryContainer
+        }}
         onPress={() => navigate('Register', {administrator: true, type})}>
         <Text
           style={{
-            borderBottomWidth: 1,
-            borderBottomColor: colors.onPrimaryContainer
+            color: dark ? colors.onSurface : colors.onSurface
           }}>
           {t('loginView.signUp')}
         </Text>
-      </Button>
+      </TouchableOpacity>
     </View>
   );
 };
