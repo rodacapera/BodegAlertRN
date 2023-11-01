@@ -168,7 +168,7 @@ i18n.use(initReactI18next).init({
           networkPass: 'Password',
           title: 'Select your network!',
           helperTitleQr:
-            '1. Turn on your button.\n2. On your phone, connect to the Wi-Fi network that starts with shellybutton1.\n3. Go back to this screen and select your Wi-Fi network from the list below.\n4. Follow the next steps.',
+            '1. Connect to power and turn on your button.\n2. On your phone, connect to the Wi-Fi network that starts with shellybutton1.\n3. Go back to this screen and select your Wi-Fi network from the list below.\n4. Follow the next steps.',
           helperFooterQrFirst: "Learn how it's done, click",
           internetError: 'Internet error, try again!',
           errorButtonExistTitle: 'Button found',
@@ -377,7 +377,7 @@ i18n.use(initReactI18next).init({
           networkPass: 'Contraseña',
           title: 'Selecciona tu red',
           helperTitleQr:
-            '1. Enciende tu botón.\n2. En tu teléfono, conéctate a la red Wi-Fi que comienza con shellybutton1.\n3. Vuelve a esta pantalla y selecciona tu red Wi-Fi de la lista de abajo.\n4. Sigue los siguientes pasos.',
+            '1. Conecta a la corriente y enciende tu botón.\n2. En tu teléfono, conéctate a la red Wi-Fi que comienza con shellybutton1.\n3. Vuelve a esta pantalla y selecciona tu red Wi-Fi de la lista de abajo.\n4. Sigue los siguientes pasos.',
           helperFooterQrFirst: 'Aprende cómo se hace, haz clic',
           internetError: 'Error de Internet, ¡inténtalo de nuevo!',
           errorButtonExistTitle: 'Botón encontrado',
@@ -584,7 +584,7 @@ i18n.use(initReactI18next).init({
           networkPass: 'Password',
           title: 'Seleziona la tua rete',
           helperTitleQr:
-            "1. Accendi il tuo pulsante.\n2. Sul tuo telefono, collegati alla rete Wi-Fi che inizia con shellybutton1.\n3. Torna a questa schermata e seleziona la tua rete Wi-Fi dall'elenco sottostante.\n4. Segui i passaggi successivi.",
+            "1. Collegare all'alimentazione e accendere il tuo pulsante.\n2. Sul tuo telefono, collegati alla rete Wi-Fi che inizia con shellybutton1.\n3. Torna a questa schermata e seleziona la tua rete Wi-Fi dall'elenco sottostante.\n4. Segui i passaggi successivi.",
           helperFooterQrFirst: 'Scopri come si fa, fai clic',
           internetError: 'Errore di Internet, riprova!',
           errorButtonExistTitle: 'Pulsante trovato',
@@ -792,7 +792,7 @@ i18n.use(initReactI18next).init({
           networkPass: 'Senha',
           title: 'Selecione sua rede!',
           helperTitleQr:
-            '1. Ligue o seu botão.\n2. No seu telefone, conecte-se à rede Wi-Fi que começa com shellybutton1.\n3. Volte para esta tela e selecione sua rede Wi-Fi na lista abaixo.\n4. Siga os próximos passos.',
+            '1. Ligar à corrente eléctrica e ligar o seu botão.\n2. No seu telefone, conecte-se à rede Wi-Fi que começa com shellybutton1.\n3. Volte para esta tela e selecione sua rede Wi-Fi na lista abaixo.\n4. Siga os próximos passos.',
           helperFooterQrFirst: 'Saiba como fazer, clique',
           internetError: 'Erro de Internet, tente novamente!',
           errorButtonExistTitle: 'Botão encontrado',
@@ -999,7 +999,7 @@ i18n.use(initReactI18next).init({
           networkPass: 'Mot de passe',
           title: 'Sélectionnez votre réseau !',
           helperTitleQr:
-            '1. Allumez votre bouton.\n2. Sur votre téléphone, connectez-vous au réseau Wi-Fi commençant par shellybutton1.\n3. Revenez à cet écran et sélectionnez votre réseau Wi-Fi dans la liste ci-dessous.\n4. Suivez les étapes suivantes.',
+            "1. Connecter à l'alimentation et mettre en marche votre bouton.\n2. Sur votre téléphone, connectez-vous au réseau Wi-Fi commençant par shellybutton1.\n3. Revenez à cet écran et sélectionnez votre réseau Wi-Fi dans la liste ci-dessous.\n4. Suivez les étapes suivantes.",
           helperFooterQrFirst: 'Découvrez comment faire, cliquez',
           internetError: 'Erreur Internet, réessayez !',
           errorButtonExistTitle: 'Bouton trouvé',

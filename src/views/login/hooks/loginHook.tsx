@@ -47,9 +47,9 @@ const loginHook = (data?: User) => {
           setErrorUserNotExist(false);
         }
       });
-      setTimeout(() => {
-        setErrorUserNotExist(false);
-      }, 5000);
+      // setTimeout(() => {
+      setErrorUserNotExist(false);
+      // }, 5000);
     } else {
       setErrorPhone(true);
     }

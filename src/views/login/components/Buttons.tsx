@@ -4,7 +4,7 @@ import {type StackNavigation} from '@src/types/globalTypes';
 import {LoginButtonsProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
 import {View, useColorScheme} from 'react-native';
-import {Button} from 'react-native-paper';
+import {Button, Text} from 'react-native-paper';
 import {loginFormStyles} from '../styles/loginFormStyles';
 
 const Buttons = ({
@@ -48,7 +48,13 @@ const Buttons = ({
         mode="text"
         textColor={dark ? colors.onSurface : colors.onSurface}
         onPress={() => navigate('Register', {administrator: true, type})}>
-        {t('loginView.signUp')}
+        <Text
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: colors.onPrimaryContainer
+          }}>
+          {t('loginView.signUp')}
+        </Text>
       </Button>
     </View>
   );

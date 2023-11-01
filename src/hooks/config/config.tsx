@@ -5,6 +5,7 @@ import {getConfigurationFirebase} from '../firebase/config/config';
 import {getLocation} from '../locations/geocoderHook';
 import {Platform} from 'react-native';
 import {requestLocationPermission} from '../locations/permissionsHook';
+import Geolocation from 'react-native-geolocation-service';
 
 const config = () => {
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
@@ -38,7 +39,9 @@ const config = () => {
     if (Platform.OS === 'android') {
       grantedPermissionAndroid();
     } else {
-      getLocation(setMyCurrentLocation);
+      Geolocation.requestAuthorization('whenInUse').then(result => {
+        getLocation(setMyCurrentLocation);
+      });
     }
   }, []);
 

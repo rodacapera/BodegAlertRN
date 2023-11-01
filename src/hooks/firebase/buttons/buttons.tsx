@@ -6,7 +6,7 @@ export const getButtonsFirebase = (shop: string) => {
   const shopDocRef = firestore().doc(shop);
   const dbPanics = firestore()
     .collection('buttons')
-    .where('shop', '>=', shopDocRef);
+    .where('shop', '==', shopDocRef);
   return dbPanics;
 };
 

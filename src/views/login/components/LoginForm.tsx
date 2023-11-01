@@ -17,7 +17,6 @@ const LoginForm = ({
   errorUserNotExist,
   countryCode
 }: LoginFormProps) => {
-  const colorScheme = useColorScheme();
   const phoneRef = useRef<any>();
   const {colors, dark} = actualTheme();
 
