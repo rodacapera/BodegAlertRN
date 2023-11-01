@@ -79,25 +79,10 @@ const OtpCode = ({
                   : colors.onPrimaryContainer
             },
             pinCodeContainerStyle: {
-              borderColor:
-                colorScheme === 'dark'
-                  ? Platform.OS == 'android'
-                    ? '#757470'
-                    : colors.surface
-                  : dark
-                  ? colors.onSurface
-                  : colors.onPrimaryContainer
+              borderColor: dark ? colors.onSurface : colors.onPrimaryContainer
             }
           }}
-          focusColor={
-            colorScheme === 'dark'
-              ? Platform.OS == 'android'
-                ? '#757470'
-                : colors.surface
-              : dark
-              ? colors.onSurface
-              : colors.onPrimaryContainer
-          }
+          focusColor={dark ? colors.onSurface : colors.onPrimaryContainer}
           onTextChange={(text: string) => handleChange(text, inputRef, setCode)}
           focusStickBlinkingDuration={500}
         />
@@ -106,12 +91,7 @@ const OtpCode = ({
             style={[
               otpStyles.errorOtp,
               {
-                color:
-                  colorScheme === 'dark'
-                    ? colors.surface
-                    : dark
-                    ? colors.onSurface
-                    : colors.error
+                color: dark ? colors.onSurface : colors.error
               }
             ]}>
             {t('otp.error')}
@@ -125,29 +105,17 @@ const OtpCode = ({
             sendOtpCode && (
               <Text
                 style={{
-                  color:
-                    colorScheme == 'dark'
-                      ? colors.surface
-                      : dark
-                      ? colors.onSurface
-                      : colors.onPrimaryContainer
+                  color: dark ? colors.onSurface : colors.onPrimaryContainer
                 }}>
                 {counter}
               </Text>
             )
           }
           style={{
-            backgroundColor: !sendOtpCode
-              ? colorScheme == 'dark'
-                ? colors.surface
-                : dark
+            backgroundColor:
+              !sendOtpCode && dark
                 ? colors.onSurfaceDisabled
                 : colors.elevation.level1
-              : colorScheme == 'dark'
-              ? colors.elevation.level0
-              : dark
-              ? colors.onSurfaceDisabled
-              : colors.elevation.level1
           }}
           theme={{
             colors: {

@@ -50,7 +50,7 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
           setButtonAction={setCurrentButtonAction}
           type="phone"
           value={
-            user?.phone && user?.phone != ''
+            user && user.phone && user.phone != ''
               ? user.phone.slice(user?.countryCode.length + 1)
               : undefined
           }

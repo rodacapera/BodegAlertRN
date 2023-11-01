@@ -30,8 +30,8 @@ const homeHook = () => {
   const [appVersion, setAppVersion] = useState<boolean>();
   const [markerTitle, setMarkerTitle] = useState<string>();
   const [markerBody, setMarkerBody] = useState<string>();
-  const [currentMarkerIcon, setCurrentMarkerIcon] = useState<ImageURISource>();
-  const [panicsMarkerIcon, setPanicsMarkerIcon] = useState<ImageURISource>();
+  const [currentMarkerIcon, setCurrentMarkerIcon] = useState();
+  const [panicsMarkerIcon, setPanicsMarkerIcon] = useState();
   const appVersionBd =
     Platform.OS == 'ios'
       ? configuration?.versionIOS
@@ -88,7 +88,6 @@ const homeHook = () => {
           ? familyPanic.body
           : user?.address
         : user?.address;
-
     const currentIcon =
       user?.type === 'residence' ? (familyPanic ? family_help : home) : bike;
 

@@ -32,12 +32,7 @@ const LoginForm = ({
         variant="titleLarge"
         style={{
           margin: 20,
-          color:
-            colorScheme == 'dark'
-              ? colors.surface
-              : dark
-              ? colors.onSurface
-              : colors.onPrimaryContainer
+          color: dark ? colors.onSurface : colors.onPrimaryContainer
         }}>
         {t('loginView.title')}
       </Text>

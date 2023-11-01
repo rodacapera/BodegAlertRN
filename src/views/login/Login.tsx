@@ -41,14 +41,7 @@ const Login = ({route, navigation}: LoginProps) => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <View
-        style={[
-          loginFormStyles.loginContent,
-          {
-            backgroundColor:
-              colorScheme == 'dark' ? colors.onBackground : colors.background
-          }
-        ]}>
+      <View style={[loginFormStyles.loginContent]}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={{flex: 1}}>
@@ -78,16 +71,7 @@ const Login = ({route, navigation}: LoginProps) => {
           </View>
           {countryCode ? (
             <ScrollView>
-              <View
-                style={[
-                  loginFormStyles.loginBody,
-                  {
-                    backgroundColor:
-                      colorScheme == 'dark'
-                        ? colors.onBackground
-                        : colors.background
-                  }
-                ]}>
+              <View style={[loginFormStyles.loginBody]}>
                 {!params?.qr && !buttonAction.logged ? (
                   countryCode ? (
                     <LoginForm

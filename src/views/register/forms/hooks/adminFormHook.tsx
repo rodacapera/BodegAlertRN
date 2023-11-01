@@ -206,7 +206,7 @@ const adminFormHook = (type: RegisterType, phoneRef: any) => {
       setUser(newCurrentUser);
       setCountryCode(myCurrentLocation.country.short_name.toLowerCase());
     } else {
-      if (user && user.phone != '') {
+      if (user && user.phone && user.phone != '') {
         const newPhone = user.phone.slice(
           currentButtonAction.countryCodeSize + 1
         );
@@ -239,7 +239,6 @@ const adminFormHook = (type: RegisterType, phoneRef: any) => {
         setAlertGroupFound(false);
         // }, 2000);
       } else {
-        console.log('oooooo');
         setGroupFound(false);
         setAlertGroupFound(true);
         // userClone.group_name = '';

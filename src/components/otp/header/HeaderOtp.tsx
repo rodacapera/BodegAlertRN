@@ -24,13 +24,7 @@ const HeaderOtp = ({
         {counter === 60 && (
           <Button
             icon="arrow-left"
-            textColor={
-              colorScheme === 'dark'
-                ? colors.surface
-                : dark
-                ? colors.onSurface
-                : colors.onPrimaryContainer
-            }
+            textColor={dark ? colors.onSurface : colors.onPrimaryContainer}
             style={{backgroundColor: 'transparent'}}
             theme={theme}
             mode="text"
@@ -46,12 +40,7 @@ const HeaderOtp = ({
           style={[
             otpStyles.titleOtp,
             {
-              color:
-                colorScheme === 'dark'
-                  ? colors.surface
-                  : dark
-                  ? colors.onSurface
-                  : colors.outline
+              color: dark ? colors.onSurface : colors.outline
             }
           ]}>
           {t('otp.title')} {'\n'}
@@ -60,12 +49,7 @@ const HeaderOtp = ({
           style={[
             otpStyles.subTitleOtp,
             {
-              color:
-                colorScheme === 'dark'
-                  ? colors.surface
-                  : dark
-                  ? colors.onSurface
-                  : colors.outline
+              color: dark ? colors.onSurface : colors.outline
             }
           ]}>
           {t('otp.subTitle')}

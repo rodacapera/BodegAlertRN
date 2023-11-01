@@ -46,9 +46,6 @@ const AdminForm = ({type}: {type: RegisterType}) => {
     emailValidate
   } = adminFormHook(type, phoneRef);
 
-  console.log('isNotSubmit', isNotSubmit);
-  console.log('alertGroupFound', alertGroupFound);
-
   return isLoadingForm ? (
     <CustomLoadingOverlay visible={isLoadingForm} />
   ) : countryCode && (countryCode != undefined || countryCode != '') ? (

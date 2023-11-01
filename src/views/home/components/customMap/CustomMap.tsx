@@ -61,9 +61,14 @@ const CustomMap = () => {
           style={homeStyles.map}
           region={region ?? fakePosition}
           customMapStyle={dark ? mapStyleDark : mapStyleLight}>
-          <Marker coordinate={region} style={{width: 400}}>
-            <Image source={currentMarkerIcon} />
-            <CalloutBadge title={markerTitle} body={markerBody} />
+          <Marker
+            coordinate={region}
+            title={markerTitle}
+            description={markerBody}
+            image={currentMarkerIcon}
+            style={{maxWidth: 400}}>
+            {/* <Image source={currentMarkerIcon} /> */}
+            {/* <CalloutBadge title={markerTitle} body={markerBody} /> */}
           </Marker>
           {panicsMarkerIcon &&
             panics.map((marker, index) => {
@@ -73,9 +78,13 @@ const CustomMap = () => {
                   <Marker
                     key={index}
                     coordinate={marker.my_location}
-                    style={{width: 400}}>
-                    <Image source={panicsMarkerIcon} />
-                    <CalloutBadge title={marker.title} body={marker.body} />
+                    title={marker.title}
+                    description={marker.body}
+                    image={panicsMarkerIcon}
+                    // style={{width: 400}}
+                  >
+                    {/* <Image source={panicsMarkerIcon} /> */}
+                    {/* <CalloutBadge title={marker.title} body={marker.body} /> */}
                   </Marker>
                 )
               );

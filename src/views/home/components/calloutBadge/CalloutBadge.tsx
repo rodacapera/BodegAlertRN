@@ -7,7 +7,7 @@ const CalloutBadge = ({title, body}: {title: string; body: string}) => {
   const {dark, colors} = actualTheme();
   const textColor = dark ? colors.background : colors.onSurface;
   return (
-    <Callout style={{maxWidth: 300}}>
+    <Callout>
       <View>
         <Text style={{fontWeight: 'bold', color: textColor}}>{title}</Text>
         <Text style={{color: textColor}}>{body}</Text>

@@ -76,13 +76,13 @@ const CustomInputForm = ({
               phoneRef.current = ref;
             }}
             textStyle={{
-              color: colorScheme == 'dark' ? colors.surface : colors.onSurface
+              color: colorScheme == 'dark' ? colors.onSurface : colors.onSurface
             }}
             pickerBackgroundColor={colors.background}
             cancelTextStyle={{color: colors.onSecondaryContainer}}
             confirmTextStyle={{color: colors.onSecondaryContainer}}
             pickerItemStyle={{
-              color: colorScheme == 'dark' ? colors.surface : colors.onSurface
+              color: colorScheme == 'dark' ? colors.onSurface : colors.onSurface
             }}
             initialCountry={code}
             disabled={isDisabled}
@@ -103,12 +103,11 @@ const CustomInputForm = ({
         underlineStyle={{
           backgroundColor: 'transparent'
         }}
-        textColor={colorScheme == 'dark' ? colors.surface : colors.onSurface}
+        textColor={colors.onSurface} //ok on profile
         theme={{
           colors: {
-            primary: colorScheme == 'dark' ? colors.surface : colors.error,
-            onSurfaceVariant:
-              colorScheme == 'dark' ? colors.surface : colors.onSurface
+            primary: colors.error,
+            onSurfaceVariant: colors.onSurface
           }
         }}
         onFocus={() => setFocusPhone(true)}
