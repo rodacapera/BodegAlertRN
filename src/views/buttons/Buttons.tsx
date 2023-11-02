@@ -18,7 +18,7 @@ import {Text} from 'react-native-paper';
 import {actualTheme} from '@src/types/contextTypes';
 
 const Buttons = ({navigation, route}: ButtonsProps) => {
-  const {colors, theme, dark} = actualTheme();
+  const {colors} = actualTheme();
   const {
     alertVisible,
     setAlertVisible,
@@ -59,7 +59,7 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
                 alignItems: 'center',
                 width: '100%'
               }}>
-              {buttons.length == 0 && <ButtonsNotFound user={user} />}
+              {buttons.length == 0 && <ButtonsNotFound />}
               {buttons.map((value, index) => (
                 <SimpleRemoveItemCards
                   titleCard={`${t('buttonsView.button')}: ${index + 1}`}

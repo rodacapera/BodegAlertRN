@@ -15,7 +15,7 @@ const Header = ({visible}: {visible: boolean}) => {
         style={[
           buttonsModalStyles.title,
           {
-            color: colors.onSurface
+            color: colors.onSurfaceVariant
           }
         ]}>
         {t('buttonsModal.helperTitleQr')}

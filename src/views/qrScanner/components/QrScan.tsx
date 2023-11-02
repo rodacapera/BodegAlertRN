@@ -28,7 +28,7 @@ const QrScan = () => {
           style={[
             qrScanStyles.centerText,
             {
-              color: colors.onSurface
+              color: colors.onSurfaceVariant
             }
           ]}>
           {t('qrScan.title')}
@@ -69,7 +69,7 @@ const QrScan = () => {
       }
       // cameraProps={{autoFocus: 'on', videoStabilizationMode: 'auto'}}
       cameraStyle={{
-        height: height * 0.7
+        height: height * 0.56
       }}
     />
   );

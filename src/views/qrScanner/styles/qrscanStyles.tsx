@@ -16,7 +16,7 @@ export const qrScanStyles = StyleSheet.create({
     fontSize: 18,
     paddingHorizontal: 30,
     paddingTop: 20,
-    fontWeight: 'bold',
+    fontWeight: '600',
     textAlign: 'center'
   },
   viewContainer: {

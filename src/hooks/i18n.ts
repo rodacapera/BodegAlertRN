@@ -114,7 +114,7 @@ i18n.use(initReactI18next).init({
         loginSplashView: {
           welcome: 'Welcome to',
           description:
-            'Remember that in BodegAlert, you will find an ally that will help you notify your entire community of the events in which you need attention from each one of them, making it easier for you to be more visible in those moments when you need it most.'
+            'Remember that in BodegAlert, you will find an ally that will help you notify your entire community of the events in which you need attention from some one of them, making it easier for you to be more visible in those moments when you need it most.'
         },
         onboarding: {
           titleOne: 'Do you have an emergency?',
@@ -157,7 +157,7 @@ i18n.use(initReactI18next).init({
         },
         qrModal: {
           helperTitleQr:
-            'Ask your collaborator to scan this code from their app to register for your shop or residence!',
+            'Ask your co-worker or relative  to scan this code from their app to register for your shop or residence!',
           helperFooterQrFirst: "Learn how it's done, click"
         },
         buttonsModal: {
@@ -170,7 +170,7 @@ i18n.use(initReactI18next).init({
           networkPass: 'Password',
           title: 'Select your network!',
           helperTitleQr:
-            '1. Connect to power and turn on your button.\n2. On your phone, connect to the Wi-Fi network that starts with shellybutton1.\n3. Go back to this screen and select your Wi-Fi network from the list below.\n4. Follow the next steps.',
+            '1. Connect to power and turn on \n    your button.\n\n2. On your phone, connect to the\n     Wi-Fi network that starts with\n     shellybutton1.\n\n3. Go back to this screen and\n     select your Wi-Fi network from\n     the list below.\n\n4. Follow the next steps.',
           helperFooterQrFirst: "Learn how it's done, click",
           internetError: 'Internet error, try again!',
           errorButtonExistTitle: 'Button found',
@@ -187,9 +187,9 @@ i18n.use(initReactI18next).init({
           alertDescriptionExitApp:
             'Are you sure you want to exit the application?',
           shareToVehicle:
-            "I'm sharing this application with you, which will help you request assistance from our community whenever you need it. To do so, you must install the application and register as a vehicle. This way, you can enjoy its services and join our community.",
+            "I'm sharing this application with you, which will support you request assistance from our community whenever you need it. To do so, you must install the application and register as a vehicle. This way, you can enjoy its services and join our community.",
           share:
-            "I'm sharing this application with you, which will help you request assistance from our community whenever you need it. To do so, you must install the application and register with the code I've attached. This way, you can enjoy its services and join our community.",
+            "I'm sharing this application with you, which will support you request assistance from our community whenever you need it. To do so, you must install the application and register with the code I've attached. This way, you can enjoy its services and join our community.",
           shareTitle: 'Hi, this app is great!',
           code: 'My group code is',
           link: 'The link'
@@ -206,7 +206,7 @@ i18n.use(initReactI18next).init({
         },
         qrScan: {
           title:
-            'Scan the QR and register your data to send your first support notification!'
+            'Scan the QR and enter your data to register as a co-worker or family member of your parent account and get your first attendance notification sent!'
         },
         network: {
           alertErrorTitle: 'Network Error',
@@ -367,7 +367,7 @@ i18n.use(initReactI18next).init({
         },
         qrModal: {
           helperTitleQr:
-            'Pide a tu colaborador que escanee este código desde su aplicación para registrarse en tu tienda o residencia.',
+            '¡Pide a tu compañero de trabajo o familiar que escanee este código desde su app para registrarse en tu tienda o residencia!',
           helperFooterQrFirst: 'Aprende cómo se hace, haz clic'
         },
         buttonsModal: {
@@ -417,7 +417,7 @@ i18n.use(initReactI18next).init({
         },
         qrScan: {
           title:
-            'Escanea el código QR y registra tus datos para enviar tu primera notificación de soporte.'
+            'Escana el QR e ingresa tus datos para registrarte como compañero de trabajo o familiar de tu cuenta padre y logra enviar primera notificación de asistencia!'
         },
         network: {
           alertErrorTitle: 'Error de Red',
@@ -577,7 +577,7 @@ i18n.use(initReactI18next).init({
         },
         qrModal: {
           helperTitleQr:
-            'Chiedi al tuo collaboratore di scansionare questo codice dalla sua app per registrarsi per il tuo negozio o residenza!',
+            'Chiedete al vostro collega o parente di scansionare questo codice dalla loro app per registrarsi al vostro negozio o alla vostra residenza!',
           helperFooterQrFirst: 'Scopri come si fa, fai clic'
         },
         buttonsModal: {
@@ -626,7 +626,7 @@ i18n.use(initReactI18next).init({
         },
         qrScan: {
           title:
-            'Scansiona il codice QR e registra i tuoi dati per inviare la tua prima notifica di supporto.'
+            'Scansiona il QR e inserisci i tuoi dati per registrarti come collaboratore o familiare del tuo account genitore e ricevere la prima notifica di presenza!'
         },
         network: {
           alertErrorTitle: 'Errore di Rete',
@@ -787,7 +787,7 @@ i18n.use(initReactI18next).init({
         },
         qrModal: {
           helperTitleQr:
-            'Peça ao seu colaborador para escanear este código com o aplicativo deles para se registrar na sua loja ou residência!',
+            'Peça ao seu colega de trabalho ou familiar para digitalizar este código a partir da sua aplicação para se registar na sua loja ou residência!',
           helperFooterQrFirst: 'Saiba como fazer, clique'
         },
         buttonsModal: {
@@ -836,7 +836,7 @@ i18n.use(initReactI18next).init({
         },
         qrScan: {
           title:
-            'Escanee o código QR e registre seus dados para enviar sua primeira notificação de suporte.'
+            'Digitalize o QR e introduza os seus dados para se registar como colega de trabalho ou familiar da sua conta principal e receba a sua primeira notificação de presença!'
         },
         network: {
           alertErrorTitle: 'Erro de Rede',
@@ -995,7 +995,7 @@ i18n.use(initReactI18next).init({
         },
         qrModal: {
           helperTitleQr:
-            "Demandez à votre collaborateur de scanner ce code depuis son application pour s'inscrire dans votre boutique ou résidence !",
+            "Demandez à votre collègue ou à un membre de votre famille de scanner ce code à partir de son application pour s'inscrire dans votre magasin ou votre résidence !",
           helperFooterQrFirst: 'Découvrez comment faire, cliquez'
         },
         buttonsModal: {
@@ -1045,7 +1045,7 @@ i18n.use(initReactI18next).init({
         },
         qrScan: {
           title:
-            'Numérisez le code QR et enregistrez vos données pour envoyer votre première notification de support.'
+            'Scannez le QR et entrez vos coordonnées pour vous inscrire en tant que collègue ou membre de la famille de votre compte parent et recevoir votre première notification de présence !'
         },
         network: {
           alertErrorTitle: 'Erreur de réseau',

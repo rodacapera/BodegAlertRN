@@ -32,7 +32,7 @@ export const buttonsModalStyles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 30,
     textAlign: 'left',
-    fontWeight: 'bold'
+    fontWeight: '600'
   },
   button: {
     borderColor: '#ccc',

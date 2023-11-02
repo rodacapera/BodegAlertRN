@@ -62,7 +62,7 @@ const LoginSplash = ({route}: LoginSplashProps) => {
           </View>
           <View style={[loginStyles.footer, {flex: width >= 768 ? 1 : 1}]}>
             <View style={loginStyles.buttonContainer}>
-              <Button
+              {/* <Button
                 style={loginStyles.button}
                 textColor="white"
                 buttonColor={
@@ -72,7 +72,7 @@ const LoginSplash = ({route}: LoginSplashProps) => {
                 mode="contained"
                 onPress={() => navigation.navigate('Login', {type: 'vehicle'})}>
                 {t('general.continueBike')}
-              </Button>
+              </Button> */}
               <Button
                 style={loginStyles.button}
                 textColor="white"

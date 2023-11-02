@@ -10,7 +10,6 @@ import {notifyStyles} from './styles/notifyStyles';
 
 export const Notify = () => {
   const {panics, setModalVisible, modalVisible} = notifyHook();
-
   return (
     <SafeAreaView style={backgroundStyle}>
       <CustomBanner
