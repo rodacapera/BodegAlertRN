@@ -13,7 +13,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  View
+  View,
+  useColorScheme
 } from 'react-native';
 import {Button, TextInput, Text} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
@@ -23,6 +24,7 @@ import ErrorInputForm from '@src/components/customErrorInputForm/CustomErrorInpu
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const AdminForm = ({type}: {type: RegisterType}) => {
+  const colorScheme = useColorScheme();
   const phoneRef = useRef<any>();
   const {colors, theme, dark} = actualTheme();
   const {t} = useTranslation();
@@ -54,8 +56,6 @@ const AdminForm = ({type}: {type: RegisterType}) => {
     setIsNotSubmit,
     emailValidate
   } = adminFormHook(type, phoneRef);
-
-  console.log('activeTab', activeTab);
 
   return isLoadingForm ? (
     <CustomLoadingOverlay visible={isLoadingForm} />
@@ -95,12 +95,18 @@ const AdminForm = ({type}: {type: RegisterType}) => {
                 ? [
                     registerStyles.activeButton,
                     {
-                      borderBottomColor: dark
-                        ? colors.surface
-                        : colors.onPrimaryContainer,
-                      backgroundColor: dark
-                        ? colors.inversePrimary
-                        : colors.primaryContainer,
+                      borderBottomColor:
+                        colorScheme == 'dark'
+                          ? colors.onPrimaryContainer
+                          : dark
+                          ? colors.surface
+                          : colors.onPrimaryContainer,
+                      backgroundColor:
+                        colorScheme == 'dark'
+                          ? colors.onPrimaryContainer
+                          : dark
+                          ? colors.inversePrimary
+                          : colors.onPrimaryContainer,
                       shadowColor: colors.elevation.level3
                     }
                   ]
@@ -108,7 +114,19 @@ const AdminForm = ({type}: {type: RegisterType}) => {
               {width: (windowWidth / 2) * 0.96}
             ]}
             onPress={() => setActiveTab(2)}>
-            <Text>{t('adminFormView.newGroup')}</Text>
+            <Text
+              style={{
+                color:
+                  activeTab === 2
+                    ? colorScheme == 'dark'
+                      ? colors.surface
+                      : dark
+                      ? colors.onSurface
+                      : colors.surface
+                    : colors.onSurfaceDisabled
+              }}>
+              {t('adminFormView.newGroup')}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
@@ -116,12 +134,18 @@ const AdminForm = ({type}: {type: RegisterType}) => {
                 ? [
                     registerStyles.activeButton,
                     {
-                      borderBottomColor: dark
-                        ? colors.surface
-                        : colors.onPrimaryContainer,
-                      backgroundColor: dark
-                        ? colors.inversePrimary
-                        : colors.primaryContainer,
+                      borderBottomColor:
+                        colorScheme == 'dark'
+                          ? colors.onPrimaryContainer
+                          : dark
+                          ? colors.surface
+                          : colors.onPrimaryContainer,
+                      backgroundColor:
+                        colorScheme == 'dark'
+                          ? colors.onPrimaryContainer
+                          : dark
+                          ? colors.inversePrimary
+                          : colors.onPrimaryContainer,
                       shadowColor: colors.elevation.level3
                     }
                   ]
@@ -129,7 +153,19 @@ const AdminForm = ({type}: {type: RegisterType}) => {
               {width: (windowWidth / 2) * 0.96}
             ]}
             onPress={() => setActiveTab(3)}>
-            <Text>{t('adminFormView.existentGroup')}</Text>
+            <Text
+              style={{
+                color:
+                  activeTab === 3
+                    ? colorScheme == 'dark'
+                      ? colors.surface
+                      : dark
+                      ? colors.onSurface
+                      : colors.surface
+                    : colors.onSurfaceDisabled
+              }}>
+              {t('adminFormView.existentGroup')}
+            </Text>
           </TouchableOpacity>
         </View>
         <ScrollView
@@ -137,7 +173,9 @@ const AdminForm = ({type}: {type: RegisterType}) => {
           showsVerticalScrollIndicator={false}>
           {type === 'residence' && (
             <Fragment>
-              <Text style={{marginTop: 10}}>Your group data:</Text>
+              <Text style={{marginTop: 10, color: colors.onSurface}}>
+                Your group data:
+              </Text>
               <TextInput
                 label={t('adminFormView.group')}
                 style={registerStyles.input}
@@ -235,7 +273,9 @@ const AdminForm = ({type}: {type: RegisterType}) => {
               <ErrorInputForm error={t('loginView.errorPhone')} />
             </View>
           )}
-          <Text style={{marginTop: 10}}>Your personal data:</Text>
+          <Text style={{marginTop: 10, color: colors.onSurface}}>
+            Your personal data:
+          </Text>
           <TextInput
             label={t('adminFormView.names')}
             style={registerStyles.input}

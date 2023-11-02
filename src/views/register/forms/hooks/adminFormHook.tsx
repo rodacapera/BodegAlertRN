@@ -156,8 +156,6 @@ const adminFormHook = (type: RegisterType, phoneRef: any) => {
   };
 
   const validatePhoneNumber = (number: string) => {
-    console.log('number', number);
-
     const validate = validateRegEx(number);
     if (validate) {
       setErrorPhone(false);
@@ -202,7 +200,6 @@ const adminFormHook = (type: RegisterType, phoneRef: any) => {
         newCurrentUser.group_number = configuration.vehicle_code?.toString()!;
         newCurrentUser.group_name = t('general.vehicle');
       }
-      console.log('currentButtonAction?.show', currentButtonAction?.show);
 
       // currentButtonAction?.show &&
       currentButtonAction?.phone?.length > 3 &&

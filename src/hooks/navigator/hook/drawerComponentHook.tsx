@@ -115,7 +115,6 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     }
   }, [shopId]);
 
-  console.log('ssss');
   return {
     handleLogout,
     onToggleSwitch,
