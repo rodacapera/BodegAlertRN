@@ -72,7 +72,9 @@ const homeHook = () => {
     const familyPanic =
       panics.length > 0 &&
       panics.find(
-        val => val.phone !== user?.phone || val.name.includes('shellybutton1')
+        val =>
+          val.alias == user.alias &&
+          (val.phone !== user?.phone || val.name.includes('shellybutton1'))
       );
 
     const title =

@@ -12,9 +12,8 @@ import {homeHook} from '@src/views/home/hooks/homeHook';
 import {homeStyles} from '@src/views/home/styles/homeStyles';
 import {t} from 'i18next';
 import {Fragment, useRef} from 'react';
-import {BackHandler, Image, Linking, Platform, View} from 'react-native';
+import {BackHandler, Linking, Platform, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import CalloutBadge from '../calloutBadge/CalloutBadge';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
@@ -72,9 +71,12 @@ const CustomMap = () => {
           </Marker>
           {panicsMarkerIcon &&
             panics.map((marker, index) => {
-              return (
+              const showMarker =
                 marker.my_location.latitude != user?.location.lat &&
-                marker.my_location.longitude != user?.location.lng && (
+                marker.my_location.longitude != user?.location.lng;
+
+              return (
+                showMarker && (
                   <Marker
                     key={index}
                     coordinate={marker.my_location}
