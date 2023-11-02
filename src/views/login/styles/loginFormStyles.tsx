@@ -36,7 +36,8 @@ export const loginFormStyles = StyleSheet.create({
   phoneInputContainer: {
     height: 50,
     flexDirection: 'row',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    width: 280
   },
   loginButtonsContainer: {
     alignItems: 'center',
