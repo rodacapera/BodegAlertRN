@@ -122,7 +122,6 @@ export const handleValidateOtp = (
       );
     });
   };
-
   if (code.length === 6) {
     currentButtonAction.confirmation
       ?.confirm(code)
@@ -152,6 +151,9 @@ export const handleValidateOtp = (
         setErrorOtp(true);
         setIsLoadingValidateOtp(false);
       });
+  } else {
+    setErrorOtp(true);
+    setIsLoadingValidateOtp(false);
   }
 };
 
@@ -172,20 +174,6 @@ export const handleSendOtp = async (
 
 export const removeOtpCode = async () => {
   AsyncStorage.removeItem('@otp');
-};
-
-export const handleChange = (
-  text: any,
-  inputRef: any,
-  setCode: (e: string) => void
-) => {
-  if (!isNaN(text)) {
-    inputRef?.current?.setValue(text)!;
-    setCode(text);
-  } else {
-    const str = text.substring(0, text.length - 1);
-    inputRef?.current?.setValue(str);
-  }
 };
 
 export const timerCount = (

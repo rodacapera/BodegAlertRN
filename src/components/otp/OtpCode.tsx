@@ -1,6 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
 import {
-  handleChange,
   handleClear,
   handleSendOtp,
   handleValidateOtp
@@ -78,7 +77,7 @@ const OtpCode = ({
             }
           }}
           focusColor={dark ? colors.onSurface : colors.onPrimaryContainer}
-          onTextChange={(text: string) => handleChange(text, inputRef, setCode)}
+          onTextChange={text => setCode(text)}
           focusStickBlinkingDuration={500}
         />
         {errorOtp && (

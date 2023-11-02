@@ -1,5 +1,11 @@
 import {LoginFormAction} from '@src/types/loginTypes';
-import {useEffect, useRef, useState} from 'react';
+import {
+  MutableRefObject,
+  RefAttributes,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import {OtpInputRef} from 'react-native-otp-entry';
 import {getOtp, removeOtpCode, timerCount} from './otpFunctions';
 
