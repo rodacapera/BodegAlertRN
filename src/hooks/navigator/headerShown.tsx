@@ -20,9 +20,6 @@ export const headerShown = ({
       : 'front'
     : 'front';
 
-  console.log('visible', visible);
-  console.log('transparent', transparent);
-
   navigation.getParent()?.setOptions({
     headerShown: visible,
     headerTransparent: transparent,

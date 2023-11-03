@@ -17,10 +17,12 @@ export const registerStyles = StyleSheet.create({
     paddingHorizontal: 50
   },
   footer: {
-    marginVertical: 30
+    marginVertical: 30,
+    width: 280
   },
   contentFooterText: {
     display: 'flex',
+    // width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
