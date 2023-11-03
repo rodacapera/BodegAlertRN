@@ -70,13 +70,29 @@ const OtpCode = ({
           numberOfDigits={6}
           theme={{
             pinCodeTextStyle: {
-              color: dark ? colors.onSurface : colors.onPrimaryContainer
+              color:
+                colorScheme == 'dark'
+                  ? colors.onSurfaceVariant
+                  : dark
+                  ? colors.onSurface
+                  : colors.onPrimaryContainer
             },
             pinCodeContainerStyle: {
-              borderColor: dark ? colors.onSurface : colors.onPrimaryContainer
+              borderColor:
+                colorScheme == 'dark'
+                  ? colors.onSurfaceVariant
+                  : dark
+                  ? colors.onSurface
+                  : colors.onPrimaryContainer
             }
           }}
-          focusColor={dark ? colors.onSurface : colors.onPrimaryContainer}
+          focusColor={
+            colorScheme == 'dark'
+              ? colors.onSurfaceVariant
+              : dark
+              ? colors.onSurface
+              : colors.onPrimaryContainer
+          }
           onTextChange={text => setCode(text)}
           focusStickBlinkingDuration={500}
         />
