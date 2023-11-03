@@ -6,8 +6,7 @@ import {headerShown} from '@src/hooks/navigator/headerShown';
 import splashHook from '@src/hooks/splash/splashHook';
 import {actualTheme} from '@src/types/contextTypes';
 import {SplashProps, StackNavigation} from '@src/types/globalTypes';
-import {useEffect, useLayoutEffect} from 'react';
-import {useTranslation} from 'react-i18next';
+import {useEffect} from 'react';
 import {Image, StatusBar, View, useColorScheme} from 'react-native';
 import {Text} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -17,7 +16,6 @@ const Splash = ({route, navigation}: SplashProps) => {
   const {colors, theme, dark} = actualTheme();
   const navigator = useNavigation<StackNavigation>();
 
-  useLayoutEffect(() => {});
   useEffect(() => {
     setTimeout(() => {
       splashHook({route, navigation});

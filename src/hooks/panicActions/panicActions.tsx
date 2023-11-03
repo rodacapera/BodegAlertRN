@@ -12,7 +12,7 @@ import {t} from 'i18next';
 import {getAxios} from '../axios';
 import {getCurrentPosition} from '../locations/permissionsHook';
 import {headerShown} from '../navigator/headerShown';
-import {MD3Colors} from 'react-native-paper/lib/typescript/src/types';
+import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 
 const url = `${SERVER_PANIC_URL_PATH}${SERVER_PANIC_API_PUSH}`;
 

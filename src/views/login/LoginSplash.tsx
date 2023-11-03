@@ -27,7 +27,7 @@ const LoginSplash = ({route}: LoginSplashProps) => {
       visible: false,
       transparent: false
     });
-  });
+  }, []);
 
   return (
     <SafeAreaView style={backgroundStyle}>

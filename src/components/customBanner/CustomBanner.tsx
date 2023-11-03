@@ -2,14 +2,14 @@ import {actualTheme} from '@src/types/contextTypes';
 import {CustomBannerProps} from '@src/types/globalTypes';
 import {useColorScheme} from 'react-native';
 import {Banner} from 'react-native-paper';
-import {backgroundStyle} from '@src/globals/styles/screenMode';
 
 const CustomBanner = ({actions, visible, text, icon}: CustomBannerProps) => {
-  const {colors, dark, theme} = actualTheme();
+  const {colors, dark} = actualTheme();
   const colorScheme = useColorScheme();
   return (
     <Banner
       contentStyle={{
+        maxWidth: '100%',
         backgroundColor:
           colorScheme == 'dark'
             ? dark

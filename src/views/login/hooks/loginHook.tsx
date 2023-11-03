@@ -78,7 +78,7 @@ const loginHook = (data?: User) => {
         visible: false,
         transparent: false
       });
-  });
+  }, []);
 
   return {
     errorPhone,
