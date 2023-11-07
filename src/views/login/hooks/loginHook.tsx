@@ -12,7 +12,6 @@ import {t} from 'i18next';
 import {useEffect, useState} from 'react';
 
 const loginHook = (data?: User) => {
-  const configuration = config();
   const navigation = useNavigation<StackNavigation>();
   const [errorPhone, setErrorPhone] = useState(false);
   const [buttonAction, setButtonAction] = useState(buttonActionInitialState);
@@ -58,7 +57,7 @@ const loginHook = (data?: User) => {
   useEffect(() => {
     setTimeout(() => {
       setLoadingText(t('network.alertErrorTitle'));
-    }, 9000);
+    }, 20000);
     getLocation(setMyCurrentLocation);
   }, []);
 
@@ -90,7 +89,6 @@ const loginHook = (data?: User) => {
     validateRegEx,
     errorUserNotExist,
     setErrorUserNotExist,
-    configuration,
     countryCode: myCurrentLocation?.country.short_name.toLowerCase(),
     loadingText
   };

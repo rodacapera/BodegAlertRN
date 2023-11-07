@@ -34,7 +34,7 @@ export const setButtonsQuery = (buttons: Buttons[]) => {
   return query;
 };
 
-export const setCompanyImagesQuery = (userExist: User) => {
+export const setCompanyImagesQuery = () => {
   const query = useQuery({
     queryKey: ['companyImages'],
     queryFn: async () => {
@@ -43,8 +43,7 @@ export const setCompanyImagesQuery = (userExist: User) => {
         resultAuth &&
         ((await getCompanyImagesFirebase(resultAuth.user.city)) as Logos[])
       );
-    },
-    enabled: !!userExist
+    }
   });
   return query;
 };
@@ -60,7 +59,6 @@ export const setShopQuery = (doc: string | undefined) => {
 
 const dataSetUser = async (data?: User) => {
   const userAuth = await getUseAuth();
-
   if (userAuth) {
     const resultAuth = userAuth as SetUserAuthParams;
     const user = data ?? resultAuth.user;

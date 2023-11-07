@@ -1,8 +1,11 @@
+import {useNavigation} from '@react-navigation/native';
 import {login_background} from '@src/assets/images';
 import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
+import {headerShown} from '@src/hooks/navigator/headerShown';
 import {actualTheme} from '@src/types/contextTypes';
 import {LoginSplashProps, StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
+import {useLayoutEffect} from 'react';
 import {
   ImageBackground,
   SafeAreaView,
@@ -12,9 +15,6 @@ import {
 import {Button, Text} from 'react-native-paper';
 import {backgroundStyle} from '../../globals/styles/screenMode';
 import {loginStyles} from './styles/loginStyles';
-import {headerShown} from '@src/hooks/navigator/headerShown';
-import {useEffect, useLayoutEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
 
 const LoginSplash = ({route}: LoginSplashProps) => {
   const {width} = useWindowDimensions();

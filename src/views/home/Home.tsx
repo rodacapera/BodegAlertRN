@@ -1,9 +1,8 @@
-import {HomeProps} from '@src/types/globalTypes';
 import {View} from 'react-native';
 import CustomMap from './components/customMap/CustomMap';
 import {homeStyles} from './styles/homeStyles';
 
-const Home = ({navigation, route}: HomeProps) => {
+const Home = () => {
   return (
     <View style={homeStyles.container}>
       <CustomMap />

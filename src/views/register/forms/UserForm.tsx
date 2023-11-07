@@ -20,6 +20,7 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
   const {t} = useTranslation();
   const phoneRef = useRef<any>();
   const {colors, theme, dark} = actualTheme();
+
   const {
     user,
     setCurrentButtonAction,

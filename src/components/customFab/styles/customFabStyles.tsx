@@ -16,13 +16,13 @@ export const customFabStyles = StyleSheet.create({
   topRight: {
     position: 'absolute',
     margin: 16,
-    top: 0,
+    top: 30,
     right: 0
   },
   topLeft: {
     position: 'absolute',
     margin: 16,
-    top: 0,
+    top: 30,
     left: 0
   },
   topCenter: {

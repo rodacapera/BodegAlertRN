@@ -1,3 +1,4 @@
+import {emergency} from '../assets/images';
 export interface Configuration {
   countryCode: string;
   distance_panic: number;
@@ -12,6 +13,7 @@ export interface Configuration {
   videoLinks: VideoLinks;
   link_app: string;
   support_mail: string;
+  emergency: string;
 }
 
 export type VideoLinks = {

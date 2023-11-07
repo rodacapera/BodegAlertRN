@@ -1,33 +1,30 @@
+import {useNavigation} from '@react-navigation/native';
 import {login_background, logo_app} from '@src/assets/images';
+import ErrorInputForm from '@src/components/customErrorInputForm/CustomErrorInputForm';
+import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 import OtpCode from '@src/components/otp/OtpCode';
 import {APP_NAME} from '@src/globals/constants/config';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
+import {actualTheme} from '@src/types/contextTypes';
 import {LoginProps, StackNavigation} from '@src/types/globalTypes';
+import {t} from 'i18next';
 import {
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
   ScrollView,
-  View,
-  useColorScheme
+  View
 } from 'react-native';
 import {Avatar, Button, Text} from 'react-native-paper';
 import LoginForm from './components/LoginForm';
 import {loginHook} from './hooks/loginHook';
 import {loginFormStyles} from './styles/loginFormStyles';
-import {actualTheme} from '@src/types/contextTypes';
-import {useNavigation} from '@react-navigation/native';
-import {t} from 'i18next';
-import ErrorInputForm from '@src/components/customErrorInputForm/CustomErrorInputForm';
-import {Fragment} from 'react';
-import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 
 const Login = ({route, navigation}: LoginProps) => {
-  const colorScheme = useColorScheme();
   const params = route.params;
   const {goBack} = useNavigation<StackNavigation>();
-  const {theme, colors, dark} = actualTheme();
+  const {theme} = actualTheme();
   const {
     buttonAction,
     setButtonAction,

@@ -50,7 +50,7 @@ export const fakeMarkers = [
 ];
 
 export const userInitialData = {
-  user: undefined,
+  user: undefined as unknown as User,
   panicsObserver: undefined,
   employeesObserver: undefined,
   buttonsObserver: undefined

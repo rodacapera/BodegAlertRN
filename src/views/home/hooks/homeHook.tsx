@@ -1,16 +1,20 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {bike, bike_help, family_help, home, shop} from '@src/assets/images';
+import {config} from '@src/hooks/config/config';
 import {headerShown} from '@src/hooks/navigator/headerShown';
-import {useGetUser} from '@src/hooks/user/useGetUser';
 import {whatsapp} from '@src/hooks/whatsapp/whatsapp';
+import {getPanicsQuery} from '@src/reactQuery/notifyQuery';
+import {getUserQuery, setUserQuery} from '@src/reactQuery/userQuery';
+import {Configuration} from '@src/types/configuration';
+// import {setUserQuery} from '@src/reactQuery/userQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {HomeParams, StackNavigation} from '@src/types/globalTypes';
+import {Panics, User} from '@src/types/userTypes';
 import {t} from 'i18next';
 import {useEffect, useLayoutEffect, useState} from 'react';
 import {
   BackHandler,
-  ImageURISource,
   Platform,
   useColorScheme,
   useWindowDimensions
@@ -18,20 +22,28 @@ import {
 import {Region} from 'react-native-maps';
 
 const homeHook = () => {
+  // setUserQuery();
+  const route = useRoute();
   const {width} = useWindowDimensions();
+  const {colors, dark} = actualTheme();
   const colorScheme = useColorScheme();
-  const {user, panics, isLoading, configuration} = useGetUser();
+  const navigation = useNavigation<StackNavigation>();
+
+  const configuration = config() as Configuration;
+  const {isLoading, data} = getUserQuery();
+  const panics = getPanicsQuery().data as Panics[];
+
   const [region, setRegion] = useState<Region>();
   const [alertVisible, setAlertVisible] = useState(false);
-  const {colors, dark} = actualTheme();
-  const route = useRoute();
-  const params = route.params as HomeParams;
-  const navigation = useNavigation<StackNavigation>();
   const [appVersion, setAppVersion] = useState<boolean>();
   const [markerTitle, setMarkerTitle] = useState<string>();
   const [markerBody, setMarkerBody] = useState<string>();
   const [currentMarkerIcon, setCurrentMarkerIcon] = useState();
   const [panicsMarkerIcon, setPanicsMarkerIcon] = useState();
+
+  const user = data.user as User;
+  const params = route.params as HomeParams;
+
   const appVersionBd =
     Platform.OS == 'ios'
       ? configuration?.versionIOS
@@ -57,6 +69,8 @@ const homeHook = () => {
   };
 
   const setMyCurrentLocation = () => {
+    console.log('user', user);
+
     if (user?.location) {
       const shopLocation = {
         latitude: user?.location.lat!,
@@ -147,6 +161,7 @@ const homeHook = () => {
               : colors.onPrimaryContainer
             : colors.onPrimaryContainer
       });
+      // }
     } else {
       headerShown({
         width: width,
@@ -156,13 +171,12 @@ const homeHook = () => {
         titleColor: colors.onPrimaryContainer
       });
     }
-    !region && setMyCurrentLocation();
-    appVersionBd && checkVersion(appVersionBd);
-  }, [params, dark, user, region, appVersionBd]);
-
-  useEffect(() => {
-    panics && getCalloutText();
-  }, [panics]);
+    if (user) {
+      !region && setMyCurrentLocation();
+      !appVersion && appVersionBd && checkVersion(appVersionBd);
+      panics && getCalloutText();
+    }
+  }, [params, dark, region, appVersion, panics, user]);
 
   return {
     region,
@@ -178,7 +192,8 @@ const homeHook = () => {
     markerTitle,
     markerBody,
     currentMarkerIcon,
-    panicsMarkerIcon
+    panicsMarkerIcon,
+    configuration
   };
 };
 

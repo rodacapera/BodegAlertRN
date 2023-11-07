@@ -191,7 +191,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           label={t('drawer.support')}
           onPress={() => {
             Linking.openURL(
-              `mailto${configuration?.support_mail}?subject=${t(
+              `mailto:${configuration?.support_mail}?subject=${t(
                 'drawer.shareSubject'
               )}&body=${t('drawer.shareMessage')}`
             ).catch(err => console.debug('An error occured', err));

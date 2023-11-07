@@ -17,16 +17,20 @@ import {useEffect, useState} from 'react';
 import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
 const userFormHook = (qr?: boolean, shopId?: string) => {
+  const navigation = useNavigation<StackNavigation>();
+
   const {width} = useWindowDimensions();
+  const {colors, dark} = actualTheme();
   const colorScheme = useColorScheme();
   const os = Platform.OS;
+
   const userData = getUserQuery();
   const shopData = getShopQuery();
-  const {colors, dark} = actualTheme();
-  const navigation = useNavigation<StackNavigation>();
+
+  const {isLoading, error, mutate, data} = updateUserQuery();
+
   const [user, setUser] = useState<User>();
   const [shop, setShop] = useState<Shop>();
-  const {isLoading, error, mutate, data} = updateUserQuery();
   const [alertUserExist, setAlertUserExist] = useState(false);
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);

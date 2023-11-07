@@ -14,6 +14,7 @@ import {t} from 'i18next';
 import {Fragment, useRef} from 'react';
 import {BackHandler, Linking, Platform, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import {Portal} from 'react-native-paper';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
@@ -31,7 +32,8 @@ const CustomMap = () => {
     markerTitle,
     markerBody,
     currentMarkerIcon,
-    panicsMarkerIcon
+    panicsMarkerIcon,
+    configuration
   } = homeHook();
 
   return isLoading ? (
@@ -52,7 +54,11 @@ const CustomMap = () => {
     />
   ) : (
     <Fragment>
-      {region && markerTitle && markerBody && currentMarkerIcon ? (
+      {region &&
+      markerTitle &&
+      markerBody &&
+      currentMarkerIcon &&
+      panicsMarkerIcon ? (
         <MapView
           ref={mapRef}
           userLocationAnnotationTitle={'Map'}
@@ -65,35 +71,29 @@ const CustomMap = () => {
             title={markerTitle}
             description={markerBody}
             image={currentMarkerIcon}
-            style={{maxWidth: 400}}>
-            {/* <Image source={currentMarkerIcon} /> */}
-            {/* <CalloutBadge title={markerTitle} body={markerBody} /> */}
-          </Marker>
-          {panicsMarkerIcon &&
-            panics.map((marker, index) => {
-              const showMarker =
-                marker.my_location.latitude != user?.location.lat &&
-                marker.my_location.longitude != user?.location.lng;
+            style={{maxWidth: 400}}></Marker>
+          {panics.map((marker, index) => {
+            const showMarker =
+              marker.my_location.latitude != user?.location.lat &&
+              marker.my_location.longitude != user?.location.lng;
 
-              return (
-                showMarker && (
-                  <Marker
-                    key={index}
-                    coordinate={marker.my_location}
-                    title={marker.title}
-                    description={marker.body}
-                    image={panicsMarkerIcon}
-                    // style={{width: 400}}
-                  >
-                    {/* <Image source={panicsMarkerIcon} /> */}
-                    {/* <CalloutBadge title={marker.title} body={marker.body} /> */}
-                  </Marker>
-                )
-              );
-            })}
+            return (
+              showMarker && (
+                <Marker
+                  key={index}
+                  coordinate={marker.my_location}
+                  title={marker.title}
+                  description={marker.body}
+                  image={panicsMarkerIcon}></Marker>
+              )
+            );
+          })}
         </MapView>
       ) : (
         <CustomLoadingOverlay visible />
+      )}
+      {configuration && (
+        <PanicButton user={user} configuration={configuration} />
       )}
       <CustomFab
         icon={'share-variant'}
@@ -105,7 +105,6 @@ const CustomMap = () => {
         }}
         iconColor="black"
       />
-      <PanicButton />
       <CustomFab
         icon={'target'}
         position={'bottomRight'}
@@ -116,6 +115,18 @@ const CustomMap = () => {
         }}
         iconColor="black"
       />
+      <Portal>
+        <CustomFab
+          icon={'phone'}
+          position={'topRight'}
+          onPress={() => Linking.openURL(`tel:${configuration.emergency}`)}
+          style={{
+            borderRadius: 80,
+            backgroundColor: 'rgba(255, 255, 255, 0)'
+          }}
+          iconColor="black"
+        />
+      </Portal>
       <CustomDialogAlert
         visible={alertVisible}
         setVisible={setAlertVisible}

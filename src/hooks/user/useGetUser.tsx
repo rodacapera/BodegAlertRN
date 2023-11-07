@@ -9,12 +9,14 @@ import {
 } from '@src/reactQuery/userQuery';
 import {GetUserData} from '@src/types/auth';
 import {Buttons} from '@src/types/buttons';
+import {Configuration} from '@src/types/configuration';
 import {Panics, User} from '@src/types/userTypes';
-import {UseQueryResult} from '@tanstack/react-query';
 import {useEffect, useState} from 'react';
+import {Platform} from 'react-native';
 
-const useGetUser = (setUser?: UseQueryResult) => {
-  const {isLoading, error, data} = setUser ?? getUserQuery();
+const useGetUser = () => {
+  const configuration = config() as Configuration;
+  const {isLoading, error, data} = getUserQuery();
   const currentData = data as GetUserData;
   const [panics, setPanics] = useState<Panics[]>([]);
   const [employees, setEmployees] = useState<User[]>([]);
@@ -23,7 +25,6 @@ const useGetUser = (setUser?: UseQueryResult) => {
   const [counterEmployees, setCounterEmployees] = useState<number>();
   const [shopId, setShopId] = useState<string>();
   const user = currentData?.user as User;
-  const configuration = config();
 
   setEmployeesQuery(employees);
   setPanicsQuery(panics);
@@ -71,6 +72,7 @@ const useGetUser = (setUser?: UseQueryResult) => {
   useEffect(() => {
     currentData &&
       currentData.user &&
+      !shopId &&
       setShopId(currentData.user.shop.split('/')[1]);
   }, [currentData, shopId]);
 

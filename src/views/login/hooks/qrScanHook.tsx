@@ -97,7 +97,7 @@ const qrScanHook = () => {
       visible: false,
       transparent: false
     });
-  });
+  }, []);
 
   return {onSuccess, flash, setFlash, marker};
 };

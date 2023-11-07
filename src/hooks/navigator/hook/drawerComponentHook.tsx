@@ -14,21 +14,22 @@ import {
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Logos} from '@src/types/imageTypes';
-import {User} from '@src/types/userTypes';
-import {UseQueryResult} from '@tanstack/react-query';
 import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
 
 const drawerComponentHook = (navigation: StackNavigation) => {
-  const {getItem} = useAsyncStorage('@theme');
-  const setUser = setUserQuery();
-  const setImages = setCompanyImagesQuery(setUser.data?.user as User);
+  setUserQuery();
+  const {getItem} = useAsyncStorage('@theme'); //get global dark mode
   const {colors, theme, setDarkTheme, setLightTheme, dark} = actualTheme();
+
+  const {user, counterEmployees, counterButtons, isLoading, configuration} =
+    useGetUser();
+
   const [isDark, setIsDark] = useState(false);
   const [logos, setLogos] = useState<Logos[]>([]);
   const [shopId, setShopId] = useState<string | undefined>(undefined);
-  const {user, counterEmployees, counterButtons, isLoading, configuration} =
-    useGetUser(setUser as UseQueryResult);
+
+  const setImages = setCompanyImagesQuery();
   setShopQuery(shopId);
 
   const onToggleSwitch = () => {
@@ -86,16 +87,14 @@ const drawerComponentHook = (navigation: StackNavigation) => {
 
   useEffect(() => {
     setImages.data && setLogos(setImages.data as Logos[]);
-  }, [setImages.data]);
+  }, [setImages]);
 
   useEffect(() => {
     validateSwitch();
-    Appearance.addChangeListener(() => {
-      validateSwitch();
-    });
-    return () => {
-      Appearance.addChangeListener(() => console.debug('remove')).remove();
-    };
+    // const listener = Appearance.addChangeListener(() => {
+    //   validateSwitch();
+    // });
+    // return () => listener.remove();
   }, []);
 
   useEffect(() => {

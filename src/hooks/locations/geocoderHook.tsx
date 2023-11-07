@@ -7,10 +7,9 @@ import {Platform} from 'react-native';
 import Geocoder from 'react-native-geocoding';
 import {getCurrentPosition} from './permissionsHook';
 
+Geocoder.init(Platform.OS === 'android' ? GOOGLE_API_ANDROID : GOOGLE_API_IOS);
+
 export const geocoding = (latLng: Geocoder.fromParams) => {
-  Geocoder.init(
-    Platform.OS === 'android' ? GOOGLE_API_ANDROID : GOOGLE_API_IOS
-  );
   return Geocoder.from(latLng).catch(error =>
     console.debug('Error Network:', error)
   );

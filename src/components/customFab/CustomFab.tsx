@@ -1,7 +1,7 @@
 import {CustomFabProps} from '@src/types/globalTypes';
 import {useEffect, useState} from 'react';
 import {ViewStyle} from 'react-native';
-import {FAB} from 'react-native-paper';
+import {FAB, Portal} from 'react-native-paper';
 import {validatePosition} from './hooks/customFabHook';
 import {customFabStyles} from './styles/customFabStyles';
 import {actualTheme} from '@src/types/contextTypes';

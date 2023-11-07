@@ -19,7 +19,7 @@ const Splash = ({route, navigation}: SplashProps) => {
   useEffect(() => {
     setTimeout(() => {
       splashHook({route, navigation});
-    }, 1000);
+    }, 2000);
     headerShown({
       navigation: navigator,
       visible: false,
