@@ -20,7 +20,7 @@ const config = () => {
         });
       })
       .catch(err => {
-        console.debug('error ', err);
+        console.debug('errorGetConfigFirebase ', err);
       });
   };
 

@@ -21,6 +21,7 @@ const PanicButton = ({
   const {width} = useWindowDimensions();
   const [loading, setLoading] = useState(false);
   const [errorDistance, setErrorDistance] = useState(false);
+  const [errorGps, setErrorGps] = useState(false);
   const {colors, dark} = actualTheme();
   const navigation = useNavigation<StackNavigation>();
 
@@ -40,6 +41,12 @@ const PanicButton = ({
         }
         setVisible={setErrorDistance}
       />
+      <CustomDialogAlert
+        visible={errorGps}
+        setVisible={setErrorGps}
+        title={t('geolocationAlert.errorGPSTitle')}
+        description={t('geolocationAlert.errorGPSDescription')}
+      />
       <CustomLoadingOverlay visible={loading} />
       <CustomFab
         icon={'bell'}
@@ -49,6 +56,7 @@ const PanicButton = ({
           panicNotification(
             setLoading,
             setErrorDistance,
+            setErrorGps,
             navigation,
             configuration,
             user as User,

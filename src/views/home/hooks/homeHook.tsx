@@ -69,8 +69,6 @@ const homeHook = () => {
   };
 
   const setMyCurrentLocation = () => {
-    console.log('user', user);
-
     if (user?.location) {
       const shopLocation = {
         latitude: user?.location.lat!,
@@ -161,7 +159,6 @@ const homeHook = () => {
               : colors.onPrimaryContainer
             : colors.onPrimaryContainer
       });
-      // }
     } else {
       headerShown({
         width: width,

@@ -90,7 +90,7 @@ const employeesHook = () => {
             : colors.onPrimaryContainer
           : colors.onPrimaryContainer
     });
-  }, []);
+  });
 
   return {
     employees: currentEmployees,

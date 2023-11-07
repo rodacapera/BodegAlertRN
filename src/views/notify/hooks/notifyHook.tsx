@@ -11,12 +11,12 @@ const notifyHook = () => {
   const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
   const {colors, dark} = actualTheme();
-  const {data, isSuccess} = getPanicsQuery();
+  const {data} = getPanicsQuery();
   const navigation = useNavigation<StackNavigation>();
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (data) {
       headerShown({
         width: width,
         navigation,
@@ -32,7 +32,7 @@ const notifyHook = () => {
             : colors.onPrimaryContainer
       });
     }
-  }, [isSuccess, dark]);
+  }, [data, dark]);
 
   return {
     panics: data as Panics[],

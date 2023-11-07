@@ -32,7 +32,12 @@ export const getCurrentPosition = async (): Promise<GeoPosition> =>
         resolve(position);
       },
       error => {
-        console.error('error', error.code, 'message', error.message);
+        console.error(
+          'errorGetCurrentPosition',
+          error.code,
+          'message',
+          error.message
+        );
         reject(error);
       },
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000}

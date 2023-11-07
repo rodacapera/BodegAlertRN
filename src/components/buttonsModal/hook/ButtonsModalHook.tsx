@@ -88,7 +88,7 @@ const ButtonsModalHook = ({
           setUrlConfigButton(response.button);
         })
         .catch(err => {
-          console.debug('error', err);
+          console.debug('errorSetButtonShelly', err);
           setSendSetButton(false);
         });
     }
@@ -148,7 +148,7 @@ const ButtonsModalHook = ({
           hideModal();
         })
         .catch(error => {
-          console.debug('error', error && error);
+          console.debug('errorSaveButtonBd', error && error);
         });
   };
 

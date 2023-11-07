@@ -63,6 +63,7 @@ const getDistanceBetween = (
 export const panicNotification = async (
   setLoading: (e: boolean) => void,
   setErrorDistance: (e: boolean) => void,
+  setErrorGps: (e: boolean) => void,
   navigation: StackNavigation,
   configuration: Configuration,
   user: User,
@@ -70,47 +71,52 @@ export const panicNotification = async (
   width: number
 ) => {
   const currentPosition = await getCurrentPosition();
-  const validDistance = configuration.distance_panic;
-  const registerPosition = {
-    latitude: user.location.lat!,
-    longitude: user.location.lng!,
-    latitudeDelta: 0.015,
-    longitudeDelta: 0.0121
-  };
-  const latLng = {
-    latitude: currentPosition.coords.latitude,
-    longitude: currentPosition.coords.longitude,
-    latitudeDelta: 0.015,
-    longitudeDelta: 0.0121
-  };
+  if (currentPosition) {
+    setErrorGps(false);
+    const validDistance = configuration.distance_panic;
+    const registerPosition = {
+      latitude: user.location.lat!,
+      longitude: user.location.lng!,
+      latitudeDelta: 0.015,
+      longitudeDelta: 0.0121
+    };
+    const latLng = {
+      latitude: currentPosition.coords.latitude,
+      longitude: currentPosition.coords.longitude,
+      latitudeDelta: 0.015,
+      longitudeDelta: 0.0121
+    };
 
-  const data = {
-    title: t('notifications.title'),
-    body: `${user.alias}: ${t('notifications.body')}`,
-    my_location: user.type === 'vehicle' ? latLng : registerPosition,
-    name: user.name + ' ' + user.lastname,
-    phone: user.phone,
-    alias: user.alias,
-    zip_code: user.zipcode,
-    countryCode: user.countryCode,
-    city: user.city,
-    group_number: user.group_number
-  };
+    const data = {
+      title: t('notifications.title'),
+      body: `${user.alias}: ${t('notifications.body')}`,
+      my_location: user.type === 'vehicle' ? latLng : registerPosition,
+      name: user.name + ' ' + user.lastname,
+      phone: user.phone,
+      alias: user.alias,
+      zip_code: user.zipcode,
+      countryCode: user.countryCode,
+      city: user.city,
+      group_number: user.group_number
+    };
 
-  const distance = getDistanceBetween(registerPosition, latLng);
-  if (user.pay) {
-    if (user.type === 'residence') {
-      if (distance < validDistance) {
+    const distance = getDistanceBetween(registerPosition, latLng);
+    if (user.pay) {
+      if (user.type === 'residence') {
+        if (distance < validDistance) {
+          sendNotification({data, setLoading, navigation, colors, width});
+          setErrorDistance(false);
+        } else {
+          setErrorDistance(true);
+        }
+      } else {
         sendNotification({data, setLoading, navigation, colors, width});
         setErrorDistance(false);
-      } else {
-        setErrorDistance(true);
       }
     } else {
-      sendNotification({data, setLoading, navigation, colors, width});
-      setErrorDistance(false);
+      setErrorDistance(true);
     }
   } else {
-    setErrorDistance(true);
+    setErrorGps(true);
   }
 };

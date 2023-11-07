@@ -64,6 +64,8 @@ i18n.use(initReactI18next).init({
           noDetectedButton: 'Button not detected. Swipe down to search again.'
         },
         geolocationAlert: {
+          errorGPSTitle: 'Access denied',
+          errorGPSDescription: 'Please enable GPS services to continue.',
           errorLocationPermissionsAlert: 'Permission denied',
           descriptionErrorLocationPermissionsAlert:
             'You have denied the use of geolocation. To enable it, you will need to uninstall the application and install it again.'
@@ -274,6 +276,9 @@ i18n.use(initReactI18next).init({
             'Botón no detectado. Desliza hacia abajo para buscar de nuevo.'
         },
         geolocationAlert: {
+          errorGPSTitle: 'Acceso denegado',
+          errorGPSDescription:
+            'Por favor habilita los servicios de GPS para continuar',
           errorLocationPermissionsAlert: 'Permiso denegado',
           descriptionErrorLocationPermissionsAlert:
             'Has denegado el uso de la geolocalización. Para habilitarlo, deberás desinstalar la aplicación e instalarla de nuevo.'
@@ -484,6 +489,8 @@ i18n.use(initReactI18next).init({
             'Pulsante non rilevato. Scorri verso il basso per cercare di nuovo.'
         },
         geolocationAlert: {
+          errorGPSTitle: 'Accesso negato',
+          errorGPSDescription: 'Attivare i servizi GPS per continuare.',
           errorLocationPermissionsAlert: 'Permesso negato',
           descriptionErrorLocationPermissionsAlert:
             "Hai negato l'uso della geolocalizzazione. Per abilitarlo, dovrai disinstallare l'applicazione e installarla nuovamente."
@@ -694,6 +701,8 @@ i18n.use(initReactI18next).init({
             'Botão não detectado. Deslize para baixo para buscar novamente.'
         },
         geolocationAlert: {
+          errorGPSTitle: 'Acesso negado',
+          errorGPSDescription: 'Active os serviços GPS para continuar.',
           errorLocationPermissionsAlert: 'Permissão negada',
           descriptionErrorLocationPermissionsAlert:
             'Você negou o uso da geolocalização. Para ativá-la, será necessário desinstalar o aplicativo e instalá-lo novamente.'
@@ -903,6 +912,9 @@ i18n.use(initReactI18next).init({
             'Bouton non détecté. Faites glisser vers le bas pour rechercher à nouveau.'
         },
         geolocationAlert: {
+          errorGPSTitle: 'Accès refusé',
+          errorGPSDescription:
+            'Veuillez activer les services GPS pour continuer.',
           errorLocationPermissionsAlert: 'Autorisation refusée',
           descriptionErrorLocationPermissionsAlert:
             "Vous avez refusé l'utilisation de la géolocalisation. Pour l'activer, vous devrez désinstaller l'application et la réinstaller."
