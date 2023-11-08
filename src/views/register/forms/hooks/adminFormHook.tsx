@@ -104,7 +104,7 @@ const adminFormHook = (type: RegisterType, phoneRef: any) => {
   };
 
   const emailValidate = (text: string) => {
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    const reg = /^\w+([\\.-]?\w+)*@\w+([.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(text) === false) {
       setIsNotValidEmail(true);
       return true;
