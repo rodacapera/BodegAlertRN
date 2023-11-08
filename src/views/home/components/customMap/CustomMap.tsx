@@ -19,7 +19,7 @@ import {HomeHook} from '../../hooks/HomeHook';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
-  const {dark} = actualTheme();
+  const {dark, colors} = actualTheme();
   const {
     region,
     animateCamera,
@@ -125,7 +125,9 @@ const CustomMap = () => {
             borderRadius: 80,
             backgroundColor: 'rgba(255, 255, 255, 0)'
           }}
-          iconColor="black"
+          iconColor={
+            dark ? colors.onPrimaryContainer : colors.onPrimaryContainer
+          }
         />
       </Portal>
       <CustomDialogAlert

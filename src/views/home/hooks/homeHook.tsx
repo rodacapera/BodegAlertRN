@@ -91,8 +91,6 @@ const HomeHook = () => {
   }, [navigation]);
 
   useEffect(() => {
-    console.log('ssss', navigation.getState().index == 0);
-    console.log('params', params);
     if (
       navigation.getState().index == 0 ||
       (params && (params.isLogin || params.isBack))

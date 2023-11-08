@@ -538,6 +538,7 @@
 			baseConfigurationReference = A9CBC29DEC980FD14EFE06E3 /* Pods-BodegAlert-BodegAlertTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = XK4QBKULJR;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -566,6 +567,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = XK4QBKULJR;
 				INFOPLIST_FILE = BodegAlertTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -593,7 +595,7 @@
 				CODE_SIGN_ENTITLEMENTS = BodegAlert/BodegAlert.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.13;
+				CURRENT_PROJECT_VERSION = 1.0.14;
 				DEVELOPMENT_TEAM = XK4QBKULJR;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BodegAlert/Info.plist;
@@ -630,7 +632,7 @@
 				CODE_SIGN_ENTITLEMENTS = BodegAlert/BodegAlert.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.13;
+				CURRENT_PROJECT_VERSION = 1.0.14;
 				DEVELOPMENT_TEAM = XK4QBKULJR;
 				INFOPLIST_FILE = BodegAlert/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BodegAlert;

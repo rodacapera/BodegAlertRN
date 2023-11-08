@@ -73,27 +73,20 @@ const DrawerComponentHook = (navigation: StackNavigation) => {
       : avatarw;
 
   useEffect(() => {
-    setImages.data && setLogos(setImages.data as Logos[]);
-  }, [setImages]);
+    !logos && setImages.data && setLogos(setImages.data as Logos[]);
+  }, [logos, setImages]);
 
   useEffect(() => {
     const validateSwitch = async () => {
       const item = await getItem();
       if (dark) {
         setIsDark(true);
-        Appearance.addChangeListener(() => console.debug('remove')).remove();
       } else {
         item ? setIsDark(item === 'dark' ? true : false) : setIsDark(true);
       }
-      item
-        ? setIsDark(item === 'dark' ? true : false)
-        : setIsDark(dark ? true : false);
     };
     validateSwitch();
-    // const listener = Appearance.addChangeListener(() => {
-    //   validateSwitch();
-    // });
-    // return () => listener.remove();
+    // Appearance.addChangeListener(() => console.debug('remove')).remove();
   }, [dark, getItem]);
 
   useEffect(() => {
