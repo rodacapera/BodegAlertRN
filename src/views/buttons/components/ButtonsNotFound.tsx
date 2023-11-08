@@ -1,13 +1,13 @@
 import {user_not_found} from '@src/assets/images';
 import CustomImage from '@src/components/customImage/CustomImage';
 import TextWithCustomLink from '@src/components/textWithCustomLink/TextWithCustomLink';
-import {config} from '@src/hooks/config/config';
+import {Config} from '@src/hooks/config/Config';
 import {t} from 'i18next';
 import {View} from 'react-native';
 import {buttonsStyles} from '../styles/buttonsStyles';
 
 const ButtonsNotFound = () => {
-  const {videoLinks} = config();
+  const {videoLinks} = Config();
 
   return (
     <View>

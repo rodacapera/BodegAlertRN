@@ -1,4 +1,4 @@
-import {config} from '@src/hooks/config/config';
+import {Config} from '@src/hooks/config/Config';
 import {getDynamicLinkFirebase} from '@src/hooks/firebase/dynamicLink/dynamicLink';
 import {GetUserQuery} from '@src/reactQuery/UserQuery';
 import {actualTheme} from '@src/types/contextTypes';
@@ -21,7 +21,7 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
   const {colors, theme} = actualTheme();
   const {data} = GetUserQuery();
   const user = data.user as unknown as User;
-  const {videoLinks} = config();
+  const {videoLinks} = Config();
 
   const getQrLink = useCallback(async () => {
     const shop_id = user.shop.split('/')[1];

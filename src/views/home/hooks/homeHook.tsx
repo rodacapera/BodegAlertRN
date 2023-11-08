@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {bike, bike_help, family_help, home, shop} from '@src/assets/images';
-import {config} from '@src/hooks/config/config';
+import {Config} from '@src/hooks/config/Config';
 import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {whatsapp} from '@src/hooks/whatsapp/whatsapp';
 import {GetPanicsQuery} from '@src/reactQuery/NotifyQuery';
@@ -29,7 +29,7 @@ const HomeHook = () => {
   const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
 
-  const configuration = config() as Configuration;
+  const configuration = Config() as Configuration;
   const {isLoading, data} = GetUserQuery();
   const panics = GetPanicsQuery().data as Panics[];
 

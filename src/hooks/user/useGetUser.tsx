@@ -1,5 +1,5 @@
 import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
-import {config} from '@src/hooks/config/config';
+import {Config} from '@src/hooks/config/Config';
 import {SetPanicsQuery} from '@src/reactQuery/NotifyQuery';
 import {
   GetUserQuery,
@@ -14,7 +14,7 @@ import {Panics, User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 
 const useGetUser = () => {
-  const configuration = config() as Configuration;
+  const configuration = Config() as Configuration;
   const {isLoading, error, data} = GetUserQuery();
   const currentData = data as GetUserData;
   const [panics, setPanics] = useState<Panics[]>([]);

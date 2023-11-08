@@ -1,5 +1,5 @@
 import {SERVER_PANIC_URL_PATH} from '@src/globals/constants/panicService';
-import {config} from '@src/hooks/config/config';
+import {Config} from '@src/hooks/config/Config';
 
 import {createButtonsFirebase} from '@src/hooks/firebase/buttons/buttons';
 import {
@@ -186,7 +186,7 @@ const ButtonsModalHook = ({
     internetError,
     savingData,
     passIsd,
-    config: config(),
+    config: Config(),
     buttonExist,
     setButtonExist,
     unConnectedShellyButton,

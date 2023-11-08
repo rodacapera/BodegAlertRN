@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {userFakeData} from '@src/globals/constants/fakeData';
 import {buttonActionInitialState} from '@src/globals/constants/login';
-import {config} from '@src/hooks/config/config';
+import {Config} from '@src/hooks/config/Config';
 import {geUserByPhoneNumberFirebase} from '@src/hooks/firebase/user/user';
 import {getLocation} from '@src/hooks/locations/geocoderHook';
 import {SetGroupQuery, UpdateGroupQuery} from '@src/reactQuery/GroupsQuery';
@@ -16,7 +16,7 @@ import {useEffect, useState} from 'react';
 import {Platform} from 'react-native';
 
 const AdminFormHook = (type: RegisterType, phoneRef: any) => {
-  const configuration = config();
+  const configuration = Config();
   const os = Platform.OS;
   const navigation = useNavigation<StackNavigation>();
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();

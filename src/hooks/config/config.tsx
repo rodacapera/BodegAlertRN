@@ -7,7 +7,7 @@ import {Platform} from 'react-native';
 import {requestLocationPermission} from '../locations/permissionsHook';
 import Geolocation from 'react-native-geolocation-service';
 
-const config = () => {
+const Config = () => {
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
   const [configuration, setConfiguration] = useState<Configuration>();
 
@@ -48,4 +48,4 @@ const config = () => {
   return {...configuration};
 };
 
-export {config};
+export {Config};
