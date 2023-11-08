@@ -5,7 +5,7 @@ import {actualTheme} from '@src/types/contextTypes';
 import {QrModalProps} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useCallback} from 'react';
 import {View} from 'react-native';
 import {Caption, Modal} from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
@@ -23,15 +23,15 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
   const user = data.user as unknown as User;
   const {videoLinks} = config();
 
-  const getQrLink = async () => {
+  const getQrLink = useCallback(async () => {
     const shop_id = user.shop.split('/')[1];
     const result = await getDynamicLinkFirebase(shop_id);
     setQrLink(result);
-  };
+  }, [user.shop]);
 
   useEffect(() => {
     getQrLink();
-  }, []);
+  }, [getQrLink]);
 
   return (
     <Modal
