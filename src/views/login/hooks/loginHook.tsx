@@ -8,7 +8,7 @@ import {ResultLocations} from '@src/types/locationTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 const LoginHook = (data?: User) => {
   const navigation = useNavigation<StackNavigation>();
@@ -19,39 +19,15 @@ const LoginHook = (data?: User) => {
   const [errorUserNotExist, setErrorUserNotExist] = useState(false);
   const [myCurrentLocation, setMyCurrentLocation] = useState<ResultLocations>();
   const [loadingText, setLoadingText] = useState(t('general.loading'));
-  const validateRegEx = () => {
+
+  const validateRegEx = useCallback(() => {
     if (buttonAction.phone != '') {
       const re = /[1-9]\d{9,14}$/;
       const phone = buttonAction.phone.slice(buttonAction.countryCodeSize + 1);
       return re.test(phone);
     }
     return false;
-  };
-
-  const validatePhoneNumber = () => {
-    const validate = validateRegEx();
-    if (validate) {
-      const userExist = geUserByPhoneNumberFirebase(buttonAction.phone);
-      userExist.then(querySnapshot => {
-        if (querySnapshot.empty) {
-          setErrorPhone(false);
-          setErrorUserNotExist(true);
-        } else {
-          const buttonActionClone = {...buttonAction};
-          buttonActionClone.logged = true;
-          setButtonAction(buttonActionClone);
-          setErrorPhone(false);
-          setErrorPhone(false);
-          setErrorUserNotExist(false);
-        }
-      });
-      // setTimeout(() => {
-      setErrorUserNotExist(false);
-      // }, 5000);
-    } else {
-      setErrorPhone(true);
-    }
-  };
+  }, [buttonAction.countryCodeSize, buttonAction.phone]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -61,13 +37,38 @@ const LoginHook = (data?: User) => {
   }, []);
 
   useEffect(() => {
+    const validatePhoneNumber = () => {
+      const validate = validateRegEx();
+      if (validate) {
+        const userExist = geUserByPhoneNumberFirebase(buttonAction.phone);
+        userExist.then(querySnapshot => {
+          if (querySnapshot.empty) {
+            setErrorPhone(false);
+            setErrorUserNotExist(true);
+          } else {
+            const buttonActionClone = {...buttonAction};
+            buttonActionClone.logged = true;
+            setButtonAction(buttonActionClone);
+            setErrorPhone(false);
+            setErrorPhone(false);
+            setErrorUserNotExist(false);
+          }
+        });
+        // setTimeout(() => {
+        setErrorUserNotExist(false);
+        // }, 5000);
+      } else {
+        setErrorPhone(true);
+      }
+    };
+
     if (data) {
       buttonAction.phone = data.phone;
     }
     !buttonAction.logged &&
       buttonAction.phone.length > 3 &&
       validatePhoneNumber();
-  }, [buttonAction, data]);
+  }, [buttonAction, data, validateRegEx]);
 
   useEffect(() => {
     !currentButtonAction.logged &&
