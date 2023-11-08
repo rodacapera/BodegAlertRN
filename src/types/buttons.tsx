@@ -30,7 +30,6 @@ export type ButtonsModalProps = {
   visible: boolean;
   setVisible: (e: boolean) => void;
   buttons: Buttons[];
-  buttonFind?: ButtonFind | undefined;
   setButtonFind: (e: ButtonFind | undefined) => void;
   setNewButtons: (e: Buttons[]) => void;
 };

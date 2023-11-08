@@ -37,44 +37,6 @@ const Buttonhook = () => {
   const [newButtons, setNewButtons] = useState<Buttons[]>(buttons);
   SetButtonsQuery(newButtons);
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    !refreshing &&
-      setTimeout(() => {
-        setRefreshing(false);
-        buttonFind && buttonFind.ip == '' ? getDevice() : setButtonFind(null);
-      }, 2000);
-  }, []);
-
-  const removeItem = (index: string) => {
-    setItemToRemove(index);
-    setAlertVisible(true);
-  };
-
-  const removeButton = () => {
-    if (itemToRemove) {
-      removeButtonByIdFirebase(itemToRemove)
-        .then(result => {
-          const newButtons = [...buttons];
-          const resultFilter = newButtons.filter(
-            value => value.uid != itemToRemove
-          );
-          setNewButtons(resultFilter);
-        })
-        .catch(err => console.debug(err));
-    }
-  };
-
-  useEffect(() => {
-    setTimeout(() => {
-      buttons.length > 0 && setNewButtons(buttons);
-    }, 1000);
-  }, [buttons]);
-
-  useEffect(() => {
-    sendRemoveItem && removeButton();
-  }, [sendRemoveItem]);
-
   const getDevice = useCallback(() => {
     statusDevice().then(result => {
       if (result) {
@@ -90,9 +52,47 @@ const Buttonhook = () => {
     });
   }, [buttonFind]);
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    !refreshing &&
+      setTimeout(() => {
+        setRefreshing(false);
+        buttonFind && buttonFind.ip == '' ? getDevice() : setButtonFind(null);
+      }, 2000);
+  }, [buttonFind, getDevice, refreshing]);
+
+  const removeItem = (index: string) => {
+    setItemToRemove(index);
+    setAlertVisible(true);
+  };
+
+  const removeButton = useCallback(() => {
+    if (itemToRemove) {
+      removeButtonByIdFirebase(itemToRemove)
+        .then(() => {
+          const newButtons = [...buttons];
+          const resultFilter = newButtons.filter(
+            value => value.uid != itemToRemove
+          );
+          setNewButtons(resultFilter);
+        })
+        .catch(err => console.debug(err));
+    }
+  }, [buttons, itemToRemove]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      buttons.length > 0 && setNewButtons(buttons);
+    }, 1000);
+  }, [buttons]);
+
+  useEffect(() => {
+    sendRemoveItem && removeButton();
+  }, [removeButton, sendRemoveItem]);
+
   useEffect(() => {
     !buttonFind && getDevice();
-  }, [buttonFind]);
+  }, [buttonFind, getDevice]);
 
   useEffect(() => {
     const appMode = AppState.addEventListener(

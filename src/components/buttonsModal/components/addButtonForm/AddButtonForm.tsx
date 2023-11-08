@@ -1,18 +1,17 @@
+import Clipboard from '@react-native-clipboard/clipboard';
 import CustomIcon from '@src/components/customIcon/CustomIcon';
+import CustomLoader from '@src/components/customLoader/CustomLoader';
 import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import Clipboard from '@react-native-clipboard/clipboard';
-import {Button, Caption, TextInput, Title, Text} from 'react-native-paper';
+import {Button, Caption, Text, TextInput, Title} from 'react-native-paper';
 import {buttonsModalStyles} from '../../styles/buttonsModalStyles';
-import CustomLoader from '@src/components/customLoader/CustomLoader';
 
 const AddButtonForm = ({
   iss,
   backButton,
   setSendSetButton,
-  setNameIsd,
   setPassIsd,
   urlConfigButton,
   saveButton,

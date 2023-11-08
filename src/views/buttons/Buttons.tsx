@@ -105,7 +105,6 @@ const Buttons = () => {
           visible={visible}
           setVisible={setVisible}
           buttons={buttons}
-          buttonFind={buttonFind}
           setButtonFind={setButtonFind}
           setNewButtons={setNewButtons}
         />

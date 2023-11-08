@@ -17,7 +17,6 @@ const ButtonsModal = ({
   visible,
   setVisible,
   buttons,
-  buttonFind,
   setButtonFind,
   setNewButtons
 }: ButtonsModalProps) => {
@@ -45,7 +44,6 @@ const ButtonsModal = ({
   } = ButtonsModalHook({
     setVisible,
     buttons,
-    buttonFind,
     setButtonFind,
     setNewButtons
   });

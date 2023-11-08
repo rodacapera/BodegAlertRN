@@ -13,20 +13,18 @@ import {GetUserQuery} from '@src/reactQuery/UserQuery';
 import {ButtonFind, Buttons} from '@src/types/buttons';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useCallback} from 'react';
 import {AppState} from 'react-native';
 import {v4 as uuid} from 'uuid';
 
 const ButtonsModalHook = ({
   setVisible,
   buttons,
-  buttonFind,
   setButtonFind,
   setNewButtons
 }: {
   setVisible: (e: boolean) => void;
   buttons: Buttons[];
-  buttonFind: ButtonFind | undefined;
   setButtonFind: (e: ButtonFind | undefined) => void;
   setNewButtons: (e: Buttons[]) => void;
 }) => {
@@ -44,8 +42,8 @@ const ButtonsModalHook = ({
   const [buttonExist, setButtonExist] = useState(false);
   const [unConnectedShellyButton, setUnConnectedShellyButton] = useState(false);
   const [buttonNotReady, setButtonNotReady] = useState(false);
-  // const [newButtons, setNewButtons] = useState<Buttons[]>(buttons);
   const networksStatus = !networks ? true : false;
+
   const hideModal = () => (
     setVisible(false),
     setTimeout(() => {
@@ -53,7 +51,7 @@ const ButtonsModalHook = ({
     }, 1000)
   );
 
-  const getMyNetworks = async () => {
+  const getMyNetworks = useCallback(async () => {
     if (!networks) {
       const networksResult = await showNetworks();
       if (networksResult && networksResult[0].error) {
@@ -62,37 +60,7 @@ const ButtonsModalHook = ({
         setNetworks(networksResult);
       }
     }
-  };
-
-  const setButton = async () => {
-    if (nameIsd && passIsd) {
-      networkSettings()
-        .then(response => {
-          const btnAction = response.myConfig.device.hostname.split('-')[1];
-          const url = `${SERVER_PANIC_URL_PATH}api/pushB?id=${btnAction}`;
-          const random = uuid();
-          const dataBtnBd = {
-            title: t('notifications.title'),
-            body: `${user.alias}: ${t('notifications.body')}`,
-            cost: 0,
-            date: Date.now().toString(),
-            name: response.myConfig.device.hostname,
-            reference: btnAction,
-            uid: random.toString(),
-            isd: nameIsd,
-            pass: passIsd,
-            server: url
-          };
-          setCurrentButton(dataBtnBd);
-          setSendSetButton(false);
-          setUrlConfigButton(response.button);
-        })
-        .catch(err => {
-          console.debug('errorSetButtonShelly', err);
-          setSendSetButton(false);
-        });
-    }
-  };
+  }, [networks]);
 
   const validateStatusButton = (currentButton: Buttons) => {
     statusActionsDevice()
@@ -155,12 +123,41 @@ const ButtonsModalHook = ({
   };
 
   useEffect(() => {
+    const setButton = async () => {
+      if (nameIsd && passIsd) {
+        networkSettings()
+          .then(response => {
+            const btnAction = response.myConfig.device.hostname.split('-')[1];
+            const url = `${SERVER_PANIC_URL_PATH}api/pushB?id=${btnAction}`;
+            const random = uuid();
+            const dataBtnBd = {
+              title: t('notifications.title'),
+              body: `${user.alias}: ${t('notifications.body')}`,
+              cost: 0,
+              date: Date.now().toString(),
+              name: response.myConfig.device.hostname,
+              reference: btnAction,
+              uid: random.toString(),
+              isd: nameIsd,
+              pass: passIsd,
+              server: url
+            };
+            setCurrentButton(dataBtnBd);
+            setSendSetButton(false);
+            setUrlConfigButton(response.button);
+          })
+          .catch(err => {
+            console.debug('errorSetButtonShelly', err);
+            setSendSetButton(false);
+          });
+      }
+    };
     sendSetButton && setButton();
-  }, [sendSetButton]);
+  }, [nameIsd, passIsd, sendSetButton, user.alias]);
 
   useEffect(() => {
     getMyNetworks();
-  }, [networks, buttonFind]);
+  }, [getMyNetworks]);
 
   useEffect(() => {
     const appMode = AppState.addEventListener(
@@ -168,7 +165,7 @@ const ButtonsModalHook = ({
       value => value === 'active' && getMyNetworks()
     );
     return () => appMode.remove();
-  }, []);
+  }, [getMyNetworks]);
 
   useEffect(() => {
     setNameIsd(firsStep.toString());
