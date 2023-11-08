@@ -68,61 +68,6 @@ const HomeHook = () => {
     }
   };
 
-  const setMyCurrentLocation = () => {
-    if (user?.location.lat && user.location.lng) {
-      const shopLocation = {
-        latitude: user?.location.lat,
-        longitude: user?.location.lng,
-        latitudeDelta: 0.015,
-        longitudeDelta: 0.0121
-      };
-      setRegion(shopLocation);
-    }
-  };
-
-  const getCalloutText = () => {
-    const familyPanic =
-      panics.length > 0 &&
-      panics.find(
-        val =>
-          val.alias == user.alias &&
-          (val.phone !== user?.phone || val.name.includes('shellybutton1'))
-      );
-
-    const title =
-      user?.type === 'residence'
-        ? familyPanic
-          ? familyPanic.title
-          : user?.alias
-        : user?.alias;
-
-    const body =
-      user?.type === 'residence'
-        ? familyPanic
-          ? familyPanic.body
-          : user?.address
-        : user?.address;
-    const currentIcon =
-      user?.type === 'residence' ? (familyPanic ? family_help : home) : bike;
-
-    const panicsIcon = user?.type === 'residence' ? shop : bike_help;
-
-    setMarkerTitle(title);
-    setMarkerBody(body);
-    setCurrentMarkerIcon(currentIcon);
-    setPanicsMarkerIcon(panicsIcon);
-  };
-
-  const checkVersion = async (appVersionBd: string) => {
-    const currentVersion = await AsyncStorage.getItem('@app_version');
-    if (currentVersion) {
-      const updateVersion = appVersionBd > currentVersion ? true : false;
-      setAppVersion(updateVersion);
-    } else {
-      checkVersion(appVersionBd);
-    }
-  };
-
   const onShare = async () => {
     const message =
       user?.type === 'residence'
@@ -136,11 +81,14 @@ const HomeHook = () => {
   };
 
   useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () =>
-      backAction(navigation)
-    );
-    return () => backHandler.remove();
-  }, []);
+    if (navigation) {
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        () => backAction(navigation)
+      );
+      return () => backHandler.remove();
+    }
+  }, [navigation]);
 
   useEffect(() => {
     console.log('ssss', navigation.getState().index == 0);
@@ -180,21 +128,67 @@ const HomeHook = () => {
   ]);
 
   useEffect(() => {
+    const setMyCurrentLocation = () => {
+      if (user?.location.lat && user.location.lng) {
+        const shopLocation = {
+          latitude: user?.location.lat,
+          longitude: user?.location.lng,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121
+        };
+        setRegion(shopLocation);
+      }
+    };
+
+    const checkVersion = async (appVersionBd: string) => {
+      const currentVersion = await AsyncStorage.getItem('@app_version');
+      if (currentVersion) {
+        const updateVersion = appVersionBd > currentVersion ? true : false;
+        setAppVersion(updateVersion);
+      } else {
+        checkVersion(appVersionBd);
+      }
+    };
+
+    const getCalloutText = () => {
+      const familyPanic =
+        panics.length > 0 &&
+        panics.find(
+          val =>
+            val.alias == user.alias &&
+            (val.phone !== user?.phone || val.name.includes('shellybutton1'))
+        );
+
+      const title =
+        user?.type === 'residence'
+          ? familyPanic
+            ? familyPanic.title
+            : user?.alias
+          : user?.alias;
+
+      const body =
+        user?.type === 'residence'
+          ? familyPanic
+            ? familyPanic.body
+            : user?.address
+          : user?.address;
+      const currentIcon =
+        user?.type === 'residence' ? (familyPanic ? family_help : home) : bike;
+
+      const panicsIcon = user?.type === 'residence' ? shop : bike_help;
+
+      setMarkerTitle(title);
+      setMarkerBody(body);
+      setCurrentMarkerIcon(currentIcon);
+      setPanicsMarkerIcon(panicsIcon);
+    };
+
     if (user) {
       !region && setMyCurrentLocation();
       !appVersion && appVersionBd && checkVersion(appVersionBd);
       panics && getCalloutText();
     }
-  }, [
-    appVersion,
-    appVersionBd,
-    checkVersion,
-    getCalloutText,
-    panics,
-    region,
-    setMyCurrentLocation,
-    user
-  ]);
+  }, [appVersion, appVersionBd, panics, region, user]);
 
   return {
     region,
