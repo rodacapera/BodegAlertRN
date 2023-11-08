@@ -22,7 +22,7 @@ export type InputFormProps = {
   phoneRef: any;
   setButtonAction: (data: LoginFormAction) => void;
   value?: string;
-  code: string;
+  code: string | undefined;
   isDisabled?: boolean;
   isRegister?: boolean;
 };

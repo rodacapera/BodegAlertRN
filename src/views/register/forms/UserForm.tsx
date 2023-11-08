@@ -60,7 +60,7 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
                 ? user.phone.slice(user?.countryCode.length + 1)
                 : undefined
             }
-            code={user?.countryCode.toLowerCase()!}
+            code={user?.countryCode.toLowerCase()}
             isDisabled={user?.shop ? true : false}
           />
           <TextInput
