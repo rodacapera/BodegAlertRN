@@ -17,7 +17,7 @@ import {Logos} from '@src/types/imageTypes';
 import {User} from '@src/types/userTypes';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
-export const setEmployeesQuery = (employees: User[]) => {
+export const SetEmployeesQuery = (employees: User[]) => {
   const query = useQuery({
     queryKey: ['employees'],
     queryFn: async () => employees
@@ -25,7 +25,7 @@ export const setEmployeesQuery = (employees: User[]) => {
   return query;
 };
 
-export const setButtonsQuery = (buttons: Buttons[]) => {
+export const SetButtonsQuery = (buttons: Buttons[]) => {
   const query = useQuery({
     queryKey: ['buttons'],
     queryFn: async () => buttons,
@@ -34,7 +34,7 @@ export const setButtonsQuery = (buttons: Buttons[]) => {
   return query;
 };
 
-export const setCompanyImagesQuery = () => {
+export const SetCompanyImagesQuery = () => {
   const query = useQuery({
     queryKey: ['companyImages'],
     queryFn: async () => {
@@ -48,7 +48,7 @@ export const setCompanyImagesQuery = () => {
   return query;
 };
 
-export const setShopQuery = (doc: string | undefined) => {
+export const SetShopQuery = (doc: string | undefined) => {
   const query = useQuery({
     queryKey: ['shop'],
     queryFn: async () => doc && (await getShopFirebase(doc)),
@@ -81,7 +81,7 @@ const dataSetUser = async (data?: User) => {
   }
 };
 
-export const setUserQuery = (data?: User) => {
+export const SetUserQuery = (data?: User) => {
   const query = useQuery({
     queryKey: ['user'],
     queryFn: async () => await dataSetUser(data),
@@ -92,31 +92,31 @@ export const setUserQuery = (data?: User) => {
 
 //get data
 
-export const getUserQuery = () =>
+export const GetUserQuery = () =>
   useQuery(['user'], {
     refetchOnWindowFocus: false,
     initialData: userInitialData
   });
 
-export const getEmployeesQuery = () =>
+export const GetEmployeesQuery = () =>
   useQuery(['employees'], {refetchOnWindowFocus: false});
 
-export const getButtonsQuery = () =>
+export const GetButtonsQuery = () =>
   useQuery(['buttons'], {refetchOnWindowFocus: false});
 
-export const getShopQuery = () =>
+export const GetShopQuery = () =>
   useQuery(['shop'], {
     refetchOnWindowFocus: false,
     initialData: shopInitialData
   });
 
-export const getCompanyImagesQuery = (setImages: boolean) =>
+export const GetCompanyImagesQuery = (setImages: boolean) =>
   useQuery(['companyImages'], {
     refetchOnWindowFocus: false,
     enabled: !!setImages
   });
 
-export const updateUserQuery = () => {
+export const UpdateUserQuery = () => {
   const queryClient = useQueryClient();
   const responseMutation = useMutation({
     mutationFn: (user: User) => editUserFirebase(user),

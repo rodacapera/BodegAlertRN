@@ -1,7 +1,7 @@
 import {Panics} from '@src/types/userTypes';
 import {useQuery} from '@tanstack/react-query';
 
-export const setPanicsQuery = (panics: Panics[]) => {
+export const SetPanicsQuery = (panics: Panics[]) => {
   const query = useQuery({
     queryKey: ['panics'],
     queryFn: async () => {
@@ -11,5 +11,5 @@ export const setPanicsQuery = (panics: Panics[]) => {
   return query;
 };
 
-export const getPanicsQuery = () =>
+export const GetPanicsQuery = () =>
   useQuery(['panics'], {refetchOnWindowFocus: false});

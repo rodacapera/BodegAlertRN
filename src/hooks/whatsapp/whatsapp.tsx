@@ -1,10 +1,6 @@
 import {Alert, Share} from 'react-native';
 
-export const whatsapp = async (
-  title: string,
-  message: string,
-  subject?: string
-) => {
+export const whatsapp = async (title: string, message: string) => {
   try {
     const result = await Share.share({
       title: title,

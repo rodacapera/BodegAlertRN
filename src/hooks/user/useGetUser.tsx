@@ -1,22 +1,21 @@
 import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 import {config} from '@src/hooks/config/config';
-import {setPanicsQuery} from '@src/reactQuery/notifyQuery';
+import {SetPanicsQuery} from '@src/reactQuery/NotifyQuery';
 import {
-  getUserQuery,
-  setButtonsQuery,
-  setEmployeesQuery,
-  setShopQuery
-} from '@src/reactQuery/userQuery';
+  GetUserQuery,
+  SetButtonsQuery,
+  SetEmployeesQuery,
+  SetShopQuery
+} from '@src/reactQuery/UserQuery';
 import {GetUserData} from '@src/types/auth';
 import {Buttons} from '@src/types/buttons';
 import {Configuration} from '@src/types/configuration';
 import {Panics, User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
-import {Platform} from 'react-native';
 
 const useGetUser = () => {
   const configuration = config() as Configuration;
-  const {isLoading, error, data} = getUserQuery();
+  const {isLoading, error, data} = GetUserQuery();
   const currentData = data as GetUserData;
   const [panics, setPanics] = useState<Panics[]>([]);
   const [employees, setEmployees] = useState<User[]>([]);
@@ -26,10 +25,10 @@ const useGetUser = () => {
   const [shopId, setShopId] = useState<string>();
   const user = currentData?.user as User;
 
-  setEmployeesQuery(employees);
-  setPanicsQuery(panics);
-  setShopQuery(shopId);
-  setButtonsQuery(buttons);
+  SetEmployeesQuery(employees);
+  SetPanicsQuery(panics);
+  SetShopQuery(shopId);
+  SetButtonsQuery(buttons);
 
   const resultPanics = (
     querySnapshot: FirebaseFirestoreTypes.QuerySnapshot

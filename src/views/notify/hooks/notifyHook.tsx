@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {headerShown} from '@src/hooks/navigator/headerShown';
-import {getPanicsQuery} from '@src/reactQuery/notifyQuery';
+import {getPanicsQuery} from '@src/reactQuery/NotifyQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Panics} from '@src/types/userTypes';

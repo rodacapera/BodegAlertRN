@@ -6,7 +6,7 @@ import {
   getEmployeesQuery,
   getUserQuery,
   setEmployeesQuery
-} from '@src/reactQuery/userQuery';
+} from '@src/reactQuery/UserQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';

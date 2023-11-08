@@ -10,14 +10,14 @@ import {
   setCompanyImagesQuery,
   setShopQuery,
   setUserQuery
-} from '@src/reactQuery/userQuery';
+} from '@src/reactQuery/UserQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Logos} from '@src/types/imageTypes';
 import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
 
-const drawerComponentHook = (navigation: StackNavigation) => {
+const DrawerComponentHook = (navigation: StackNavigation) => {
   setUserQuery();
   const {getItem} = useAsyncStorage('@theme'); //get global dark mode
   const {colors, theme, setDarkTheme, setLightTheme, dark} = actualTheme();
@@ -68,9 +68,9 @@ const drawerComponentHook = (navigation: StackNavigation) => {
     // Handle dynamic link inside your own application
     if (link.url.includes('?')) {
       const params = link.url.split('?')[1].split('&');
-      const viewParam = params[0].split('=');
+      // const viewParam = params[0].split('=');
       const shopParam = params[1].split('=');
-      const view = viewParam[0] == 'view' ? viewParam[1] : undefined;
+      // const view = viewParam[0] == 'view' ? viewParam[1] : undefined;
       const id_shop = shopParam[0] == 'id_shop' ? shopParam[1] : undefined;
       setShopId(id_shop);
     }
@@ -131,4 +131,4 @@ const drawerComponentHook = (navigation: StackNavigation) => {
   };
 };
 
-export {drawerComponentHook};
+export {DrawerComponentHook};

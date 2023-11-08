@@ -8,7 +8,7 @@ import {
   getShopQuery,
   getUserQuery,
   updateUserQuery
-} from '@src/reactQuery/userQuery';
+} from '@src/reactQuery/UserQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';

@@ -90,17 +90,17 @@ const mqttConfig = async (value: string) => {
     });
 };
 
-const buttonConfig = async (value: string) => {
-  const url = API + BUTTON_ACTION(value);
-  return await fetch(url, {method: 'GET'})
-    .then(response => response.json())
-    .then(async data => {
-      return data;
-    })
-    .catch(err => {
-      console.debug('error', err);
-    });
-};
+// const buttonConfig = async (value: string) => {
+//   const url = API + BUTTON_ACTION(value);
+//   return await fetch(url, {method: 'GET'})
+//     .then(response => response.json())
+//     .then(async data => {
+//       return data;
+//     })
+//     .catch(err => {
+//       console.debug('error', err);
+//     });
+// };
 
 export const getShellyConfig = async () => {
   return await fetch(API + '/settings', {method: 'GET'})
@@ -131,11 +131,11 @@ const networkSettings = async () => {
   const mqttUser = '_user=pannic';
   const mqttPass = '_pass=p4nnic2022';
 
-  const mqttStatusResponse = await mqttConfig(mqttStat);
-  const mqttPeriodResponse = await mqttConfig(mqttPeriod);
-  const mqttServerResponse = await mqttConfig(mqttServer);
-  const mqttUserResponse = await mqttConfig(mqttUser);
-  const mqttPasswordResponse = await mqttConfig(mqttPass);
+  await mqttConfig(mqttStat);
+  await mqttConfig(mqttPeriod);
+  await mqttConfig(mqttServer);
+  await mqttConfig(mqttUser);
+  await mqttConfig(mqttPass);
   // const buttonConfigResponse = await buttonConfig(btnAction);
   const url = API + BUTTON_ACTION(btnAction);
   return {myConfig, button: url};

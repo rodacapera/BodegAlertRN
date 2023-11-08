@@ -19,7 +19,7 @@ import {
   Title
 } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {drawerComponentHook} from './hook/drawerComponentHook';
+import {DrawerComponentHook} from './hook/DrawerComponentHook';
 import {drawerComponentStyles} from './styles/drawerComponentStyles';
 
 const DrawerComponent = (props: DrawerContentComponentProps) => {
@@ -37,7 +37,7 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
     isLoading,
     imageAvatar,
     configuration
-  } = drawerComponentHook(navigation);
+  } = DrawerComponentHook(navigation);
 
   return isLoading ? (
     <></>

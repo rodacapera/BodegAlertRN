@@ -1,6 +1,6 @@
 import {config} from '@src/hooks/config/config';
 import {getDynamicLinkFirebase} from '@src/hooks/firebase/dynamicLink/dynamicLink';
-import {getUserQuery} from '@src/reactQuery/userQuery';
+import {getUserQuery} from '@src/reactQuery/UserQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {QrModalProps} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';

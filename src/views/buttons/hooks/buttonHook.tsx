@@ -6,7 +6,7 @@ import {
   getButtonsQuery,
   getUserQuery,
   setButtonsQuery
-} from '@src/reactQuery/userQuery';
+} from '@src/reactQuery/UserQuery';
 import {ButtonFind, Buttons} from '@src/types/buttons';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';

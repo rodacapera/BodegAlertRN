@@ -9,7 +9,7 @@ import {
   showNetworks,
   statusActionsDevice
 } from '@src/hooks/shellyActions';
-import {getUserQuery} from '@src/reactQuery/userQuery';
+import {getUserQuery} from '@src/reactQuery/UserQuery';
 import {ButtonFind, Buttons} from '@src/types/buttons';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';

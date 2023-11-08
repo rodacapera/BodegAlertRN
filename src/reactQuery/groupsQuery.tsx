@@ -1,7 +1,7 @@
 import {getGroupById} from '@src/hooks/firebase/groups/groups';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
-export const setGroupQuery = (group_number?: string) => {
+export const SetGroupQuery = (group_number?: string) => {
   const query = useQuery({
     queryKey: ['groups'],
     queryFn: async () => group_number && (await getGroupById(group_number)),
@@ -10,7 +10,7 @@ export const setGroupQuery = (group_number?: string) => {
   return query;
 };
 
-export const updateGroupQuery = () => {
+export const UpdateGroupQuery = () => {
   const queryClient = useQueryClient();
   const responseMutation = useMutation({
     mutationFn: (group_number: string) => getGroupById(group_number),
