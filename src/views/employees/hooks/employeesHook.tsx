@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {getEmployeesFirebase} from '@src/hooks/firebase/employees/employees';
 import {editFieldUserFirebase} from '@src/hooks/firebase/user/user';
-import {headerShown} from '@src/hooks/navigator/headerShown';
+import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {
   GetEmployeesQuery,
   GetUserQuery,
@@ -14,11 +14,11 @@ import {useEffect, useState} from 'react';
 import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
 const EmployeesHook = () => {
+  const navigation = useNavigation<StackNavigation>();
   const {width} = useWindowDimensions();
   const userData = GetUserQuery().data.user;
   const user = userData as unknown as User;
   const colorScheme = useColorScheme();
-  const navigation = useNavigation<StackNavigation>();
   const {data, isLoading} = GetEmployeesQuery();
   const {shop} = GetUserQuery().data.user as unknown as User;
   const employees = data as User[];
@@ -76,9 +76,9 @@ const EmployeesHook = () => {
   }, [employees]);
 
   useEffect(() => {
-    headerShown({
-      width: width,
+    HeaderShown({
       navigation,
+      width: width,
       visible: true,
       transparent: false,
       titleColor:
@@ -90,7 +90,14 @@ const EmployeesHook = () => {
             : colors.onPrimaryContainer
           : colors.onPrimaryContainer
     });
-  });
+  }, [
+    colorScheme,
+    colors.onPrimaryContainer,
+    colors.onSurface,
+    dark,
+    navigation,
+    width
+  ]);
 
   return {
     employees: currentEmployees,

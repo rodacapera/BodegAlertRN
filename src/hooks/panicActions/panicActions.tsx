@@ -9,33 +9,33 @@ import {User} from '@src/types/userTypes';
 import * as geolib from 'geolib';
 import {GeolibInputCoordinates} from 'geolib/es/types';
 import {t} from 'i18next';
+import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {getAxios} from '../axios';
 import {getCurrentPosition} from '../locations/permissionsHook';
-import {headerShown} from '../navigator/headerShown';
-import {MD3Colors} from 'react-native-paper/lib/typescript/types';
+import {HeaderShown} from '../navigator/HeaderShown';
 
 const url = `${SERVER_PANIC_URL_PATH}${SERVER_PANIC_API_PUSH}`;
 
-const sendNotification = async ({
+const SendNotification = async ({
+  navigation,
   data,
   setLoading,
-  navigation,
   colors,
   width
 }: SendNotificationProps) => {
   setLoading(true);
-  headerShown({
-    width: width,
+  HeaderShown({
     navigation,
+    width: width,
     visible: false,
     transparent: true,
     titleColor: colors.onPrimaryContainer
   });
   const response = await getAxios.post(url, data);
   if (response.status == 201) {
-    headerShown({
-      width: width,
+    HeaderShown({
       navigation,
+      width: width,
       visible: true,
       transparent: true,
       titleColor: colors.onPrimaryContainer
@@ -104,13 +104,13 @@ export const panicNotification = async (
     if (user.pay) {
       if (user.type === 'residence') {
         if (distance < validDistance) {
-          sendNotification({data, setLoading, navigation, colors, width});
+          SendNotification({data, setLoading, navigation, colors, width});
           setErrorDistance(false);
         } else {
           setErrorDistance(true);
         }
       } else {
-        sendNotification({data, setLoading, navigation, colors, width});
+        SendNotification({data, setLoading, navigation, colors, width});
         setErrorDistance(false);
       }
     } else {

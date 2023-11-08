@@ -3,11 +3,11 @@ import {useNavigation} from '@react-navigation/native';
 import {userFakeData} from '@src/globals/constants/fakeData';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {geUserByPhoneNumberFirebase} from '@src/hooks/firebase/user/user';
-import {headerShown} from '@src/hooks/navigator/headerShown';
+import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {
-  getShopQuery,
-  getUserQuery,
-  updateUserQuery
+  GetShopQuery,
+  GetUserQuery,
+  UpdateUserQuery
 } from '@src/reactQuery/UserQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
@@ -16,7 +16,7 @@ import {DataKey, Shop, User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
-const userFormHook = (qr?: boolean, shopId?: string) => {
+const UserFormHook = (qr?: boolean, shopId?: string) => {
   const navigation = useNavigation<StackNavigation>();
 
   const {width} = useWindowDimensions();
@@ -24,10 +24,10 @@ const userFormHook = (qr?: boolean, shopId?: string) => {
   const colorScheme = useColorScheme();
   const os = Platform.OS;
 
-  const userData = getUserQuery();
-  const shopData = getShopQuery();
+  const userData = GetUserQuery();
+  const shopData = GetShopQuery();
 
-  const {isLoading, error, mutate, data} = updateUserQuery();
+  const {isLoading, error, mutate, data} = UpdateUserQuery();
 
   const [user, setUser] = useState<User>();
   const [shop, setShop] = useState<Shop>();
@@ -110,9 +110,9 @@ const userFormHook = (qr?: boolean, shopId?: string) => {
 
   useEffect(() => {
     user &&
-      headerShown({
-        width: !qr ? width : undefined,
+      HeaderShown({
         navigation,
+        width: !qr ? width : undefined,
         visible: qr ? false : true,
         transparent: false,
         titleColor:
@@ -124,7 +124,16 @@ const userFormHook = (qr?: boolean, shopId?: string) => {
               : colors.onPrimaryContainer
             : colors.onPrimaryContainer
       });
-  }, [dark, user, qr]);
+  }, [
+    navigation,
+    dark,
+    user,
+    qr,
+    width,
+    colorScheme,
+    colors.onSurface,
+    colors.onPrimaryContainer
+  ]);
 
   return {
     user,
@@ -138,4 +147,4 @@ const userFormHook = (qr?: boolean, shopId?: string) => {
     setAlertUserExist
   };
 };
-export {userFormHook};
+export {UserFormHook};

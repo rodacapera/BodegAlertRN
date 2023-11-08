@@ -1,19 +1,19 @@
-import {SplashProps} from '@src/types/globalTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StackNavigation} from '@src/types/globalTypes';
 
-const splashHook = async ({navigation}: SplashProps) => {
+const SplashHook = async ({navigator}: {navigator: StackNavigation}) => {
   const user = await AsyncStorage.getItem('@userAuth');
   const appInit = await AsyncStorage.getItem('@appInit');
 
   if (appInit !== null) {
     if (user) {
-      navigation.replace('Home', {isLogin: false, isBack: true});
+      navigator.replace('Home', {isLogin: false, isBack: true});
     } else {
-      navigation.replace('LoginSplash');
+      navigator.replace('LoginSplash');
     }
   } else {
-    navigation.replace('MyOnboarding');
+    navigator.replace('MyOnboarding');
   }
 };
 
-export default splashHook;
+export default SplashHook;

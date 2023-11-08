@@ -39,9 +39,10 @@ const AddButtonForm = ({
 }) => {
   const [eye, setEye] = useState(false);
   const {colors, theme} = actualTheme();
-  useEffect(() => {
-    setNameIsd(iss.toString());
-  }, [iss]);
+
+  // useEffect(() => {
+  //   setNameIsd(iss.toString());
+  // }, [iss, setNameIsd]);
 
   const copyToClipboard = () => {
     urlConfigButton && Clipboard.setString(urlConfigButton);

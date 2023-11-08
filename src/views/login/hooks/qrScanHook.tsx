@@ -1,16 +1,16 @@
 import {useNavigation} from '@react-navigation/native';
-import {headerShown} from '@src/hooks/navigator/headerShown';
-import {setShopQuery} from '@src/reactQuery/UserQuery';
+import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
+import {SetShopQuery} from '@src/reactQuery/UserQuery';
 import {StackNavigation} from '@src/types/globalTypes';
 import {useEffect, useState} from 'react';
 import {DimensionValue, View} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 
-const qrScanHook = () => {
+const QrScanHook = () => {
   const navigation = useNavigation<StackNavigation>();
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
   const [shopId, setShopId] = useState<string | undefined>(undefined);
-  setShopQuery(shopId);
+  SetShopQuery(shopId);
   const onSuccess = (e: {data: string}) => {
     const url = e.data.split('=')[6];
     const urlDecode = decodeURI(url);
@@ -92,14 +92,14 @@ const qrScanHook = () => {
   }, [shopId]);
 
   useEffect(() => {
-    headerShown({
+    HeaderShown({
       navigation,
       visible: false,
       transparent: false
     });
-  }, []);
+  }, [navigation]);
 
   return {onSuccess, flash, setFlash, marker};
 };
 
-export {qrScanHook};
+export {QrScanHook};

@@ -5,31 +5,30 @@ import {
   location,
   notification
 } from '@src/assets/images';
+import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {handleFinishOnboarding} from '@src/hooks/onboarding/onboardingHook';
 import {actualTheme} from '@src/types/contextTypes';
-import {MyOnboardingProps, StackNavigation} from '@src/types/globalTypes';
+import {StackNavigation} from '@src/types/globalTypes';
 import {splashStyles} from '@src/views/splash/styles/splashStyles';
-import React, {Fragment, useLayoutEffect, useState} from 'react';
+import {Fragment, useLayoutEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
-import {headerShown} from '@src/hooks/navigator/headerShown';
 
-const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
-  const navigator = useNavigation<StackNavigation>();
+const MyOnboarding = () => {
   const [visible, setVisible] = useState(false);
   const {t} = useTranslation();
   const {colors} = actualTheme();
-  const {navigate} = useNavigation<StackNavigation>();
+  const navigation = useNavigation<StackNavigation>();
 
   useLayoutEffect(() => {
-    headerShown({
-      navigation: navigator,
+    HeaderShown({
       visible: false,
-      transparent: false
+      transparent: false,
+      navigation
     });
-  });
+  }, [navigation]);
 
   return (
     <Fragment>
@@ -45,8 +44,8 @@ const MyOnboarding = ({route, navigation}: MyOnboardingProps) => {
         nextLabel={t('onboarding.next')}
         skipLabel={t('onboarding.skip')}
         bottomBarColor="transparent"
-        onSkip={() => handleFinishOnboarding(setVisible, navigate)}
-        onDone={() => handleFinishOnboarding(setVisible, navigate)}
+        onSkip={() => handleFinishOnboarding(setVisible, navigation.navigate)}
+        onDone={() => handleFinishOnboarding(setVisible, navigation.navigate)}
         pages={[
           {
             backgroundColor: colors.background,

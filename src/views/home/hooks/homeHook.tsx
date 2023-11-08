@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {bike, bike_help, family_help, home, shop} from '@src/assets/images';
 import {config} from '@src/hooks/config/config';
-import {headerShown} from '@src/hooks/navigator/headerShown';
+import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {whatsapp} from '@src/hooks/whatsapp/whatsapp';
 import {GetPanicsQuery} from '@src/reactQuery/NotifyQuery';
 import {GetUserQuery} from '@src/reactQuery/UserQuery';
@@ -12,7 +12,7 @@ import {actualTheme} from '@src/types/contextTypes';
 import {HomeParams, StackNavigation} from '@src/types/globalTypes';
 import {Panics, User} from '@src/types/userTypes';
 import {t} from 'i18next';
-import {useEffect, useLayoutEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
   BackHandler,
   Platform,
@@ -25,7 +25,7 @@ const HomeHook = () => {
   // setUserQuery();
   const route = useRoute();
   const {width} = useWindowDimensions();
-  const {colors, dark} = actualTheme();
+  const {colors} = actualTheme();
   const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
 
@@ -142,14 +142,16 @@ const HomeHook = () => {
     return () => backHandler.remove();
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    console.log('ssss', navigation.getState().index == 0);
+    console.log('params', params);
     if (
-      navigation.getState().index == 1 ||
+      navigation.getState().index == 0 ||
       (params && (params.isLogin || params.isBack))
     ) {
-      headerShown({
-        width: width,
+      HeaderShown({
         navigation,
+        width: width,
         visible: !isLoading,
         transparent: true,
         titleColor:
@@ -160,20 +162,39 @@ const HomeHook = () => {
             : colors.onPrimaryContainer
       });
     } else {
-      headerShown({
-        width: width,
+      HeaderShown({
         navigation,
+        width: width,
         visible: !isLoading,
         transparent: true,
         titleColor: colors.onPrimaryContainer
       });
     }
+  }, [
+    colorScheme,
+    colors.onPrimaryContainer,
+    isLoading,
+    navigation,
+    params,
+    width
+  ]);
+
+  useEffect(() => {
     if (user) {
       !region && setMyCurrentLocation();
       !appVersion && appVersionBd && checkVersion(appVersionBd);
       panics && getCalloutText();
     }
-  }, [params, dark, region, appVersion, panics, user]);
+  }, [
+    appVersion,
+    appVersionBd,
+    checkVersion,
+    getCalloutText,
+    panics,
+    region,
+    setMyCurrentLocation,
+    user
+  ]);
 
   return {
     region,

@@ -2,11 +2,11 @@ import {actualTheme} from '@src/types/contextTypes';
 import {LoginFormProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
 import {useRef} from 'react';
+import {View} from 'react-native';
 import {Text} from 'react-native-paper';
 import ErrorInputForm from '../../../components/customErrorInputForm/CustomErrorInputForm';
 import CustomInputForm from '../../../components/customInputForm/CustomInputForm';
 import Buttons from './Buttons';
-import {View, useColorScheme} from 'react-native';
 
 const LoginForm = ({
   setButtonAction,

@@ -1,9 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import {buttonActionInitialState} from '@src/globals/constants/login';
-import {config} from '@src/hooks/config/config';
 import {geUserByPhoneNumberFirebase} from '@src/hooks/firebase/user/user';
 import {getLocation} from '@src/hooks/locations/geocoderHook';
-import {headerShown} from '@src/hooks/navigator/headerShown';
+import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {StackNavigation} from '@src/types/globalTypes';
 import {ResultLocations} from '@src/types/locationTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
@@ -11,7 +10,7 @@ import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
 import {useEffect, useState} from 'react';
 
-const loginHook = (data?: User) => {
+const LoginHook = (data?: User) => {
   const navigation = useNavigation<StackNavigation>();
   const [errorPhone, setErrorPhone] = useState(false);
   const [buttonAction, setButtonAction] = useState(buttonActionInitialState);
@@ -72,12 +71,12 @@ const loginHook = (data?: User) => {
 
   useEffect(() => {
     !currentButtonAction.logged &&
-      headerShown({
+      HeaderShown({
         navigation,
         visible: false,
         transparent: false
       });
-  }, []);
+  }, [currentButtonAction.logged, navigation]);
 
   return {
     errorPhone,
@@ -93,4 +92,4 @@ const loginHook = (data?: User) => {
     loadingText
   };
 };
-export {loginHook};
+export {LoginHook};

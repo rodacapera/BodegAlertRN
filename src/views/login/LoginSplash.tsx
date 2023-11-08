@@ -1,9 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
 import {login_background} from '@src/assets/images';
 import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
-import {headerShown} from '@src/hooks/navigator/headerShown';
+import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {actualTheme} from '@src/types/contextTypes';
-import {LoginSplashProps, StackNavigation} from '@src/types/globalTypes';
+import {StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {useLayoutEffect} from 'react';
 import {
@@ -16,18 +16,18 @@ import {Button, Text} from 'react-native-paper';
 import {backgroundStyle} from '../../globals/styles/screenMode';
 import {loginStyles} from './styles/loginStyles';
 
-const LoginSplash = ({route}: LoginSplashProps) => {
+const LoginSplash = () => {
   const {width} = useWindowDimensions();
   const {colors, theme} = actualTheme();
   const navigation = useNavigation<StackNavigation>();
 
   useLayoutEffect(() => {
-    headerShown({
+    HeaderShown({
       navigation,
       visible: false,
       transparent: false
     });
-  }, []);
+  }, [navigation]);
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -35,7 +35,7 @@ const LoginSplash = ({route}: LoginSplashProps) => {
         source={login_background}
         resizeMode="cover"
         style={loginStyles.image}>
-        <View style={[loginStyles.content]}>
+        <View style={loginStyles.content}>
           <View
             style={{
               flex: width >= 768 ? 1 : 2

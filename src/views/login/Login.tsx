@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import {Avatar, Button, Text} from 'react-native-paper';
 import LoginForm from './components/LoginForm';
-import {loginHook} from './hooks/loginHook';
+import {LoginHook} from './hooks/LoginHook';
 import {loginFormStyles} from './styles/loginFormStyles';
 
 const Login = ({route}: LoginProps) => {
@@ -34,7 +34,7 @@ const Login = ({route}: LoginProps) => {
     errorUserNotExist,
     countryCode,
     loadingText
-  } = loginHook(params?.data);
+  } = LoginHook(params?.data);
 
   return (
     <SafeAreaView style={backgroundStyle}>

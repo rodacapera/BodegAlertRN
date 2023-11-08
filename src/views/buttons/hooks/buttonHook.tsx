@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {removeButtonByIdFirebase} from '@src/hooks/firebase/buttons/buttons';
-import {headerShown} from '@src/hooks/navigator/headerShown';
+import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {statusDevice} from '@src/hooks/shellyActions';
 import {
   GetButtonsQuery,
@@ -20,9 +20,9 @@ import {
 } from 'react-native';
 
 const Buttonhook = () => {
+  const navigation = useNavigation<StackNavigation>();
   const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
-  const navigation = useNavigation<StackNavigation>();
   const {colors, dark} = actualTheme();
   const userData = GetUserQuery().data.user;
   const user = userData as unknown as User;
@@ -75,7 +75,7 @@ const Buttonhook = () => {
     sendRemoveItem && removeButton();
   }, [sendRemoveItem]);
 
-  const getDevice = () => {
+  const getDevice = useCallback(() => {
     statusDevice().then(result => {
       if (result) {
         setButtonFind({
@@ -88,7 +88,7 @@ const Buttonhook = () => {
           setButtonFind({isValid: false, connected: false, ip: ''});
       }
     });
-  };
+  }, [buttonFind]);
 
   useEffect(() => {
     !buttonFind && getDevice();
@@ -100,12 +100,12 @@ const Buttonhook = () => {
       value => value === 'active' && getDevice()
     );
     return () => appMode.remove();
-  }, []);
+  }, [getDevice]);
 
   useEffect(() => {
-    headerShown({
-      width: width,
+    HeaderShown({
       navigation,
+      width: width,
       visible: true,
       transparent: false,
       titleColor:
@@ -117,7 +117,14 @@ const Buttonhook = () => {
             : colors.onPrimaryContainer
           : colors.onPrimaryContainer
     });
-  });
+  }, [
+    colorScheme,
+    colors.onPrimaryContainer,
+    colors.onSurface,
+    dark,
+    navigation,
+    width
+  ]);
 
   return {
     alertVisible,

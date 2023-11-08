@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {headerShown} from '@src/hooks/navigator/headerShown';
+import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {GetPanicsQuery} from '@src/reactQuery/NotifyQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
@@ -17,7 +17,7 @@ const NotifyHook = () => {
 
   useEffect(() => {
     if (data) {
-      headerShown({
+      HeaderShown({
         width: width,
         navigation,
         visible: true,
@@ -32,7 +32,15 @@ const NotifyHook = () => {
             : colors.onPrimaryContainer
       });
     }
-  }, [data, dark]);
+  }, [
+    navigation,
+    data,
+    dark,
+    width,
+    colorScheme,
+    colors.onSurface,
+    colors.onPrimaryContainer
+  ]);
 
   return {
     panics: data as Panics[],

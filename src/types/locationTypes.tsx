@@ -1,8 +1,8 @@
 export type Region = {
   latitude: number;
   longitude: number;
-  latitudeDelta: Number;
-  longitudeDelta: Number;
+  latitudeDelta: number;
+  longitudeDelta: number;
 };
 
 export interface LatLng {

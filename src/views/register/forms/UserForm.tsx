@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {Button, Caption, TextInput} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
-import {userFormHook} from './hooks/userFormHook';
+import {UserFormHook} from './hooks/UserFormHook';
 import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 
 const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
@@ -31,7 +31,7 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
     shop,
     alertUserExist,
     setAlertUserExist
-  } = userFormHook(qr, shopId);
+  } = UserFormHook(qr, shopId);
 
   return (
     <KeyboardAvoidingView

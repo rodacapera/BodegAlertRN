@@ -1,7 +1,7 @@
 import {StackNavigation} from '@src/types/globalTypes';
 type DrawerType = 'permanent' | 'front';
 
-export const headerShown = ({
+export const HeaderShown = ({
   navigation,
   visible,
   transparent,

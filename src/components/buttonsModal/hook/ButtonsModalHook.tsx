@@ -9,7 +9,7 @@ import {
   showNetworks,
   statusActionsDevice
 } from '@src/hooks/shellyActions';
-import {getUserQuery} from '@src/reactQuery/UserQuery';
+import {GetUserQuery} from '@src/reactQuery/UserQuery';
 import {ButtonFind, Buttons} from '@src/types/buttons';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
@@ -30,7 +30,7 @@ const ButtonsModalHook = ({
   setButtonFind: (e: ButtonFind | undefined) => void;
   setNewButtons: (e: Buttons[]) => void;
 }) => {
-  const {data} = getUserQuery();
+  const {data} = GetUserQuery();
   const user = data.user as unknown as User;
   const [networks, setNetworks] = useState<Networks[]>();
   const [firsStep, setFirsStep] = useState<string>('');
@@ -104,10 +104,7 @@ const ButtonsModalHook = ({
           if (!findButton) {
             const buttonIsReady = result.actions.shortpush_url[0].enabled;
             if (buttonIsReady) {
-              const finishSetup = finisSettButton(
-                currentButton.isd,
-                currentButton.pass
-              );
+              finisSettButton(currentButton.isd, currentButton.pass);
               setButtonNotReady(false);
               saveButtonOnBd(buttons);
             } else {
@@ -135,7 +132,7 @@ const ButtonsModalHook = ({
   const saveButtonOnBd = (buttons: Buttons[]) => {
     currentButton &&
       createButtonsFirebase(currentButton, user)
-        .then(response => {
+        .then(() => {
           const newCurrenButtons = [...buttons];
           newCurrenButtons.push(currentButton);
           setSavingData(true);
@@ -172,6 +169,10 @@ const ButtonsModalHook = ({
     );
     return () => appMode.remove();
   }, []);
+
+  useEffect(() => {
+    setNameIsd(firsStep.toString());
+  }, [firsStep]);
 
   return {
     networks,
