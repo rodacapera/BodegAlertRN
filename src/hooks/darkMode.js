@@ -35,10 +35,10 @@ export const darkTheme = {
       level2: 'rgb(50, 38, 37)',
       level3: 'rgb(57, 43, 41)',
       level4: 'rgb(59, 44, 43)',
-      level5: 'rgb(63, 47, 46)',
+      level5: 'rgb(63, 47, 46)'
     },
     surfaceDisabled: 'rgba(237, 224, 222, 0.12)',
     onSurfaceDisabled: 'rgba(237, 224, 222, 0.38)',
-    backdrop: 'rgba(59, 45, 44, 0.4)',
-  },
+    backdrop: 'rgba(59, 45, 44, 0.4)'
+  }
 };

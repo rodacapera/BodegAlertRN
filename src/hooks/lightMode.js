@@ -35,10 +35,10 @@ export const lightTheme = {
       level2: 'rgb(248, 236, 239)',
       level3: 'rgb(245, 230, 233)',
       level4: 'rgb(244, 228, 231)',
-      level5: 'rgb(242, 224, 227)',
+      level5: 'rgb(242, 224, 227)'
     },
     surfaceDisabled: 'rgba(32, 26, 25, 0.12)',
     onSurfaceDisabled: 'rgba(32, 26, 25, 0.38)',
-    backdrop: 'rgba(59, 45, 44, 0.4)',
-  },
+    backdrop: 'rgba(59, 45, 44, 0.4)'
+  }
 };

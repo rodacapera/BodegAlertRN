@@ -1,5 +1,8 @@
 import {StyleSheet} from 'react-native';
 
+const gray = '#ccc';
+const transparent = 'transparent';
+
 export const buttonsModalStyles = StyleSheet.create({
   imageContainer: {
     width: 80,
@@ -22,7 +25,7 @@ export const buttonsModalStyles = StyleSheet.create({
     paddingBottom: 20
   },
   helperCaption: {
-    borderColor: '#ccc',
+    borderColor: gray,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 10
@@ -35,10 +38,14 @@ export const buttonsModalStyles = StyleSheet.create({
     fontWeight: '600'
   },
   button: {
-    borderColor: '#ccc',
+    borderColor: gray,
     borderWidth: 1,
     margin: 3,
     borderRadius: 6
   },
-  input: {width: 280, backgroundColor: 'transparent', marginVertical: 15}
+  input: {
+    width: 280,
+    backgroundColor: transparent,
+    marginVertical: 15
+  }
 });

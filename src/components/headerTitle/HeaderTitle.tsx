@@ -4,9 +4,11 @@ import {Text, View} from 'react-native';
 import {IconButton} from 'react-native-paper';
 import {headerStyles} from './styes/headerStyles';
 
+const transparent = 'transparent';
+
 const HeaderTitle = ({title}: {title: string}) => {
   const {goBack} = useNavigation();
-  const {colors, theme, dark} = actualTheme();
+  const {colors, dark} = actualTheme();
   return (
     <View style={headerStyles.header}>
       <View style={headerStyles.arrowBackIcon}>
@@ -15,7 +17,7 @@ const HeaderTitle = ({title}: {title: string}) => {
           mode="contained-tonal"
           iconColor={dark ? colors.onSurface : colors.onPrimaryContainer}
           style={{
-            backgroundColor: 'transparent'
+            backgroundColor: transparent
           }}
           onPress={() => goBack()}
         />

@@ -1,12 +1,14 @@
+import {useNavigation} from '@react-navigation/native';
 import {handleBack} from '@src/components/otp/hooks/otpFunctions';
 import {actualTheme} from '@src/types/contextTypes';
+import {StackNavigation} from '@src/types/globalTypes';
 import {HeaderOtpParams} from '@src/types/otpTypes';
 import {t} from 'i18next';
-import {Text, View, useColorScheme} from 'react-native';
+import {Text, View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {otpStyles} from '../styles/otpStyles';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigation} from '@src/types/globalTypes';
+
+const transparent = 'transparent';
 
 const HeaderOtp = ({
   setButtonAction,
@@ -14,7 +16,6 @@ const HeaderOtp = ({
   counter,
   goBack
 }: HeaderOtpParams) => {
-  const colorScheme = useColorScheme();
   const navigator = useNavigation<StackNavigation>();
   const {colors, theme, dark} = actualTheme();
 
@@ -25,7 +26,7 @@ const HeaderOtp = ({
           <Button
             icon="arrow-left"
             textColor={dark ? colors.onSurface : colors.onPrimaryContainer}
-            style={{backgroundColor: 'transparent'}}
+            style={{backgroundColor: transparent}}
             theme={theme}
             mode="text"
             onPress={() => {

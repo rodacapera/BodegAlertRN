@@ -8,7 +8,7 @@ import {shop} from '@src/globals/constants/fakeData';
 import {StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {Fragment} from 'react';
-import {Image, Linking, StatusBar, View} from 'react-native';
+import {Image, Linking, View} from 'react-native';
 import {
   Avatar,
   Caption,

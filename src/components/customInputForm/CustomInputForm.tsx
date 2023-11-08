@@ -22,9 +22,10 @@ const CustomInputForm = ({
   const [focusPhone, setFocusPhone] = useState(false);
   const {colors} = actualTheme();
   const [currentPhone, setCurrentPhone] = useState<string>();
+  const transparent = 'transparent';
 
   const handlePhoneNumber = (text: string) => {
-    let countryCode = phoneRef.current.getCountryCode();
+    const countryCode = phoneRef.current.getCountryCode();
     const myPhone = `+${countryCode}${text}`;
     setButtonAction({
       name: 'login',
@@ -40,7 +41,7 @@ const CustomInputForm = ({
   };
 
   useEffect(() => {
-    let countryCode = phoneRef?.current?.getCountryCode();
+    const countryCode = phoneRef?.current?.getCountryCode();
     setButtonAction({
       name: 'login',
       show: !focusPhone,
@@ -101,7 +102,7 @@ const CustomInputForm = ({
         placeholder="3003543968"
         placeholderTextColor={lightTheme.colors.outlineVariant}
         underlineStyle={{
-          backgroundColor: 'transparent'
+          backgroundColor: transparent
         }}
         textColor={colors.onSurface} //ok on profile
         theme={{

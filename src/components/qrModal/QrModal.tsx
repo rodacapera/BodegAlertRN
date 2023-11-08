@@ -13,6 +13,8 @@ import {logo_app} from '../../assets/images';
 import TextWithCustomLink from '../textWithCustomLink/TextWithCustomLink';
 import {qrModalStyles} from './styles/qrModalStyles';
 
+const white = 'white';
+
 const QrModal = ({visible, setVisible}: QrModalProps) => {
   const hideModal = () => setVisible(false);
   const [qrLink, setQrLink] = useState<string>();
@@ -53,7 +55,7 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
         </Caption>
         <View
           style={{
-            backgroundColor: 'white',
+            backgroundColor: white,
             width: '100%',
             height: 350,
             justifyContent: 'center',

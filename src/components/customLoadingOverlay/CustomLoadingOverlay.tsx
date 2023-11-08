@@ -3,6 +3,9 @@ import {View} from 'react-native';
 import CustomLoader from '../customLoader/CustomLoader';
 import {customLoadingOverlayStyles} from './styles/customLoadingOverlayStyles';
 
+const transparentColor = 'transparent';
+const whiteOpacity = 'rgba(255,255,255, 0.60)';
+
 const CustomLoadingOverlay = ({
   visible,
   transparent,
@@ -19,9 +22,7 @@ const CustomLoadingOverlay = ({
       style={[
         customLoadingOverlayStyles.container,
         {
-          backgroundColor: transparent
-            ? 'transparent'
-            : 'rgba(255,255,255, 0.60)'
+          backgroundColor: transparent ? transparentColor : whiteOpacity
         }
       ]}>
       <View style={customLoadingOverlayStyles.loader}>

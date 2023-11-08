@@ -1,11 +1,13 @@
 import {lightTheme} from '@src/hooks/lightMode';
 import {StyleSheet} from 'react-native';
 
+const black = '#000';
+
 export const loginStyles = StyleSheet.create({
   content: {flex: 1, paddingTop: 50, paddingLeft: 30, paddingRight: 30},
   buttonContainer: {
     width: 250,
-    shadowColor: '#000',
+    shadowColor: black,
     shadowOffset: {
       width: 0,
       height: 6
