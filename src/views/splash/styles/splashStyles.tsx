@@ -2,23 +2,23 @@ import {StyleSheet} from 'react-native';
 
 export const splashStyles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center'
   },
   imgContent: {
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center'
   },
   logo: {
-    width: 200,
     height: 200,
+    width: 200
+  },
+  textLogoFin: {
+    fontWeight: 'bold'
   },
   textLogoInit: {
     fontSize: 30,
-    textTransform: 'uppercase',
-  },
-  textLogoFin: {
-    fontWeight: 'bold',
-  },
+    textTransform: 'uppercase'
+  }
 });
