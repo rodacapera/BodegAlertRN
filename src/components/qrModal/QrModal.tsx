@@ -1,6 +1,6 @@
 import {config} from '@src/hooks/config/config';
 import {getDynamicLinkFirebase} from '@src/hooks/firebase/dynamicLink/dynamicLink';
-import {getUserQuery} from '@src/reactQuery/UserQuery';
+import {GetUserQuery} from '@src/reactQuery/UserQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {QrModalProps} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
@@ -19,7 +19,7 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
   const hideModal = () => setVisible(false);
   const [qrLink, setQrLink] = useState<string>();
   const {colors, theme} = actualTheme();
-  const {data} = getUserQuery();
+  const {data} = GetUserQuery();
   const user = data.user as unknown as User;
   const {videoLinks} = config();
 

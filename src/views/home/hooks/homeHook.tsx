@@ -4,8 +4,8 @@ import {bike, bike_help, family_help, home, shop} from '@src/assets/images';
 import {config} from '@src/hooks/config/config';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {whatsapp} from '@src/hooks/whatsapp/whatsapp';
-import {getPanicsQuery} from '@src/reactQuery/NotifyQuery';
-import {getUserQuery} from '@src/reactQuery/UserQuery';
+import {GetPanicsQuery} from '@src/reactQuery/NotifyQuery';
+import {GetUserQuery} from '@src/reactQuery/UserQuery';
 import {Configuration} from '@src/types/configuration';
 // import {setUserQuery} from '@src/reactQuery/userQuery';
 import {actualTheme} from '@src/types/contextTypes';
@@ -30,8 +30,8 @@ const homeHook = () => {
   const navigation = useNavigation<StackNavigation>();
 
   const configuration = config() as Configuration;
-  const {isLoading, data} = getUserQuery();
-  const panics = getPanicsQuery().data as Panics[];
+  const {isLoading, data} = GetUserQuery();
+  const panics = GetPanicsQuery().data as Panics[];
 
   const [region, setRegion] = useState<Region>();
   const [alertVisible, setAlertVisible] = useState(false);

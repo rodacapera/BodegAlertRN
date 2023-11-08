@@ -7,9 +7,9 @@ import {DrawerActions, StackActions} from '@react-navigation/native';
 import {avatar, avatarw} from '@src/assets/images';
 import {useGetUser} from '@src/hooks/user/useGetUser';
 import {
-  setCompanyImagesQuery,
-  setShopQuery,
-  setUserQuery
+  SetCompanyImagesQuery,
+  SetShopQuery,
+  SetUserQuery
 } from '@src/reactQuery/UserQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
@@ -18,7 +18,7 @@ import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
 
 const DrawerComponentHook = (navigation: StackNavigation) => {
-  setUserQuery();
+  SetUserQuery();
   const {getItem} = useAsyncStorage('@theme'); //get global dark mode
   const {colors, theme, setDarkTheme, setLightTheme, dark} = actualTheme();
 
@@ -29,8 +29,8 @@ const DrawerComponentHook = (navigation: StackNavigation) => {
   const [logos, setLogos] = useState<Logos[]>([]);
   const [shopId, setShopId] = useState<string | undefined>(undefined);
 
-  const setImages = setCompanyImagesQuery();
-  setShopQuery(shopId);
+  const setImages = SetCompanyImagesQuery();
+  SetShopQuery(shopId);
 
   const onToggleSwitch = () => {
     setIsDark(!isDark);
