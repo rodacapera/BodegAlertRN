@@ -50,19 +50,6 @@ const DrawerComponentHook = (navigation: StackNavigation) => {
       });
   };
 
-  const validateSwitch = async () => {
-    const item = await getItem();
-    if (dark) {
-      setIsDark(true);
-      Appearance.addChangeListener(() => console.debug('remove')).remove();
-    } else {
-      item ? setIsDark(item === 'dark' ? true : false) : setIsDark(true);
-    }
-    item
-      ? setIsDark(item === 'dark' ? true : false)
-      : setIsDark(dark ? true : false);
-  };
-
   const handleDynamicLink = (link: {url: string}) => {
     setShopId(undefined);
     // Handle dynamic link inside your own application
@@ -90,12 +77,24 @@ const DrawerComponentHook = (navigation: StackNavigation) => {
   }, [setImages]);
 
   useEffect(() => {
+    const validateSwitch = async () => {
+      const item = await getItem();
+      if (dark) {
+        setIsDark(true);
+        Appearance.addChangeListener(() => console.debug('remove')).remove();
+      } else {
+        item ? setIsDark(item === 'dark' ? true : false) : setIsDark(true);
+      }
+      item
+        ? setIsDark(item === 'dark' ? true : false)
+        : setIsDark(dark ? true : false);
+    };
     validateSwitch();
     // const listener = Appearance.addChangeListener(() => {
     //   validateSwitch();
     // });
     // return () => listener.remove();
-  }, []);
+  }, [dark, getItem]);
 
   useEffect(() => {
     const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
@@ -112,7 +111,7 @@ const DrawerComponentHook = (navigation: StackNavigation) => {
     } else {
       console.debug('user is logged or app was not open');
     }
-  }, [shopId]);
+  }, [navigation, shopId, user]);
 
   return {
     handleLogout,
