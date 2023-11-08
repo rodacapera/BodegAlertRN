@@ -1,4 +1,4 @@
-import customTheme from '@src/globals/constants/customTheme';
+import CustomTheme from '@src/globals/constants/CustomTheme';
 import {ThemeProvider} from '@src/hooks/context/themeContext/ThemeContext';
 import '@src/hooks/i18n';
 import {LateralDrawer} from '@src/hooks/navigator/LateralDrawer';
@@ -11,7 +11,7 @@ import {PaperProvider} from 'react-native-paper';
 const queryClient = new QueryClient();
 
 function App(): JSX.Element {
-  const {customDefaultTheme} = customTheme();
+  const {customDefaultTheme} = CustomTheme();
   if (Platform.OS === 'android') enableLatestRenderer();
 
   return (

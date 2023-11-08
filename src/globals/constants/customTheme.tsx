@@ -4,7 +4,7 @@ import {ThemeContextMode} from '@src/types/contextTypes';
 import {useColorScheme} from 'react-native';
 import {MD3DarkTheme, MD3LightTheme} from 'react-native-paper';
 
-const customTheme = () => {
+const CustomTheme = () => {
   const colorScheme = useColorScheme();
 
   const customDefaultTheme = (
@@ -15,4 +15,4 @@ const customTheme = () => {
   return {customDefaultTheme};
 };
 
-export default customTheme;
+export default CustomTheme;

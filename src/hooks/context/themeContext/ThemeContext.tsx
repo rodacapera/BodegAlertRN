@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {customDarkTheme, customLightTheme} from '@src/globals/constants/theme';
 import {ThemeContext, ThemeContextMode} from '@src/types/contextTypes';
 import {useEffect, useState} from 'react';
-import customTheme from '@src/globals/constants/customTheme';
+import CustomTheme from '@src/globals/constants/CustomTheme';
 
 export const ThemeProvider = ({children}: any) => {
   const [currentCustomTheme, setCurrentCustomTheme] =
@@ -10,7 +10,7 @@ export const ThemeProvider = ({children}: any) => {
   const setCurrentTheme = async (myTheme: string) => {
     await AsyncStorage.setItem('@theme', myTheme);
   };
-  const {customDefaultTheme} = customTheme();
+  const {customDefaultTheme} = CustomTheme();
 
   const setDarkTheme = () => {
     setCurrentTheme('dark');
