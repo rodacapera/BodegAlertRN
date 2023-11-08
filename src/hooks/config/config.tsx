@@ -39,7 +39,7 @@ const Config = () => {
     if (Platform.OS === 'android') {
       grantedPermissionAndroid();
     } else {
-      Geolocation.requestAuthorization('whenInUse').then(result => {
+      Geolocation.requestAuthorization('whenInUse').then(() => {
         getLocation(setMyCurrentLocation);
       });
     }
