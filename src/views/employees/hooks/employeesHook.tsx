@@ -37,33 +37,32 @@ const EmployeesHook = () => {
     setAlertVisible(true);
   };
 
-  const sendToRemoveItem = (user_uid: string) => {
-    editFieldUserFirebase(user_uid, {pay: false}).then(() => {
-      setTimeout(() => {
-        getEmployeesFirebase(shop)
-          .get()
-          .then(querySnapshot => {
-            setCurrentEmployees([]);
-            querySnapshot.forEach(value => {
-              const data = value.data() as User;
-              if (querySnapshot.size > 1) {
-                !data.administrator &&
-                  setCurrentEmployees(prev => [...prev, data]);
-              } else {
-                setCurrentEmployees([]);
-              }
-            });
-          });
-        setUserRemoved(true);
-      }, 3000);
-    });
-  };
-
   useEffect(() => {
+    const sendToRemoveItem = (user_uid: string) => {
+      editFieldUserFirebase(user_uid, {pay: false}).then(() => {
+        setTimeout(() => {
+          getEmployeesFirebase(shop)
+            .get()
+            .then(querySnapshot => {
+              setCurrentEmployees([]);
+              querySnapshot.forEach(value => {
+                const data = value.data() as User;
+                if (querySnapshot.size > 1) {
+                  !data.administrator &&
+                    setCurrentEmployees(prev => [...prev, data]);
+                } else {
+                  setCurrentEmployees([]);
+                }
+              });
+            });
+          setUserRemoved(true);
+        }, 3000);
+      });
+    };
     itemMustRemove &&
       itemToRemove != undefined &&
       sendToRemoveItem(itemToRemove);
-  }, [itemMustRemove]);
+  }, [itemMustRemove, itemToRemove, shop]);
 
   useEffect(() => {
     setTimeout(() => {
