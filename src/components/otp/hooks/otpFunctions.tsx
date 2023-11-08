@@ -70,12 +70,12 @@ export const handleValidateOtp = (
       user: user
     } as unknown as SetUserAuthParams;
     await setUser(newUserData);
-    handleBack(setButtonAction, setCode);
     setErrorOtp(false);
     setIsLoadingValidateOtp(false);
     clearInterval(count);
     count = null;
     navigate('Home', {isLogin: true});
+    handleBack(setButtonAction, setCode);
   };
 
   const createShopAndUser = (

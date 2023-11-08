@@ -42,8 +42,7 @@ const OtpCode = ({
     errorNetwork,
     setErrorNetwork,
     isLoadingValidateOtp,
-    setIsLoadingValidateOtp,
-    isCodeRequested
+    setIsLoadingValidateOtp
   } = OtpHook({
     buttonAction
   });
