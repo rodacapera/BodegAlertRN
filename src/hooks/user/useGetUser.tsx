@@ -40,21 +40,6 @@ const useGetUser = () => {
     });
   };
 
-  const resultEmployees = (
-    querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
-  ) => {
-    setEmployees([]);
-    querySnapshot.forEach(value => {
-      const data = value.data() as User;
-      if (querySnapshot.size > 1) {
-        !data.administrator && setEmployees(prev => [...prev, data]);
-      } else {
-        setEmployees([]);
-      }
-    });
-    setCounterEmployees(querySnapshot.size > 1 ? employees.length : 0);
-  };
-
   const resultButtons = (
     querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
   ) => {
@@ -89,6 +74,21 @@ const useGetUser = () => {
   }, [currentData]);
 
   useEffect(() => {
+    const resultEmployees = (
+      querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
+    ) => {
+      setEmployees([]);
+      querySnapshot.forEach(value => {
+        const data = value.data() as User;
+        if (querySnapshot.size > 1) {
+          !data.administrator && setEmployees(prev => [...prev, data]);
+        } else {
+          setEmployees([]);
+        }
+      });
+      setCounterEmployees(querySnapshot.size > 1 ? employees.length : 0);
+    };
+
     if (currentData && currentData.employeesObserver) {
       const employeesObserver = currentData.employeesObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
@@ -99,7 +99,7 @@ const useGetUser = () => {
       );
       return () => employeesObserver();
     }
-  }, [currentData]);
+  }, [currentData, employees.length, setEmployees]);
 
   useEffect(() => {
     if (currentData && currentData.user) {
