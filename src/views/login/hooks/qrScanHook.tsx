@@ -89,7 +89,7 @@ const QrScanHook = () => {
         qr: true,
         shopId: shopId
       });
-  }, [shopId]);
+  }, [navigation, shopId]);
 
   useEffect(() => {
     HeaderShown({
