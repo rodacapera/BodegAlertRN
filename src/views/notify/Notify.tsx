@@ -5,11 +5,11 @@ import {t} from 'i18next';
 import {SafeAreaView} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import NotifyNotFound from './components/NotifyNotFound';
-import {notifyHook} from './hooks/notifyHook';
+import {NotifyHook} from './hooks/NotifyHook';
 import {notifyStyles} from './styles/notifyStyles';
 
 export const Notify = () => {
-  const {panics, setModalVisible, modalVisible} = notifyHook();
+  const {panics, setModalVisible, modalVisible} = NotifyHook();
   return (
     <SafeAreaView style={backgroundStyle}>
       <CustomBanner

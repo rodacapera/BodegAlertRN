@@ -7,7 +7,7 @@ import {Panics} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
-const notifyHook = () => {
+const NotifyHook = () => {
   const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
   const {colors, dark} = actualTheme();
@@ -41,4 +41,4 @@ const notifyHook = () => {
   };
 };
 
-export {notifyHook};
+export {NotifyHook};

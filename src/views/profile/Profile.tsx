@@ -6,7 +6,7 @@ import {SafeAreaView} from 'react-native';
 import UserForm from '../register/forms/UserForm';
 import {profileHook} from './hooks/profileHook';
 
-const Profile = ({navigation, route}: ProfileProps) => {
+const Profile = () => {
   profileHook();
 
   return (
