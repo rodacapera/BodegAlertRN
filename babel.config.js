@@ -14,20 +14,20 @@ module.exports = {
           '.jsx',
           '.json',
           '.ts',
-          '.tsx',
+          '.tsx'
         ],
         root: '.',
         alias: {
           '@src': './src/',
-          '@assets': './src/assets/',
-        },
-      },
+          '@assets': './src/assets/'
+        }
+      }
     ],
-    'react-native-reanimated/plugin',
+    'react-native-reanimated/plugin'
   ],
   env: {
     production: {
-      plugins: ['react-native-paper/babel'],
-    },
-  },
+      plugins: ['react-native-paper/babel']
+    }
+  }
 };

@@ -18,7 +18,7 @@ import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAle
 
 const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
   const {t} = useTranslation();
-  const phoneRef = useRef<any>();
+  const phoneRef = useRef();
   const {colors, theme, dark} = actualTheme();
 
   const {
@@ -46,7 +46,11 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
           title={t('registerView.errorUserRegisterTitle')}
           description={t('registerView.errorUserRegisterDescription')}
         />
-        <View style={{display: 'flex', alignItems: 'center'}}>
+        <View
+          style={{
+            display: 'flex',
+            alignItems: 'center'
+          }}>
           <CustomInputForm
             phoneRef={phoneRef}
             setButtonAction={setCurrentButtonAction}
@@ -162,7 +166,7 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
               />
             </Fragment>
           )}
-          <View style={[registerStyles.footer]}>
+          <View style={registerStyles.footer}>
             <View style={registerStyles.contentFooterText}>
               <Text
                 style={[registerStyles.footerText, {color: colors.onSurface}]}>

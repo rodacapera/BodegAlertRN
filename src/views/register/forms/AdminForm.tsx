@@ -327,7 +327,7 @@ const AdminForm = ({type}: {type: RegisterType}) => {
               style={registerStyles.input}
               theme={theme}
               inputMode="email"
-              onBlur={() => emailValidate(user?.email!)}
+              onBlur={() => user?.email && emailValidate(user?.email)}
               onChangeText={text =>
                 onChangeInput(text as never, 'email' as DataKey)
               }

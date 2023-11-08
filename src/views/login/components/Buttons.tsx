@@ -3,16 +3,10 @@ import {actualTheme} from '@src/types/contextTypes';
 import {type StackNavigation} from '@src/types/globalTypes';
 import {LoginButtonsProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
-import {
-  TouchableHighlight,
-  TouchableOpacityBase,
-  TouchableWithoutFeedback,
-  View,
-  useColorScheme
-} from 'react-native';
-import {Button, Text, TouchableRipple} from 'react-native-paper';
-import {loginFormStyles} from '../styles/loginFormStyles';
+import {View, useColorScheme} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Button, Text} from 'react-native-paper';
+import {loginFormStyles} from '../styles/loginFormStyles';
 
 const Buttons = ({
   setButtonAction,

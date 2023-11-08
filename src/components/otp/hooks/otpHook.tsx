@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import {OtpInputRef} from 'react-native-otp-entry';
 import {getOtp, removeOtpCode, timerCount} from './otpFunctions';
 
-const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
+const OtpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
   const inputRef = useRef<OtpInputRef>();
   const [code, setCode] = useState('');
   const [errorOtp, setErrorOtp] = useState(false);
@@ -13,24 +13,25 @@ const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
   const [isCodeRequested, setIsCodeRequested] = useState(false);
   const [isLoadingValidateOtp, setIsLoadingValidateOtp] = useState(false);
 
-  const initOtp = async () => {
-    setIsCodeRequested(true);
-    if (!isCodeRequested) {
-      await removeOtpCode();
-      const sendOtpCode = await getOtp(buttonAction, setSendOtpCode);
-      !sendOtpCode ? setErrorNetwork(!sendOtpCode) : setIsCodeRequested(false);
-    }
-  };
-
   useEffect(() => {
+    const initOtp = async () => {
+      if (!isCodeRequested) {
+        await removeOtpCode();
+        const sendOtpCodeRequest = await getOtp(buttonAction, setSendOtpCode);
+        !sendOtpCodeRequest
+          ? setErrorNetwork(!sendOtpCodeRequest)
+          : setIsCodeRequested(true);
+      }
+    };
     initOtp();
-  }, []);
+  }, [buttonAction, isCodeRequested]);
 
   useEffect(() => {
     counter === 60 &&
       timerCount(setCounter, setSendOtpCode, sendOtpCode, counter);
+    counter == 0 && setSendOtpCode(false);
     code === '' && (setErrorOtp(false), setCode(''));
-  }, [sendOtpCode, code]);
+  }, [sendOtpCode, code, counter]);
 
   return {
     inputRef,
@@ -50,4 +51,4 @@ const otpHook = ({buttonAction}: {buttonAction: LoginFormAction}) => {
   };
 };
 
-export {otpHook};
+export {OtpHook};

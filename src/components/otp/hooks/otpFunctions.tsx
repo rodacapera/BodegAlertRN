@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {createShopFirebase} from '@src/hooks/firebase/company/company';
 import {createGroupFirebase} from '@src/hooks/firebase/groups/groups';
-import {useLoginFirebase} from '@src/hooks/firebase/login/loginWithPhoneNumber';
+import {UseLoginFirebase} from '@src/hooks/firebase/login/loginWithPhoneNumber';
 import {
   createUserFirebase,
   editDevicesUserFirebase,
@@ -161,7 +161,7 @@ export const handleSendOtp = async (
   buttonAction: LoginFormAction,
   setSendOtpCode?: (e: boolean) => void
 ) => {
-  const confirmation = await useLoginFirebase(buttonAction.phone);
+  const confirmation = await UseLoginFirebase(buttonAction.phone);
   if (confirmation) {
     buttonAction.confirmation = confirmation;
     AsyncStorage.setItem('@otp', JSON.stringify(true));

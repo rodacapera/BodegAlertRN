@@ -12,7 +12,7 @@ const ButtonsList = ({
 }: ButtonsListProps) => {
   return (
     <Fragment>
-      <Title style={[buttonsListStyles.title]}>{t('buttonsModal.title')}</Title>
+      <Title style={buttonsListStyles.title}>{t('buttonsModal.title')}</Title>
       <ScrollView style={{height, width}}>{children}</ScrollView>
     </Fragment>
   );

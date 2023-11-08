@@ -9,14 +9,13 @@ import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
-import {View, useColorScheme, Platform} from 'react-native';
+import {View, useColorScheme} from 'react-native';
 import {OtpInput, OtpInputRef} from 'react-native-otp-entry';
 import {Button, Text} from 'react-native-paper';
 import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
 import HeaderOtp from './header/HeaderOtp';
-import {otpHook} from './hooks/otpHook';
+import {OtpHook} from './hooks/OtpHook';
 import {otpStyles} from './styles/otpStyles';
-import {backgroundStyle} from '@src/globals/styles/screenMode';
 
 const OtpCode = ({
   buttonAction,
@@ -45,12 +44,12 @@ const OtpCode = ({
     isLoadingValidateOtp,
     setIsLoadingValidateOtp,
     isCodeRequested
-  } = otpHook({
+  } = OtpHook({
     buttonAction
   });
 
   return (
-    <View style={[otpStyles.containerOtp]}>
+    <View style={otpStyles.containerOtp}>
       <HeaderOtp
         setButtonAction={setButtonAction}
         setCode={setCode}
@@ -122,10 +121,7 @@ const OtpCode = ({
             )
           }
           style={{
-            backgroundColor:
-              !sendOtpCode && dark
-                ? colors.onSurfaceDisabled
-                : colors.elevation.level1
+            backgroundColor: colors.elevation.level1
           }}
           theme={{
             colors: {
@@ -142,7 +138,7 @@ const OtpCode = ({
             }
           }}
           onPress={() => handleSendOtp(buttonAction, setSendOtpCode)}
-          disabled={isCodeRequested ?? sendOtpCode}>
+          disabled={sendOtpCode}>
           {t('otp.resend')}
         </Button>
         <Button
