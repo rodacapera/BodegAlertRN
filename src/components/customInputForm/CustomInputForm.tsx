@@ -55,7 +55,7 @@ const CustomInputForm = ({
 
   useEffect(() => {
     value && !phone && setPhone(value);
-  }, [phone, value]);
+  }, [value]);
 
   return (
     <View

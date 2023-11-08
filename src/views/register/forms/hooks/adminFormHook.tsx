@@ -12,7 +12,7 @@ import {ResultLocations} from '@src/types/locationTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {DataKey, User} from '@src/types/userTypes';
 import {t} from 'i18next';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Platform} from 'react-native';
 
 const AdminFormHook = (type: RegisterType, phoneRef: any) => {
@@ -144,25 +144,32 @@ const AdminFormHook = (type: RegisterType, phoneRef: any) => {
     }
   };
 
-  const validateRegEx = (phone: string) => {
-    if (currentButtonAction.phone != '') {
-      const re = /[1-9]\d{9,14}$/;
-      const phoneValidated = phone.slice(
-        currentButtonAction.countryCodeSize + 1
-      );
-      return re.test(phoneValidated);
-    }
-    return false;
-  };
+  const validateRegEx = useCallback(
+    (phone: string) => {
+      if (currentButtonAction.phone != '') {
+        const re = /[1-9]\d{9,14}$/;
+        const phoneValidated = phone.slice(
+          currentButtonAction.countryCodeSize + 1
+        );
+        return re.test(phoneValidated);
+      }
+      return false;
+    },
+    [currentButtonAction.countryCodeSize, currentButtonAction.phone]
+  );
 
-  const validatePhoneNumber = (number: string) => {
-    const validate = validateRegEx(number);
-    if (validate) {
-      setErrorPhone(false);
-    } else {
-      setErrorPhone(true);
-    }
-  };
+  useEffect(() => {
+    const validatePhoneNumber = (number: string) => {
+      const validate = validateRegEx(number);
+      if (validate) {
+        setErrorPhone(false);
+      } else {
+        setErrorPhone(true);
+      }
+    };
+    currentButtonAction?.phone?.length > 3 &&
+      validatePhoneNumber(currentButtonAction.phone);
+  }, [currentButtonAction.phone, validateRegEx]);
 
   useEffect(() => {
     getDevice();
@@ -196,14 +203,12 @@ const AdminFormHook = (type: RegisterType, phoneRef: any) => {
       newCurrentUser.devices = [{device: tokenPush, os}];
       newCurrentUser.countryCode = myCurrentLocation.country.short_name;
       newCurrentUser.type = type;
-      if (type === 'vehicle' && configuration) {
-        newCurrentUser.group_number = configuration.vehicle_code?.toString()!;
+      if (type === 'vehicle' && configuration.vehicle_code) {
+        newCurrentUser.group_number = configuration.vehicle_code?.toString();
         newCurrentUser.group_name = t('general.vehicle');
       }
 
       // currentButtonAction?.show &&
-      currentButtonAction?.phone?.length > 3 &&
-        validatePhoneNumber(currentButtonAction.phone);
       setUser(newCurrentUser);
       setCountryCode(myCurrentLocation.country.short_name.toLowerCase());
     } else {
