@@ -51,11 +51,11 @@ const CustomInputForm = ({
       countryCodeSize: countryCode?.length,
       sendRegister: !focusPhone
     });
-  }, [focusPhone]);
+  }, [currentPhone, focusPhone, phoneRef, setButtonAction]);
 
   useEffect(() => {
     value && !phone && setPhone(value);
-  }, [value]);
+  }, [phone, value]);
 
   return (
     <View
