@@ -1,4 +1,4 @@
-import {Images, User} from './userTypes';
+import {User} from './userTypes';
 
 export interface UserAuthData {
   displayName: null;

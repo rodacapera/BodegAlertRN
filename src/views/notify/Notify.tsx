@@ -5,8 +5,8 @@ import {t} from 'i18next';
 import {SafeAreaView} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import NotifyNotFound from './components/NotifyNotFound';
-import {NotifyHook} from './hooks/NotifyHook';
 import {notifyStyles} from './styles/notifyStyles';
+import {NotifyHook} from './hooks/notifyHook';
 
 export const Notify = () => {
   const {panics, setModalVisible, modalVisible} = NotifyHook();

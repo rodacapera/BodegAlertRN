@@ -1,4 +1,3 @@
-import {emergency} from '../assets/images';
 export interface Configuration {
   countryCode: string;
   distance_panic: number;

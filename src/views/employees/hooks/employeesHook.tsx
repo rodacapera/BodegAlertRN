@@ -3,9 +3,9 @@ import {getEmployeesFirebase} from '@src/hooks/firebase/employees/employees';
 import {editFieldUserFirebase} from '@src/hooks/firebase/user/user';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {
-  getEmployeesQuery,
-  getUserQuery,
-  setEmployeesQuery
+  GetEmployeesQuery,
+  GetUserQuery,
+  SetEmployeesQuery
 } from '@src/reactQuery/UserQuery';
 import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
@@ -13,14 +13,14 @@ import {User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
 import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
-const employeesHook = () => {
+const EmployeesHook = () => {
   const {width} = useWindowDimensions();
-  const userData = getUserQuery().data.user;
+  const userData = GetUserQuery().data.user;
   const user = userData as unknown as User;
   const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
-  const {data, isLoading} = getEmployeesQuery();
-  const {shop} = getUserQuery().data.user as unknown as User;
+  const {data, isLoading} = GetEmployeesQuery();
+  const {shop} = GetUserQuery().data.user as unknown as User;
   const employees = data as User[];
   const {colors, dark} = actualTheme();
   const [visible, setVisible] = useState(false);
@@ -30,7 +30,7 @@ const employeesHook = () => {
   const [itemToRemove, setItemToRemove] = useState<string | undefined>();
   const [userRemoved, setUserRemoved] = useState(false);
   const [currentEmployees, setCurrentEmployees] = useState<User[]>([]);
-  setEmployeesQuery(currentEmployees);
+  SetEmployeesQuery(currentEmployees);
 
   const removeItem = (user_uid: string) => {
     setItemToRemove(user_uid);
@@ -107,4 +107,4 @@ const employeesHook = () => {
   };
 };
 
-export {employeesHook};
+export {EmployeesHook};

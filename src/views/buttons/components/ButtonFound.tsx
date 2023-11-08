@@ -5,7 +5,7 @@ import {View} from 'react-native';
 import {Caption, Text} from 'react-native-paper';
 
 const ButtonFound = ({buttonFind}: {buttonFind: Button}) => {
-  const {colors, dark} = actualTheme();
+  const {colors} = actualTheme();
   return (
     <View>
       <Caption

@@ -21,7 +21,7 @@ import {
 } from 'react-native';
 import {Region} from 'react-native-maps';
 
-const homeHook = () => {
+const HomeHook = () => {
   // setUserQuery();
   const route = useRoute();
   const {width} = useWindowDimensions();
@@ -69,10 +69,10 @@ const homeHook = () => {
   };
 
   const setMyCurrentLocation = () => {
-    if (user?.location) {
+    if (user?.location.lat && user.location.lng) {
       const shopLocation = {
-        latitude: user?.location.lat!,
-        longitude: user?.location.lng!,
+        latitude: user?.location.lat,
+        longitude: user?.location.lng,
         latitudeDelta: 0.015,
         longitudeDelta: 0.0121
       };
@@ -194,4 +194,4 @@ const homeHook = () => {
   };
 };
 
-export {homeHook};
+export {HomeHook};

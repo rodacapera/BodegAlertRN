@@ -18,10 +18,10 @@ import {
 } from 'react-native';
 import {Button, TextInput, Text} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
-import {adminFormHook} from './hooks/adminFormHook';
 import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 import ErrorInputForm from '@src/components/customErrorInputForm/CustomErrorInputForm';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {AdminFormHook} from './hooks/AdminFormHook';
 
 const AdminForm = ({type}: {type: RegisterType}) => {
   const colorScheme = useColorScheme();
@@ -55,7 +55,7 @@ const AdminForm = ({type}: {type: RegisterType}) => {
     isNotSubmit,
     setIsNotSubmit,
     emailValidate
-  } = adminFormHook(type, phoneRef);
+  } = AdminFormHook(type, phoneRef);
 
   return isLoadingForm ? (
     <CustomLoadingOverlay visible={isLoadingForm} />

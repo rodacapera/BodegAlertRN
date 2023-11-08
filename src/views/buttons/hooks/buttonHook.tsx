@@ -3,9 +3,9 @@ import {removeButtonByIdFirebase} from '@src/hooks/firebase/buttons/buttons';
 import {headerShown} from '@src/hooks/navigator/headerShown';
 import {statusDevice} from '@src/hooks/shellyActions';
 import {
-  getButtonsQuery,
-  getUserQuery,
-  setButtonsQuery
+  GetButtonsQuery,
+  GetUserQuery,
+  SetButtonsQuery
 } from '@src/reactQuery/UserQuery';
 import {ButtonFind, Buttons} from '@src/types/buttons';
 import {actualTheme} from '@src/types/contextTypes';
@@ -19,14 +19,14 @@ import {
   useWindowDimensions
 } from 'react-native';
 
-const buttonhook = () => {
+const Buttonhook = () => {
   const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
   const {colors, dark} = actualTheme();
-  const userData = getUserQuery().data.user;
+  const userData = GetUserQuery().data.user;
   const user = userData as unknown as User;
-  const {isLoading, data} = getButtonsQuery();
+  const {isLoading, data} = GetButtonsQuery();
   const buttons = data as Buttons[];
   const [alertVisible, setAlertVisible] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -35,7 +35,7 @@ const buttonhook = () => {
   const [itemToRemove, setItemToRemove] = useState<string>();
   const [sendRemoveItem, setSendRemoveItem] = useState(false);
   const [newButtons, setNewButtons] = useState<Buttons[]>(buttons);
-  setButtonsQuery(newButtons);
+  SetButtonsQuery(newButtons);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -137,4 +137,4 @@ const buttonhook = () => {
     user
   };
 };
-export {buttonhook};
+export {Buttonhook};

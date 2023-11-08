@@ -2,9 +2,8 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ReactNode} from 'react';
 import {Button, ViewStyle} from 'react-native';
-import {$RemoveChildren} from 'react-native-paper/lib/typescript/src/types';
 import {User} from './userTypes';
-import {Buttons} from './buttons';
+import {$RemoveChildren} from 'react-native-paper/lib/typescript/types';
 
 export type ShopProps = {
   address: string;
@@ -150,10 +149,10 @@ export type CustomFabProps = {
   disabled?: boolean;
 };
 
-type ParamListBase = {
-  //example to index on array
-  [x: string]: object | undefined;
-};
+// type ParamListBase = {
+//example to index on array
+//   [x: string]: object | undefined;
+// };
 
 export type Field = {
   [x: string]: string | boolean | number | object;

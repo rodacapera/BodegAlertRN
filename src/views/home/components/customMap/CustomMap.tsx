@@ -8,13 +8,14 @@ import {
 } from '@src/globals/constants/mapsStylesMode';
 import {actualTheme} from '@src/types/contextTypes';
 import PanicButton from '@src/views/home/components/panicButton/PanicButton';
-import {homeHook} from '@src/views/home/hooks/homeHook';
+
 import {homeStyles} from '@src/views/home/styles/homeStyles';
 import {t} from 'i18next';
 import {Fragment, useRef} from 'react';
-import {BackHandler, Linking, Platform, View} from 'react-native';
+import {BackHandler, Linking, Platform} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {Portal} from 'react-native-paper';
+import {HomeHook} from '../../hooks/HomeHook';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
@@ -34,7 +35,7 @@ const CustomMap = () => {
     currentMarkerIcon,
     panicsMarkerIcon,
     configuration
-  } = homeHook();
+  } = HomeHook();
 
   return isLoading ? (
     <CustomLoadingOverlay visible />

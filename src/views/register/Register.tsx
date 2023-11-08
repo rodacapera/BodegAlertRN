@@ -8,7 +8,7 @@ import AdminForm from './forms/AdminForm';
 import UserForm from './forms/UserForm';
 import {registerStyles} from './styles/registerStyles';
 
-const Register = ({navigation, route}: RegisterProps) => {
+const Register = ({route}: RegisterProps) => {
   const {t} = useTranslation();
   const {administrator, qr, shopId, type} = route.params;
 

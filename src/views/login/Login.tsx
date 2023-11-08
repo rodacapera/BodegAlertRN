@@ -21,7 +21,7 @@ import LoginForm from './components/LoginForm';
 import {loginHook} from './hooks/loginHook';
 import {loginFormStyles} from './styles/loginFormStyles';
 
-const Login = ({route, navigation}: LoginProps) => {
+const Login = ({route}: LoginProps) => {
   const params = route.params;
   const {goBack} = useNavigation<StackNavigation>();
   const {theme} = actualTheme();
@@ -38,7 +38,7 @@ const Login = ({route, navigation}: LoginProps) => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <View style={[loginFormStyles.loginContent]}>
+      <View style={loginFormStyles.loginContent}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={{flex: 1}}>
@@ -68,7 +68,7 @@ const Login = ({route, navigation}: LoginProps) => {
           </View>
           {countryCode ? (
             <ScrollView>
-              <View style={[loginFormStyles.loginBody]}>
+              <View style={loginFormStyles.loginBody}>
                 {!params?.qr && !buttonAction.logged ? (
                   countryCode ? (
                     <LoginForm

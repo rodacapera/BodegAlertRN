@@ -27,6 +27,7 @@ export const actualTheme = () => {
     customTheme,
     setDarkTheme,
     setLightTheme
+    // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useContext(ThemeContext);
   return {
     theme: customTheme,

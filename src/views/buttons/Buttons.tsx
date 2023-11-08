@@ -2,22 +2,21 @@ import ButtonsModal from '@src/components/buttonsModal/ButtonsModal';
 import CustomBanner from '@src/components/customBanner/CustomBanner';
 import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 import CustomFab from '@src/components/customFab/CustomFab';
+import CustomLoader from '@src/components/customLoader/CustomLoader';
 import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 import SimpleRemoveItemCards from '@src/components/simpleRemoveItemCards/SimpleRemoveItemCards';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
-import {ButtonsProps} from '@src/types/globalTypes';
+import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
 import {KeyboardAvoidingView, Platform, SafeAreaView, View} from 'react-native';
+import {RefreshControl, ScrollView} from 'react-native-gesture-handler';
+import {Text} from 'react-native-paper';
 import {employeeStyles} from '../employees/styles/employeesStyles';
 import ButtonFound from './components/ButtonFound';
 import ButtonsNotFound from './components/ButtonsNotFound';
-import {buttonhook} from './hooks/buttonHook';
-import CustomLoader from '@src/components/customLoader/CustomLoader';
-import {RefreshControl, ScrollView} from 'react-native-gesture-handler';
-import {Text} from 'react-native-paper';
-import {actualTheme} from '@src/types/contextTypes';
+import {Buttonhook} from './hooks/ButtonHook';
 
-const Buttons = ({navigation, route}: ButtonsProps) => {
+const Buttons = () => {
   const {colors} = actualTheme();
   const {
     alertVisible,
@@ -32,9 +31,8 @@ const Buttons = ({navigation, route}: ButtonsProps) => {
     refreshing,
     setButtonFind,
     setSendRemoveItem,
-    setNewButtons,
-    user
-  } = buttonhook();
+    setNewButtons
+  } = Buttonhook();
 
   return isLoading ? (
     <CustomLoadingOverlay visible />
