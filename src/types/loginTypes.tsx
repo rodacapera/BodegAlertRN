@@ -9,6 +9,7 @@ export type LoginFormAction = {
   confirmation?: FirebaseAuthTypes.ConfirmationResult;
   countryCodeSize: number;
   sendRegister?: boolean;
+  prefix: string;
 };
 
 export type LoginButtonsProps = {
@@ -25,6 +26,7 @@ export type InputFormProps = {
   code: string | undefined;
   isDisabled?: boolean;
   isRegister?: boolean;
+  prefix?: string;
 };
 
 export type LoginFormProps = {

@@ -54,13 +54,6 @@ const useGetUser = () => {
   };
 
   useEffect(() => {
-    currentData &&
-      currentData.user &&
-      !shopId &&
-      setShopId(currentData.user.shop.split('/')[1]);
-  }, [currentData, shopId]);
-
-  useEffect(() => {
     if (currentData && currentData.panicsObserver) {
       const panicsObserver = currentData.panicsObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
@@ -74,22 +67,25 @@ const useGetUser = () => {
   }, [currentData]);
 
   useEffect(() => {
-    const resultEmployees = (
-      querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
-    ) => {
-      setEmployees([]);
-      querySnapshot.forEach(value => {
-        const data = value.data() as User;
-        if (querySnapshot.size > 1) {
-          !data.administrator && setEmployees(prev => [...prev, data]);
-        } else {
-          setEmployees([]);
-        }
-      });
-      setCounterEmployees(querySnapshot.size > 1 ? employees.length : 0);
-    };
-
-    if (currentData && currentData.employeesObserver) {
+    if (
+      currentData &&
+      currentData.employeesObserver &&
+      employees.length == 0 &&
+      !counterEmployees
+    ) {
+      const resultEmployees = (
+        querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
+      ) => {
+        setEmployees([]);
+        querySnapshot.forEach(value => {
+          const data = value.data() as User;
+          if (querySnapshot.size > 1) {
+            !data.administrator && setEmployees(prev => [...prev, data]);
+          } else {
+            setEmployees([]);
+          }
+        });
+      };
       const employeesObserver = currentData.employeesObserver.onSnapshot(
         (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
           documentSnapshot && documentSnapshot.size > 0
@@ -99,7 +95,7 @@ const useGetUser = () => {
       );
       return () => employeesObserver();
     }
-  }, [currentData, employees.length, setEmployees]);
+  }, [counterEmployees, currentData, employees.length]);
 
   useEffect(() => {
     if (currentData && currentData.user) {
@@ -113,6 +109,17 @@ const useGetUser = () => {
       return () => buttonsObserver();
     }
   }, [currentData]);
+
+  useEffect(() => {
+    currentData &&
+      currentData.user &&
+      !shopId &&
+      setShopId(currentData.user.shop.split('/')[1]);
+  }, [currentData, shopId]);
+
+  useEffect(() => {
+    employees.length >= 0 && setCounterEmployees(employees.length);
+  }, [employees.length]);
 
   return {
     user,

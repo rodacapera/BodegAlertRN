@@ -15,7 +15,8 @@ const CustomInputForm = ({
   value,
   code,
   isDisabled,
-  isRegister
+  isRegister,
+  prefix
 }: InputFormProps) => {
   const colorScheme = useColorScheme();
   const [phone, setPhone] = useState<string>();
@@ -34,7 +35,8 @@ const CustomInputForm = ({
       logged: false,
       confirmation: undefined,
       countryCodeSize: countryCode.length,
-      sendRegister: false
+      sendRegister: false,
+      prefix: countryCode
     });
     setCurrentPhone(myPhone);
     setPhone(text);
@@ -49,13 +51,14 @@ const CustomInputForm = ({
       logged: false,
       confirmation: undefined,
       countryCodeSize: countryCode?.length,
-      sendRegister: !focusPhone
+      sendRegister: !focusPhone,
+      prefix: countryCode
     });
-  }, [currentPhone, focusPhone, phoneRef, setButtonAction]);
+  }, [currentPhone, focusPhone, phoneRef, setButtonAction, phone]);
 
   useEffect(() => {
-    value && !phone && setPhone(value);
-  }, [phone, value]);
+    value && !phone && prefix && setPhone(value.slice(prefix.length));
+  }, [phone, phoneRef, prefix, value]);
 
   return (
     <View

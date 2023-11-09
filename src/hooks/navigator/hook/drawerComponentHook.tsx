@@ -15,7 +15,6 @@ import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Logos} from '@src/types/imageTypes';
 import {useEffect, useState} from 'react';
-import {Appearance} from 'react-native';
 
 const DrawerComponentHook = (navigation: StackNavigation) => {
   SetUserQuery();
@@ -101,8 +100,6 @@ const DrawerComponentHook = (navigation: StackNavigation) => {
         qr: true,
         shopId: shopId
       });
-    } else {
-      console.debug('user is logged or app was not open');
     }
   }, [navigation, shopId, user]);
 

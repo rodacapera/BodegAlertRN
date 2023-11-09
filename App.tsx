@@ -15,13 +15,13 @@ function App(): JSX.Element {
   if (Platform.OS === 'android') enableLatestRenderer();
 
   return (
-    <ThemeProvider>
-      <PaperProvider theme={customDefaultTheme}>
-        <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <PaperProvider theme={customDefaultTheme}>
           <LateralDrawer />
-        </QueryClientProvider>
-      </PaperProvider>
-    </ThemeProvider>
+        </PaperProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 export default App;

@@ -202,6 +202,7 @@ const AdminFormHook = (type: RegisterType, phoneRef: any) => {
       newCurrentUser.zipcode = parseInt(myCurrentLocation.zipCode.short_name);
       newCurrentUser.devices = [{device: tokenPush, os}];
       newCurrentUser.countryCode = myCurrentLocation.country.short_name;
+      newCurrentUser.prefix = currentButtonAction.prefix;
       newCurrentUser.type = type;
       if (type === 'vehicle' && configuration.vehicle_code) {
         newCurrentUser.group_number = configuration.vehicle_code?.toString();

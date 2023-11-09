@@ -51,18 +51,17 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
             display: 'flex',
             alignItems: 'center'
           }}>
-          <CustomInputForm
-            phoneRef={phoneRef}
-            setButtonAction={setCurrentButtonAction}
-            type="phone"
-            value={
-              user && user.phone && user.phone != ''
-                ? user.phone.slice(user?.countryCode.length + 1)
-                : undefined
-            }
-            code={user?.countryCode.toLowerCase()}
-            isDisabled={user?.shop ? true : false}
-          />
+          {user && (
+            <CustomInputForm
+              phoneRef={phoneRef}
+              setButtonAction={setCurrentButtonAction}
+              type="phone"
+              value={user?.phone}
+              code={user?.countryCode.toLowerCase()}
+              isDisabled={user?.shop ? true : false}
+              prefix={user.prefix}
+            />
+          )}
           <TextInput
             label={t('adminFormView.names')}
             style={registerStyles.input}

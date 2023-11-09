@@ -7,6 +7,7 @@ import {
 } from '@src/hooks/notifications/notificationsHook';
 import messaging from '@react-native-firebase/messaging';
 import 'react-native-get-random-values';
+import 'react-native-gesture-handler';
 
 AppRegistry.registerComponent(appName, () => {
   pushConfigure();

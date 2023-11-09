@@ -66,7 +66,7 @@ const LoginHook = (data?: User) => {
       buttonAction.phone = data.phone;
     }
     !buttonAction.logged &&
-      buttonAction.phone.length > 3 &&
+      buttonAction?.phone?.length > 3 &&
       validatePhoneNumber();
   }, [buttonAction, data, validateRegEx]);
 

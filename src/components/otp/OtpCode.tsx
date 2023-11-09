@@ -58,8 +58,8 @@ const OtpCode = ({
       <CustomDialogAlert
         visible={errorNetwork}
         setVisible={() => (setErrorNetwork(false), navigation.goBack())}
-        title={t('network.alertErrorTitle')}
-        description={t('network.alertErrorDescription')}
+        title={t('otp.alertErrorTitleOtp')}
+        description={t('otp.alertErrorDescriptionOtp')}
       />
 
       <View style={otpStyles.contentOtpInput}>

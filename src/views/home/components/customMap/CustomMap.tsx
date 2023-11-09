@@ -11,8 +11,8 @@ import PanicButton from '@src/views/home/components/panicButton/PanicButton';
 
 import {homeStyles} from '@src/views/home/styles/homeStyles';
 import {t} from 'i18next';
-import {Fragment, useRef} from 'react';
-import {BackHandler, Linking, Platform} from 'react-native';
+import {useRef} from 'react';
+import {BackHandler, Linking, Platform, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {Portal} from 'react-native-paper';
 import {HomeHook} from '../../hooks/HomeHook';
@@ -54,7 +54,7 @@ const CustomMap = () => {
       continueButton
     />
   ) : (
-    <Fragment>
+    <View style={homeStyles.container}>
       {region &&
       markerTitle &&
       markerBody &&
@@ -138,7 +138,7 @@ const CustomMap = () => {
         description={t('home.alertDescriptionExitApp')}
         actionSuccess={() => BackHandler.exitApp()}
       />
-    </Fragment>
+    </View>
   );
 };
 

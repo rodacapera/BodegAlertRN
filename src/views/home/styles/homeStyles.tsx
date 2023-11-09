@@ -7,7 +7,6 @@ export const homeStyles = StyleSheet.create({
     alignItems: 'center'
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
-    height: '100%'
+    ...StyleSheet.absoluteFillObject
   }
 });

@@ -3,5 +3,6 @@ export const buttonActionInitialState = {
   show: true,
   phone: '',
   logged: false,
-  countryCodeSize: 0
+  countryCodeSize: 0,
+  prefix: ''
 };

@@ -8,7 +8,6 @@ import NavigationProvider from './NavigationProvider';
 export const LateralDrawer = () => {
   const MyDrawer = createDrawerNavigator();
   const {colors, theme, dark} = actualTheme();
-
   return (
     <NavigationContainer theme={theme}>
       <MyDrawer.Navigator

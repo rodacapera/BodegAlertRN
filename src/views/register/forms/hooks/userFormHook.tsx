@@ -52,6 +52,7 @@ const UserFormHook = (qr?: boolean, shopId?: string) => {
           userClone.alias = shop?.alias;
           userClone.avatar = '';
           userClone.city = shop?.city;
+          userClone.prefix = currentButtonAction.prefix;
           userClone.countryCode = shop?.countryCode;
           userClone.created = Date.now().toString();
           userClone.date = Date.now().toString();
@@ -135,6 +136,23 @@ const UserFormHook = (qr?: boolean, shopId?: string) => {
     colors.onPrimaryContainer
   ]);
 
+  // useEffect(() => {
+  //   const getUSer = async (user: User) => {
+  //     const userN = (await getUserFirebase(user.user_uid)) as User;
+  //     console.log('userFound', userN.prefix);
+
+  //     const newUserData = {
+  //       uid: userN.user_uid,
+  //       user: userN
+  //     } as unknown as SetUserAuthParams;
+  //     console.log('newUserData', newUserData.user);
+
+  //     await AsyncStorage.setItem('@userAuth', JSON.stringify(newUserData));
+  //     setUser(newUserData.user);
+  //   };
+  //   user && getUSer(user);
+  // }, [user]);
+
   return {
     user,
     setCurrentButtonAction,
@@ -144,7 +162,8 @@ const UserFormHook = (qr?: boolean, shopId?: string) => {
     error,
     shop,
     alertUserExist,
-    setAlertUserExist
+    setAlertUserExist,
+    currentButtonAction
   };
 };
 export {UserFormHook};

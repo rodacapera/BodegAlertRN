@@ -139,7 +139,10 @@ i18n.use(initReactI18next).init({
           subTitle:
             'An OTP code has been sent to your cell phone. Enter it below.',
           error: 'The code is not valid. Please try again.',
-          resend: 'Resend'
+          resend: 'Resend',
+          alertErrorTitleOtp: 'Error OTP',
+          alertErrorDescriptionOtp:
+            'We have blocked all requests from this device due to unusual activity. Try again later.'
         },
         general: {
           phone: 'Phone',
@@ -352,7 +355,10 @@ i18n.use(initReactI18next).init({
           subTitle:
             'Se ha enviado un código OTP a tu teléfono celular. Introdúcelo a continuación.',
           error: 'El código no es válido. Inténtalo de nuevo.',
-          resend: 'Reenviar'
+          resend: 'Reenviar',
+          alertErrorTitleOtp: 'Error de OTP',
+          alertErrorDescriptionOtp:
+            'Hemos bloqueado todas las solicitudes de este dispositivo por una actividad inusual, Intenta de nuevo más tarde'
         },
         general: {
           phone: 'Teléfono',
@@ -564,7 +570,10 @@ i18n.use(initReactI18next).init({
           subTitle:
             'È stato inviato un codice OTP al tuo cellulare. Inseriscilo di seguito.',
           error: 'Il codice non è valido. Per favore, riprova.',
-          resend: 'Rinvia'
+          resend: 'Rinvia',
+          alertErrorTitleOtp: 'Error de OTP',
+          alertErrorDescriptionOtp:
+            "Abbiamo bloccato tutte le richieste da questo dispositivo a causa di un'attività insolita; riprovare più tardi."
         },
         general: {
           phone: 'Telefono',
@@ -776,7 +785,10 @@ i18n.use(initReactI18next).init({
           subTitle:
             'Um código OTP foi enviado para o seu celular. Digite-o abaixo.',
           error: 'O código não é válido. Por favor, tente novamente.',
-          resend: 'Reenviar'
+          resend: 'Reenviar',
+          alertErrorTitleOtp: 'OTP Errore',
+          alertErrorDescriptionOtp:
+            'Bloqueámos todos os pedidos deste dispositivo devido a atividade invulgar; tente novamente mais tarde.'
         },
         general: {
           phone: 'Telefone',
@@ -987,7 +999,10 @@ i18n.use(initReactI18next).init({
           subTitle:
             'Un code OTP a été envoyé sur votre téléphone portable. Entrez-le ci-dessous.',
           error: "Le code n'est pas valide. Veuillez réessayer.",
-          resend: 'Renvoyer'
+          resend: 'Renvoyer',
+          alertErrorTitleOtp: 'OTP Errore',
+          alertErrorDescriptionOtp:
+            "Nous avons bloqué toutes les demandes provenant de cet appareil en raison d'une activité inhabituelle ; réessayez plus tard."
         },
         general: {
           phone: 'Téléphone',

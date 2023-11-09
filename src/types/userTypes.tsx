@@ -25,6 +25,7 @@ export interface User {
   zipcode: number;
   group_number: string;
   group_name: string;
+  prefix: string;
 }
 
 export interface Location {

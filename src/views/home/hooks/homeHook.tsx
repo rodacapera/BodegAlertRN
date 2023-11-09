@@ -22,7 +22,7 @@ import {
 import {Region} from 'react-native-maps';
 
 const HomeHook = () => {
-  // setUserQuery();
+  GetUserQuery();
   const route = useRoute();
   const {width} = useWindowDimensions();
   const {colors} = actualTheme();
@@ -41,7 +41,7 @@ const HomeHook = () => {
   const [currentMarkerIcon, setCurrentMarkerIcon] = useState();
   const [panicsMarkerIcon, setPanicsMarkerIcon] = useState();
 
-  const user = data.user as User;
+  const user = data?.user as User;
   const params = route.params as HomeParams;
 
   const appVersionBd =
@@ -67,6 +67,7 @@ const HomeHook = () => {
       return false;
     }
   };
+  // AsyncStorage.clear();
 
   const onShare = async () => {
     const message =
