@@ -3,13 +3,13 @@ import {backgroundStyle} from '@src/globals/styles/screenMode';
 import {t} from 'i18next';
 import {SafeAreaView} from 'react-native';
 import UserForm from '../register/forms/UserForm';
-import {profileHook} from './hooks/profileHook';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 
 const Profile = () => {
-  profileHook();
-
+  const {colors} = ActualTheme();
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView
+      style={[backgroundStyle, {backgroundColor: colors.background}]}>
       <CustomBanner
         visible={true}
         text={t('profileTitle')}

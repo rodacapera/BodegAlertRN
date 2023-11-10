@@ -2,7 +2,6 @@ import {useNavigation} from '@react-navigation/native';
 import {login_background} from '@src/assets/images';
 import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
 import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
-import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {useLayoutEffect} from 'react';
@@ -15,22 +14,29 @@ import {
 import {Button, Text} from 'react-native-paper';
 import {backgroundStyle} from '../../globals/styles/screenMode';
 import {loginStyles} from './styles/loginStyles';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 
 const LoginSplash = () => {
   const {width} = useWindowDimensions();
-  const {colors, theme} = actualTheme();
+  const {dark, colors} = ActualTheme();
   const navigation = useNavigation<StackNavigation>();
 
   useLayoutEffect(() => {
-    HeaderShown({
-      navigation,
-      visible: false,
-      transparent: false
-    });
+    let isMounted = true;
+    isMounted &&
+      HeaderShown({
+        navigation,
+        visible: false,
+        transparent: false
+      });
+    return () => {
+      isMounted = false;
+    };
   }, [navigation]);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView
+      style={[backgroundStyle, {backgroundColor: colors.background}]}>
       <ImageBackground
         source={login_background}
         resizeMode="cover"
@@ -66,7 +72,7 @@ const LoginSplash = () => {
                 style={loginStyles.button}
                 textColor="white"
                 buttonColor={
-                  theme.dark ? colors.onPrimary : colors.onPrimaryContainer
+                  dark ? colors.onPrimary : colors.onPrimaryContainer
                 }
                 icon="bike"
                 mode="contained"
@@ -77,7 +83,7 @@ const LoginSplash = () => {
                 style={loginStyles.button}
                 textColor="white"
                 buttonColor={
-                  theme.dark ? colors.onPrimary : colors.onPrimaryContainer
+                  dark ? colors.onPrimary : colors.onPrimaryContainer
                 }
                 icon="office-building-marker-outline"
                 mode="contained"

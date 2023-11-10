@@ -4,12 +4,12 @@ import {userFakeData} from '@src/globals/constants/fakeData';
 import {buttonActionInitialState} from '@src/globals/constants/login';
 import {geUserByPhoneNumberFirebase} from '@src/hooks/firebase/user/user';
 import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {
   GetShopQuery,
   GetUserQuery,
   UpdateUserQuery
 } from '@src/reactQuery/UserQuery';
-import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {DataKey, Shop, User} from '@src/types/userTypes';
@@ -20,7 +20,7 @@ const UserFormHook = (qr?: boolean, shopId?: string) => {
   const navigation = useNavigation<StackNavigation>();
 
   const {width} = useWindowDimensions();
-  const {colors, dark} = actualTheme();
+  const {dark, colors, theme} = ActualTheme();
   const colorScheme = useColorScheme();
   const os = Platform.OS;
 
@@ -136,23 +136,6 @@ const UserFormHook = (qr?: boolean, shopId?: string) => {
     colors.onPrimaryContainer
   ]);
 
-  // useEffect(() => {
-  //   const getUSer = async (user: User) => {
-  //     const userN = (await getUserFirebase(user.user_uid)) as User;
-  //     console.log('userFound', userN.prefix);
-
-  //     const newUserData = {
-  //       uid: userN.user_uid,
-  //       user: userN
-  //     } as unknown as SetUserAuthParams;
-  //     console.log('newUserData', newUserData.user);
-
-  //     await AsyncStorage.setItem('@userAuth', JSON.stringify(newUserData));
-  //     setUser(newUserData.user);
-  //   };
-  //   user && getUSer(user);
-  // }, [user]);
-
   return {
     user,
     setCurrentButtonAction,
@@ -163,7 +146,10 @@ const UserFormHook = (qr?: boolean, shopId?: string) => {
     shop,
     alertUserExist,
     setAlertUserExist,
-    currentButtonAction
+    currentButtonAction,
+    colors,
+    dark,
+    theme
   };
 };
 export {UserFormHook};

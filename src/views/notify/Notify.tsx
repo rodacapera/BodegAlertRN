@@ -9,9 +9,10 @@ import {notifyStyles} from './styles/notifyStyles';
 import {NotifyHook} from './hooks/notifyHook';
 
 export const Notify = () => {
-  const {panics, setModalVisible, modalVisible} = NotifyHook();
+  const {panics, setModalVisible, modalVisible, colors, dark} = NotifyHook();
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView
+      style={[backgroundStyle, {backgroundColor: colors.background}]}>
       <CustomBanner
         visible={true}
         text={t('notifyView.banner')}

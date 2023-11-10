@@ -51,8 +51,8 @@ export const SetCompanyImagesQuery = () => {
 export const SetShopQuery = (doc: string | undefined) => {
   const query = useQuery({
     queryKey: ['shop'],
-    queryFn: async () => doc && (await getShopFirebase(doc)),
-    enabled: !!doc
+    queryFn: async () => (doc ? await getShopFirebase(doc) : false)
+    // enabled: !!doc
   });
   return query;
 };
@@ -84,8 +84,12 @@ const dataSetUser = async (data?: User) => {
 export const SetUserQuery = (data?: User) => {
   const query = useQuery({
     queryKey: ['user'],
-    queryFn: async () => await dataSetUser(data),
-    enabled: !!data
+    queryFn: async () => {
+      const allData = await dataSetUser(data);
+
+      return allData;
+    }
+    // enabled: !!data
   });
   return query;
 };
@@ -110,10 +114,9 @@ export const GetShopQuery = () =>
     initialData: shopInitialData
   });
 
-export const GetCompanyImagesQuery = (setImages: boolean) =>
+export const GetCompanyImagesQuery = () =>
   useQuery(['companyImages'], {
-    refetchOnWindowFocus: false,
-    enabled: !!setImages
+    refetchOnWindowFocus: false
   });
 
 export const UpdateUserQuery = () => {

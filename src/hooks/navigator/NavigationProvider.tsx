@@ -14,6 +14,7 @@ import QrScanner from '@src/views/qrScanner/QrScanner';
 
 const NavigationProvider = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
+
   return (
     <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen
@@ -56,10 +57,6 @@ const NavigationProvider = () => {
         name="Home"
         component={Home}
         options={{
-          // title: 'BodegAlert',
-          // headerStyle: {
-          //   backgroundColor: backgroundStyle.backgroundColor,
-          // },
           headerShown: false,
           animation: 'slide_from_right'
         }}

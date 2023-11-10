@@ -1,37 +1,17 @@
-import {useNavigation} from '@react-navigation/native';
 import {logo_app} from '@src/assets/images';
 import {APP_NAME_END, APP_NAME_FIRST} from '@src/globals/constants/config';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
-import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
-import SplashHook from '@src/hooks/splash/SplashHook';
-import {actualTheme} from '@src/types/contextTypes';
-import {StackNavigation} from '@src/types/globalTypes';
-import {useEffect} from 'react';
-import {Image, StatusBar, View, useColorScheme} from 'react-native';
+import {SplashHook} from '@src/hooks/splash/SplashHook';
+import {Image, StatusBar, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {splashStyles} from './styles/splashStyles';
 const Splash = () => {
-  const colorScheme = useColorScheme();
-  const {colors, theme, dark} = actualTheme();
-  const navigator = useNavigation<StackNavigation>();
-
-  useEffect(() => {
-    setTimeout(() => {
-      SplashHook({navigator});
-    }, 2000);
-  }, [navigator]);
-
-  useEffect(() => {
-    HeaderShown({
-      navigation: navigator,
-      visible: false,
-      transparent: false
-    });
-  }, [navigator]);
+  const {colorScheme, colors, dark} = SplashHook();
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView
+      style={[backgroundStyle, {backgroundColor: colors.background}]}>
       <StatusBar
         backgroundColor={
           colorScheme == 'dark'
@@ -55,14 +35,14 @@ const Splash = () => {
           <Text
             style={[
               splashStyles.textLogoInit,
-              {color: theme.dark ? colors.onPrimaryContainer : colors.primary}
+              {color: dark ? colors.onPrimaryContainer : colors.primary}
             ]}>
             {APP_NAME_FIRST}
             <Text
               style={[
                 splashStyles.textLogoFin,
                 {
-                  color: theme.dark ? colors.inversePrimary : colors.primary
+                  color: dark ? colors.inversePrimary : colors.primary
                 }
               ]}>
               {APP_NAME_END}

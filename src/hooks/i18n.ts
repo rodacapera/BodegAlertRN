@@ -106,7 +106,7 @@ i18n.use(initReactI18next).init({
         loginView: {
           title: 'Login with your cell phone number!',
           signIn: 'Sign in',
-          scanButton: 'Scan',
+          scanButton: 'Scan and join',
           signUp: 'Sign up',
           errorPhone: 'The phone number is not valid or is empty',
           goBack: 'Back',
@@ -158,7 +158,9 @@ i18n.use(initReactI18next).init({
           loading: 'Loading',
           continueBike: 'Continue as a vehicle',
           continueResidence: 'Continue as residence',
-          vehicle: 'Vehicle'
+          vehicle: 'Vehicle',
+          personalData: 'Your personal data',
+          groupData: 'Your group data'
         },
         qrModal: {
           helperTitleQr:
@@ -322,7 +324,7 @@ i18n.use(initReactI18next).init({
         loginView: {
           title: 'Inicia sesión con tu número de teléfono celular.',
           signIn: 'Iniciar sesión',
-          scanButton: 'Escanear',
+          scanButton: 'Escanear y unirme',
           signUp: 'Registrarse',
           errorPhone: 'El número de teléfono no es válido o está vacío.',
           goBack: 'Atrás',
@@ -374,7 +376,9 @@ i18n.use(initReactI18next).init({
           loading: 'Cargando',
           continueBike: 'Continuar como vehículo',
           continueResidence: 'Continuar como residencia',
-          vehicle: 'Vehículo'
+          vehicle: 'Vehículo',
+          personalData: 'Tus datos personales',
+          groupData: 'Los datos de tu grupo'
         },
         qrModal: {
           helperTitleQr:
@@ -537,7 +541,7 @@ i18n.use(initReactI18next).init({
         loginView: {
           title: 'Accedi con il tuo numero di cellulare!',
           signIn: 'Accedi',
-          scanButton: 'Scansiona',
+          scanButton: 'Scansione e unione',
           signUp: 'Iscriviti',
           errorPhone: 'Il numero di telefono non è valido o è vuoto.',
           goBack: 'Indietro',
@@ -589,7 +593,9 @@ i18n.use(initReactI18next).init({
           loading: 'Caricamento',
           continueBike: 'Continua come veicolo',
           continueResidence: 'Continua come residenza',
-          vehicle: 'Veicolo'
+          vehicle: 'Veicolo',
+          personalData: 'I vostri dati personali',
+          groupData: 'I dati del vostro gruppo'
         },
         qrModal: {
           helperTitleQr:
@@ -752,7 +758,7 @@ i18n.use(initReactI18next).init({
         loginView: {
           title: 'Faça login com seu número de celular!',
           signIn: 'Entrar',
-          scanButton: 'Escanear',
+          scanButton: 'Digitalizar e aderir',
           signUp: 'Cadastrar',
           errorPhone: 'O número de telefone não é válido ou está vazio',
           goBack: 'Voltar',
@@ -804,7 +810,9 @@ i18n.use(initReactI18next).init({
           loading: 'Carregando',
           continueBike: 'Continuar como veículo',
           continueResidence: 'Continuar como residência',
-          vehicle: 'Veículo'
+          vehicle: 'Veículo',
+          personalData: 'Os seus dados pessoais',
+          groupData: 'Os dados do seu grupo'
         },
         qrModal: {
           helperTitleQr:
@@ -967,7 +975,7 @@ i18n.use(initReactI18next).init({
         loginView: {
           title: 'Connectez-vous avec votre numéro de téléphone portable !',
           signIn: 'Se connecter',
-          scanButton: 'Scanner',
+          scanButton: 'Numériser et joindre',
           signUp: "S'inscrire",
           errorPhone: "Le numéro de téléphone n'est pas valide ou est vide",
           goBack: 'Retour',
@@ -1018,7 +1026,9 @@ i18n.use(initReactI18next).init({
           loading: 'Chargement',
           continueBike: 'Continuer en tant que véhicule',
           continueResidence: 'Continuer en tant que résidence',
-          vehicle: 'Véhicule'
+          vehicle: 'Véhicule',
+          personalData: 'Vos données personnelles',
+          groupData: 'Les coordonnées de votre groupe'
         },
         qrModal: {
           helperTitleQr:

@@ -1,11 +1,11 @@
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {Button} from '@src/types/buttons';
-import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
 import {View} from 'react-native';
 import {Caption, Text} from 'react-native-paper';
 
 const ButtonFound = ({buttonFind}: {buttonFind: Button}) => {
-  const {colors} = actualTheme();
+  const {colors} = ActualTheme();
   return (
     <View>
       <Caption

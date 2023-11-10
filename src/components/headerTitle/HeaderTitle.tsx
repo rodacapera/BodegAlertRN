@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {Text, View} from 'react-native';
 import {IconButton} from 'react-native-paper';
 import {headerStyles} from './styes/headerStyles';
@@ -8,7 +8,7 @@ const transparent = 'transparent';
 
 const HeaderTitle = ({title}: {title: string}) => {
   const {goBack} = useNavigation();
-  const {colors, dark} = actualTheme();
+  const {dark, colors} = ActualTheme();
   return (
     <View style={headerStyles.header}>
       <View style={headerStyles.arrowBackIcon}>

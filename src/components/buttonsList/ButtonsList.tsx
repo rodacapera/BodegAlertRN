@@ -1,3 +1,4 @@
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {ButtonsListProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {Fragment} from 'react';
@@ -10,9 +11,12 @@ const ButtonsList = ({
   width = 320,
   children
 }: ButtonsListProps) => {
+  const {colors} = ActualTheme();
   return (
     <Fragment>
-      <Title style={buttonsListStyles.title}>{t('buttonsModal.title')}</Title>
+      <Title style={[buttonsListStyles.title, {color: colors.onSurface}]}>
+        {t('buttonsModal.title')}
+      </Title>
       <ScrollView style={{height, width}}>{children}</ScrollView>
     </Fragment>
   );

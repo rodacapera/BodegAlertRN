@@ -1,10 +1,10 @@
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {ItemCardProps} from '@src/types/removeItemTypes';
+import {Fragment} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Avatar, Card, IconButton} from 'react-native-paper';
 import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
 import {simpleRemoveItemCardsStyles} from './styles/simpleRemoveItemCards';
-import {Fragment} from 'react';
 
 const SimpleRemoveItemCards = ({
   titleCard,
@@ -17,7 +17,7 @@ const SimpleRemoveItemCards = ({
   removeItem,
   setModalVisible = () => console.log('noting')
 }: ItemCardProps) => {
-  const {colors, theme, dark} = actualTheme();
+  const {colors, theme, dark} = ActualTheme();
   return (
     <Fragment>
       {titleAlert && subtitleAlert && (

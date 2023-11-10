@@ -1,11 +1,11 @@
 import {Config} from '@src/hooks/config/Config';
 import {getDynamicLinkFirebase} from '@src/hooks/firebase/dynamicLink/dynamicLink';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {GetUserQuery} from '@src/reactQuery/UserQuery';
-import {actualTheme} from '@src/types/contextTypes';
 import {QrModalProps} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
-import {useEffect, useState, useCallback} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {Caption, Modal} from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
@@ -18,7 +18,7 @@ const white = 'white';
 const QrModal = ({visible, setVisible}: QrModalProps) => {
   const hideModal = () => setVisible(false);
   const [qrLink, setQrLink] = useState<string>();
-  const {colors, theme} = actualTheme();
+  const {dark, colors} = ActualTheme();
   const {data} = GetUserQuery();
   const user = data.user as unknown as User;
   const {videoLinks} = Config();
@@ -40,7 +40,7 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
       contentContainerStyle={[
         qrModalStyles.modalContainer,
         {
-          backgroundColor: theme.dark ? colors.background : colors.background
+          backgroundColor: dark ? colors.background : colors.background
         }
       ]}>
       <View style={qrModalStyles.modalContent}>
@@ -69,7 +69,7 @@ const QrModal = ({visible, setVisible}: QrModalProps) => {
             logoSize={50}
             logoBackgroundColor="white"
             logoBorderRadius={80}
-            color={theme.dark ? colors.surface : colors.onPrimaryContainer}
+            color={dark ? colors.surface : colors.onPrimaryContainer}
           />
         </View>
         <TextWithCustomLink

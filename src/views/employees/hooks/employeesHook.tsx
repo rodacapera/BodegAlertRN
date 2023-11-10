@@ -2,12 +2,12 @@ import {useNavigation} from '@react-navigation/native';
 import {getEmployeesFirebase} from '@src/hooks/firebase/employees/employees';
 import {editFieldUserFirebase} from '@src/hooks/firebase/user/user';
 import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {
   GetEmployeesQuery,
   GetUserQuery,
   SetEmployeesQuery
 } from '@src/reactQuery/UserQuery';
-import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
@@ -15,6 +15,7 @@ import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
 const EmployeesHook = () => {
   const navigation = useNavigation<StackNavigation>();
+  const {dark, colors} = ActualTheme();
   const {width} = useWindowDimensions();
   const userData = GetUserQuery().data.user;
   const user = userData as unknown as User;
@@ -22,7 +23,6 @@ const EmployeesHook = () => {
   const {data, isLoading} = GetEmployeesQuery();
   const {shop} = GetUserQuery().data.user as unknown as User;
   const employees = data as User[];
-  const {colors, dark} = actualTheme();
   const [visible, setVisible] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -109,7 +109,9 @@ const EmployeesHook = () => {
     modalVisible,
     setModalVisible,
     setItemMustRemove,
-    user
+    user,
+    dark,
+    colors
   };
 };
 

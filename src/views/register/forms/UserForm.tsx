@@ -1,7 +1,7 @@
+import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 import CustomIcon from '@src/components/customIcon/CustomIcon';
 import CustomInputForm from '@src/components/customInputForm/CustomInputForm';
 import CustomLoader from '@src/components/customLoader/CustomLoader';
-import {actualTheme} from '@src/types/contextTypes';
 import {Fragment, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
@@ -14,13 +14,10 @@ import {
 import {Button, Caption, TextInput} from 'react-native-paper';
 import {registerStyles} from '../styles/registerStyles';
 import {UserFormHook} from './hooks/UserFormHook';
-import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 
 const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
   const {t} = useTranslation();
   const phoneRef = useRef();
-  const {colors, theme, dark} = actualTheme();
-
   const {
     user,
     setCurrentButtonAction,
@@ -30,7 +27,10 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
     error,
     shop,
     alertUserExist,
-    setAlertUserExist
+    setAlertUserExist,
+    colors,
+    dark,
+    theme
   } = UserFormHook(qr, shopId);
 
   return (
@@ -251,7 +251,7 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
                   : 'check'
               }
               buttonColor={
-                theme.dark ? colors.primaryContainer : colors.onPrimaryContainer
+                dark ? colors.primaryContainer : colors.onPrimaryContainer
               }
               disabled={isLoading}
               onPress={handleEditUser}>

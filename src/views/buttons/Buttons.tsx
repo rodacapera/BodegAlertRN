@@ -6,7 +6,6 @@ import CustomLoader from '@src/components/customLoader/CustomLoader';
 import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 import SimpleRemoveItemCards from '@src/components/simpleRemoveItemCards/SimpleRemoveItemCards';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
-import {actualTheme} from '@src/types/contextTypes';
 import {t} from 'i18next';
 import {KeyboardAvoidingView, Platform, SafeAreaView, View} from 'react-native';
 import {RefreshControl, ScrollView} from 'react-native-gesture-handler';
@@ -17,7 +16,6 @@ import ButtonsNotFound from './components/ButtonsNotFound';
 import {Buttonhook} from './hooks/ButtonHook';
 
 const Buttons = () => {
-  const {colors} = actualTheme();
   const {
     alertVisible,
     setAlertVisible,
@@ -31,16 +29,18 @@ const Buttons = () => {
     refreshing,
     setButtonFind,
     setSendRemoveItem,
-    setNewButtons
+    setNewButtons,
+    colors
   } = Buttonhook();
 
   return isLoading ? (
     <CustomLoadingOverlay visible />
   ) : (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={{flex: 1}}>
-      <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView
+      style={[backgroundStyle, {backgroundColor: colors.background}]}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{flex: 1}}>
         <CustomBanner
           visible={true}
           text={t('buttonsView.banner')}
@@ -108,8 +108,8 @@ const Buttons = () => {
           setButtonFind={setButtonFind}
           setNewButtons={setNewButtons}
         />
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 

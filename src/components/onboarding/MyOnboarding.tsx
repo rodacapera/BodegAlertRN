@@ -6,8 +6,8 @@ import {
   notification
 } from '@src/assets/images';
 import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {handleFinishOnboarding} from '@src/hooks/onboarding/onboardingHook';
-import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {splashStyles} from '@src/views/splash/styles/splashStyles';
 import {Fragment, useLayoutEffect, useState} from 'react';
@@ -19,7 +19,7 @@ import CustomDialogAlert from '../customDialogAlert/CustomDialogAlert';
 const MyOnboarding = () => {
   const [visible, setVisible] = useState(false);
   const {t} = useTranslation();
-  const {colors} = actualTheme();
+  const {colors} = ActualTheme();
   const navigation = useNavigation<StackNavigation>();
 
   useLayoutEffect(() => {

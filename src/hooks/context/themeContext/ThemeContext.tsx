@@ -1,39 +1,41 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {customDarkTheme, customLightTheme} from '@src/globals/constants/theme';
 import {ThemeContext, ThemeContextMode} from '@src/types/contextTypes';
-import {useCallback, useEffect, useState} from 'react';
+import {SetStateAction, useCallback, useEffect, useState} from 'react';
 import CustomTheme from '@src/globals/constants/CustomTheme';
 
-export const ThemeProvider = ({children}: any) => {
+const ThemeProvider = ({children}: any) => {
   const {customDefaultTheme} = CustomTheme();
   const [currentCustomTheme, setCurrentCustomTheme] =
     useState<ThemeContextMode>();
 
-  const setCurrentTheme = async (myTheme: string) => {
-    await AsyncStorage.setItem('@theme', myTheme);
-  };
-
-  const setDarkTheme = useCallback(() => {
-    setCurrentTheme('dark');
+  const setDarkTheme = useCallback(async () => {
+    await AsyncStorage.setItem('@theme', 'dark');
     setCurrentCustomTheme(customDarkTheme);
   }, []);
 
-  const setLightTheme = useCallback(() => {
-    setCurrentTheme('light');
+  const setLightTheme = useCallback(async () => {
+    await AsyncStorage.setItem('@theme', 'light');
     setCurrentCustomTheme(customLightTheme);
   }, []);
 
-  useEffect(() => {
-    const getCurrentTheme = async () => {
+  const getCurrentTheme = useCallback(
+    async (
+      customDefaultTheme: SetStateAction<ThemeContextMode | undefined>
+    ) => {
       const myCurrentTheme = await AsyncStorage.getItem('@theme');
       if (myCurrentTheme) {
         myCurrentTheme === 'dark' ? setDarkTheme() : setLightTheme();
       } else {
         setCurrentCustomTheme(customDefaultTheme);
       }
-    };
-    getCurrentTheme();
-  }, [customDefaultTheme, setDarkTheme, setLightTheme]);
+    },
+    [setDarkTheme, setLightTheme]
+  );
+
+  useEffect(() => {
+    !currentCustomTheme && getCurrentTheme(customDefaultTheme);
+  }, [currentCustomTheme, customDefaultTheme, getCurrentTheme]);
 
   return (
     currentCustomTheme && (
@@ -44,3 +46,4 @@ export const ThemeProvider = ({children}: any) => {
     )
   );
 };
+export default ThemeProvider;

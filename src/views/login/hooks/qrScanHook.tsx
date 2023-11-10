@@ -11,6 +11,7 @@ const QrScanHook = () => {
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
   const [shopId, setShopId] = useState<string | undefined>(undefined);
   SetShopQuery(shopId);
+
   const onSuccess = (e: {data: string}) => {
     const url = e.data.split('=')[6];
     const urlDecode = decodeURI(url);

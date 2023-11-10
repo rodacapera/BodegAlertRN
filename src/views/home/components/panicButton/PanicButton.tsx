@@ -2,9 +2,9 @@ import {useNavigation} from '@react-navigation/native';
 import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
 import CustomFab from '@src/components/customFab/CustomFab';
 import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {panicNotification} from '@src/hooks/panicActions/panicActions';
 import {Configuration} from '@src/types/configuration';
-import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
@@ -22,7 +22,7 @@ const PanicButton = ({
   const [loading, setLoading] = useState(false);
   const [errorDistance, setErrorDistance] = useState(false);
   const [errorGps, setErrorGps] = useState(false);
-  const {colors, dark} = actualTheme();
+  const {dark, colors} = ActualTheme();
   const navigation = useNavigation<StackNavigation>();
 
   return (

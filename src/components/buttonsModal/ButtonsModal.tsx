@@ -1,4 +1,5 @@
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
+import {ButtonsModalProps} from '@src/types/buttons';
 import {t} from 'i18next';
 import {Fragment} from 'react';
 import {TouchableOpacity, View} from 'react-native';
@@ -11,7 +12,6 @@ import AddButtonForm from './components/addButtonForm/AddButtonForm';
 import Header from './components/header/Header';
 import {ButtonsModalHook} from './hook/ButtonsModalHook';
 import {buttonsModalStyles} from './styles/buttonsModalStyles';
-import {ButtonsModalProps} from '@src/types/buttons';
 
 const ButtonsModal = ({
   visible,
@@ -20,7 +20,7 @@ const ButtonsModal = ({
   setButtonFind,
   setNewButtons
 }: ButtonsModalProps) => {
-  const {colors, theme} = actualTheme();
+  const {dark, colors, theme} = ActualTheme();
   const {
     networks,
     firsStep,
@@ -56,9 +56,7 @@ const ButtonsModal = ({
       contentContainerStyle={[
         buttonsModalStyles.modalContainer,
         {
-          backgroundColor: theme.dark
-            ? colors.surfaceVariant
-            : colors.background
+          backgroundColor: dark ? colors.surfaceVariant : colors.background
         }
       ]}>
       <View style={buttonsModalStyles.modalContent}>

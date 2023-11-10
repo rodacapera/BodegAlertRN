@@ -5,7 +5,7 @@ import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoa
 import OtpCode from '@src/components/otp/OtpCode';
 import {APP_NAME} from '@src/globals/constants/config';
 import {backgroundStyle} from '@src/globals/styles/screenMode';
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {LoginProps, StackNavigation} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {
@@ -23,8 +23,8 @@ import {loginFormStyles} from './styles/loginFormStyles';
 
 const Login = ({route}: LoginProps) => {
   const params = route.params;
+  const {colors, theme} = ActualTheme();
   const {goBack} = useNavigation<StackNavigation>();
-  const {theme} = actualTheme();
   const {
     buttonAction,
     setButtonAction,
@@ -37,7 +37,8 @@ const Login = ({route}: LoginProps) => {
   } = LoginHook(params?.data);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView
+      style={[backgroundStyle, {backgroundColor: colors.background}]}>
       <View style={loginFormStyles.loginContent}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

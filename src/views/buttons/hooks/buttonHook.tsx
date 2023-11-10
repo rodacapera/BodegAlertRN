@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {removeButtonByIdFirebase} from '@src/hooks/firebase/buttons/buttons';
 import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {statusDevice} from '@src/hooks/shellyActions';
 import {
   GetButtonsQuery,
@@ -8,7 +9,6 @@ import {
   SetButtonsQuery
 } from '@src/reactQuery/UserQuery';
 import {ButtonFind, Buttons} from '@src/types/buttons';
-import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {User} from '@src/types/userTypes';
 import {useCallback, useEffect, useState} from 'react';
@@ -21,9 +21,9 @@ import {
 
 const Buttonhook = () => {
   const navigation = useNavigation<StackNavigation>();
+  const {dark, colors} = ActualTheme();
   const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
-  const {colors, dark} = actualTheme();
   const userData = GetUserQuery().data.user;
   const user = userData as unknown as User;
   const {isLoading, data} = GetButtonsQuery();
@@ -141,7 +141,9 @@ const Buttonhook = () => {
     setButtonFind,
     setSendRemoveItem,
     setNewButtons,
-    user
+    user,
+    colors,
+    dark
   };
 };
 export {Buttonhook};

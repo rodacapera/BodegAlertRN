@@ -1,10 +1,10 @@
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {CustomBannerProps} from '@src/types/globalTypes';
 import {useColorScheme} from 'react-native';
 import {Banner} from 'react-native-paper';
 
 const CustomBanner = ({actions, visible, text, icon}: CustomBannerProps) => {
-  const {colors, dark} = actualTheme();
+  const {dark, colors} = ActualTheme();
   const colorScheme = useColorScheme();
   return (
     <Banner

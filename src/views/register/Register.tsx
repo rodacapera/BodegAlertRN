@@ -7,13 +7,16 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import AdminForm from './forms/AdminForm';
 import UserForm from './forms/UserForm';
 import {registerStyles} from './styles/registerStyles';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 
 const Register = ({route}: RegisterProps) => {
+  const {colors} = ActualTheme();
   const {t} = useTranslation();
   const {administrator, qr, shopId, type} = route.params;
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView
+      style={[backgroundStyle, {backgroundColor: colors.background}]}>
       <View style={registerStyles.container}>
         <HeaderTitle
           title={

@@ -1,4 +1,4 @@
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {TextWithCustomLinkProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {View} from 'react-native';
@@ -7,7 +7,7 @@ import CustomLink from '../customLink/CustomLink';
 import {qrModalStyles} from '../qrModal/styles/qrModalStyles';
 
 const TextWithCustomLink = ({text, link, visible}: TextWithCustomLinkProps) => {
-  const {colors, dark} = actualTheme();
+  const {dark, colors} = ActualTheme();
   return visible ? (
     <View style={qrModalStyles.linkText}>
       <Paragraph

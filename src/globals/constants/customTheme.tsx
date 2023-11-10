@@ -12,6 +12,7 @@ const CustomTheme = () => {
       ? {...MD3DarkTheme, colors: darkTheme.colors}
       : {...MD3LightTheme, colors: lightTheme.colors}
   ) as ThemeContextMode;
+
   return {customDefaultTheme};
 };
 

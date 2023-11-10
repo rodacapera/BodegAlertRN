@@ -1,10 +1,10 @@
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {View} from 'react-native';
-import {Text} from 'react-native-paper';
 import {Callout} from 'react-native-maps';
+import {Text} from 'react-native-paper';
 
 const CalloutBadge = ({title, body}: {title: string; body: string}) => {
-  const {dark, colors} = actualTheme();
+  const {dark, colors} = ActualTheme();
   const textColor = dark ? colors.background : colors.onSurface;
   return (
     <Callout>

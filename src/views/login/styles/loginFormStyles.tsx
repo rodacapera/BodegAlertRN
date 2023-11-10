@@ -46,21 +46,10 @@ export const loginFormStyles = StyleSheet.create({
     marginTop: 20
   },
   buttonLogin: {
-    width: 250,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 6
-    },
-    shadowOpacity: 0.39,
-    shadowRadius: 8.3,
-    elevation: 13
+    width: 250
   },
   button: {
-    marginBottom: 20
-  },
-  buttonQr: {
-    width: 150,
+    marginBottom: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -69,6 +58,9 @@ export const loginFormStyles = StyleSheet.create({
     shadowOpacity: 0.39,
     shadowRadius: 8.3,
     elevation: 13
+  },
+  buttonQr: {
+    width: 180
   },
   appName: {
     color: Colors.white,

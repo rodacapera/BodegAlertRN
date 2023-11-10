@@ -1,4 +1,4 @@
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {LoginFormProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
 import {useRef} from 'react';
@@ -18,7 +18,7 @@ const LoginForm = ({
   countryCode
 }: LoginFormProps) => {
   const phoneRef = useRef<any>();
-  const {colors, dark} = actualTheme();
+  const {colors, dark} = ActualTheme();
 
   return (
     <View

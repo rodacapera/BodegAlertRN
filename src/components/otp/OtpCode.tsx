@@ -4,7 +4,7 @@ import {
   handleSendOtp,
   handleValidateOtp
 } from '@src/components/otp/hooks/otpFunctions';
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {User} from '@src/types/userTypes';
@@ -28,7 +28,7 @@ const OtpCode = ({
 }) => {
   const colorScheme = useColorScheme();
   const navigation = useNavigation<StackNavigation>();
-  const {colors, dark, theme} = actualTheme();
+  const {colors, theme, dark} = ActualTheme();
 
   const {
     inputRef,

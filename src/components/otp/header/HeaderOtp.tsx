@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {handleBack} from '@src/components/otp/hooks/otpFunctions';
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {StackNavigation} from '@src/types/globalTypes';
 import {HeaderOtpParams} from '@src/types/otpTypes';
 import {t} from 'i18next';
@@ -17,7 +17,7 @@ const HeaderOtp = ({
   goBack
 }: HeaderOtpParams) => {
   const navigator = useNavigation<StackNavigation>();
-  const {colors, theme, dark} = actualTheme();
+  const {colors, theme, dark} = ActualTheme();
 
   return (
     <View style={otpStyles.headerOtp}>

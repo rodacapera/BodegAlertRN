@@ -1,16 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {bike, bike_help, family_help, home, shop} from '@src/assets/images';
-import {Config} from '@src/hooks/config/Config';
 import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
+import {useGetUser} from '@src/hooks/user/useGetUser';
 import {whatsapp} from '@src/hooks/whatsapp/whatsapp';
-import {GetPanicsQuery} from '@src/reactQuery/NotifyQuery';
-import {GetUserQuery} from '@src/reactQuery/UserQuery';
-import {Configuration} from '@src/types/configuration';
-// import {setUserQuery} from '@src/reactQuery/userQuery';
-import {actualTheme} from '@src/types/contextTypes';
 import {HomeParams, StackNavigation} from '@src/types/globalTypes';
-import {Panics, User} from '@src/types/userTypes';
+import {User} from '@src/types/userTypes';
 import {t} from 'i18next';
 import {useEffect, useState} from 'react';
 import {
@@ -20,18 +16,21 @@ import {
   useWindowDimensions
 } from 'react-native';
 import {Region} from 'react-native-maps';
+let isMounted = true;
 
 const HomeHook = () => {
-  GetUserQuery();
+  const navigation = useNavigation<StackNavigation>();
   const route = useRoute();
   const {width} = useWindowDimensions();
-  const {colors} = actualTheme();
-  const colorScheme = useColorScheme();
-  const navigation = useNavigation<StackNavigation>();
+  const {dark, colors} = ActualTheme();
 
-  const configuration = Config() as Configuration;
-  const {isLoading, data} = GetUserQuery();
-  const panics = GetPanicsQuery().data as Panics[];
+  const colorScheme = useColorScheme();
+
+  // const {isLoading, data} = GetUserQuery();
+  // const configuration = Config() as Configuration;
+  // const panics = GetPanicsQuery().data as Panics[];
+
+  const {user, panics, configuration, isLoading} = useGetUser();
 
   const [region, setRegion] = useState<Region>();
   const [alertVisible, setAlertVisible] = useState(false);
@@ -41,13 +40,8 @@ const HomeHook = () => {
   const [currentMarkerIcon, setCurrentMarkerIcon] = useState();
   const [panicsMarkerIcon, setPanicsMarkerIcon] = useState();
 
-  const user = data?.user as User;
+  // const user = data?.user as User;
   const params = route.params as HomeParams;
-
-  const appVersionBd =
-    Platform.OS == 'ios'
-      ? configuration?.versionIOS
-      : configuration?.versionAndroid;
 
   const animateCamera = async (mapRef: any, region: Region, speed: number) => {
     const camera = await mapRef.current.getCamera();
@@ -67,7 +61,6 @@ const HomeHook = () => {
       return false;
     }
   };
-  // AsyncStorage.clear();
 
   const onShare = async () => {
     const message =
@@ -92,31 +85,37 @@ const HomeHook = () => {
   }, [navigation]);
 
   useEffect(() => {
-    if (
-      navigation.getState().index == 0 ||
-      (params && (params.isLogin || params.isBack))
-    ) {
-      HeaderShown({
-        navigation,
-        width: width,
-        visible: !isLoading,
-        transparent: true,
-        titleColor:
-          Platform.OS == 'android'
-            ? colorScheme === 'dark'
-              ? '#a23234'
+    let isMounted = true;
+    if (isMounted) {
+      if (
+        navigation.getState().index == 0 ||
+        (params && (params.isLogin || params.isBack))
+      ) {
+        HeaderShown({
+          navigation,
+          width: width,
+          visible: !isLoading,
+          transparent: true,
+          titleColor:
+            Platform.OS == 'android'
+              ? colorScheme === 'dark'
+                ? '#a23234'
+                : colors.onPrimaryContainer
               : colors.onPrimaryContainer
-            : colors.onPrimaryContainer
-      });
-    } else {
-      HeaderShown({
-        navigation,
-        width: width,
-        visible: !isLoading,
-        transparent: true,
-        titleColor: colors.onPrimaryContainer
-      });
+        });
+      } else {
+        HeaderShown({
+          navigation,
+          width: width,
+          visible: !isLoading,
+          transparent: true,
+          titleColor: colors.onPrimaryContainer
+        });
+      }
     }
+    return () => {
+      isMounted = false;
+    };
   }, [
     colorScheme,
     colors.onPrimaryContainer,
@@ -125,6 +124,44 @@ const HomeHook = () => {
     params,
     width
   ]);
+
+  useEffect(() => {
+    const getCalloutText = (user: User) => {
+      const familyPanic =
+        panics.length > 0 &&
+        panics.find(
+          val =>
+            val.alias == user.alias &&
+            (val.phone !== user.phone || val.name.includes('shellybutton1'))
+        );
+
+      const title =
+        user.type === 'residence'
+          ? familyPanic
+            ? familyPanic.title
+            : user.alias
+          : user.alias;
+
+      const body =
+        user.type === 'residence'
+          ? familyPanic
+            ? familyPanic.body
+            : user.address
+          : user.address;
+
+      const currentIcon =
+        user.type === 'residence' ? (familyPanic ? family_help : home) : bike;
+      setMarkerTitle(title);
+      setMarkerBody(body);
+      setCurrentMarkerIcon(currentIcon);
+    };
+    panics && user && getCalloutText(user);
+  }, [panics, user]);
+
+  useEffect(() => {
+    const panicsIcon = user?.type === 'residence' ? shop : bike_help;
+    setPanicsMarkerIcon(panicsIcon);
+  }, [user?.type]);
 
   useEffect(() => {
     const setMyCurrentLocation = () => {
@@ -138,56 +175,31 @@ const HomeHook = () => {
         setRegion(shopLocation);
       }
     };
+    !region && user && setMyCurrentLocation();
+  }, [region, user]);
 
-    const checkVersion = async (appVersionBd: string) => {
-      const currentVersion = await AsyncStorage.getItem('@app_version');
-      if (currentVersion) {
-        const updateVersion = appVersionBd > currentVersion ? true : false;
-        setAppVersion(updateVersion);
-      } else {
-        checkVersion(appVersionBd);
+  useEffect(() => {
+    const checkVersion = async () => {
+      if (isMounted) {
+        isMounted = false;
+        const appVersionBd =
+          Platform.OS == 'ios'
+            ? configuration.versionIOS
+            : configuration.versionAndroid;
+        const currentVersion = await AsyncStorage.getItem('@app_version');
+        if (currentVersion) {
+          const updateVersion = appVersionBd > currentVersion ? true : false;
+          setAppVersion(updateVersion);
+        } else {
+          await AsyncStorage.setItem(
+            '@app_version',
+            JSON.stringify(appVersionBd)
+          );
+        }
       }
     };
-
-    const getCalloutText = () => {
-      const familyPanic =
-        panics.length > 0 &&
-        panics.find(
-          val =>
-            val.alias == user.alias &&
-            (val.phone !== user?.phone || val.name.includes('shellybutton1'))
-        );
-
-      const title =
-        user?.type === 'residence'
-          ? familyPanic
-            ? familyPanic.title
-            : user?.alias
-          : user?.alias;
-
-      const body =
-        user?.type === 'residence'
-          ? familyPanic
-            ? familyPanic.body
-            : user?.address
-          : user?.address;
-      const currentIcon =
-        user?.type === 'residence' ? (familyPanic ? family_help : home) : bike;
-
-      const panicsIcon = user?.type === 'residence' ? shop : bike_help;
-
-      setMarkerTitle(title);
-      setMarkerBody(body);
-      setCurrentMarkerIcon(currentIcon);
-      setPanicsMarkerIcon(panicsIcon);
-    };
-
-    if (user) {
-      !region && setMyCurrentLocation();
-      !appVersion && appVersionBd && checkVersion(appVersionBd);
-      panics && getCalloutText();
-    }
-  }, [appVersion, appVersionBd, panics, region, user]);
+    configuration.versionIOS && configuration.versionAndroid && checkVersion();
+  }, [configuration]);
 
   return {
     region,
@@ -204,7 +216,9 @@ const HomeHook = () => {
     markerBody,
     currentMarkerIcon,
     panicsMarkerIcon,
-    configuration
+    configuration,
+    dark,
+    colors
   };
 };
 

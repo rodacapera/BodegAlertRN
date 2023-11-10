@@ -6,7 +6,6 @@ import {
   mapStyleDark,
   mapStyleLight
 } from '@src/globals/constants/mapsStylesMode';
-import {actualTheme} from '@src/types/contextTypes';
 import PanicButton from '@src/views/home/components/panicButton/PanicButton';
 
 import {homeStyles} from '@src/views/home/styles/homeStyles';
@@ -19,7 +18,6 @@ import {HomeHook} from '../../hooks/HomeHook';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
-  const {dark, colors} = actualTheme();
   const {
     region,
     animateCamera,
@@ -34,7 +32,9 @@ const CustomMap = () => {
     markerBody,
     currentMarkerIcon,
     panicsMarkerIcon,
-    configuration
+    configuration,
+    dark,
+    colors
   } = HomeHook();
 
   return isLoading ? (
@@ -102,17 +102,22 @@ const CustomMap = () => {
         onPress={onShare}
         style={{
           borderRadius: 80,
-          backgroundColor: 'rgba(255, 255, 255, 0.5)'
+          backgroundColor: dark
+            ? colors.onPrimaryContainer
+            : colors.elevation.level4
         }}
         iconColor="black"
       />
+
       <CustomFab
         icon={'target'}
         position={'bottomRight'}
         onPress={() => animateCamera(mapRef, region!, 1000)}
         style={{
           borderRadius: 80,
-          backgroundColor: 'rgba(255, 255, 255, 0.5)'
+          backgroundColor: dark
+            ? colors.onPrimaryContainer
+            : colors.elevation.level4
         }}
         iconColor="black"
       />
@@ -123,7 +128,7 @@ const CustomMap = () => {
           onPress={() => Linking.openURL(`tel:${configuration.emergency}`)}
           style={{
             borderRadius: 80,
-            backgroundColor: 'rgba(255, 255, 255, 0)'
+            backgroundColor: 'transparent'
           }}
           iconColor={
             dark ? colors.onPrimaryContainer : colors.onPrimaryContainer

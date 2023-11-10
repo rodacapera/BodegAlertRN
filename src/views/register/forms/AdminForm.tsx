@@ -1,9 +1,11 @@
 import CustomBanner from '@src/components/customBanner/CustomBanner';
 import CustomDialogAlert from '@src/components/customDialogAlert/CustomDialogAlert';
+import ErrorInputForm from '@src/components/customErrorInputForm/CustomErrorInputForm';
 import CustomIcon from '@src/components/customIcon/CustomIcon';
 import CustomInputForm from '@src/components/customInputForm/CustomInputForm';
+import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
 import {lightTheme} from '@src/hooks/lightMode';
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {RegisterType} from '@src/types/globalTypes';
 import {DataKey} from '@src/types/userTypes';
 import {Fragment, useRef, useState} from 'react';
@@ -16,17 +18,15 @@ import {
   View,
   useColorScheme
 } from 'react-native';
-import {Button, TextInput, Text} from 'react-native-paper';
-import {registerStyles} from '../styles/registerStyles';
-import CustomLoadingOverlay from '@src/components/customLoadingOverlay/CustomLoadingOverlay';
-import ErrorInputForm from '@src/components/customErrorInputForm/CustomErrorInputForm';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Button, Text, TextInput} from 'react-native-paper';
+import {registerStyles} from '../styles/registerStyles';
 import {AdminFormHook} from './hooks/AdminFormHook';
 
 const AdminForm = ({type}: {type: RegisterType}) => {
   const colorScheme = useColorScheme();
   const phoneRef = useRef<any>();
-  const {colors, theme, dark} = actualTheme();
+  const {colors, dark, theme} = ActualTheme();
   const {t} = useTranslation();
   const [activeTab, setActiveTab] = useState(2);
   const windowWidth = Dimensions.get('window').width;
@@ -179,8 +179,14 @@ const AdminForm = ({type}: {type: RegisterType}) => {
             }}>
             {type === 'residence' && (
               <Fragment>
-                <Text style={{marginTop: 10, color: colors.onSurface}}>
-                  Your group data:
+                <Text
+                  style={{
+                    marginTop: 10,
+                    color: colors.onSurface,
+                    textAlign: 'left',
+                    width: 280
+                  }}>
+                  {t('general.groupData')}:
                 </Text>
                 <TextInput
                   label={t('adminFormView.group')}
@@ -279,8 +285,14 @@ const AdminForm = ({type}: {type: RegisterType}) => {
                 <ErrorInputForm error={t('loginView.errorPhone')} />
               </View>
             )}
-            <Text style={{marginTop: 10, color: colors.onSurface}}>
-              Your personal data:
+            <Text
+              style={{
+                marginTop: 10,
+                color: colors.onSurface,
+                textAlign: 'left',
+                width: 280
+              }}>
+              {t('general.personalData')}:
             </Text>
             <TextInput
               label={t('adminFormView.names')}
@@ -456,9 +468,7 @@ const AdminForm = ({type}: {type: RegisterType}) => {
                 mode="contained"
                 icon="check"
                 buttonColor={
-                  theme.dark
-                    ? colors.primaryContainer
-                    : colors.onPrimaryContainer
+                  dark ? colors.primaryContainer : colors.onPrimaryContainer
                 }
                 onPress={submitForm}>
                 {t('general.continue')}

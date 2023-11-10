@@ -1,8 +1,9 @@
+import {NavigationContainer} from '@react-navigation/native';
 import CustomTheme from '@src/globals/constants/CustomTheme';
-import {ThemeProvider} from '@src/hooks/context/themeContext/ThemeContext';
+import ThemeProvider from '@src/hooks/context/themeContext/ThemeContext';
 import '@src/hooks/i18n';
 import {LateralDrawer} from '@src/hooks/navigator/LateralDrawer';
-import {QueryClientProvider, QueryClient} from '@tanstack/react-query';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {Platform} from 'react-native';
 import {enableLatestRenderer} from 'react-native-maps';
 import {PaperProvider} from 'react-native-paper';
@@ -15,13 +16,15 @@ function App(): JSX.Element {
   if (Platform.OS === 'android') enableLatestRenderer();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <PaperProvider theme={customDefaultTheme}>
-          <LateralDrawer />
-        </PaperProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <PaperProvider theme={customDefaultTheme}>
+        <NavigationContainer>
+          <QueryClientProvider client={queryClient}>
+            <LateralDrawer />
+          </QueryClientProvider>
+        </NavigationContainer>
+      </PaperProvider>
+    </ThemeProvider>
   );
 }
 export default App;

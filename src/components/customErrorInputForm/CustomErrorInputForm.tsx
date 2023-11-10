@@ -1,6 +1,6 @@
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {Text, View} from 'react-native';
 import {loginFormStyles} from '../../views/login/styles/loginFormStyles';
-import {actualTheme} from '@src/types/contextTypes';
 
 const ErrorInputForm = ({
   error,
@@ -9,7 +9,7 @@ const ErrorInputForm = ({
   error: string;
   marginTop?: number;
 }) => {
-  const {dark, colors} = actualTheme();
+  const {dark, colors} = ActualTheme();
   return (
     <View style={[loginFormStyles.errorContainer, {marginTop}]}>
       <Text

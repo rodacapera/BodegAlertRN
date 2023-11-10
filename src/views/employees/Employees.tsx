@@ -22,13 +22,15 @@ const Employees = () => {
     isLoading,
     setModalVisible,
     modalVisible,
-    setItemMustRemove
+    setItemMustRemove,
+    colors
   } = EmployeesHook();
 
   return isLoading ? (
     <CustomLoadingOverlay visible />
   ) : (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView
+      style={[backgroundStyle, {backgroundColor: colors.background}]}>
       <CustomBanner
         visible={true}
         text={t('employeesView.banner')}

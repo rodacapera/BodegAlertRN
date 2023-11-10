@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {GetPanicsQuery} from '@src/reactQuery/NotifyQuery';
-import {actualTheme} from '@src/types/contextTypes';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Panics} from '@src/types/userTypes';
 import {useEffect, useState} from 'react';
@@ -10,7 +10,7 @@ import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 const NotifyHook = () => {
   const {width} = useWindowDimensions();
   const colorScheme = useColorScheme();
-  const {colors, dark} = actualTheme();
+  const {dark, colors} = ActualTheme();
   const {data} = GetPanicsQuery();
   const navigation = useNavigation<StackNavigation>();
   const [modalVisible, setModalVisible] = useState(false);
@@ -45,7 +45,9 @@ const NotifyHook = () => {
   return {
     panics: data as Panics[],
     setModalVisible,
-    modalVisible
+    modalVisible,
+    colors,
+    dark
   };
 };
 

@@ -1,4 +1,4 @@
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {CustomFabProps} from '@src/types/globalTypes';
 import {useEffect, useState} from 'react';
 import {ViewStyle} from 'react-native';
@@ -15,7 +15,7 @@ const CustomFab = ({
   iconColor,
   disabled = false
 }: CustomFabProps) => {
-  const {colors} = actualTheme();
+  const {colors} = ActualTheme();
   const [currentPosition, setCurrentPosition] = useState<ViewStyle>(
     customFabStyles.bottomRight
   );

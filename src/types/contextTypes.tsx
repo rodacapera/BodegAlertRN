@@ -1,4 +1,4 @@
-import {createContext, useContext} from 'react';
+import {createContext} from 'react';
 import {MD3Theme} from 'react-native-paper';
 
 export type ThemeContextMode = MD3Theme & {
@@ -20,20 +20,3 @@ export interface TeamContextProps {
 }
 
 export const ThemeContext = createContext({} as TeamContextProps);
-
-export const actualTheme = () => {
-  const {
-    customTheme: {colors, dark},
-    customTheme,
-    setDarkTheme,
-    setLightTheme
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-  } = useContext(ThemeContext);
-  return {
-    theme: customTheme,
-    colors: colors,
-    dark,
-    setDarkTheme,
-    setLightTheme
-  };
-};

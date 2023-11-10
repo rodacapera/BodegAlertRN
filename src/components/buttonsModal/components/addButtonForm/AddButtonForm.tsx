@@ -1,7 +1,7 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import CustomIcon from '@src/components/customIcon/CustomIcon';
 import CustomLoader from '@src/components/customLoader/CustomLoader';
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {t} from 'i18next';
 import {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
@@ -37,7 +37,7 @@ const AddButtonForm = ({
   buttonNotReady: boolean;
 }) => {
   const [eye, setEye] = useState(false);
-  const {colors, theme} = actualTheme();
+  const {colors, theme} = ActualTheme();
 
   // useEffect(() => {
   //   setNameIsd(iss.toString());

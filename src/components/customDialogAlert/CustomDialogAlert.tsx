@@ -1,4 +1,4 @@
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {CustomDialogAlertProps} from '@src/types/globalTypes';
 import {t} from 'i18next';
 import {Button, Dialog, Portal, Text} from 'react-native-paper';
@@ -13,7 +13,7 @@ const CustomDialogAlert = ({
   description,
   continueButton = false
 }: CustomDialogAlertProps) => {
-  const {colors} = actualTheme();
+  const {colors} = ActualTheme();
   const handleSuccess = () => {
     actionSuccess && actionSuccess(true);
     setVisible(false);

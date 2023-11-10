@@ -2,34 +2,27 @@ import AsyncStorage, {
   useAsyncStorage
 } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
-import dynamicLinks from '@react-native-firebase/dynamic-links';
+
 import {DrawerActions, StackActions} from '@react-navigation/native';
-import {avatar, avatarw} from '@src/assets/images';
+import {avatar, avatar_w} from '@src/assets/images';
 import {useGetUser} from '@src/hooks/user/useGetUser';
-import {
-  SetCompanyImagesQuery,
-  SetShopQuery,
-  SetUserQuery
-} from '@src/reactQuery/UserQuery';
-import {actualTheme} from '@src/types/contextTypes';
+import {GetCompanyImagesQuery} from '@src/reactQuery/UserQuery';
 import {StackNavigation} from '@src/types/globalTypes';
 import {Logos} from '@src/types/imageTypes';
 import {useEffect, useState} from 'react';
+import {ActualTheme} from './GlobalTheme';
 
 const DrawerComponentHook = (navigation: StackNavigation) => {
-  SetUserQuery();
   const {getItem} = useAsyncStorage('@theme'); //get global dark mode
-  const {colors, theme, setDarkTheme, setLightTheme, dark} = actualTheme();
+
+  const {theme, dark, colors, setDarkTheme, setLightTheme} = ActualTheme();
 
   const {user, counterEmployees, counterButtons, isLoading, configuration} =
     useGetUser();
 
   const [isDark, setIsDark] = useState(false);
   const [logos, setLogos] = useState<Logos[]>([]);
-  const [shopId, setShopId] = useState<string | undefined>(undefined);
-
-  const setImages = SetCompanyImagesQuery();
-  SetShopQuery(shopId);
+  const setImages = GetCompanyImagesQuery();
 
   const onToggleSwitch = () => {
     setIsDark(!isDark);
@@ -49,19 +42,6 @@ const DrawerComponentHook = (navigation: StackNavigation) => {
       });
   };
 
-  const handleDynamicLink = (link: {url: string}) => {
-    setShopId(undefined);
-    // Handle dynamic link inside your own application
-    if (link.url.includes('?')) {
-      const params = link.url.split('?')[1].split('&');
-      // const viewParam = params[0].split('=');
-      const shopParam = params[1].split('=');
-      // const view = viewParam[0] == 'view' ? viewParam[1] : undefined;
-      const id_shop = shopParam[0] == 'id_shop' ? shopParam[1] : undefined;
-      setShopId(id_shop);
-    }
-  };
-
   const imageAvatar =
     user && user?.avatar
       ? {
@@ -69,10 +49,10 @@ const DrawerComponentHook = (navigation: StackNavigation) => {
         }
       : dark
       ? avatar
-      : avatarw;
+      : avatar_w;
 
   useEffect(() => {
-    !logos && setImages.data && setLogos(setImages.data as Logos[]);
+    logos.length == 0 && setImages.data && setLogos(setImages.data as Logos[]);
   }, [logos, setImages]);
 
   useEffect(() => {
@@ -87,21 +67,6 @@ const DrawerComponentHook = (navigation: StackNavigation) => {
     validateSwitch();
     // Appearance.addChangeListener(() => console.debug('remove')).remove();
   }, [dark, getItem]);
-
-  useEffect(() => {
-    const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    if (!user && shopId) {
-      navigation.navigate('Register', {
-        administrator: false,
-        qr: true,
-        shopId: shopId
-      });
-    }
-  }, [navigation, shopId, user]);
 
   return {
     handleLogout,

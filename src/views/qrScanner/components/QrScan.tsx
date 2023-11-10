@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {StackNavigation} from '@src/types/globalTypes';
 import {qrScanStyles} from '@src/views/qrScanner/styles/qrscanStyles';
 import {t} from 'i18next';
@@ -10,7 +10,7 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import {QrScanHook} from '../../login/hooks/QrScanHook';
 
 const QrScan = () => {
-  const {colors, dark} = actualTheme();
+  const {dark, colors} = ActualTheme();
   const {goBack} = useNavigation<StackNavigation>();
   const {height} = useWindowDimensions();
   const {onSuccess, flash, setFlash, marker} = QrScanHook();

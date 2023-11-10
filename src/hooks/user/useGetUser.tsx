@@ -2,12 +2,12 @@ import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 import {Config} from '@src/hooks/config/Config';
 import {SetPanicsQuery} from '@src/reactQuery/NotifyQuery';
 import {
-  GetUserQuery,
   SetButtonsQuery,
+  SetCompanyImagesQuery,
   SetEmployeesQuery,
-  SetShopQuery
+  SetShopQuery,
+  SetUserQuery
 } from '@src/reactQuery/UserQuery';
-import {GetUserData} from '@src/types/auth';
 import {Buttons} from '@src/types/buttons';
 import {Configuration} from '@src/types/configuration';
 import {Panics, User} from '@src/types/userTypes';
@@ -15,20 +15,23 @@ import {useEffect, useState} from 'react';
 
 const useGetUser = () => {
   const configuration = Config() as Configuration;
-  const {isLoading, error, data} = GetUserQuery();
-  const currentData = data as GetUserData;
+  const {isLoading, error, data} = SetUserQuery();
+  const currentData = data;
+  const user = data?.user as User;
+
   const [panics, setPanics] = useState<Panics[]>([]);
-  const [employees, setEmployees] = useState<User[]>([]);
   const [buttons, setButtons] = useState<Buttons[]>([]);
-  const [counterButtons, setCounterButtons] = useState<number>();
-  const [counterEmployees, setCounterEmployees] = useState<number>();
-  const [shopId, setShopId] = useState<string>();
-  const user = currentData?.user as User;
+  const [counterButtons, setCounterButtons] = useState<number>(0);
+
+  const [employees, setEmployees] = useState<User[]>([]);
+  const [counterEmployees, setCounterEmployees] = useState<number>(0);
+  const [shopId, setShopId] = useState<string>('');
 
   SetEmployeesQuery(employees);
   SetPanicsQuery(panics);
   SetShopQuery(shopId);
   SetButtonsQuery(buttons);
+  SetCompanyImagesQuery();
 
   const resultPanics = (
     querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
@@ -44,14 +47,23 @@ const useGetUser = () => {
     querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
   ) => {
     setButtons([]);
-    setCounterButtons(0);
     querySnapshot.forEach(value => {
       const data = value.data() as Buttons;
       setButtons(prev => [...prev, data]);
     });
-
     setCounterButtons(querySnapshot.size >= 1 ? querySnapshot.size : 0);
   };
+
+  useEffect(() => {
+    currentData &&
+      currentData.user &&
+      !shopId &&
+      setShopId(currentData.user.shop.split('/')[1]);
+  }, [currentData, shopId]);
+
+  useEffect(() => {
+    employees.length >= 0 && setCounterEmployees(employees.length);
+  }, [employees.length]);
 
   useEffect(() => {
     if (currentData && currentData.panicsObserver) {
@@ -63,6 +75,19 @@ const useGetUser = () => {
         }
       );
       return () => panicsObserver();
+    }
+  }, [currentData]);
+
+  useEffect(() => {
+    if (currentData && currentData.buttonsObserver) {
+      const buttonsObserver = currentData.buttonsObserver.onSnapshot(
+        (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
+          documentSnapshot && documentSnapshot.size > 0
+            ? resultButtons(documentSnapshot)
+            : (setButtons([]), setCounterButtons(0));
+        }
+      );
+      return () => buttonsObserver();
     }
   }, [currentData]);
 
@@ -96,30 +121,6 @@ const useGetUser = () => {
       return () => employeesObserver();
     }
   }, [counterEmployees, currentData, employees.length]);
-
-  useEffect(() => {
-    if (currentData && currentData.user) {
-      const buttonsObserver = currentData.buttonsObserver.onSnapshot(
-        (documentSnapshot: FirebaseFirestoreTypes.QuerySnapshot) => {
-          documentSnapshot && documentSnapshot.size > 0
-            ? resultButtons(documentSnapshot)
-            : (setButtons([]), setCounterButtons(0));
-        }
-      );
-      return () => buttonsObserver();
-    }
-  }, [currentData]);
-
-  useEffect(() => {
-    currentData &&
-      currentData.user &&
-      !shopId &&
-      setShopId(currentData.user.shop.split('/')[1]);
-  }, [currentData, shopId]);
-
-  useEffect(() => {
-    employees.length >= 0 && setCounterEmployees(employees.length);
-  }, [employees.length]);
 
   return {
     user,

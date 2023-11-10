@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {type StackNavigation} from '@src/types/globalTypes';
 import {LoginButtonsProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
@@ -14,7 +14,7 @@ const Buttons = ({
   type
 }: LoginButtonsProps) => {
   const {navigate} = useNavigation<StackNavigation>();
-  const {colors, dark} = actualTheme();
+  const {dark, colors} = ActualTheme();
 
   return (
     <View style={loginFormStyles.loginButtonsContainer}>

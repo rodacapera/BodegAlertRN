@@ -1,5 +1,5 @@
 import {lightTheme} from '@src/hooks/lightMode';
-import {actualTheme} from '@src/types/contextTypes';
+import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {InputFormProps} from '@src/types/loginTypes';
 import {t} from 'i18next';
 import {useEffect, useState} from 'react';
@@ -21,7 +21,7 @@ const CustomInputForm = ({
   const colorScheme = useColorScheme();
   const [phone, setPhone] = useState<string>();
   const [focusPhone, setFocusPhone] = useState(false);
-  const {colors} = actualTheme();
+  const {colors} = ActualTheme();
   const [currentPhone, setCurrentPhone] = useState<string>();
   const transparent = 'transparent';
 
