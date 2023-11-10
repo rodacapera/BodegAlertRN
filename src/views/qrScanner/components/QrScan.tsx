@@ -3,7 +3,7 @@ import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {StackNavigation} from '@src/types/globalTypes';
 import {qrScanStyles} from '@src/views/qrScanner/styles/qrscanStyles';
 import {t} from 'i18next';
-import {View, useWindowDimensions} from 'react-native';
+import {Platform, View, useWindowDimensions} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {IconButton, Text} from 'react-native-paper';
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -69,7 +69,12 @@ const QrScan = () => {
       }
       // cameraProps={{autoFocus: 'on', videoStabilizationMode: 'auto'}}
       cameraStyle={{
-        height: height * 0.56
+        height: Platform.OS == 'android' ? height * 0.4 : height * 0.55
+      }}
+      topViewStyle={{paddingBottom: Platform.OS == 'android' ? 80 : 10}}
+      bottomViewStyle={{
+        marginTop: Platform.OS == 'android' ? 20 : -40,
+        marginBottom: Platform.OS == 'android' ? 5 : 50
       }}
     />
   );

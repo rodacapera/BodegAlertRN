@@ -2,10 +2,11 @@ import {StyleSheet} from 'react-native';
 
 export const qrScanStyles = StyleSheet.create({
   buttonContent: {
+    flex: 1,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    alignItems: 'center'
+    alignItems: 'flex-end'
   },
   buttonContainer: {
     justifyContent: 'center',
