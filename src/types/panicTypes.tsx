@@ -7,4 +7,5 @@ export type SendNotificationProps = {
   colors: MD3Colors;
   width: number;
   navigation: StackNavigation;
+  setSnackVisible: (e: boolean) => void;
 };

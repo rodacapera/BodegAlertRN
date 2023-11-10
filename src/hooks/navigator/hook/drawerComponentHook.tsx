@@ -11,8 +11,10 @@ import {StackNavigation} from '@src/types/globalTypes';
 import {Logos} from '@src/types/imageTypes';
 import {useEffect, useState} from 'react';
 import {ActualTheme} from './GlobalTheme';
+import {QueryCache} from '@tanstack/react-query';
 
 const DrawerComponentHook = (navigation: StackNavigation) => {
+  const queryCache = new QueryCache();
   const {getItem} = useAsyncStorage('@theme'); //get global dark mode
 
   const {theme, dark, colors, setDarkTheme, setLightTheme} = ActualTheme();
@@ -33,6 +35,7 @@ const DrawerComponentHook = (navigation: StackNavigation) => {
     auth()
       .signOut()
       .then(async () => {
+        queryCache.clear();
         await AsyncStorage.multiRemove(['@otp', '@userAuth']);
         navigation.dispatch(DrawerActions.closeDrawer());
         navigation.dispatch(StackActions.replace('LoginSplash'));

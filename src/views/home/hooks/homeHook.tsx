@@ -39,6 +39,9 @@ const HomeHook = () => {
   const [markerBody, setMarkerBody] = useState<string>();
   const [currentMarkerIcon, setCurrentMarkerIcon] = useState();
   const [panicsMarkerIcon, setPanicsMarkerIcon] = useState();
+  const [snackVisible, setSnackVisible] = useState(false);
+
+  const onDismissSnackBar = () => setSnackVisible(false);
 
   // const user = data?.user as User;
   const params = route.params as HomeParams;
@@ -188,13 +191,11 @@ const HomeHook = () => {
             : configuration.versionAndroid;
         const currentVersion = await AsyncStorage.getItem('@app_version');
         if (currentVersion) {
-          const updateVersion = appVersionBd > currentVersion ? true : false;
+          const updateVersion =
+            appVersionBd > currentVersion.toString() ? true : false;
           setAppVersion(updateVersion);
         } else {
-          await AsyncStorage.setItem(
-            '@app_version',
-            JSON.stringify(appVersionBd)
-          );
+          await AsyncStorage.setItem('@app_version', appVersionBd);
         }
       }
     };
@@ -218,7 +219,10 @@ const HomeHook = () => {
     panicsMarkerIcon,
     configuration,
     dark,
-    colors
+    colors,
+    snackVisible,
+    onDismissSnackBar,
+    setSnackVisible
   };
 };
 

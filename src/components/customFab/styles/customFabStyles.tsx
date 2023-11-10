@@ -16,7 +16,7 @@ export const customFabStyles = StyleSheet.create({
   topRight: {
     position: 'absolute',
     margin: 16,
-    top: 30,
+    top: Platform.OS == 'android' ? -10 : 30,
     right: 0
   },
   topLeft: {

@@ -13,11 +13,12 @@ import {t} from 'i18next';
 import {useRef} from 'react';
 import {BackHandler, Linking, Platform, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import {Portal} from 'react-native-paper';
+import {Portal, Snackbar} from 'react-native-paper';
 import {HomeHook} from '../../hooks/HomeHook';
 
 const CustomMap = () => {
   const mapRef = useRef<any>();
+
   const {
     region,
     animateCamera,
@@ -34,7 +35,10 @@ const CustomMap = () => {
     panicsMarkerIcon,
     configuration,
     dark,
-    colors
+    colors,
+    snackVisible,
+    onDismissSnackBar,
+    setSnackVisible
   } = HomeHook();
 
   return isLoading ? (
@@ -94,7 +98,11 @@ const CustomMap = () => {
         <CustomLoadingOverlay visible />
       )}
       {configuration && (
-        <PanicButton user={user} configuration={configuration} />
+        <PanicButton
+          user={user}
+          configuration={configuration}
+          setSnackVisible={setSnackVisible}
+        />
       )}
       <CustomFab
         icon={'share-variant'}
@@ -127,6 +135,8 @@ const CustomMap = () => {
           position={'topRight'}
           onPress={() => Linking.openURL(`tel:${configuration.emergency}`)}
           style={{
+            shadowColor: 'transparent',
+            elevation: 0,
             borderRadius: 80,
             backgroundColor: 'transparent'
           }}
@@ -135,6 +145,7 @@ const CustomMap = () => {
           }
         />
       </Portal>
+
       <CustomDialogAlert
         visible={alertVisible}
         setVisible={setAlertVisible}
@@ -143,6 +154,17 @@ const CustomMap = () => {
         description={t('home.alertDescriptionExitApp')}
         actionSuccess={() => BackHandler.exitApp()}
       />
+      <Snackbar
+        visible={snackVisible}
+        onDismiss={onDismissSnackBar}
+        action={{
+          label: t('general.ok'),
+          onPress: () => {
+            // Do something
+          }
+        }}>
+        {t('notifyView.notifySend')}
+      </Snackbar>
     </View>
   );
 };

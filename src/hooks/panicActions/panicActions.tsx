@@ -21,7 +21,8 @@ const SendNotification = async ({
   data,
   setLoading,
   colors,
-  width
+  width,
+  setSnackVisible
 }: SendNotificationProps) => {
   setLoading(true);
   HeaderShown({
@@ -41,6 +42,7 @@ const SendNotification = async ({
       titleColor: colors.onPrimaryContainer
     });
     setLoading(false);
+    setSnackVisible(true);
     return true;
   } else {
     setLoading(false);
@@ -68,7 +70,8 @@ export const panicNotification = async (
   configuration: Configuration,
   user: User,
   colors: MD3Colors,
-  width: number
+  width: number,
+  setSnackVisible: (e: boolean) => void
 ) => {
   const currentPosition = await getCurrentPosition();
   if (currentPosition) {
@@ -104,13 +107,27 @@ export const panicNotification = async (
     if (user.pay) {
       if (user.type === 'residence') {
         if (distance < validDistance) {
-          SendNotification({data, setLoading, navigation, colors, width});
+          SendNotification({
+            data,
+            setLoading,
+            navigation,
+            colors,
+            width,
+            setSnackVisible
+          });
           setErrorDistance(false);
         } else {
           setErrorDistance(true);
         }
       } else {
-        SendNotification({data, setLoading, navigation, colors, width});
+        SendNotification({
+          data,
+          setLoading,
+          navigation,
+          colors,
+          width,
+          setSnackVisible
+        });
         setErrorDistance(false);
       }
     } else {

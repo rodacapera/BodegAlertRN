@@ -43,7 +43,8 @@ i18n.use(initReactI18next).init({
           banner:
             'Below, you will find a list of the notifications registered in your shop or residence.',
           notifyNotFound:
-            "We haven't found any notifications registered to your shop or residence."
+            "We haven't found any notifications registered to your shop or residence.",
+          notifySend: 'The notification was sent'
         },
         buttonsView: {
           button: 'Button',
@@ -259,7 +260,8 @@ i18n.use(initReactI18next).init({
           banner:
             'A continuación, encontrarás una lista de las notificaciones registradas en tu tienda o residencia.',
           notifyNotFound:
-            'No hemos encontrado notificaciones registradas en tu tienda o residencia.'
+            'No hemos encontrado notificaciones registradas en tu tienda o residencia.',
+          notifySend: 'La notificación fue enviada'
         },
         buttonsView: {
           button: 'Botón',
@@ -477,7 +479,8 @@ i18n.use(initReactI18next).init({
           banner:
             'Di seguito troverai un elenco delle notifiche registrate nel tuo negozio o residenza.',
           notifyNotFound:
-            'Non abbiamo trovato notifiche registrate nel tuo negozio o residenza.'
+            'Non abbiamo trovato notifiche registrate nel tuo negozio o residenza.',
+          notifySend: 'La notifica è stata inviata'
         },
         buttonsView: {
           button: 'Pulsante',
@@ -694,7 +697,8 @@ i18n.use(initReactI18next).init({
           banner:
             'Abaixo, você encontrará uma lista de notificações registradas na sua loja ou residência.',
           notifyNotFound:
-            'Não encontramos nenhuma notificação registrada na sua loja ou residência.'
+            'Não encontramos nenhuma notificação registrada na sua loja ou residência.',
+          notifySend: 'A notificação foi enviada'
         },
         buttonsView: {
           button: 'Botão',
@@ -910,7 +914,8 @@ i18n.use(initReactI18next).init({
           banner:
             'Ci-dessous, vous trouverez une liste des notifications enregistrées dans votre boutique ou résidence.',
           notifyNotFound:
-            "Nous n'avons trouvé aucune notification enregistrée dans votre boutique ou résidence."
+            "Nous n'avons trouvé aucune notification enregistrée dans votre boutique ou résidence.",
+          notifySend: 'La notification a été envoyée'
         },
         buttonsView: {
           button: 'Bouton',

@@ -13,10 +13,12 @@ import {useWindowDimensions} from 'react-native';
 
 const PanicButton = ({
   user,
-  configuration
+  configuration,
+  setSnackVisible
 }: {
   user: User;
   configuration: Configuration;
+  setSnackVisible: (e: boolean) => void;
 }) => {
   const {width} = useWindowDimensions();
   const [loading, setLoading] = useState(false);
@@ -61,7 +63,8 @@ const PanicButton = ({
             configuration,
             user as User,
             colors,
-            width
+            width,
+            setSnackVisible
           )
         }
         style={{
