@@ -21,14 +21,14 @@ export const drawerComponentStyles = StyleSheet.create({
     fontWeight: '500'
   },
   row: {
-    marginTop: 20,
     flexDirection: 'row',
     alignItems: 'center'
   },
   section: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 15
+    marginRight: 15,
+    marginVertical: 5
   },
   paragraph: {
     fontWeight: 'bold',
@@ -36,6 +36,12 @@ export const drawerComponentStyles = StyleSheet.create({
   },
   drawerSection: {
     marginTop: 10
+  },
+  preferenceTitle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 12,
+    paddingHorizontal: 16
   },
   preference: {
     flexDirection: 'row',

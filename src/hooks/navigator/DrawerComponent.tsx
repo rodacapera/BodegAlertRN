@@ -56,19 +56,24 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           source={imageAvatar}
           size={50}
         />
-        <Title style={[drawerComponentStyles.title, {color: colors.onSurface}]}>
-          {user?.name} {user?.lastname}
-        </Title>
-        <Caption
-          numberOfLines={1}
-          style={[drawerComponentStyles.caption, {color: colors.onSurface}]}>
-          {t('drawer.groupName')} : {user?.group_name}
-        </Caption>
-        <Caption
-          numberOfLines={1}
-          style={[drawerComponentStyles.caption, {color: colors.onSurface}]}>
-          {t('drawer.aliasName')} : {user?.alias}
-        </Caption>
+      </View>
+
+      <Drawer.Section>
+        <View style={drawerComponentStyles.userInfoSection}>
+          <Title
+            style={[drawerComponentStyles.title, {color: colors.onSurface}]}>
+            {user?.name} {user?.lastname}
+          </Title>
+          <Caption style={{color: colors.onSurface}}>{user?.alias}</Caption>
+          <Caption
+            numberOfLines={1}
+            style={{color: colors.onSurface, marginTop: -5}}>
+            {user?.group_name}
+          </Caption>
+        </View>
+      </Drawer.Section>
+
+      <View style={drawerComponentStyles.userInfoSection}>
         <View style={drawerComponentStyles.row}>
           {user?.administrator && user.type !== 'vehicle' && (
             <View style={drawerComponentStyles.section}>
@@ -107,6 +112,11 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
             </Caption>
           </View>
         </View>
+        <Caption
+          numberOfLines={1}
+          style={[drawerComponentStyles.caption, {color: colors.onSurface}]}>
+          {t('adminFormView.group')} : {user?.group_number}
+        </Caption>
       </View>
 
       {/* <DrawerItemList {...props} /> */}
@@ -198,7 +208,12 @@ const DrawerComponent = (props: DrawerContentComponentProps) => {
           }}
         />
       </Drawer.Section>
-      <Drawer.Section theme={theme} title="Preferences">
+      <Drawer.Section theme={theme}>
+        <View style={drawerComponentStyles.preferenceTitle}>
+          <Caption style={{color: colors.onSurface, fontSize: 15}}>
+            {t('general.preferences')}
+          </Caption>
+        </View>
         <View style={drawerComponentStyles.preference}>
           <Text style={{color: colors.onSurface}}>{t('drawer.darkTheme')}</Text>
           <View>

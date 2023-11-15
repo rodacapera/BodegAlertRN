@@ -162,7 +162,8 @@ i18n.use(initReactI18next).init({
           vehicle: 'Vehicle',
           personalData: 'Your personal data',
           groupData: 'Your group data',
-          copiedText: 'Text successfully copied'
+          copiedText: 'Text successfully copied',
+          preferences: 'Preferences'
         },
         qrModal: {
           helperTitleQr:
@@ -382,7 +383,8 @@ i18n.use(initReactI18next).init({
           vehicle: 'Vehículo',
           personalData: 'Tus datos personales',
           groupData: 'Los datos de tu grupo',
-          copiedText: 'Texto copiado con éxito'
+          copiedText: 'Texto copiado con éxito',
+          preferences: 'Preferencias'
         },
         qrModal: {
           helperTitleQr:
@@ -601,7 +603,8 @@ i18n.use(initReactI18next).init({
           vehicle: 'Veicolo',
           personalData: 'I vostri dati personali',
           groupData: 'I dati del vostro gruppo',
-          copiedText: 'Testo copiato con successo'
+          copiedText: 'Testo copiato con successo',
+          preferences: 'Preferenze'
         },
         qrModal: {
           helperTitleQr:
@@ -820,7 +823,8 @@ i18n.use(initReactI18next).init({
           vehicle: 'Veículo',
           personalData: 'Os seus dados pessoais',
           groupData: 'Os dados do seu grupo',
-          copiedText: 'Texto copiado com sucesso'
+          copiedText: 'Texto copiado com sucesso',
+          preferences: 'Preferências'
         },
         qrModal: {
           helperTitleQr:
@@ -1038,7 +1042,8 @@ i18n.use(initReactI18next).init({
           vehicle: 'Véhicule',
           personalData: 'Vos données personnelles',
           groupData: 'Les coordonnées de votre groupe',
-          copiedText: 'Texte copié avec succès'
+          copiedText: 'Texte copié avec succès',
+          preferences: 'Préférences'
         },
         qrModal: {
           helperTitleQr:
