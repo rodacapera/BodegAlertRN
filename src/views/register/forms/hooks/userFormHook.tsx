@@ -107,7 +107,7 @@ const UserFormHook = (qr?: boolean, shopId?: string) => {
 
   useEffect(() => {
     !shop && shopData.data && setShop(shopData.data as unknown as Shop);
-  }, [shopData]);
+  }, [shop, shopData]);
 
   useEffect(() => {
     user &&

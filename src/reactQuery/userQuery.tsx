@@ -51,8 +51,8 @@ export const SetCompanyImagesQuery = () => {
 export const SetShopQuery = (doc: string | undefined) => {
   const query = useQuery({
     queryKey: ['shop'],
-    queryFn: async () => (doc ? await getShopFirebase(doc) : false)
-    // enabled: !!doc
+    queryFn: async () => doc && (await getShopFirebase(doc)),
+    enabled: !!doc
   });
   return query;
 };

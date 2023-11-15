@@ -57,7 +57,7 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
               setButtonAction={setCurrentButtonAction}
               type="phone"
               value={user?.phone}
-              code={user?.countryCode.toLowerCase()}
+              code={user?.countryCode?.toLowerCase()}
               isDisabled={user?.shop ? true : false}
               prefix={user.prefix}
             />
