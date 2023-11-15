@@ -45,7 +45,8 @@ const ButtonsModal = ({
     setVisible,
     buttons,
     setButtonFind,
-    setNewButtons
+    setNewButtons,
+    visible
   });
 
   return (
@@ -68,6 +69,7 @@ const ButtonsModal = ({
           title={t('buttonsModal.errorButtonExistTitle')}
           description={t('buttonsModal.errorButtonExistDescription')}
         />
+
         {networks && networks[0].name && (
           <Fragment>
             {firsStep == '' ? (

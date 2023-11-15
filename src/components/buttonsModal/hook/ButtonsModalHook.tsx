@@ -21,12 +21,14 @@ const ButtonsModalHook = ({
   setVisible,
   buttons,
   setButtonFind,
-  setNewButtons
+  setNewButtons,
+  visible
 }: {
   setVisible: (e: boolean) => void;
   buttons: Buttons[];
   setButtonFind: (e: ButtonFind | undefined) => void;
   setNewButtons: (e: Buttons[]) => void;
+  visible: boolean;
 }) => {
   const {data} = GetUserQuery();
   const user = data.user as unknown as User;
@@ -156,8 +158,8 @@ const ButtonsModalHook = ({
   }, [nameIsd, passIsd, sendSetButton, user.alias]);
 
   useEffect(() => {
-    getMyNetworks();
-  }, [getMyNetworks]);
+    visible && getMyNetworks();
+  }, [getMyNetworks, visible]);
 
   useEffect(() => {
     const appMode = AppState.addEventListener(

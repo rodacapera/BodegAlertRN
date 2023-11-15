@@ -117,21 +117,21 @@ i18n.use(initReactI18next).init({
         loginSplashView: {
           welcome: 'Welcome to',
           description:
-            'Remember that in BodegAlert, you will find an ally that will help you notify your entire community of the events in which you need attention from some one of them, making it easier for you to be more visible in those moments when you need it most.'
+            'BodegAlert is a New a tool available to you. by pressing the BodegAlert button you send an instant message to your selected community with your register Geo-location. if you are in an emergency press the dial button to call 911.'
         },
         onboarding: {
-          titleOne: 'Do you have an emergency?',
+          titleOne: 'Use our APP',
           titleTwo: 'With our messaging service',
           titleThree: 'We are your best option',
           titleFour: 'We need access to your location!',
           descriptionOne:
-            'Forget about calling the traditional emergency system.',
+            'When you find yourself in a situation requiring support or aid.',
           descriptionTwo:
-            'You will be able to inform your entire community about what is happening.',
+            'You can communicate your need to your community of friends.',
           descriptionThree:
-            'For those moments when you need to warn about any event that is happening.',
+            'For those moments when you need a helping hand in your community.',
           descriptionFour:
-            'To ensure that our application works correctly, we require access to your location so that we can additionally complete your profile data.',
+            'For the proper functioning of our application, we need access to your location to complete your profile data.',
           next: 'Next',
           skip: 'Skip'
         },
@@ -161,7 +161,8 @@ i18n.use(initReactI18next).init({
           continueResidence: 'Continue as residence',
           vehicle: 'Vehicle',
           personalData: 'Your personal data',
-          groupData: 'Your group data'
+          groupData: 'Your group data',
+          copiedText: 'Text successfully copied'
         },
         qrModal: {
           helperTitleQr:
@@ -172,7 +173,7 @@ i18n.use(initReactI18next).init({
           formTitle: 'Add your network settings',
           formTitleFinish: 'The last step',
           descriptionLastStep:
-            '1. Please copy and paste this link into your browser and press enter.\n2. Switch your current network to get internet.',
+            '1. Please click on the Continue button, If the button was not set, copy and paste this link into your browser and press Enter.\n2. Switch your current network to get internet.',
           formCaption: 'Please input your network password and press continue!',
           networkName: 'ISS',
           networkPass: 'Password',
@@ -380,7 +381,8 @@ i18n.use(initReactI18next).init({
           continueResidence: 'Continuar como residencia',
           vehicle: 'Vehículo',
           personalData: 'Tus datos personales',
-          groupData: 'Los datos de tu grupo'
+          groupData: 'Los datos de tu grupo',
+          copiedText: 'Texto copiado con éxito'
         },
         qrModal: {
           helperTitleQr:
@@ -391,7 +393,7 @@ i18n.use(initReactI18next).init({
           formTitle: 'Agrega la configuración de tu red',
           formTitleFinish: 'El último paso',
           descriptionLastStep:
-            '1. Copia y pega este enlace en tu navegador y presiona Enter.\n2. Cambia tu red actual para obtener acceso a Internet.',
+            '1. Por favor da click al botón Continuar, si el botón no se ha configurado, copia y pega este enlace en tu navegador y presiona Enter.\n2. Cambia tu red actual para obtener acceso a Internet.',
           formCaption:
             'Por favor, ingresa la contraseña de tu red y presiona continuar.',
           networkName: 'ISS',
@@ -598,7 +600,8 @@ i18n.use(initReactI18next).init({
           continueResidence: 'Continua come residenza',
           vehicle: 'Veicolo',
           personalData: 'I vostri dati personali',
-          groupData: 'I dati del vostro gruppo'
+          groupData: 'I dati del vostro gruppo',
+          copiedText: 'Testo copiato con successo'
         },
         qrModal: {
           helperTitleQr:
@@ -609,7 +612,7 @@ i18n.use(initReactI18next).init({
           formTitle: 'Aggiungi le impostazioni della tua rete',
           formTitleFinish: "L'ultimo passo",
           descriptionLastStep:
-            "1. Copia e incolla questo link nel tuo browser e premi Invio.\n2. Cambia la tua rete attuale per ottenere l'accesso a Internet.",
+            "1. Se il pulsante non è stato impostato, copiare e incollare questo link nel browser e premere Invio.\n2. Cambia la tua rete attuale per ottenere l'accesso a Internet.",
           formCaption: 'Inserisci la password della tua rete e premi Continua.',
           networkName: 'ISS',
           networkPass: 'Password',
@@ -816,7 +819,8 @@ i18n.use(initReactI18next).init({
           continueResidence: 'Continuar como residência',
           vehicle: 'Veículo',
           personalData: 'Os seus dados pessoais',
-          groupData: 'Os dados do seu grupo'
+          groupData: 'Os dados do seu grupo',
+          copiedText: 'Texto copiado com sucesso'
         },
         qrModal: {
           helperTitleQr:
@@ -827,7 +831,7 @@ i18n.use(initReactI18next).init({
           formTitle: 'Adicione as configurações da sua rede',
           formTitleFinish: 'A última etapa',
           descriptionLastStep:
-            '1. Copie e cole este link no seu navegador e pressione Enter.\n2. Altere sua rede atual para obter acesso à Internet.',
+            '1. Clique no botão Continuar. Se o botão não estiver definido, copie e cole esta ligação no seu browser e prima Enter.\n2. Altere sua rede atual para obter acesso à Internet.',
           formCaption: 'Insira a senha da sua rede e pressione Continuar!',
           networkName: 'ISS',
           networkPass: 'Senha',
@@ -1033,7 +1037,8 @@ i18n.use(initReactI18next).init({
           continueResidence: 'Continuer en tant que résidence',
           vehicle: 'Véhicule',
           personalData: 'Vos données personnelles',
-          groupData: 'Les coordonnées de votre groupe'
+          groupData: 'Les coordonnées de votre groupe',
+          copiedText: 'Texte copié avec succès'
         },
         qrModal: {
           helperTitleQr:
@@ -1044,7 +1049,7 @@ i18n.use(initReactI18next).init({
           formTitle: 'Ajoutez les paramètres de votre réseau',
           formTitleFinish: 'La dernière étape',
           descriptionLastStep:
-            '1. Copiez et collez ce lien dans votre navigateur, puis appuyez sur Entrée.\n2. Modifiez votre réseau actuel pour avoir accès à Internet.',
+            "1. Veuillez cliquer sur le bouton Continuer. Si le bouton n'a pas été placé, copiez et collez ce lien dans votre navigateur et appuyez sur Entrée.\n2. Modifiez votre réseau actuel pour avoir accès à Internet.",
           formCaption:
             'Saisissez le mot de passe de votre réseau et appuyez sur Continuer !',
           networkName: 'ISS',

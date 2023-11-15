@@ -5,7 +5,14 @@ import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {t} from 'i18next';
 import {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import {Button, Caption, Text, TextInput, Title} from 'react-native-paper';
+import {
+  Button,
+  Caption,
+  Snackbar,
+  Text,
+  TextInput,
+  Title
+} from 'react-native-paper';
 import {buttonsModalStyles} from '../../styles/buttonsModalStyles';
 
 const AddButtonForm = ({
@@ -37,16 +44,15 @@ const AddButtonForm = ({
   buttonNotReady: boolean;
 }) => {
   const [eye, setEye] = useState(false);
+  const [copied, setCopied] = useState('');
   const {colors, theme} = ActualTheme();
 
-  // useEffect(() => {
-  //   setNameIsd(iss.toString());
-  // }, [iss, setNameIsd]);
-
   const copyToClipboard = () => {
-    urlConfigButton && Clipboard.setString(urlConfigButton);
+    urlConfigButton &&
+      (Clipboard.setString(urlConfigButton), setCopied(urlConfigButton));
   };
 
+  const onDismissSnackBar = () => setCopied('');
   return (
     <View>
       <Title style={{fontWeight: 'bold', color: colors.onSurface}}>
@@ -61,10 +67,24 @@ const AddButtonForm = ({
               color: colors.onSurface,
               marginBottom: 10,
               fontWeight: 'bold'
-            }}>{`${t('buttonsModal.descriptionLastStep')}`}</Text>
-          <TouchableOpacity onPress={copyToClipboard}>
-            <Text style={{color: colors.onSurface}}>{urlConfigButton}</Text>
-          </TouchableOpacity>
+            }}>
+            {`${t('buttonsModal.descriptionLastStep')}`} oooo
+          </Text>
+          <Text style={{color: colors.onSurface}}>
+            {urlConfigButton}{' '}
+            <TouchableOpacity
+              onPress={copyToClipboard}
+              style={{
+                marginBottom: -4
+              }}>
+              <CustomIcon
+                font="material"
+                name="content-copy"
+                size={18}
+                color={colors.secondary}
+              />
+            </TouchableOpacity>
+          </Text>
         </View>
       ) : (
         <View>
@@ -183,6 +203,17 @@ const AddButtonForm = ({
           {t('general.continue')}
         </Button>
       </View>
+      <Snackbar
+        visible={copied != '' ? true : false}
+        onDismiss={onDismissSnackBar}
+        action={{
+          label: t('general.ok'),
+          onPress: () => {
+            // Do something
+          }
+        }}>
+        {t('general.copiedText')}
+      </Snackbar>
     </View>
   );
 };

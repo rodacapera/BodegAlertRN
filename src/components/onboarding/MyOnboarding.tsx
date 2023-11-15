@@ -3,7 +3,8 @@ import {
   alert_push,
   emergency,
   location,
-  notification
+  notification,
+  use_uor_app
 } from '@src/assets/images';
 import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
@@ -49,7 +50,7 @@ const MyOnboarding = () => {
         pages={[
           {
             backgroundColor: colors.background,
-            image: <Image source={emergency} style={splashStyles.logo} />,
+            image: <Image source={use_uor_app} style={splashStyles.logo} />,
             title: t('onboarding.titleOne'),
             subtitle: t('onboarding.descriptionOne')
           },

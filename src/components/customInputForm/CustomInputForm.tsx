@@ -57,7 +57,7 @@ const CustomInputForm = ({
   }, [currentPhone, focusPhone, phoneRef, setButtonAction, phone]);
 
   useEffect(() => {
-    value && !phone && prefix && setPhone(value.slice(prefix.length));
+    value && !phone && prefix && setPhone(value.slice(prefix.length + 1));
   }, [phone, phoneRef, prefix, value]);
 
   return (

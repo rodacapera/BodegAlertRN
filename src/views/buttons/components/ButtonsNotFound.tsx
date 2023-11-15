@@ -10,7 +10,7 @@ const ButtonsNotFound = () => {
   const {videoLinks} = Config();
 
   return (
-    <View>
+    <View style={{flex: 1, alignItems: 'center'}}>
       <CustomImage source={user_not_found} style={buttonsStyles} />
       <TextWithCustomLink
         text={t('buttonsView.buttonsNotFound')}

@@ -9,7 +9,7 @@ import {employeeStyles} from '../styles/employeesStyles';
 const UsersNotFound = () => {
   const {videoLinks} = Config();
   return (
-    <View>
+    <View style={{flex: 1, alignItems: 'center'}}>
       <CustomImage source={user_not_found} style={employeeStyles} />
       <TextWithCustomLink
         text={t('employeesView.employeeNotFound')}

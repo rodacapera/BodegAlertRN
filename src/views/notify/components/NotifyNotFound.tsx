@@ -7,7 +7,7 @@ import {notifyStyles} from '../styles/notifyStyles';
 
 const NotifyNotFound = () => {
   return (
-    <View>
+    <View style={{flex: 1, alignItems: 'center'}}>
       <CustomImage source={user_not_found} style={notifyStyles} />
       <TextWithCustomLink text={t('notifyView.notifyNotFound')} visible />
     </View>
