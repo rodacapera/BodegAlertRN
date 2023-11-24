@@ -46,12 +46,17 @@ const LoginHook = (data?: User) => {
             setErrorPhone(false);
             setErrorUserNotExist(true);
           } else {
-            const buttonActionClone = {...buttonAction};
-            buttonActionClone.logged = true;
-            setButtonAction(buttonActionClone);
-            setErrorPhone(false);
-            setErrorPhone(false);
-            setErrorUserNotExist(false);
+            if (querySnapshot.docs[0].data().pay) {
+              const buttonActionClone = {...buttonAction};
+              buttonActionClone.logged = true;
+              setButtonAction(buttonActionClone);
+              setErrorPhone(false);
+              setErrorPhone(false);
+              setErrorUserNotExist(false);
+            } else {
+              setErrorPhone(false);
+              setErrorUserNotExist(true);
+            }
           }
         });
         // setTimeout(() => {
