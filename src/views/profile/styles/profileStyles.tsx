@@ -14,5 +14,10 @@ export const profileStyles = StyleSheet.create({
   contentProfileTitle: {
     paddingHorizontal: 30,
     marginBottom: 10
+  },
+  rmAccountButtonContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingHorizontal: 50
   }
 });

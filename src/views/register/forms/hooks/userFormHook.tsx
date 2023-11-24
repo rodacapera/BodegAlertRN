@@ -2,7 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {userFakeData} from '@src/globals/constants/fakeData';
 import {buttonActionInitialState} from '@src/globals/constants/login';
-import {geUserByPhoneNumberFirebase} from '@src/hooks/firebase/user/user';
+import {
+  editUserFirebase,
+  geUserByPhoneNumberFirebase
+} from '@src/hooks/firebase/user/user';
 import {HeaderShown} from '@src/hooks/navigator/HeaderShown';
 import {ActualTheme} from '@src/hooks/navigator/hook/GlobalTheme';
 import {
@@ -10,14 +13,18 @@ import {
   GetUserQuery,
   UpdateUserQuery
 } from '@src/reactQuery/UserQuery';
+import {DrawerActions, StackActions} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 import {StackNavigation} from '@src/types/globalTypes';
 import {LoginFormAction} from '@src/types/loginTypes';
 import {DataKey, Shop, User} from '@src/types/userTypes';
+import {QueryCache} from '@tanstack/react-query';
 import {useEffect, useState} from 'react';
 import {Platform, useColorScheme, useWindowDimensions} from 'react-native';
 
 const UserFormHook = (qr?: boolean, shopId?: string) => {
   const navigation = useNavigation<StackNavigation>();
+  const queryCache = new QueryCache();
 
   const {width} = useWindowDimensions();
   const {dark, colors, theme} = ActualTheme();
@@ -35,6 +42,27 @@ const UserFormHook = (qr?: boolean, shopId?: string) => {
   const [currentButtonAction, setCurrentButtonAction] =
     useState<LoginFormAction>(buttonActionInitialState);
   const [tokenPush, setTokenPush] = useState<string>();
+  const [alertRemoveUser, setAlertRemoveUser] = useState(false);
+  const [actionRemoveUser, setActionRemoveUser] = useState(false);
+
+  const removeAccount = () => {
+    const userClone = {...user};
+    userClone.pay = false;
+    editUserFirebase(userClone as User).then(() => {
+      auth()
+        .signOut()
+        .then(async () => {
+          queryCache.clear();
+          await AsyncStorage.multiRemove(['@otp', '@userAuth']);
+          navigation.dispatch(DrawerActions.closeDrawer());
+          navigation.dispatch(StackActions.replace('LoginSplash'));
+          setAlertRemoveUser(false);
+        })
+        .catch(async error => {
+          console.debug(error);
+        });
+    });
+  };
 
   const getDevice = async () => {
     const device = await AsyncStorage.getItem('@fcmToken');
@@ -86,6 +114,10 @@ const UserFormHook = (qr?: boolean, shopId?: string) => {
       setUser(newCurrentUser);
     }
   };
+
+  useEffect(() => {
+    actionRemoveUser && removeAccount();
+  }, [actionRemoveUser]);
 
   useEffect(() => {
     getDevice();
@@ -149,7 +181,10 @@ const UserFormHook = (qr?: boolean, shopId?: string) => {
     currentButtonAction,
     colors,
     dark,
-    theme
+    theme,
+    alertRemoveUser,
+    setAlertRemoveUser,
+    setActionRemoveUser
   };
 };
 export {UserFormHook};

@@ -30,7 +30,10 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
     setAlertUserExist,
     colors,
     dark,
-    theme
+    theme,
+    alertRemoveUser,
+    setAlertRemoveUser,
+    setActionRemoveUser
   } = UserFormHook(qr, shopId);
 
   return (
@@ -45,6 +48,13 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
           setVisible={() => setAlertUserExist(false)}
           title={t('registerView.errorUserRegisterTitle')}
           description={t('registerView.errorUserRegisterDescription')}
+        />
+        <CustomDialogAlert
+          visible={alertRemoveUser}
+          setVisible={() => setAlertRemoveUser(false)}
+          actionSuccess={setActionRemoveUser}
+          title={t('profileView.titleAlertRemoveUser')}
+          description={t('profileView.descriptionAlertRemoveUser')}
         />
         <View
           style={{
@@ -229,7 +239,31 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
                 {shop?.alias}
               </Caption>
             </View>
+            {user && (
+              <View style={{alignItems: 'center'}}>
+                <Text
+                  style={{
+                    color: colors.error,
+                    marginBottom: 10,
+                    fontSize: 11,
+                    marginTop: 10
+                  }}
+                  onPress={() => setAlertRemoveUser(true)}>
+                  {t('general.removeAccount')}{' '}
+                  <Caption
+                    style={{
+                      color: colors.error,
+                      textDecorationLine: 'underline',
+                      fontSize: 11,
+                      fontWeight: '700'
+                    }}>
+                    {t('general.here')}
+                  </Caption>
+                </Text>
+              </View>
+            )}
           </View>
+
           {error ? (
             <View>
               <Text style={{color: colors.onSurface}}>error</Text>
@@ -237,7 +271,11 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
           ) : (
             <></>
           )}
-          <View style={{paddingBottom: 90}}>
+          <View
+            style={{
+              paddingBottom: 90,
+              alignItems: 'center'
+            }}>
             <Button
               textColor="white"
               mode="contained"

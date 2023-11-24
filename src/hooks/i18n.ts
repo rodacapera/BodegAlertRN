@@ -71,6 +71,10 @@ i18n.use(initReactI18next).init({
           descriptionErrorLocationPermissionsAlert:
             'You have denied the use of geolocation. To enable it, you will need to uninstall the application and install it again.'
         },
+        profileView: {
+          titleAlertRemoveUser: 'Remove user',
+          descriptionAlertRemoveUser: 'Are you sure to remove your user?'
+        },
         profileTitle:
           'Below, you will find your profile data registered in our system. If you wish, you can update them right here.',
         adminFormView: {
@@ -163,7 +167,9 @@ i18n.use(initReactI18next).init({
           personalData: 'Your personal data',
           groupData: 'Your group data',
           copiedText: 'Text successfully copied',
-          preferences: 'Preferences'
+          preferences: 'Preferences',
+          removeAccount: 'If you want to remove your account please click',
+          remove: 'Remove'
         },
         qrModal: {
           helperTitleQr:
@@ -292,6 +298,11 @@ i18n.use(initReactI18next).init({
           descriptionErrorLocationPermissionsAlert:
             'Has denegado el uso de la geolocalización. Para habilitarlo, deberás desinstalar la aplicación e instalarla de nuevo.'
         },
+        profileView: {
+          titleAlertRemoveUser: 'Eliminar usuario',
+          descriptionAlertRemoveUser:
+            '¿Estás seguro que deseas eliminar tu usurio?'
+        },
         profileTitle:
           'A continuación, encontrarás tus datos de perfil registrados en nuestro sistema. Si lo deseas, puedes actualizarlos aquí mismo.',
         adminFormView: {
@@ -384,7 +395,9 @@ i18n.use(initReactI18next).init({
           personalData: 'Tus datos personales',
           groupData: 'Los datos de tu grupo',
           copiedText: 'Texto copiado con éxito',
-          preferences: 'Preferencias'
+          preferences: 'Preferencias',
+          removeAccount: 'Si deseas eliminar tu cuenta, da click',
+          remove: 'Eliminar'
         },
         qrModal: {
           helperTitleQr:
@@ -512,6 +525,11 @@ i18n.use(initReactI18next).init({
           descriptionErrorLocationPermissionsAlert:
             "Hai negato l'uso della geolocalizzazione. Per abilitarlo, dovrai disinstallare l'applicazione e installarla nuovamente."
         },
+        profileView: {
+          titleAlertRemoveUser: "Rimuovere l'utente",
+          descriptionAlertRemoveUser:
+            'Sei sicuro di aver rimosso il tuo utente?'
+        },
         profileTitle:
           'Di seguito troverai i tuoi dati di profilo registrati nel nostro sistema. Se lo desideri, puoi aggiornarli qui stesso.',
         adminFormView: {
@@ -604,7 +622,10 @@ i18n.use(initReactI18next).init({
           personalData: 'I vostri dati personali',
           groupData: 'I dati del vostro gruppo',
           copiedText: 'Testo copiato con successo',
-          preferences: 'Preferenze'
+          preferences: 'Preferenze',
+          removeAccount:
+            'Se si desidera rimuovere il proprio account, fare clic',
+          remove: 'Rimuovi'
         },
         qrModal: {
           helperTitleQr:
@@ -732,6 +753,11 @@ i18n.use(initReactI18next).init({
           descriptionErrorLocationPermissionsAlert:
             'Você negou o uso da geolocalização. Para ativá-la, será necessário desinstalar o aplicativo e instalá-lo novamente.'
         },
+        profileView: {
+          titleAlertRemoveUser: 'Remover utilizador',
+          descriptionAlertRemoveUser:
+            'Tem a certeza de que removeu o seu utilizador?'
+        },
         profileTitle:
           'Abaixo, você encontrará seus dados de perfil registrados em nosso sistema. Se desejar, você pode atualizá-los aqui mesmo.',
         adminFormView: {
@@ -824,7 +850,9 @@ i18n.use(initReactI18next).init({
           personalData: 'Os seus dados pessoais',
           groupData: 'Os dados do seu grupo',
           copiedText: 'Texto copiado com sucesso',
-          preferences: 'Preferências'
+          preferences: 'Preferências',
+          removeAccount: 'Se pretender remover a sua conta, clique',
+          remove: 'Remover'
         },
         qrModal: {
           helperTitleQr:
@@ -952,6 +980,11 @@ i18n.use(initReactI18next).init({
           descriptionErrorLocationPermissionsAlert:
             "Vous avez refusé l'utilisation de la géolocalisation. Pour l'activer, vous devrez désinstaller l'application et la réinstaller."
         },
+        profileView: {
+          titleAlertRemoveUser: "Supprimer l'utilisateur",
+          descriptionAlertRemoveUser:
+            'Êtes-vous sûr de supprimer votre utilisateur?'
+        },
         profileTitle:
           'Ci-dessous, vous trouverez les données de votre profil enregistrées dans notre système. Si vous le souhaitez, vous pouvez les mettre à jour ici même.',
         adminFormView: {
@@ -1043,7 +1076,9 @@ i18n.use(initReactI18next).init({
           personalData: 'Vos données personnelles',
           groupData: 'Les coordonnées de votre groupe',
           copiedText: 'Texte copié avec succès',
-          preferences: 'Préférences'
+          preferences: 'Préférences',
+          removeAccount: 'Si vous souhaitez supprimer votre compte, cliquez',
+          remove: 'Supprimer'
         },
         qrModal: {
           helperTitleQr:
