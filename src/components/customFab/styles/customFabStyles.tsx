@@ -1,4 +1,5 @@
-import {Platform, StyleSheet} from 'react-native';
+import {Platform, PlatformIOSStatic, StyleSheet} from 'react-native';
+const platformIOS = Platform as PlatformIOSStatic;
 
 export const customFabStyles = StyleSheet.create({
   bottomRight: {
@@ -16,7 +17,7 @@ export const customFabStyles = StyleSheet.create({
   topRight: {
     position: 'absolute',
     margin: 16,
-    top: Platform.OS == 'android' ? -10 : 30,
+    top: Platform.OS == 'android' ? -10 : platformIOS.isPad ? 8 : 30,
     right: 0
   },
   topLeft: {

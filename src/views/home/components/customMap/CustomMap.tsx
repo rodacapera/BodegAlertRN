@@ -129,22 +129,24 @@ const CustomMap = () => {
         }}
         iconColor="black"
       />
-      <Portal>
-        <CustomFab
-          icon={'phone'}
-          position={'topRight'}
-          onPress={() => Linking.openURL(`tel:${configuration.emergency}`)}
-          style={{
-            shadowColor: 'transparent',
-            elevation: 0,
-            borderRadius: 80,
-            backgroundColor: 'transparent'
-          }}
-          iconColor={
-            dark ? colors.onPrimaryContainer : colors.onPrimaryContainer
-          }
-        />
-      </Portal>
+      {user && (
+        <Portal>
+          <CustomFab
+            icon={'phone'}
+            position={'topRight'}
+            onPress={() => Linking.openURL(`tel:${configuration.emergency}`)}
+            style={{
+              shadowColor: 'transparent',
+              elevation: 0,
+              borderRadius: 80,
+              backgroundColor: 'transparent'
+            }}
+            iconColor={
+              dark ? colors.onPrimaryContainer : colors.onPrimaryContainer
+            }
+          />
+        </Portal>
+      )}
 
       <CustomDialogAlert
         visible={alertVisible}
