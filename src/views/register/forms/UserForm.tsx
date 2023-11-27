@@ -55,6 +55,7 @@ const UserForm = ({qr, shopId}: {qr?: boolean; shopId?: string}) => {
           actionSuccess={setActionRemoveUser}
           title={t('profileView.titleAlertRemoveUser')}
           description={t('profileView.descriptionAlertRemoveUser')}
+          cancelButton
         />
         <View
           style={{
